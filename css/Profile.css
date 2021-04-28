@@ -16,7 +16,7 @@
     background-color: #49A1B9;
     color: white;
     border-radius: 8px;
-    margin-top: 20px;
+    margin-top: 70px;
 
 
 
@@ -26,15 +26,18 @@
     margin-left: 450px;
     text-align:justify;
     margin-top: -50px;
+    font-size: 14pt;
 
 }
 #posts{
-    margin-left: 510px;
-    margin-top: -40px;
+    margin-left: 530px;
+    margin-top: -25px;
+    font-size: 14pt;
 }
 #followers{
-    margin-left: 600px;
-    margin-top: -40px;
+    margin-left: 645px;
+    margin-top: -25px;
+    font-size: 14pt;
   
 
 }
@@ -43,12 +46,15 @@ p{
 }
 
 h2{
-    margin-left: 20px;
+    margin-left: 30px;
 }
 h1{
-    margin-left: 20px;
+    margin-left: 30px;
 }
 
+#profile{
+    margin-left: 20px;
+}
 
 
 
