@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+/* color variables */
+:root {
+  --clr-primary: #6aeeb5;
+  --clr-primary-hover: #29e6a7;
+  --clr-primary-dark: #039d69;
+  --clr-gray100: #f0f7f8;
+  --clr-gray200: #cfd8dc;
+  --clr-gray300: #a7b7be;
+  --clr-gray400: #6b7e86;
+  --clr-gray500: #425a65;
+  /* border radius */
+  --radius: 0.2rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background: var(--clr-gray100);
+}
+
+.nav__list {
+  background: white;
+  box-shadow: 0px 0px 10px var(--clr-gray200);
+  padding: 1rem 0;
+  width: 5rem;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.main {
+  margin-left: 5rem;
+}
+
+.nav__item {
+  list-style: none;
+  font-size: 0.7rem;
+  text-align: center;
+  transition: all 200ms ease-in;
+}
+
+.nav__item svg,
+svg {
+  fill: var(--clr-gray400);
+  width: 2rem;
+  transition: all 200ms ease-in;
+}
+
+.nav__item svg:hover {
+  fill: var(--clr-gray500);
+}
+
+.nav__item a {
+  color: var(--clr-gray400);
+  text-decoration: none;
+}
+
+.nav__item a:hover {
+  color: var(--clr-gray500);
+}
+
+.heading-title {
+  padding-top: 24px;
+  padding-left: 24px;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+@media screen and (max-width: 550px) {
+  .nav__list {
+    flex-direction: row;
+    width: 100vw;
+    height: 5rem;
+    bottom: 0;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .mobile-menu {
+    display: block;
+    margin-top: 24px;
+    margin-left: 24px;
+  }
+
+  .hide-in-mobile {
+    display: none;
+  }
+
+  .heading-title {
+    padding-top: 8px;
+    padding-left: 24px;
+  }
+
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
