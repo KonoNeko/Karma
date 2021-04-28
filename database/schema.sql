@@ -64,3 +64,17 @@ CREATE TABLE profile_experiences (
     FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id'),
     FOREIGN KEY ('experience_id') REFERENCES experiences ('experience_id')
 );
+
+CREATE TABLE awards_certifications (
+    'award_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'title' CHAR(50) NOT NULL,
+    'date_received' CHAR(50) NOT NULL
+);
+
+CREATE TABLE profile_awards (
+    'profile_award_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'profile_id' INTEGER NOT NULL,
+    'award_id' INTEGER NOT NULL,
+    FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id'),
+    FOREIGN KEY ('award_id') REFERENCES awards_certifications ('award_id')
+);
