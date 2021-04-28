@@ -78,3 +78,33 @@ CREATE TABLE profile_awards (
     FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id'),
     FOREIGN KEY ('award_id') REFERENCES awards_certifications ('award_id')
 );
+
+CREATE TABLE social_posts (
+    'post_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'user_id' INTEGER NOT NULL,
+    'image_url' TEXT NOT NULL,
+    'caption' CHAR(400) NOT NULL,
+    'location' CHAR(50),
+    'post_date' DATE DEFAULT NOW(),
+    'likes' INTEGER NOT NULL DEFAULT 0,
+    FOREIGN KEY ('user_id') REFERENCES profiles ("profile_id")
+);
+
+CREATE TABLE post_comments (
+    'comment_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'post_id' INTEGER NOT NULL,
+    'user_id' INTEGER NOT NULL, 
+    'comment' CHAR(200) NOT NULL,
+    'post_date' DATE DEFAULT NOW(), 
+    FOREIGN KEY ('post_id') REFERENCES social_posts ('post_id'),
+    FOREIGN KEY ('user_id') REFERENCES profiles ('profile_id')
+);
+
+CREATE TABLE post_likes (
+    'like_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'post_id' INTEGER NOT NULL,
+    'user_id' INTEGER NOT NULL,
+    'like_date' DATE DEFAULT NOW(),
+    FOREIGN KEY ('post_id') REFERENCES social_posts ('post_id'),
+    FOREIGN KEY ('user_id') REFERENCES profiles ('profile_id')
+);
