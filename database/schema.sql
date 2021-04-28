@@ -18,3 +18,16 @@ CREATE TABLE profile_follows (
     FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id'),
     FOREIGN KEY ('follower_id') REFERENCES profiles ('profile_id')
 );
+
+CREATE TABLE skills (
+    'skill_id' INTEGER NOT PRIMARY KEY AUTO_INCREMENT,
+    'skill_title' CHAR(50) NOT NULL
+);
+
+CREATE TABLE profile_skills (
+    'profile_skill_id' INTEGER NOT PRIMARY KEY AUTO_INCREMENT,
+    'profile_id' INTEGER NOT NULL,
+    'skill_id' INTEGER NOT NULL,
+    FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id'),
+    FOREIGN KEY ('skill_id') REFERENCES skills ('skill_id')
+);
