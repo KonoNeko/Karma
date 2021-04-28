@@ -1,0 +1,59 @@
+#changeprofbtn{
+
+    margin-left: 500px;
+    width: 250px;
+    height: 50px;
+    background-color: #49A1B9;
+    color: white;
+    border-radius: 8px;
+    display: block;
+    margin-top: 120px;
+
+}
+#descbtn{
+    margin-left: 500px;
+    width: 250px;
+    height: 50px;
+    background-color: #49A1B9;
+    color: white;
+    border-radius: 8px;
+    display: block;
+    margin-top: 10px;
+}
+#skillsbtn{
+    margin-left: 500px;
+    width: 250px;
+    height: 50px;
+    background-color: #49A1B9;
+    color: white;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: block;
+}
+
+#profile{
+    margin-left: 520px;
+}
+
+h2 {
+    margin-left: 555px;
+}
+#following{
+    margin-left: 490px;
+    margin-top: 50px;
+    font-size: 14pt;
+    display:flex;
+    word-spacing: 20px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
