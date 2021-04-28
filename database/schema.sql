@@ -11,3 +11,10 @@ CREATE TABLE profiles (
     'is_Volunteer' TINYINT(1) NOT NULL
 );
 
+CREATE TABLE profile_follows (
+    'follow_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'profile_id' INTEGER NOT NULL,
+    'follower_id' INTEGER NOT NULL,
+    FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id'),
+    FOREIGN KEY ('follower_id') REFERENCES profiles ('profile_id')
+);
