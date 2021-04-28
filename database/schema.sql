@@ -20,14 +20,31 @@ CREATE TABLE profile_follows (
 );
 
 CREATE TABLE skills (
-    'skill_id' INTEGER NOT PRIMARY KEY AUTO_INCREMENT,
+    'skill_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
     'skill_title' CHAR(50) NOT NULL
 );
 
 CREATE TABLE profile_skills (
-    'profile_skill_id' INTEGER NOT PRIMARY KEY AUTO_INCREMENT,
+    'profile_skill_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
     'profile_id' INTEGER NOT NULL,
     'skill_id' INTEGER NOT NULL,
     FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id'),
     FOREIGN KEY ('skill_id') REFERENCES skills ('skill_id')
+);
+
+CREATE TABLE education (
+    'education_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'school_name' CHAR(50) NOT NULL,
+    'startDate' CHAR(50) NOT NULL,
+    'endDate' CHAR(50) NOT NULL,
+    'gpa' DECIMAL(1, 1) NOT NULL,
+    'certification' CHAR(50) NOT NULL
+);
+
+CREATE TABLE profile_education (
+    'profile_education_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'profile_id' INTEGER NOT NULL,
+    'education_id' INTEGER NOT NULL,
+    FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id'),
+    FOREIGN KEY ('education_id') REFERENCES education ('education_id')
 );
