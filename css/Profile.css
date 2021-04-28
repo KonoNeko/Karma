@@ -1,0 +1,54 @@
+#editbtn{
+    margin-left: 440px;
+    width: 130px;
+    height: 30px;
+    background-color: #49A1B9;
+    color: white;
+    border-radius: 8px;
+
+    
+
+}
+#msgbtn{
+    
+    width: 130px;
+    height: 30px;
+    background-color: #49A1B9;
+    color: white;
+    border-radius: 8px;
+    margin-top: 20px;
+
+
+
+}
+
+#following{
+    margin-left: 450px;
+    text-align:justify;
+    margin-top: -50px;
+
+}
+#posts{
+    margin-left: 510px;
+    margin-top: -40px;
+}
+#followers{
+    margin-left: 600px;
+    margin-top: -40px;
+  
+
+}
+p{
+    text-align: end;
+}
+
+h2{
+    margin-left: 20px;
+}
+h1{
+    margin-left: 20px;
+}
+
+
+
+
