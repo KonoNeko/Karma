@@ -50,6 +50,11 @@ button {
   margin-right: 8px;
 }
 
+#partner-with-us-volunteer,
+#partner-with-us-organization {
+  display: none;
+}
+
 .partner-with-us-form-form {
   margin-left: 24px;
   margin-right: 24px;
