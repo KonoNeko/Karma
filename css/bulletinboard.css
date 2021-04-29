@@ -1,15 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-.heading-2 {
-    font-size: 24px;
+.heading-1 {
+    font-size: 36px;
     font-family: "Monserrat", sans-serif;
+    width: 302px;
     color: #0367A6;
 }
 
 .body-text {
     font-size: 14px;
-    font-family: "Monserrat", sans-serif;
+    font-family: "Open Sans", sans-serif;
+    width: 332px;
 }
 
 @media screen and (max-width: 550px) {
