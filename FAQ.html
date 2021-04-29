@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Edit Profile</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/FAQ.css">
+    <link rel="stylesheet" href="css/home.css">
+  </head>
+  <body>
+    
+
+
+     <h1>Frequently Asked Questions</h1>
+    
+
+<!-- <div class="dropdown">
+  <span>How do I apply for a volunteering oppurtunity?</span>
+  <div class="dropdown-content">
+  <p>To apply for a volunteering oppurtunity, you simply click on the volunteer icon and choose which organziation you would like to apply for.</p>
+  </div>
+</div>
+<div id="block">
+<div class="dropdown">
+    <span>How long will it take to get a response from the organziation?</span>
+    <div class="dropdown-content">
+    <p>That will all depend on the organziation. Most organziations respond back in 3-5 business days.</p>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <span> Can I post ?</span>
+    <div class="dropdown-content">
+    <p>To apply for a volunteering oppurtunity, you simply click on the volunteer icon and choose which organziation you would like to apply for.</p>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <span>How do I apply for a volunteering oppurtunity?</span>
+    <div class="dropdown-content">
+    <p>To apply for a volunteering oppurtunity, you simply click on the volunteer icon and choose which organziation you would like to apply for.</p>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <span>How do I apply for a volunteering oppurtunity?</span>
+    <div class="dropdown-content">
+    <p>To apply for a volunteering oppurtunity, you simply click on the volunteer icon and choose which organziation you would like to apply for.</p>
+    </div>
+  </div>
+</div> -->
+
+<div class="dropdown">
+    <button class="dropbtn" onclick="myFunction()"> How do I apply for a volunteering oppurtunity? ▼
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content" id="myDropdown">
+      <p>To apply for a volunteering oppurtunity, you simply click on the volunteer icon and choose which organziation you would like to apply for.</p>
+     
+    </div>
+    </div> 
+    <div class="dropdown">
+        <button class="dropbtn" onclick="dropone()"> How long will it take to get a response from the organziation? ▼
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="drop1">
+          <spam>That will all depend on the organziation. Most organziations respond back in 3-5 business days.</spam>
+         
+        </div>
+        </div> 
+
+        <div class="dropdown">
+            <button class="dropbtn" onclick="droptwo()"> Can organziation view my profile? ▼
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="drop2">
+              <spam>Yes, organziations can view your profile and see your resume </spam>
+             
+            </div>
+            </div> 
+
+
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropbtn')) {
+          var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
+
+
+        function dropone() {
+          document.getElementById("drop1").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropbtn')) {
+          var myDropdown = document.getElementById("drop1");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
+
+        function droptwo() {
+          document.getElementById("drop2").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropbtn')) {
+          var myDropdown = document.getElementById("drop2");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
+
+        function dropthree() {
+          document.getElementById("drop1").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropbtn')) {
+          var myDropdown = document.getElementById("drop1");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
+        </script>
+
+
+
+   
+  </body>
+</html>

@@ -26,18 +26,6 @@
     <a href="#">Report a bug</a>
   </div>
 
-  <div class="dropup">
-    <div class="dropup-content">
-      <a href="#">About</a>
-      <a href="#">Settings</a>
-      <a href="#">FAQ</a>
-      <a href="#">Contact us</a>
-      <a href="#">Partner with us</a>
-      <a href="#">Donate</a>
-      <a href="#">Report a bug</a>
-    </div>
-  </div>
-
   <navbar class="nav">
     <ul class="nav__list">
       <li class="nav__item">
@@ -109,8 +97,8 @@
         </a>
       </li>
 
-      <li class="nav__item hide-in-mobile">
-        <a id="more-menu-options" href="#">
+      <li class="nav__item hide-in-mobile dropdown">
+        <a href="#">
           <svg viewBox="0 0 24 24" width="100" title="menu">
             <path
               fill-rule="evenodd"
@@ -119,6 +107,15 @@
             />
           </svg>
           <p class="nav__itemlabel">Menu</p>
+          <div class="dropdown-content">
+            <a href="#">About</a>
+            <a href="#">Settings</a>
+            <a href="#">FAQ</a>
+            <a href="#">Contact us</a>
+            <a href="#">Partner with us</a>
+            <a href="#">Donate</a>
+            <a href="#">Report a bug</a>
+          </div>
         </a>
       </li>
     </ul>
@@ -146,12 +143,13 @@
       be returned to you. We want to create a community of people who want to
       contribute to their communities.
     </p>
+    <br />
     <div class="creators">
       <div class="creator">
         <img src="images/placeholder.jpg" class="creator-img" />
         <div class="creator-name">Chris Raganit</div>
         <div class="creator-description">
-          Chris is a web developer, and designer who volunteered in her high
+          Chris is a web developer and designer who volunteered in her high
           school library for four years. When she is not coding, she likes
           reading and playing strategy games.
         </div>
