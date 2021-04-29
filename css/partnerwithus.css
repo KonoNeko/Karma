@@ -64,6 +64,10 @@ button {
   margin-bottom: 8px;
 }
 
+.partner-heading-title {
+  margin-left: 24px;
+}
+
 #organization-partner-btn:hover,
 #volunteer-partner-btn:hover {
   box-shadow: 0 5px 15px rgba(3, 103, 166, 0.4);
