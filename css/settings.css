@@ -1,0 +1,69 @@
+.subtitle {
+  padding-top: 12px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.settings-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.setting {
+  font-family: Montserrat;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 12px;
+  padding-left: 24px;
+  background: #eff0f3;
+  color: #214049;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+}
+
+a {
+  border: none;
+  color: #214049;
+  text-decoration: none;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #51b09f;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+}
+
+.settings-heading {
+  font-weight: bold;
+}
+
+button {
+  text-align: center;
+  background-color: #0367a6;
+  width: 100%;
+  border: 0;
+  color: #eff0f3;
+  padding: 12px;
+  font-size: 14px;
+  font-family: Montserrat;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
