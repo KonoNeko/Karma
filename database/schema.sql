@@ -79,13 +79,20 @@ CREATE TABLE profile_awards (
     FOREIGN KEY ('award_id') REFERENCES awards_certifications ('award_id')
 );
 
+CREATE TABLE profile_preferences (
+    'preference_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'user_id' INTEGER NOT NULL,
+    'category' CHAR(50) NOT NULL,
+    FOREIGN KEY ('user_id') REFERENCES profiles ('profile_id')
+);
+
 CREATE TABLE social_posts (
     'post_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
     'user_id' INTEGER NOT NULL,
     'image_url' TEXT NOT NULL,
     'caption' CHAR(400) NOT NULL,
     'location' CHAR(50),
-    'post_date' DATE DEFAULT NOW(),
+    'post_date' TIMESTAMP DEFAULT NOW(),
     'likes' INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY ('user_id') REFERENCES profiles ("profile_id")
 );
@@ -104,7 +111,41 @@ CREATE TABLE post_likes (
     'like_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
     'post_id' INTEGER NOT NULL,
     'user_id' INTEGER NOT NULL,
-    'like_date' DATE DEFAULT NOW(),
+    'like_date' TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY ('post_id') REFERENCES social_posts ('post_id'),
     FOREIGN KEY ('user_id') REFERENCES profiles ('profile_id')
+);
+
+CREATE TABLE messages (
+    'message_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'sender_id' INTEGER NOT NULL,
+    'receiver_id' INTEGER NOT NULL,
+    'message' CHAR(200) NOT NULL,
+    'timestamp' TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY ('sender_id') REFERENCES profiles ('profile_id'),
+    FOREIGN KEY ('receiver_id') REFERENCES profiles ('profile_id')
+);
+
+CREATE TABLE opportunites {
+    'opportunity_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'poster_id' INTEGER NOT NULL,
+    'title' CHAR(50) NOT NULL,
+    'description' CHAR(400) NOT NULL,
+    'requirements' CHAR(400),
+    'post_date' TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY ('poster_id') REFERENCES profiles ('profile_id')
+}
+
+CREATE TABLE opportunites_applicants (
+    'application_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'applicant_id' INTEGER NOT NULL,
+    'opportunity_id' INTEGER NOT NULL,
+    'message' CHAR(400) NOT NULL,
+    FOREIGN KEY ('opportunity_id') REFERENCES opportunites ('opportunity_id'),
+    FOREIGN KEY ('applicant_id') REFERENCES profiles ('profile_id')
+);
+
+CREATE TABLE volunteer_categories (
+    'category_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'category' CHAR(50) NOT NULL
 );
