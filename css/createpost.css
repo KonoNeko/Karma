@@ -3,17 +3,19 @@
 
 
 
-/* @media screen and (max-width: 550px) {
+@media screen and (max-width: 550px) {
   body {
       margin: 0;
-  } */
+  } 
 
 
 #window {
   width: 100%;
 }
 
-
+.center {
+  margin-top: 16px;
+}
 
 #addpicture {
   width: 216px;
@@ -42,7 +44,7 @@ border-radius: 12px;
   font-size: 18px;
   font-family: "Montserrat", sans-serif;
   font-weight: 600; /* semibold */
-  margin-top: 16px;
+  
 }
 
 #textbox {
@@ -60,3 +62,4 @@ div > * {
  }
 
 
+}

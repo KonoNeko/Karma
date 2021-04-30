@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+
+
+.heading-1 {
+    width: 314px;
+height: 44px;
+    font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 36px;
+line-height: 44px;
+/* identical to box height */
+color: #0367A6;
+}
+
+.heading-2 {
+    font-size: 24px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700; /* bold */
+}
+
+#desc {
+
+width: 374px;
+height: 261px;
+
+/* Body text */
+
+font-family: Open Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 19px;
+
+color: #000000;
+}
+
+#restrictions {
+width: 374px;
+height: 261px;
+
+/* Body text */
+
+font-family: Open Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 19px;
+
+color: #000000;
+}
+
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 790px;
+  left: 490px;
+}
+
+#apply {
+    width: 500px;
+}
+
