@@ -1,19 +1,56 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-.heading-1 {
-    font-size: 36px;
-    font-family: "Monserrat", sans-serif;
-    width: 302px;
-    color: #0367A6;
-}
 
-.body-text {
-    font-size: 14px;
-    font-family: "Open Sans", sans-serif;
-    width: 332px;
-}
 
 @media screen and (max-width: 550px) {
+    .heading-1 {
+        font-size: 36px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700; /* bold */
+        width: 302px;
+        color: #0367A6;
+    }
+
+    .heading-2 {
+        font-size: 24px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700; /* bold */
+    }
+
+    .heading-3 {
+        margin-top: 10px;
+        font-size: 18px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600; /* semibold */
+    }
+
+    .bulletin-card {
+        width: 138px;
+        height: 234px;
+        background: #EFF0F3;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 2px;
+    }
+
+    .body-text {
+        font-size: 14px;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 400; /* normal */
+        width: 333px;
+    }
+
+    .card-image {
+        margin: 0 auto;
+        margin-top: 10px;
+        width: 118px;
+        height: 118px;
+        border-radius: 10px;
+    }
+
+    #guildfordImg {
+        background-image: url("../images/library.jpeg");
+        background-size: 100px;
+    }
 }
   
