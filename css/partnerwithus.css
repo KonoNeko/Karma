@@ -14,6 +14,12 @@ textarea {
   box-sizing: border-box;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+}
+
 .subtitle {
   padding-top: 12px;
   padding-left: 24px;
