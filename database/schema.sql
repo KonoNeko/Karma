@@ -85,7 +85,7 @@ CREATE TABLE social_posts (
     'image_url' TEXT NOT NULL,
     'caption' CHAR(400) NOT NULL,
     'location' CHAR(50),
-    'post_date' DATE DEFAULT NOW(),
+    'post_date' TIMESTAMP DEFAULT NOW(),
     'likes' INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY ('user_id') REFERENCES profiles ("profile_id")
 );
@@ -104,7 +104,17 @@ CREATE TABLE post_likes (
     'like_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
     'post_id' INTEGER NOT NULL,
     'user_id' INTEGER NOT NULL,
-    'like_date' DATE DEFAULT NOW(),
+    'like_date' TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY ('post_id') REFERENCES social_posts ('post_id'),
     FOREIGN KEY ('user_id') REFERENCES profiles ('profile_id')
+);
+
+CREATE TABLE messages (
+    'message_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'sender_id' INTEGER NOT NULL,
+    'receiver_id' INTEGER NOT NULL,
+    'message' CHAR(200) NOT NULL,
+    'timestamp' TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY ('sender_id') REFERENCES profiles ('profile_id'),
+    FOREIGN KEY ('receiver_id') REFERENCES profiles ('profile_id')
 );
