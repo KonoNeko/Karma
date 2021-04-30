@@ -118,3 +118,22 @@ CREATE TABLE messages (
     FOREIGN KEY ('sender_id') REFERENCES profiles ('profile_id'),
     FOREIGN KEY ('receiver_id') REFERENCES profiles ('profile_id')
 );
+
+CREATE TABLE opportunites {
+    'opportunity_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'poster_id' INTEGER NOT NULL,
+    'title' CHAR(50) NOT NULL,
+    'description' CHAR(400) NOT NULL,
+    'requirements' CHAR(400),
+    'post_date' TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY ('poster_id') REFERENCES profiles ('profile_id')
+}
+
+CREATE TABLE opportunites_applicants (
+    'application_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'applicant_id' INTEGER NOT NULL,
+    'opportunity_id' INTEGER NOT NULL,
+    'message' CHAR(400) NOT NULL,
+    FOREIGN KEY ('opportunity_id') REFERENCES opportunites ('opportunity_id'),
+    FOREIGN KEY ('applicant_id') REFERENCES profiles ('profile_id')
+);
