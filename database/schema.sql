@@ -137,3 +137,8 @@ CREATE TABLE opportunites_applicants (
     FOREIGN KEY ('opportunity_id') REFERENCES opportunites ('opportunity_id'),
     FOREIGN KEY ('applicant_id') REFERENCES profiles ('profile_id')
 );
+
+CREATE TABLE volunteer_categories (
+    'category_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'category' CHAR(50) NOT NULL
+);
