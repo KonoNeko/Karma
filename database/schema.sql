@@ -79,6 +79,13 @@ CREATE TABLE profile_awards (
     FOREIGN KEY ('award_id') REFERENCES awards_certifications ('award_id')
 );
 
+CREATE TABLE profile_preferences (
+    'preference_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'user_id' INTEGER NOT NULL,
+    'category' CHAR(50) NOT NULL,
+    FOREIGN KEY ('user_id') REFERENCES profiles ('profile_id')
+);
+
 CREATE TABLE social_posts (
     'post_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
     'user_id' INTEGER NOT NULL,
