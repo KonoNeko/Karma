@@ -1,46 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-#createpost {
-  text-align: center;
-  color: royalblue;
+
+
+/* @media screen and (max-width: 550px) {
+  body {
+      margin: 0;
+  } */
+
+
+#window {
+  width: 100%;
 }
 
-.center {
-  margin: 0;
-  position: absolute;
-  top: 75px;
-  left: 660px;
+
+
+#addpicture {
+  width: 216px;
+height: 118px;
+background: #49A1B9;
+border-radius: 12px;
 }
 
-.center2 {
-  margin: 0;
-  position: absolute;
-  top: 375px;
-  left: 645px;
+#post {
+  margin-top: 32px;
+  width: 218px;
+  height: 50px;
+  background: #49A1B9;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 12px;
 }
 
+.heading-2 {
+  font-size: 24px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700; /* bold */
+}
+
+.heading-3 {
+  margin-top: 10px;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600; /* semibold */
+  margin-top: 16px;
+}
 
 #textbox {
-  width: 200px;
-
+  margin-top: 24px;
+  border: 2px solid #000000;
+box-sizing: border-box;
+border-radius: 10px;
+width: 218px;
+height: 116px;
 }
 
-.form-group {
-  margin: 0;
-  position: absolute;
-  top: 150px;
-  left: 630px;
-}
+div > * {
+  margin: auto;
+  text-align: center;
+ }
 
-.form-group2 {
-  margin: 0;
-  position: absolute;
-  top: 225px;
-  left: 630px;
-}
 
-.form-group3 {
-  margin: 0;
-  position: absolute;
-  top: 300px;
-  left: 630px;
-}
