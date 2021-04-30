@@ -4,6 +4,10 @@
 
 
 @media screen and (max-width: 550px) {
+    body {
+        margin: 0;
+    }
+    
     .heading-1 {
         font-size: 36px;
         font-family: "Montserrat", sans-serif;
@@ -58,9 +62,29 @@
         border-radius: 10px;
     }
 
+    .category-title {
+        margin-top: 24px;
+        margin-bottom: 10px;
+    }
+
     #guildfordImg {
         background-image: url("../images/library.jpeg");
         background-size: 118px;
+    }
+
+    #title {
+        margin: 0;
+        margin-top: 24px;
+    }
+
+    #description {
+        margin: 0;
+        margin-top: 10px;
+    }
+
+    #description {
+        margin: 0;
+        margin-top: 10px;
     }
 }
   
