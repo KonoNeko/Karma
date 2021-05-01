@@ -65,5 +65,8 @@ button {
   font-size: 14px;
   font-family: Montserrat;
   border-radius: 10px;
-  margin-bottom: 12px;
+}
+
+button:hover {
+  box-shadow: 0 5px 15px rgba(3, 103, 166, 0.4);
 }
