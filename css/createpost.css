@@ -24,6 +24,11 @@ background: #49A1B9;
 border-radius: 12px;
 }
 
+#real-file {
+  margin-top: 75px;
+  margin-left: 100px;
+}
+
 #post {
   margin-top: 32px;
   width: 218px;
