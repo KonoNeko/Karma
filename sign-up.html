@@ -5,7 +5,9 @@
 
 
 <title>Login Page</title>
+
     <meta name = "viewport" content = "width=device-width, initial-scale = 1">
+	<link rel="stylesheet" href="css/sign-up.css">
 
     <!----------------------------------------------->
     <!--  Meta tag for rendering on mobile devices -->
@@ -25,15 +27,16 @@
 
 </head>
 <body>
+	<div id="bodies">
     <!----------------------->
     <!--  HTML Section -->
     <!----------------------->
 
-    <h1>Welcome to Karma!</h1>
-    <h2>Please Login </h2>
+    <h1><b>Karma</b></h1>
+    <h3>What we do makes a difference.</h3>
     <div id="firebaseui-auth-container"><br></div>
 
-    <div id="loader">Loading...</div>   
+    <div id="loader">Please wait as the page loads...</div>   
      
 
     <!----------------------------------------------->
@@ -124,6 +127,7 @@
         // Inject the login interface into the HTML
         ui.start('#firebaseui-auth-container', uiConfig);
     </script>
-
+	</div>
+</div>
 </body>
 </html>
