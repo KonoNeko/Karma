@@ -1,0 +1,18 @@
+
+#createpost {
+    text-align: center;
+    color: royalblue;
+}
+
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 100px;
+  left: 650px;
+}
+
+#text {
+    text-align: center;
+    color: royalblue;
+}
+
