@@ -43,27 +43,62 @@ border: 1px solid #51B09F;
 }
 
 #profile {
-  position: absolute;
-  top: 145px;
-  left: 425px;
+margin-top: 5px;
+width: 48px;
+height: 48px; 
 }
 
 #profilename {
-    position: absolute;
-  top: 127px;
-  left: 500px;
+margin-top: -50px;
+margin-left: 55px;
+width: 72px;
+height: 19px;
+
+/* Body Title */
+
+font-family: Open Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: #000000;
 }
 
 #postcaption {
-    position: absolute;
-  top: 180px;
-  left: 500px;
+margin-left: 55px;
+width: 314px;
+height: 31px;
+
+/* Body text */
+
+font-family: Open Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 19px;
+
+color: #000000;
 }
 
 #time {
-    position: absolute;
-  top: 220px;
-  left: 500px;
+    margin-left: 55px;
+    width: 97px;
+    height: 14px;
+    
+    /* Time Text on Comments */
+    
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 14px;
+    /* identical to box height */
+    
+    
+    color: #000000;
 }
 
 }
