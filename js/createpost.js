@@ -11,20 +11,46 @@
 //     });
 //   });
 
-const realFileBtn = document.getElementById("real-file");
-const customBtn = document.getElementById("custom-button");
-const customTxt = document.getElementById("custom-text");
 
-customBtn.addEventListener("click", function() {
-  realFileBtn.click();
-});
+let posts = [];
 
-realFileBtn.addEventListener("change", function() {
-  if (realFileBtn.value) {
-    customTxt.innerHTML = realFileBtn.value.match(
-      /[\/\\]([\w\d\s\.\-\(\)]+)$/
-    )[1];
-  } else {
-    customTxt.innerHTML = "No file chosen, yet.";
+const addPost = (ev)=> {
+  ev.preventDefault(); // stop the form from submitting
+  let post = {
+    caption: document.getElementById('caption').value,
+    location: document.getElementById('location').value,
+    tags: document.getElementById('tag').value
   }
-});
+  posts.push(post);
+  document.forms[0].reset(); // clear form
+
+  console.warn('added', {posts});
+  let pre = document.querySelector('#msg pre');
+  pre.textContent = '\n' + JSON.stringify(posts, '\t', 2);
+}
+
+document.addEventListener('DOMContentLoaded', ()=> {
+  document.getElementById('post').addEventListener('click', addPost);
+})
+
+
+
+
+
+// const realFileBtn = document.getElementById("real-file");
+// const customBtn = document.getElementById("custom-button");
+// const customTxt = document.getElementById("custom-text");
+
+// customBtn.addEventListener("click", function() {
+//   realFileBtn.click();
+// });
+
+// realFileBtn.addEventListener("change", function() {
+//   if (realFileBtn.value) {
+//     customTxt.innerHTML = realFileBtn.value.match(
+//       /[\/\\]([\w\d\s\.\-\(\)]+)$/
+//     )[1];
+//   } else {
+//     customTxt.innerHTML = "No file chosen, yet.";
+//   }
+// });
