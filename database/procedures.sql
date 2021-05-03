@@ -1,7 +1,7 @@
 /*
 TODO:
 -Profile
-    a) Gather profile info (with education, skills, experience, etc.)
+DONEa) Gather profile info (with education, skills, experience, etc.)
     b) Create a new profile/signup
     c) Sign a user in
     d) Edit a profile/add information
@@ -17,12 +17,13 @@ TODO:
     d) View applicants for the posted opportunites
 
 -Social Posts
-    a) View comments
-    b) Get caption, location and image??
-    b) View number of likes
-    c) View timestamp posted
-    d) Like a post
-    e) Comment on a post
+DONEa) View all posts (social feed)
+    b) View comments
+DONEc) Get caption, location and image??
+DONEd) View number of likes
+DONEe) View timestamp posted
+DONEf) Like a post
+    g) Comment on a post
 */
 
 
@@ -59,3 +60,96 @@ BEGIN
     WHERE prof.username = current_username;
 END//
 DELIMITER ;
+
+
+
+/*
+Gathers all the posts to fill a social feed
+*/
+CREATE VIEW posts_feed as
+SELECT s.image_url, s.caption, s.location, s.post_date, s.likes, p.username, p.profile_pic_url
+FROM social_posts s JOIN profiles p
+ON s.user_id = p.profile_id
+ORDER BY s.post_date
+
+
+
+/*
+Likes a social post.
+*/
+DROP PROCEDURE IF EXISTS like_post;
+DELIMITER //
+CREATE PROCEDURE like_post(IN current_post INTEGER, IN liker_id INTEGER)
+BEGIN
+    INSERT INTO post_likes (post_id, user_id)
+    VALUES (current_post, liker_id);
+END//
+DELIMITER ;
+
+
+/*
+Increments the number of likes that a post has.
+*/
+DROP PROCEDURE IF EXISTS increment_post_likes;
+DELIMITER //
+CREATE PROCEDURE increment_post_likes (IN current_post_id INT)
+BEGIN
+    UPDATE social_posts
+    SET likes = likes + 1
+    WHERE post_id = current_post_id;
+END//
+DELIMITER ;
+
+
+/*
+Unlikes a social post.
+*/
+DROP PROCEDURE IF EXISTS unlike_post;
+DELIMITER //
+CREATE PROCEDURE unlike_post(IN current_post INTEGER, IN liker_id INTEGER)
+BEGIN
+    DELETE FROM post_likes
+    WHERE post_id = current_post AND user_id = liker_id;
+END//
+DELIMITER ;
+
+
+/*
+Decrements the number of likes a post has.
+*/
+DROP PROCEDURE IF EXISTS decrement_post_likes;
+DELIMITER //
+CREATE PROCEDURE decrement_post_likes (IN current_post_id INT)
+BEGIN
+    UPDATE social_posts
+    SET likes = likes - 1
+    WHERE post_id = current_post_id;
+END//
+DELIMITER ;
+
+
+
+/*
+Automatically updates the value of likes a post has after a user likes a post.
+*/
+CREATE trigger update_post_like_likes
+    AFTER INSERT ON post_likes
+    FOR EACH ROW
+    CALL increment_post_likes(NEW.post_id);
+
+
+/*
+Automatically updates the value of unlikes a post has after a user likes a post.
+*/
+CREATE trigger update_post_like_unlikes
+    AFTER DELETE ON post_likes
+    FOR EACH ROW
+    CALL decrement_post_likes(OLD.post_id);
+
+/*
+Automatically updates the number of posts a usre has after 
+*/
+CREATE trigger update_post_number
+    AFTER INSERT ON social_posts
+    FOR EACH ROW
+    CALL increment_post_number(NEW.user_id);
