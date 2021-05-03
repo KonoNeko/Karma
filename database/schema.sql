@@ -38,7 +38,7 @@ CREATE TABLE education (
     `school_name` CHAR(50) NOT NULL,
     `start_date` CHAR(50) NOT NULL,
     `end_date` CHAR(50) NOT NULL,
-    `gpa` DECIMAL(1, 1) NOT NULL,
+    `gpa` DECIMAL(2, 1) NOT NULL,
     `certification_type` CHAR(50) NOT NULL
 );
 
