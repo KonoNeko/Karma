@@ -72,3 +72,9 @@ function fillCertifications(object) {
     }
     return awardsAndCertifications;
 }
+
+module.exports.profile = fillProfile;
+module.exports.education = fillEducation;
+module.exports.experience = fillExperience;
+module.exports.skills = fillSkills;
+module.exports.certifications = fillCertifications;
