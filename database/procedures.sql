@@ -67,7 +67,7 @@ DELIMITER ;
 Gathers all the posts to fill a social feed
 */
 CREATE VIEW posts_feed as
-SELECT s.image_url, s.caption, s.location, s.post_date, s.likes, p.username, p.profile_pic_url
+SELECT s.image_url, s.caption, s.location, s.post_date, s.likes, p.username, p.profile_pic_url, s.user_id, s.post_id
 FROM social_posts s JOIN profiles p
 ON s.user_id = p.profile_id
 ORDER BY s.post_date
