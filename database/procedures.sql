@@ -104,7 +104,7 @@ DELIMITER ;
 
 
 /*
-Increments the number of likes that a post has.
+Increments the number of posts that a profile has.
 */
 DROP PROCEDURE IF EXISTS increment_post_number;
 DELIMITER //
@@ -118,12 +118,35 @@ DELIMITER ;
 
 
 /*
-Automatically updates the number of posts a usre has after 
+Decrements the number of likes that a post has.
+*/
+DROP PROCEDURE IF EXISTS decrement_post_number;
+DELIMITER //
+CREATE PROCEDURE decrement_post_number (IN current_poster INTEGER)
+BEGIN
+    UPDATE profiles
+    SET posts = posts - 1
+    WHERE profile_id = current_poster;
+END//
+DELIMITER ;
+
+
+/*
+Automatically updates the number of posts a user has after creation
 */
 CREATE trigger update_post_number
     AFTER INSERT ON social_posts
     FOR EACH ROW
     CALL increment_post_number(NEW.user_id);
+
+
+/*
+Automatically updates the number of posts a user has after deletion
+*/
+CREATE trigger update_post_number_del
+    AFTER DELETE ON social_posts
+    FOR EACH ROW
+    CALL decrement_post_number(OLD.user_id);
 
 
 /*
