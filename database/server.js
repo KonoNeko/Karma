@@ -41,7 +41,7 @@ app.get(ENDPOINT + '/profiles/:id', (req, res) => {
             education: filter.education(response),
             skills: filter.skills(response),
             experience: filter.experience(response),
-            certifications: filter.experience(response)
+            certifications: filter.certifications(response)
         };
         res.end(JSON.stringify(profile));
     });
