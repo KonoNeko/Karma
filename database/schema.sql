@@ -36,8 +36,8 @@ CREATE TABLE profile_skills (
 CREATE TABLE education (
     `education_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `school_name` CHAR(50) NOT NULL,
-    `start_date` CHAR(50) NOT NULL,
-    `end_date` CHAR(50) NOT NULL,
+    `edu_start_date` CHAR(50) NOT NULL,
+    `edu_start_date` CHAR(50) NOT NULL,
     `gpa` DECIMAL(2, 1) NOT NULL,
     `certification_type` CHAR(50) NOT NULL,
     `edu_image_url` TEXT NOT NULL,
@@ -55,8 +55,8 @@ CREATE TABLE experiences (
     `experience_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `exp_image_url` TEXT NOT NULL,
     `job_title` CHAR(50) NOT NULL,
-    `start_date` CHAR(50) NOT NULL,
-    `end_date` CHAR(50) NOT NULL,
+    `exp_start_date` CHAR(50) NOT NULL,
+    `exp_end_date` CHAR(50) NOT NULL,
     `employer` CHAR(50) NOT NULL
 );
 
