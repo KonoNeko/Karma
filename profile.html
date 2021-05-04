@@ -128,8 +128,19 @@
       </div>
 
 
-      
-<h1>Jason Grace</h1><br>
+      <div id="innerDiv" class="container">
+        <br>
+        <br>
+      <div class="container" id="innermostDiv">
+        <div class="container" id="profileDiv"><br>
+        
+            <br>
+            <h1><span id="name"></span></h1><br>
+        </div>
+      </div>
+        <br>
+    </div>
+    <br>
 <div id="profile">
     <img width="200" height="233" src= "images/profile.png" alt="prof">
     </div>
@@ -159,6 +170,25 @@
 <h2>Experience</h2><br><br><br><br>
 
 <h2>Awards and Certifications</h2>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<script src="js/signup.js"> </script> 
+<script src="js/profile.js"></script>
+<script>
+      showProfile();
+    </script>
+    <script>
+        document.getElementById("editbtn").onclick = function () {
+            location.href = "editprofile.html";
+        };
+    </script>
 
    
   </body>

@@ -3,9 +3,128 @@
 
 
 .heading-1 {
-    font-size: 36px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 700; /* bold */
-    width: 302px;
-    color: #0367A6;
+width: 277px;
+height: 59px;
+
+/* Title */
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 48px;
+line-height: 59px;
+/* identical to box height */
+
+
+/* Heading 1 color */
+
+color: #0367A6;
+margin-top: 15px;
+margin-left: 100px;
 }
+
+
+#callnow {
+margin-top: -50px;
+margin-left: 100px;
+width: 270px;
+height: 44px;
+
+/* Heading 1 */
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 36px;
+line-height: 44px;
+/* identical to box height */
+
+
+color: #000000;
+
+}
+
+#callnow-two {
+margin-top: 15px;
+margin-left: 125px;
+width: 201px;
+height: 29px;
+
+/* Heading 2 */
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 29px;
+
+color: #000000;
+
+}
+
+
+#email {
+    margin-top: -50px;
+    margin-left: 170px;
+    width: 270px;
+    height: 44px;
+    
+    /* Heading 1 */
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 44px;
+    /* identical to box height */
+    
+    
+    color: #000000;
+    
+    }
+    
+    #email-two {
+    margin-top: 15px;
+    margin-left: 50px;
+    width: 201px;
+    height: 29px;
+    
+    /* Heading 2 */
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+    
+    color: #000000;
+    
+    }
+
+    #phoneicon {
+    margin-top: -50px;
+    margin-left: 70px;
+    }
+
+    #earthicon {
+    margin-top: -50px;
+    margin-left: 70px;
+    }
+
+
+    #paragraph {
+    margin-top: 35px;
+    margin-left: 15px;
+    width: 508px;   
+    height: 44px;
+
+    /* Heading 3 */
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #000000;
+    }
