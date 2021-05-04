@@ -25,7 +25,7 @@ margin-left: 100px;
 
 
 #callnow {
-margin-top: -25px;
+margin-top: -50px;
 margin-left: 100px;
 width: 270px;
 height: 44px;
@@ -64,8 +64,8 @@ color: #000000;
 
 
 #email {
-    margin-top: 75px;
-    margin-left: 160px;
+    margin-top: -50px;
+    margin-left: 170px;
     width: 270px;
     height: 44px;
     
@@ -104,4 +104,27 @@ color: #000000;
     #phoneicon {
     margin-top: -50px;
     margin-left: 70px;
+    }
+
+    #earthicon {
+    margin-top: -50px;
+    margin-left: 70px;
+    }
+
+
+    #paragraph {
+    margin-top: 35px;
+    margin-left: 15px;
+    width: 508px;   
+    height: 44px;
+
+    /* Heading 3 */
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #000000;
     }
