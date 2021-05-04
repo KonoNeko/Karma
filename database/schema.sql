@@ -39,7 +39,8 @@ CREATE TABLE education (
     `start_date` CHAR(50) NOT NULL,
     `end_date` CHAR(50) NOT NULL,
     `gpa` DECIMAL(2, 1) NOT NULL,
-    `certification_type` CHAR(50) NOT NULL
+    `certification_type` CHAR(50) NOT NULL,
+    `edu_image_url` TEXT NOT NULL,
 );
 
 CREATE TABLE profile_education (
@@ -52,6 +53,7 @@ CREATE TABLE profile_education (
 
 CREATE TABLE experiences (
     `experience_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `exp_image_url` TEXT NOT NULL,
     `job_title` CHAR(50) NOT NULL,
     `start_date` CHAR(50) NOT NULL,
     `end_date` CHAR(50) NOT NULL,
@@ -69,7 +71,8 @@ CREATE TABLE profile_experiences (
 CREATE TABLE awards_certifications (
     `award_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `title` CHAR(50) NOT NULL,
-    `date_received` CHAR(50) NOT NULL
+    `date_received` CHAR(50) NOT NULL,
+    `awards_image_url` TEXT NOT NULL
 );
 
 CREATE TABLE profile_awards (
@@ -133,6 +136,7 @@ CREATE TABLE opportunites (
     `title` CHAR(50) NOT NULL,
     `description` TEXT NOT NULL,
     `requirements` TEXT,
+    'image_url' TEXT NOT NULL,
     `post_date` TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (`poster_id`) REFERENCES profiles (`profile_id`)
 );
