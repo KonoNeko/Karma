@@ -15,7 +15,7 @@
   />
 </head>
 
-<body>
+<body onload="loadHome()">
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
       >&times;</a
@@ -146,14 +146,11 @@
       </div>
     </div>
 
-    <div class="above">
-      <h1 class="heading-title">Home</h1>
-    </div>
-
     <div class="flex-main">
       <div class="column" id="mainmain">
-        <div class="stories"></div>
-        <div class="posts"></div>
+        <h1 class="heading-title">Home</h1>
+        <div id="stories" class="stories">Stories here</div>
+        <div id="posts" class="posts">Posts here</div>
       </div>
 
       <div class="column" id="sidemain">
@@ -163,8 +160,16 @@
             <button type="submit"><i class="fa fa-search"></i></button>
           </form>
         </div>
-        <div class="whats-new"></div>
-        <div class="recommended-contacts"></div>
+        <div id="whats-new" class="whats-new">
+          <h1>What's new?</h1>
+          <p>Recommended volunteering opportunities for you</p>
+          <div id="whats-new-volunteering-opportunities"></div>
+          <a href="">View all volunteering opportunities</a>
+        </div>
+        <div id="recommended-connections" class="recommended-connections">
+          <h1>Who to connect with</h1>
+          <a href="">View all recommended connections</a>
+        </div>
       </div>
     </div>
   </div>
