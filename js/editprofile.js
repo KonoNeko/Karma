@@ -18,3 +18,6 @@ function showProfile(){
   });
   
   }
+  document.getElementById("descbtn").onclick = function () {
+    location.href = "adddescription.html";
+};

@@ -73,6 +73,81 @@ ON s.user_id = p.profile_id
 ORDER BY s.post_date
 
 
+/*
+Gets the user id using a username.
+*/
+DROP FUNCTION IF EXISTS get_user_id;
+DELIMITER //
+CREATE FUNCTION get_user_id(current_username VARCHAR(30)) 
+RETURNS INT READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT profile_id
+      FROM profiles
+      WHERE username = current_username
+    );
+END //
+DELIMITER ;
+
+
+/*
+Gets all the user profile information (following stats, skills, education, experiences, awards, posts).
+*/
+DROP PROCEDURE IF EXISTS create_post;
+DELIMITER //
+CREATE PROCEDURE create_post(IN current_username VARCHAR(50), IN media_url TEXT, IN new_caption TEXT, IN new_location CHAR(50))
+BEGIN
+    INSERT INTO social_posts(`user_id`, `image_url`, `caption`, `location`)
+    VALUES (get_user_id(current_username), media_url, new_caption, new_location);
+END//
+DELIMITER ;
+
+
+/*
+Increments the number of posts that a profile has.
+*/
+DROP PROCEDURE IF EXISTS increment_post_number;
+DELIMITER //
+CREATE PROCEDURE increment_post_number (IN current_poster INTEGER)
+BEGIN
+    UPDATE profiles
+    SET posts = posts + 1
+    WHERE profile_id = current_poster;
+END//
+DELIMITER ;
+
+
+/*
+Decrements the number of likes that a post has.
+*/
+DROP PROCEDURE IF EXISTS decrement_post_number;
+DELIMITER //
+CREATE PROCEDURE decrement_post_number (IN current_poster INTEGER)
+BEGIN
+    UPDATE profiles
+    SET posts = posts - 1
+    WHERE profile_id = current_poster;
+END//
+DELIMITER ;
+
+
+/*
+Automatically updates the number of posts a user has after creation
+*/
+CREATE trigger update_post_number
+    AFTER INSERT ON social_posts
+    FOR EACH ROW
+    CALL increment_post_number(NEW.user_id);
+
+
+/*
+Automatically updates the number of posts a user has after deletion
+*/
+CREATE trigger update_post_number_del
+    AFTER DELETE ON social_posts
+    FOR EACH ROW
+    CALL decrement_post_number(OLD.user_id);
+
 
 /*
 Likes a social post.
@@ -145,11 +220,3 @@ CREATE trigger update_post_like_unlikes
     AFTER DELETE ON post_likes
     FOR EACH ROW
     CALL decrement_post_likes(OLD.post_id);
-
-/*
-Automatically updates the number of posts a usre has after 
-*/
-CREATE trigger update_post_number
-    AFTER INSERT ON social_posts
-    FOR EACH ROW
-    CALL increment_post_number(NEW.user_id);
