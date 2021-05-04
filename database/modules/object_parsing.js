@@ -16,14 +16,14 @@ function fillProfile(object) {
 
 function fillEducation(object) {
     let education = {};
-    const edu_keys = ["education_id", "school_name", "start_date", 
-    "end_date", "gpa", "certification_type", "edu_image_url"];
+    const edu_keys = ["education_id", "school_name", "edu_start_date", 
+    "edu_end_date", "gpa", "certification_type", "edu_image_url"];
 
     for (let i=0; i<object.length; i++) {
         // If current education entry doesnt exist
         if (!education[object[i]['education_id']]) { 
             let newEducation = filterObject(object[i], edu_keys);
-            education[[i]['education_id']] = newEducation;
+            education[object[i]['education_id']] = newEducation;
         }
     }
     return education;
@@ -37,7 +37,7 @@ function fillSkills(object) {
         // If current skill entry doesnt exist
         if (!skills[object[i]['skill_id']]) { 
             let newSkill = filterObject(object[i], skill_keys);
-            skills[[i]['skill_id']] = newSkill;
+            skills[object[i]['skill_id']] = newSkill;
         }
     }
     return skills;
@@ -46,13 +46,13 @@ function fillSkills(object) {
 function fillExperience(object) {
     let experience = {};
     const exp_keys = ['experience_id', 'job_title', 'employer', 
-    'exp_image_url'];
+    'exp_image_url', 'exp_start_date', 'exp_end_date'];
 
     for (let i=0; i<object.length; i++) {
         // If current experience entry doesnt exist
         if (!experience[object[i]['experience_id']]) { 
             let newExp = filterObject(object[i], exp_keys);
-            experience[[i]['experience_id']] = newExp;
+            experience[object[i]['experience_id']] = newExp;
         }
     }
     return experience;
@@ -67,7 +67,7 @@ function fillCertifications(object) {
         // If current experience entry doesnt exist
         if (!awardsAndCertifications[object[i]['award_id']]) { 
             let newAC = filterObject(object[i], awards_keys);
-            awardsAndCertifications[[i]['award_id']] = newAC;
+            awardsAndCertifications[object[i]['award_id']] = newAC;
         }
     }
     return awardsAndCertifications;
