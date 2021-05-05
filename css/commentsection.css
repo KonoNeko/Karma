@@ -4,102 +4,325 @@
 
 
 @media screen and (max-width: 550px) {
-  body {
-      margin: 0;
-  } 
+    body {
+        margin: 0;
+    } 
+  
+  
+  
+  .heading-2 {
+      text-align: center;
+      margin-top: 150px;
+      width: 139px;
+      height: 29px;
+      /* Heading 2 */
+      
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 29px;
+      
+      color: #0367A6;
+      
+  }
+  
+  #first {
+  margin-top: 24px;
+  width: 414px;
+  height: 0px;
+  border: 1px solid #51B09F;
+  }
+  
+  #second {
+  margin-top: 10px;
+  width: 414px;
+  height: 0px;
+  border: 1px solid #51B09F;
+  
+  }
+  
+  #profile {
+  margin-top: 5px;
+  width: 48px;
+  height: 48px; 
+  }
+  
+  #profilename {
+  margin-top: -50px;
+  margin-left: 55px;
+  width: 72px;
+  height: 19px;
+  
+  /* Body Title */
+  
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  /* identical to box height */
+  
+  
+  color: #000000;
+  }
+  
+  #postcaption {
+  margin-left: 55px;
+  width: 314px;
+  height: 31px;
+  
+  /* Body text */
+  
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  
+  color: #000000;
+  }
+  
+  #time {
+      margin-left: 55px;
+      width: 97px;
+      height: 14px;
+      
+      /* Time Text on Comments */
+      
+      font-family: Open Sans;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 10px;
+      line-height: 14px;
+      /* identical to box height */
+      
+      
+      color: #000000;
+  }
+  
+  
+  }
+  
+  #profile {
+      margin-top: 5px;
+      width: 48px;
+      height: 48px; 
+      }
+      
+      #profilename {
+      margin-top: -50px;
+      margin-left: 55px;
+      width: 72px;
+      height: 19px;
+      
+      /* Body Title */
+      
+      font-family: Open Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 19px;
+      /* identical to box height */
+      
+      
+      color: #000000;
+      }
+  
+  
+      #time {
+          margin-left: 55px;
+          width: 97px;
+          height: 14px;
+          
+          /* Time Text on Comments */
+          
+          font-family: Open Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 10px;
+          line-height: 14px;
+          /* identical to box height */
+          
+          
+          color: #000000;
+      }
+  
+      #postcaption {
+          margin-left: 55px;
+          width: 314px;
+          height: 31px;
+          
+          /* Body text */
+          
+          font-family: Open Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 19px;
+          
+          color: #000000;
+          }
+  
 
 
 
-.heading-2 {
-    text-align: center;
-    margin-top: 150px;
-    width: 139px;
-    height: 29px;
-    /* Heading 2 */
-    
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 29px;
-    
-    color: #0367A6;
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+#above-search {
+  display: none;
 }
 
-#first {
-margin-top: 24px;
-width: 414px;
-height: 0px;
-border: 1px solid #51B09F;
+.above {
+  margin-left: 5rem;
 }
 
-#second {
-margin-top: 10px;
-width: 414px;
-height: 0px;
-border: 1px solid #51B09F;
-
+.flex-main {
+  margin-left: 5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
-#profile {
-margin-top: 5px;
-width: 48px;
-height: 48px; 
+.flex-main > .column {
+  width: 50%;
+  margin-left: 24px;
+  margin-right: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
-#profilename {
-margin-top: -50px;
-margin-left: 55px;
-width: 72px;
-height: 19px;
-
-/* Body Title */
-
-font-family: Open Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 14px;
-line-height: 19px;
-/* identical to box height */
-
-
-color: #000000;
+#mainmain > #stories {
+  background-color: red; /* temp */
+  margin-top: 24px;
+  height: 400px; /* temp */
+  width: 100%;
 }
 
-#postcaption {
-margin-left: 55px;
-width: 314px;
-height: 31px;
-
-/* Body text */
-
-font-family: Open Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 19px;
-
-color: #000000;
+#mainmain > #posts {
+  background-color: purple; /* temp */
+  margin-top: 24px;
+  height: 400px; /* temp */
+  width: 100%;
+  margin-bottom: 24px;
 }
 
-#time {
-    margin-left: 55px;
-    width: 97px;
-    height: 14px;
-    
-    /* Time Text on Comments */
-    
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 10px;
-    line-height: 14px;
-    /* identical to box height */
-    
-    
-    color: #000000;
+#sidemain > #whats-new {
+  background-color: #eff0f3;
+  margin-top: 24px;
+  padding-left: 24px;
+  height: 400px; /* temp */
+  padding: 24px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
 }
 
+#sidemain > #recommended-connections {
+  background-color: #eff0f3;
+  margin-top: 24px;
+  padding: 24px;
+  width: 100%;
+  height: 400px; /* temp */
+  border-radius: 12px;
+  box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+  margin-bottom: 24px;
 }
 
+.heading-title {
+  padding-top: 24px;
+  padding-left: 24px;
+}
+
+@media screen and (max-width: 550px) {
+  .above {
+    margin-left: 0;
+  }
+
+  #above-search {
+    display: unset;
+  }
+
+  #sidemain {
+    display: none;
+  }
+
+  .flex-main > .column {
+    width: 100%;
+  }
+
+  .flex-main {
+    margin-left: 0;
+  }
+
+  #mainmain > #posts {
+    margin-bottom: 96px;
+  }
+
+  .heading-title {
+    padding-top: 12px;
+    padding-left: 0px;
+  }
+
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+
+  .menu-and-search {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .menu-and-search > .mobile-menu > a {
+    width: 20%;
+    height: auto;
+    margin-right: 24px;
+  }
+
+  .menu-and-search > #above-search {
+    width: 80%;
+    margin-right: 24px;
+  }
+
+  .search input[type="text"] {
+    font-family: "Montserrat";
+    border: 0px;
+    padding-left: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 80%;
+    height: 100%;
+  }
+
+  .search {
+    background-color: white;
+  }
+
+  .search button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 20%;
+    height: 100%;
+  }
+}
