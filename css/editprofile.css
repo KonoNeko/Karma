@@ -1,5 +1,6 @@
 #changeprofbtn{
 
+    margin-top: -100px;
     margin-left: 500px;
     width: 250px;
     height: 50px;
@@ -9,8 +10,18 @@
     display: block;
     margin-top: 120px;
 
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    align-items: center;
+
+    color: #EFF0F3;
+
 }
 #descbtn{
+    margin-top: -100px;
     margin-left: 500px;
     width: 250px;
     height: 50px;
@@ -19,8 +30,18 @@
     border-radius: 8px;
     display: block;
     margin-top: 10px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    align-items: center;
+
+    color: #EFF0F3;
 }
 #skillsbtn{
+    margin-top: -100px;
     margin-left: 500px;
     width: 250px;
     height: 50px;
@@ -29,6 +50,15 @@
     border-radius: 8px;
     margin-top: 10px;
     display: block;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    align-items: center;
+
+    color: #EFF0F3;
 }
 
 #profile{
@@ -45,6 +75,26 @@ h2 {
     display:flex;
     word-spacing: 20px;
 
+}
+
+
+#name {
+    margin-top: 100px;
+    margin-left: -45px;
+    font-size: 36px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700; /* bold */
+    width: 302px;
+    color: #0367A6;
+}
+
+
+.heading-3 {
+    margin-left: -5px;
+    margin-top: -75px;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600; /* semibold */
 }
 
 
