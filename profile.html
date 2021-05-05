@@ -147,6 +147,7 @@
 <div><h4 id="following">Posts</h4></div>
 <h4 id="posts">Followers</h4>
 <h4 id="followers">Following</h4>
+<div id="postDiv" class="container"></div>
 
 
 <button id="editbtn">Edit Profile</button>
@@ -179,11 +180,15 @@
 <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
 <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
 <script src="js/signup.js"> </script> 
 <script src="js/profile.js"></script>
 <script>
       showProfile();
+      
+
     </script>
+    <script>showImages();</script>
     <script>
         document.getElementById("editbtn").onclick = function () {
             location.href = "editprofile.html";

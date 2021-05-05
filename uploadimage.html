@@ -202,8 +202,9 @@
                 
                 var storageRef = firebase.storage().ref();
                 file = $('#file')[0].files[0];
+                var user = firebase.auth().currentUser
                 // Create a reference to the '.jpg'
-                var photoRef = storageRef.child( 'images/' +uid + '.jpg' + new Date().getTime() + file.name);
+                var photoRef = storageRef.child( '/images/' + user + '/profilePicture' + file.name);
                 photoRef.put(file).then(function (snapshot) {
                     var usersRef = db.collection("images");
                     usersRef.doc(uid).set({
