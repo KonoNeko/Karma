@@ -74,11 +74,10 @@ CREATE PROCEDURE create_new_profile(IN new_username VARCHAR(50),
 BEGIN
     INSERT INTO profiles(username, full_name, is_volunteer)
     VALUES (new_username, new_fullname, new_is_volunteer);
-    -- Continue this .....
-    -- CALL new_education_entry();
-    -- CALL new_experience_entry();
-    -- CALL new_award_entry();
-    -- CALL new_skill_entry();
+    CALL new_education_entry(username, "Start", "End", 0.0, "Certification type", "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png", "School Name");
+    CALL new_experience_entry(username, "Start", "End", "Job title", "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png", "Employer");
+    CALL new_award_entry(username, "Certificate Title", "Date Received", "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png");
+    CALL new_skill_entry(username, "Community Member");
 END//
 DELIMITER ;
 
@@ -87,7 +86,7 @@ DELIMITER ;
 Creates a new education entry with the associated username.
 
 Example of the procedure being called:
-CALL new_experience_entry("username", "start", "end", "gpa", "certification type", "image url", "school name");
+CALL new_education_entry("username", "start", "end", "gpa", "certification type", "image url", "school name");
 */
 DROP PROCEDURE IF EXISTS new_education_entry;
 DELIMITER //
@@ -135,8 +134,8 @@ DELIMITER //
 CREATE PROCEDURE new_award_entry(IN current_username VARCHAR(50),
 IN new_title CHAR(50), IN new_date CHAR(50), IN new_img TEXT)
 BEGIN
-    INSERT INTO experiences(`title`, `date_received`, `awards_image_url`)
-    VALUES (new_title, new_date, new_image);
+    INSERT INTO awards_certifications(`title`, `date_received`, `awards_image_url`)
+    VALUES (new_title, new_date, new_img);
     INSERT INTO profile_awards(profile_id, award_id)
     VALUES ((SELECT get_user_id(current_username)), (SELECT LAST_INSERT_ID()));
 END//
