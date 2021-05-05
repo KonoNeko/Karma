@@ -30,6 +30,8 @@ app.get(ENDPOINT + '/posts', (req, res) => {
     });
 });
 
+
+// Gets the profile information for a given user
 app.get(ENDPOINT + '/profiles/:id', (req, res) => {
     const id = req.params.id;
     const sql = `CALL get_profile_info('${id}');`;
@@ -47,6 +49,8 @@ app.get(ENDPOINT + '/profiles/:id', (req, res) => {
     });
 });
 
+
+// Creates a new profile with a given username, full name and if the profile was a volunteer
 app.post(ENDPOINT + '/profiles/:username/:fullname/:isVolunteer', (req, res) => {
     const username = req.params.username;
     let fullname = req.params.fullname;
@@ -55,12 +59,43 @@ app.post(ENDPOINT + '/profiles/:username/:fullname/:isVolunteer', (req, res) => 
     const sql = `CALL create_new_profile("${username}", "${fullname}", ${isVolunteer});`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        if (result['affected_rows']) {
+        if (result['affectedRows']) {
             res.send("Success creating profile");
         } else {
             res.send("Error creating profile");
         }
     });
 });
+
+
+app.delete(ENDPOINT + '/profiles/skills/:id/:toRemove', (req, res) => {
+    const id = req.params.id;
+    const toRemove = req.params.toRemove;
+    const sql = `CALL remove_skill_entry("${id}", "${toRemove}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success removing skill");
+        } else {
+            res.send("Error removing skill");
+        }
+    });
+});
+
+/*
+TODO:
+-Profile
+    a) Add skills (PUT - new_skill_entry)
+    b) Remove skills (DELETE - remove_skill_entry)
+    c) Add education (POST - new_education_entry)
+    d) Edit education (PUT - _______)
+    e) Add experience (POST - new_experience_entry)
+    f) Edit experience (PUT - _______)
+    g) Add award/certification (POST - new_award_entry)
+    h) Edit award/certification (PUT - _____)
+
+
+*/
+
 
 app.listen();
