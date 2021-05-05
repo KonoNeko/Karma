@@ -64,10 +64,109 @@ DELIMITER ;
 
 
 /*
+Creates a new profile when a user signs up.
+*/
+DROP PROCEDURE IF EXISTS create_new_profile;
+DELIMITER //
+CREATE PROCEDURE create_new_profile(IN new_username VARCHAR(50), 
+                                    IN new_fullname VARCHAR(100),
+                                    IN new_is_volunteer TINYINT(1))
+BEGIN
+    INSERT INTO profiles(username, full_name, is_volunteer)
+    VALUES (new_username, new_fullname, new_is_volunteer);
+    -- Continue this .....
+    -- CALL new_education_entry();
+    -- CALL new_experience_entry();
+    -- CALL new_award_entry();
+    -- CALL new_skill_entry();
+END//
+DELIMITER ;
+
+
+/*
+Creates a new education entry with the associated username.
+
+Example of the procedure being called:
+CALL new_experience_entry("username", "start", "end", "gpa", "certification type", "image url", "school name");
+*/
+DROP PROCEDURE IF EXISTS new_education_entry;
+DELIMITER //
+CREATE PROCEDURE new_education_entry(IN current_username VARCHAR(50),
+IN new_start CHAR(50), IN new_end CHAR(50), IN new_gpa DECIMAL(2, 1),
+IN new_type CHAR(50), IN new_image TEXT, IN new_name CHAR(50))
+BEGIN
+    INSERT INTO education(`school_name`, `edu_start_date`, `edu_end_date`,
+    `gpa`, `certification_type`, `edu_image_url`)
+    VALUES (new_name, new_start, new_end, new_gpa, new_type, new_image);
+    INSERT INTO profile_education(profile_id, education_id)
+    VALUES ((SELECT get_user_id(current_username)), (SELECT LAST_INSERT_ID()));
+END//
+DELIMITER ;
+
+
+/*
+Creates a new experience entry with the associated username.
+
+Example of the procedure being called:
+CALL new_experience_entry("username", "start", "end", "job title", "image url", "employer");
+*/
+DROP PROCEDURE IF EXISTS new_experience_entry;
+DELIMITER //
+CREATE PROCEDURE new_experience_entry(IN current_username VARCHAR(50),
+IN new_start CHAR(50), IN new_end CHAR(50), IN new_title CHAR(50), 
+IN new_image TEXT, IN new_employer CHAR(50))
+BEGIN
+    INSERT INTO experiences(`job_title`, `exp_start_date`, `exp_end_date`,
+    `employer`, `exp_image_url`)
+    VALUES (new_title, new_start, new_end, new_employer, new_image);
+    INSERT INTO profile_experiences(profile_id, experience_id)
+    VALUES ((SELECT get_user_id(current_username)), (SELECT LAST_INSERT_ID()));
+END//
+DELIMITER ;
+
+/*
+Creates a new award/certification entry with the associated username.
+
+Example of the procedure being called:
+CALL new_award_entry("username", "award title", "date received", "image url");
+*/
+DROP PROCEDURE IF EXISTS new_award_entry;
+DELIMITER //
+CREATE PROCEDURE new_award_entry(IN current_username VARCHAR(50),
+IN new_title CHAR(50), IN new_date CHAR(50), IN new_img TEXT)
+BEGIN
+    INSERT INTO experiences(`title`, `date_received`, `awards_image_url`)
+    VALUES (new_title, new_date, new_image);
+    INSERT INTO profile_awards(profile_id, award_id)
+    VALUES ((SELECT get_user_id(current_username)), (SELECT LAST_INSERT_ID()));
+END//
+DELIMITER ;
+
+/*
+Connects a skill entry with the associated username.
+
+Example of the procedure being called:
+CALL new_skill_entry("username", "skill");
+*/
+DROP PROCEDURE IF EXISTS new_skill_entry;
+DELIMITER //
+CREATE PROCEDURE new_skill_entry(IN current_username CHAR(50),
+IN new_title CHAR(50))
+BEGIN
+    INSERT IGNORE INTO skills (skill_title)
+    VALUES (new_title);
+    INSERT INTO profile_skills(profile_id, skill_id)
+    VALUES ((SELECT get_user_id(current_username)), (SELECT skill_id FROM skills WHERE skill_title = new_title));
+END//
+DELIMITER ;
+
+
+/*
 Gathers all the posts to fill a social feed
 */
 CREATE VIEW posts_feed as
-SELECT s.image_url, s.caption, s.location, s.post_date, s.likes, p.username, p.profile_pic_url, s.user_id, s.post_id
+SELECT s.image_url, s.caption, s.location, s.post_date, 
+s.likes, p.username, p.profile_pic_url, s.user_id, s.post_id
 FROM social_posts s JOIN profiles p
 ON s.user_id = p.profile_id
 ORDER BY s.post_date
