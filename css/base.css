@@ -313,7 +313,6 @@ svg {
 
 @media screen and (min-width: 550px) {
 
-
   /* SCROLLBAR */
 /* width */
 ::-webkit-scrollbar {
@@ -337,8 +336,26 @@ svg {
 ::-webkit-scrollbar-thumb:hover {
   background: #51b09f;
 }
+
   
 }
+
+@media screen and (max-width: 550px) {
+
+  html {
+    overflow: scroll;
+    overflow-x: hidden;
+    }
+    ::-webkit-scrollbar {
+    width: 0px; 
+    }
+    
+  
+}
+
+
+
+
 
 
 
