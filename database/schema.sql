@@ -22,7 +22,7 @@ CREATE TABLE profile_follows (
 
 CREATE TABLE skills (
     `skill_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `skill_title` CHAR(50) NOT NULL
+    `skill_title` CHAR(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE profile_skills (
