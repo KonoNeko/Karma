@@ -72,12 +72,12 @@ CREATE PROCEDURE create_new_profile(IN new_username VARCHAR(50),
                                     IN new_fullname VARCHAR(100),
                                     IN new_is_volunteer TINYINT(1))
 BEGIN
-    INSERT INTO profiles(username, full_name, is_volunteer)
-    VALUES (new_username, new_fullname, new_is_volunteer);
-    CALL new_education_entry(username, "Start", "End", 0.0, "Certification type", "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png", "School Name");
-    CALL new_experience_entry(username, "Start", "End", "Job title", "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png", "Employer");
-    CALL new_award_entry(username, "Certificate Title", "Date Received", "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png");
-    CALL new_skill_entry(username, "Community Member");
+    INSERT INTO profiles(username, full_name, is_volunteer, profile_pic_url)
+    VALUES (new_username, new_fullname, new_is_volunteer, "");
+    CALL new_education_entry(new_username, "Start", "End", 0.0, "Certification type", "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png", "School Name");
+    CALL new_experience_entry(new_username, "Start", "End", "Job title", "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png", "Employer");
+    CALL new_award_entry(new_username, "Certificate Title", "Date Received", "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png");
+    CALL new_skill_entry(new_username, "Community Member");
 END//
 DELIMITER ;
 
