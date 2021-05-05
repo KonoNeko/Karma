@@ -67,6 +67,21 @@ app.post(ENDPOINT + '/profiles/:username/:fullname/:isVolunteer', (req, res) => 
     });
 });
 
+
+app.delete(ENDPOINT + '/profiles/skills/:id/:toRemove', (req, res) => {
+    const id = req.params.id;
+    const toRemove = req.params.toRemove;
+    const sql = `CALL remove_skill_entry("${id}", "${toRemove}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success removing skill");
+        } else {
+            res.send("Error removing skill");
+        }
+    });
+});
+
 /*
 TODO:
 -Profile

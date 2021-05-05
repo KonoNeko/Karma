@@ -2,7 +2,7 @@
 TODO:
 -Profile
 DONEa) Gather profile info (with education, skills, experience, etc.)
-    b) Create a new profile/signup
+DONEb) Create a new profile/signup
     c) Sign a user in
     d) Edit a profile/add information
 
@@ -60,7 +60,6 @@ BEGIN
     WHERE prof.username = current_username;
 END//
 DELIMITER ;
-
 
 
 /*
@@ -123,6 +122,7 @@ BEGIN
 END//
 DELIMITER ;
 
+
 /*
 Creates a new award/certification entry with the associated username.
 
@@ -141,6 +141,7 @@ BEGIN
 END//
 DELIMITER ;
 
+
 /*
 Connects a skill entry with the associated username.
 
@@ -156,6 +157,26 @@ BEGIN
     VALUES (new_title);
     INSERT INTO profile_skills(profile_id, skill_id)
     VALUES ((SELECT get_user_id(current_username)), (SELECT skill_id FROM skills WHERE skill_title = new_title));
+END//
+DELIMITER ;
+
+
+/*
+Removes the connection between a skill entry and the associated username.
+
+Example of the procedure being called:
+CALL remove_skill_entry("username", "skill");
+*/
+DROP PROCEDURE IF EXISTS remove_skill_entry;
+DELIMITER //
+CREATE PROCEDURE remove_skill_entry(IN current_username CHAR(50),
+IN current_skill CHAR(50))
+BEGIN
+    DELETE FROM profile_skills 
+    WHERE profile_id = (SELECT get_user_id(current_username)) 
+    AND skill_id = (
+        SELECT skill_id FROM skills WHERE skill_title = current_skill
+        );
 END//
 DELIMITER ;
 
@@ -299,7 +320,6 @@ BEGIN
     WHERE post_id = current_post_id;
 END//
 DELIMITER ;
-
 
 
 /*
