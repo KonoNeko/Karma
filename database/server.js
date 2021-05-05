@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 app.use(express.urlencoded( {extended: true} ));
 
 
-
+// Gets all posts in order of date posted.
 app.get(ENDPOINT + '/posts', (req, res) => {
     const sql = "SELECT * FROM posts_feed";
     db.query(sql, (err, result) => {
@@ -49,9 +49,10 @@ app.get(ENDPOINT + '/profiles/:id', (req, res) => {
 
 app.post(ENDPOINT + '/profiles/:username/:fullname/:isVolunteer', (req, res) => {
     const username = req.params.username;
-    const fullname = req.params.fullname;
-    const isVolunteer = req.params.isVolunteer;
-    const sql = `CALL create_new_profile("${username}", "${fullname}", ${isVolunteer})`;
+    let fullname = req.params.fullname;
+    fullname = fullname.replace("%", " ");
+    const isVolunteer = parseInt(req.params.isVolunteer);
+    const sql = `CALL create_new_profile("${username}", "${fullname}", ${isVolunteer});`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         if (result['affected_rows']) {
