@@ -2,6 +2,8 @@
   padding-top: 10px;
   padding-left: 20px;
   padding-right: 20px;
+  width: 50%;
+  text-align: justify;
 }
 
 .creators {
@@ -63,8 +65,9 @@
 
 @media screen and (max-width: 550px) {
   .subtitle {
-    padding-top: 8px;
-    padding-left: 24px;
+    padding-top: 10px;
+    padding-left: 20px;
+    width: 100%;
   }
 
   #main {
@@ -75,7 +78,7 @@
     flex: 1 0 30%; /* The important bit. This percentage decides your columns. 
      The percent can be px. It just represents your minimum starting width.
       */
-    margin: 8px;
+    margin: 10px;
     background: #eff0f3;
     color: #214049;
     display: flex;
@@ -85,6 +88,6 @@
   }
 
   .creators {
-    margin-bottom: 96px;
+    margin-bottom: 100px;
   }
 }
