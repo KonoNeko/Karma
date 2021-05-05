@@ -32,7 +32,7 @@ app.get(ENDPOINT + '/posts', (req, res) => {
 
 app.get(ENDPOINT + '/profiles/:id', (req, res) => {
     const id = req.params.id;
-    let sql = `CALL get_profile_info('${id}');`;
+    const sql = `CALL get_profile_info('${id}');`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         let response = result[0];
@@ -44,6 +44,21 @@ app.get(ENDPOINT + '/profiles/:id', (req, res) => {
             certifications: filter.certifications(response)
         };
         res.end(JSON.stringify(profile));
+    });
+});
+
+app.post(ENDPOINT + '/profiles/:username/:fullname/:isVolunteer', (req, res) => {
+    const username = req.params.username;
+    const fullname = req.params.fullname;
+    const isVolunteer = req.params.isVolunteer;
+    const sql = `CALL create_new_profile("${username}", "${fullname}", ${isVolunteer})`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affected_rows']) {
+            res.send("Success creating profile");
+        } else {
+            res.send("Error creating profile");
+        }
     });
 });
 
