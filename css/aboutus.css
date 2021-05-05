@@ -37,7 +37,7 @@
 }
 
 .creator {
-  flex: 1 0 18%; /* The important bit. This percentage decides your columns. 
+  flex: 1 0 10%; /* The important bit. This percentage decides your columns. 
      The percent can be px. It just represents your minimum starting width.
       */
   margin-left: 8px;
@@ -47,7 +47,7 @@
   background: #eff0f3;
   color: #214049;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 12px;
