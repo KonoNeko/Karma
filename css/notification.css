@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+#notificationelements {
+    padding-left: 100px;
+}
+
+
 * {
     box-sizing: border-box;
 }
@@ -31,9 +39,31 @@
 .btn.active {
     background-color: #666;
     color: white;
+}
+.heading-1 {
+    width: 277px;
+height: 59px;
 
-.heading {
-    text-align: left;
-    font-family: "Open Sans", sans-serif;
+/* Title */
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 48px;
+line-height: 59px;
+/* identical to box height */
+
+
+/* Heading 1 color */
+
+color: #0367A6;
+margin-top: 15px;
+margin-left: 100px;
 }
-}
+
+.creator-img {
+    padding-top: 8px;
+    height: 150px;
+    width: auto;
+    border-radius: 50%;
+  }
