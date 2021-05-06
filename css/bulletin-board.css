@@ -57,6 +57,82 @@
   box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
 }
 
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  border-radius: 12px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  display: flex;
+}
+
+.modal-column {
+  flex: 1 0 50%; /* The important bit. This percentage decides your columns. 
+    The percent can be px. It just represents your minimum starting width.
+     */
+  color: #214049;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+}
+
+.modal-img {
+  width: 60%;
+  background-image: url("../images/placeholder1.png");
+  background-size: 100%;
+}
+
+.modal-text {
+  width: 20%;
+  padding-left: 20px;
+}
+
+/* The Close Button */
+.close {
+  color: #51b09f;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modalDescription {
+  padding-bottom: 20px;
+}
+
+.primarybutton {
+  width: 100%;
+  padding: 20px;
+}
+
+.heading2 {
+  padding-bottom: 10px;
+}
+
 @media screen and (max-width: 550px) {
   .content {
     margin-left: 0px;
