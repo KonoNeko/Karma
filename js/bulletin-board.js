@@ -82,7 +82,7 @@ function generateOpportunity(category) {
   let opportunityRole = document.createElement("p");
   opportunityRole.innerHTML = "opportunityRole Role Role";
   opportunityRole.setAttribute("class", "heading3");
-  opportunityRole.setAttribute("font-weight", "bold");
+  opportunityRole.setAttribute("style", "font-weight: 700 !important");
 
   let opportunityImgDiv = document.createElement("div");
   opportunityImgDiv.setAttribute("class", "bulletinboardpicture");
@@ -103,4 +103,27 @@ function generateOpportunity(category) {
   opportunityDiv.appendChild(opportunityLocation);
 
   category.appendChild(opportunityDiv);
+
+  opportunityDiv.onclick = function (event) {
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    opportunityDiv.onclick = function () {
+      modal.style.display = "block";
+    };
+
+    span.onclick = function () {
+      modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  };
 }
