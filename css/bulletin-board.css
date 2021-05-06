@@ -11,4 +11,63 @@
 
 .category {
   margin-top: 20px;
+  margin-right: 20px;
+}
+
+#recommended-category,
+#fine-arts-category,
+#sports-category,
+#literacy-category,
+#environment-category,
+#health-category,
+#computers-category {
+  width: 100%;
+}
+
+#recommended-opportunities,
+#fine-arts-opportunities,
+#sports-opportunities,
+#literacy-opportunities,
+#environment-opportunities,
+#health-opportunities,
+#computers-opportunities {
+  display: flex;
+  overflow: auto;
+  flex-direction: row;
+  margin-right: 20px;
+}
+
+.heading3 {
+  width: 100%;
+}
+
+.opportunity {
+  flex: 1 0 18%; /* The important bit. This percentage decides your columns. 
+    The percent can be px. It just represents your minimum starting width.
+     */
+  padding: 20px;
+  margin-right: 10px;
+  width: 200px;
+  background-color: #eff0f3;
+  color: #214049;
+  border-radius: 12px;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+  box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+}
+
+@media screen and (max-width: 550px) {
+  .content {
+    margin-left: 0px;
+  }
+
+  .heading1 {
+    width: 75%;
+  }
+
+  .bodytext {
+    width: 100%;
+    padding-right: 10px;
+  }
 }

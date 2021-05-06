@@ -183,7 +183,6 @@ svg {
   cursor: pointer;
 }
 
-
 /***************************************** FONT WEIGHT KEY *********************************************/
 /* 400 - normal */
 /* 500 - semibold */
@@ -285,7 +284,7 @@ svg {
 .postpreviewpicture > img,
 .socialpostpicture > img,
 .largebulletinboardpicture > img {
-  width: auto;
+  width: 100%;
   border-radius: 10px;
 }
 
@@ -312,51 +311,37 @@ svg {
 }
 
 @media screen and (min-width: 550px) {
-
   /* SCROLLBAR */
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
 
-/* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
-}
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #51b09f;
-  border-radius: 10px;
-}
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #51b09f;
+    border-radius: 10px;
+  }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #51b09f;
-}
-
-  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #51b09f;
+  }
 }
 
 @media screen and (max-width: 550px) {
-
   html {
     overflow: scroll;
     overflow-x: hidden;
-    }
-    ::-webkit-scrollbar {
-    width: 0px; 
-    }
-    
-  
+  }
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
 }
-
-
-
-
-
-
-
-
