@@ -102,6 +102,8 @@
 .modal-text {
   width: 20%;
   padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
 }
 
 /* The Close Button */
@@ -110,7 +112,6 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
-  padding-left: 20px;
 }
 
 .close:hover,
@@ -121,7 +122,8 @@
 }
 
 #modalDescription {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  padding-top: 0px;
 }
 
 .primarybutton {
@@ -145,5 +147,30 @@
   .bodytext {
     width: 100%;
     padding-right: 10px;
+  }
+
+  .modal-content {
+    display: block;
+  }
+
+  .modal-column {
+    width: 100%;
+  }
+
+  .modal-img {
+    height: 200px;
+    margin-bottom: 10px;
+  }
+
+  #modalButton {
+    background-color: #0367a6;
+    padding: 12px 20px;
+    border: none;
+    color: #eff0f3;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 10px;
+    outline: none;
   }
 }
