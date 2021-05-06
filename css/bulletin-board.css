@@ -138,6 +138,7 @@
 @media screen and (max-width: 550px) {
   .content {
     margin-left: 0px;
+    margin-bottom: 100px;
   }
 
   .heading1 {

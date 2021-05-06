@@ -82,7 +82,7 @@ function generateOpportunity(category) {
   let opportunityRole = document.createElement("p");
   opportunityRole.innerHTML = "opportunityRole Role Role";
   opportunityRole.setAttribute("class", "heading3");
-  opportunityRole.setAttribute("font-weight", "bold");
+  opportunityRole.setAttribute("style", "font-weight: 700 !important");
 
   let opportunityImgDiv = document.createElement("div");
   opportunityImgDiv.setAttribute("class", "bulletinboardpicture");
