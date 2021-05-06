@@ -5,6 +5,7 @@
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/editprofile.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/adddescription.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
     
@@ -135,26 +136,30 @@
         <div class="stories"></div>
         <dib class="posts"> </dib>
       </div>
+
+    
 <div id="profile">
     <img width="200" height="233" src= "images/profile.png" alt="prof">
     </div> 
 <h2 class="heading-1">Jason Grace</h2><br>
+<div id="container-1"> 
 <h3 class="heading-3"> Please choose an image to have as your profile picture</h3>
 <div class="container">
        
     <div class="form-group">
         <img id="photo" class="rounded-circle mx-auto d-block border border-primary"
             src="images/upload.png"
-            style="max-width: 150px; margin-left: 285px;  border: px solid cornsilk!important; ">
+            style="max-width: 150px; border: px solid cornsilk!important; ">
         <input type="file" id="file" style="display: none;">
     </div>
     
-<!--                       
-<!--                        click to finish profile-->
     <div class="form-group text-center">
-        <button type="button" class="btn-primary"> Post picture</button>
+        <button id="postbutton" type="button" class="btn-primary"> Post picture</button>
     </div>
 </div>
+</div> 
+
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous">
