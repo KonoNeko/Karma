@@ -128,3 +128,13 @@ color: #000000;
 
     color: #000000;
     }
+
+    #move {
+        margin-left: 5rem;
+    }
+
+    @media screen and (max-width: 550px) {
+        #move {
+            margin-left: 0rem;
+        }
+    }
