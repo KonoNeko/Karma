@@ -38,7 +38,7 @@
     
   } */
   h1 {
-      margin-left:  20px;
+      margin-left:  100px;
       margin-top: 10px;
       margin-bottom: 30px;
    
@@ -59,8 +59,8 @@
         color: #0367A6;
         }
         
-  p {
-      margin-left: 20px;
+  #para {
+      margin-left: 100px;
       font-family: Montserrat;
     font-style: normal;
     font-weight: 600;
@@ -76,7 +76,7 @@
 
 
 
-  .dropdown {
+  .dropdownn {
     
     overflow: hidden;
     margin-bottom: 45px;
@@ -90,7 +90,7 @@
   
   }
   
-  .dropdown .dropbtn {
+  .dropdownn .dropbtn {
     cursor: pointer;
     font-size: 18px;  
     border: none;
@@ -102,22 +102,25 @@
     margin: 0;
     display: block;
     margin-top: 40px;
+    margin-left: 100px ;
   }
   
   .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
    
   }
   
-  .dropdown-content {
+  .dropdown-contentt {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    margin-left: 100px;
+   
   }
   
-  .dropdown-content a {
+  .dropdown-contentt a {
     float: none;
     color: black;
     padding: 12px 16px;
