@@ -136,5 +136,14 @@ color: #000000;
     @media screen and (max-width: 550px) {
         #move {
             margin-left: 0rem;
+            margin-bottom: 100px;
         }
+        #phoneicon {
+            margin-right: 110px;
+       
+            }
+        #earthicon {
+            margin-right: 110px;
+            }
+
     }
