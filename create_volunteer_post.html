@@ -154,29 +154,29 @@
 <!--Post form-->
                 <div class="container">
                     <h1 class="heading1 heading-title">Create Volunteer opportunity</h1>
-                    <form target="_blank" action="https://formsubmit.co/dhc20067227@gmail.com" method="POST">
+                    <form target="_blank" id="create_volunteers" method="POST">
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col">
-                                    <input type="text" name="Title" class="form-control" placeholder="Title" required>
+                                    <input type="text" id="title" name="Title" class="form-control" placeholder="Title" required>
                                 </div>
                                 <div class="col">
-                                    <input type="datetime-local" name="date" class="form-control" placeholder="date" required>
+                                    <input type="datetime-local" id="date" name="date" class="form-control" placeholder="date" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col">
-                                    <input type="text" name="Location" class="form-control" placeholder="Location" required>
+                                    <input type="text" id="location" name="Location" class="form-control" placeholder="Location" required>
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="conctact" class="form-control" placeholder="Conctact" required>
+                                    <input type="text" id="contact" name="Contact" class="form-control" placeholder="Contact" required>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="Volunteer Details" class="form-control" name="message" rows="10" required></textarea>
+                            <textarea placeholder="Volunteer Details" id="messages" class="form-control" name="message" rows="10" required></textarea>
                         </div>
-                        <button type="submit" class="bugbutton">Report The Bug</button>
+                        <button onclick="writeDate()" type="submit" class="bugbutton">Report The Bug</button>
                     </form>
 
                 </div>
@@ -203,6 +203,38 @@
         </div>
     </div>
 </div>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-analytics.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
+        authDomain: "karma-535f3.firebaseapp.com",
+        projectId: "karma-535f3",
+        storageBucket: "karma-535f3.appspot.com",
+        messagingSenderId: "1023587584355",
+        appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
+        measurementId: "G-VTZ4TEWFBW"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    function writeDate(){
+        firebase.database().red("Users").set({
+            title: document.getElementById("title").value,
+            date: document.getElementById("date").value,
+            location: document.getElementById("location").value,
+            contact: document.getElementById("contact").value,
+            messages: document.getElementById("messages").value
+        });
+    }
+</script>
 </body>
 
 <script src="js/home.js"></script>
