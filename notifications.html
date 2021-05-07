@@ -16,7 +16,7 @@
   />
 </head>
 
-<body onload="loadHome()">
+<body onload="loadAll()">
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
       >&times;</a
@@ -150,7 +150,7 @@
     <div class="flex-main">
       <div class="column" id="mainmain">
         <h1 class="heading1 heading-title">Notifications</h1>
-        <div id="notifications" class="notifications">Notifications here</div>
+        <div id="notifications" class="notifications"></div>
       </div>
 
       <div class="column" id="sidemain">
@@ -175,7 +175,11 @@
   </div>
 </body>
 
-<script src="js/home.js"></script>
+<script src="js/notifications.js"></script>
+<script
+  src="https://kit.fontawesome.com/2ec3384389.js"
+  crossorigin="anonymous"
+></script>
 <script>
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
