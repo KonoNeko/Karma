@@ -25,9 +25,7 @@
 }
 
 #mainmain > #notifications {
-  background-color: red; /* temp */
   margin-top: 24px;
-  height: 400px; /* temp */
   width: 100%;
 }
 
@@ -55,6 +53,24 @@
 
 .heading-title {
   padding-top: 24px;
+}
+
+.notificationDiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.notificationImgDiv,
+.notificationImgDiv > img,
+.notificationPostImgDiv,
+.notificationPostImgDiv > img {
+  height: 60px;
+  width: 60px !important;
+}
+
+.notificationPostImgDiv {
+  margin-left: 20px;
+  border: 1px solid #51b09f;
 }
 
 @media screen and (max-width: 550px) {
