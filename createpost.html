@@ -1,46 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
+    />
+    <title></title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/createpost.css" />
+    <link rel="stylesheet" href="css/base.css" />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover" />
-  <title></title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/createpost.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
-  <script src="js/createpost.js"></script>
-</head>
+    <script src="js/createpost.js"></script>
+  </head>
 
-<body>
+  <body>
+    <!-- <svg id="rectangle">
+      <rect />
+    </svg>
 
-    <!-- <input type="file" id="real-file" hidden="hidden"/> -->
-
-  <div id="window">
-    <h1 class="heading-2">Create Social Post</h1>
-
-    <div class="heading-3">
-      <button id="addpicture" type="button" class="btn btn-primary btn-lg">Add a picture</button>
+    <div class="form-group shadow-textarea sizing">
+      <textarea
+        class="form-control z-depth-1"
+        id="exampleFormControlTextarea6"
+        rows="3"
+        placeholder="Caption..."
+      ></textarea>
     </div>
 
-    <div class="form-group heading-3">
-      <input id="textbox caption" type="text" class="form-control input-lg" name="Captionn" placeholder="Add Caption...">
-    </div>
+     <img id="icon-1" src="images/upload.png"> -->
 
-    <div class="form-group2 heading-3">
-      <input id="textbox location" type="text" class="form-control input-lg" name="Location" placeholder="Add Location...">
+    <div class="create-post-container">
+      <div class="image-poster profilepicture">
+        <img src="images/placeholder2.png" />
+      </div>
+      <div class="caption">
+        <div>
+          <textarea rows="4" cols="50">
+Write a caption here...
+          </textarea>
+        </div>
+        <div style="font-size: 2.5rem" class="icons">
+          <i class="fa fa-image"></i><i class="fas fa-map-marker-alt"></i
+          ><i class="fas fa-users"></i>
+        </div>
+        <div class="button">
+          <button class="secondarybutton">Post</button>
+        </div>
+      </div>
     </div>
-
-    <div class="form-group3 heading-3">
-      <input id="textbox tag" type="text" class="form-control input-lg" name="Tag" placeholder="Tag other users...">
-    </div>
-
-    <div class="center2 heading-3">
-      <button id="post" type="button" class="btn btn-primary btn-lg">POST</button>
-    </div>
-  </div>
-</body>
-
+  </body>
+  <script
+    src="https://kit.fontawesome.com/2ec3384389.js"
+    crossorigin="anonymous"
+  ></script>
 </html>

@@ -5,8 +5,8 @@
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/editprofile.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/adddescription.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
     
 
   </head>
@@ -135,26 +135,38 @@
         <div class="stories"></div>
         <dib class="posts"> </dib>
       </div>
+
+    
 <div id="profile">
     <img width="200" height="233" src= "images/profile.png" alt="prof">
     </div> 
-<h2 class="heading-1">Jason Grace</h2><br>
+    <div id="innerDiv" class="container">
+        <br>
+        <br>
+      <div class="container" id="innermostDiv">
+        <div class="container" id="profileDiv"><br>
+        
+            <br>
+            <h2><span id="name"></span></h2><br>
+
+<div id="container-1"> 
 <h3 class="heading-3"> Please choose an image to have as your profile picture</h3>
 <div class="container">
        
     <div class="form-group">
         <img id="photo" class="rounded-circle mx-auto d-block border border-primary"
             src="images/upload.png"
-            style="max-width: 150px; margin-left: 285px;  border: px solid cornsilk!important; ">
+            style="max-width: 150px; border: px solid cornsilk!important; ">
         <input type="file" id="file" style="display: none;">
     </div>
     
-<!--                       
-<!--                        click to finish profile-->
     <div class="form-group text-center">
-        <button type="button" class="btn-primary"> Post picture</button>
+        <button id="postbutton" type="button" class="btn-primary"> Post picture</button>
     </div>
 </div>
+</div> 
+
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous">
@@ -202,8 +214,9 @@
                 
                 var storageRef = firebase.storage().ref();
                 file = $('#file')[0].files[0];
+                var user = firebase.auth().currentUser
                 // Create a reference to the '.jpg'
-                var photoRef = storageRef.child( 'images/' +uid + '.jpg' + new Date().getTime() + file.name);
+                var photoRef = storageRef.child( '/images/' + user + '/profilePicture' + file.name);
                 photoRef.put(file).then(function (snapshot) {
                     var usersRef = db.collection("images");
                     usersRef.doc(uid).set({
@@ -284,7 +297,22 @@
     </script>   
 <script src="js/uploadimage.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+<script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
+<script src="js/signup.js"> </script> 
+<script src="js/profile.js"></script>
+<script>
+      showProfile();
+      
+
+    </script>
 </body>
 <script src="js/home.js"></script>
 <script>

@@ -4,7 +4,7 @@
     <title>Edit Profile</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/editprofile.css">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/base.css">
   </head>
   <body>
     <div id="mySidenav" class="sidenav">
@@ -118,7 +118,7 @@
           </a>
       </div>
 
-
+<div id="move">
       <div id="profile">
         <img width="200" height="233" src= "images/profile.png" alt="prof">
         </div> 
@@ -144,6 +144,7 @@
 <button id="changeprofbtn">Change Profile Picture</button>
 <button id="descbtn">Add Description</button>
 <button id="skillsbtn">Edit Skills</button>
+</div>
 <br>
 <br>
 <br>
@@ -165,8 +166,16 @@
     location.href = "adddescription.html";
 };
  </script>
+<script>
+    document.getElementById("changeprofbtn").onclick = function () {
+   location.href = "uploadimage.html";
+};
+</script>
 
-
-   
+<script>
+    document.getElementById("skillsbtn").onclick = function () {
+   location.href = "addskills.html";
+};
+</script>
   </body>
 </html>

@@ -6,6 +6,15 @@
     color: white;
     border-radius: 8px;
 
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    align-items: center;
+
+    color: #EFF0F3;
+
     
 
 }
@@ -17,6 +26,15 @@
     color: white;
     border-radius: 8px;
     margin-top: 70px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    align-items: center;
+
+    color: #EFF0F3;
 
 
 
@@ -48,10 +66,86 @@ p{
 h2{
     margin-left: 30px;
 }
-h1{
+#name {
+    margin-top: 100px;
     margin-left: 30px;
+    font-size: 36px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700; /* bold */
+    width: 302px;
+    color: #0367A6;
 }
 
 #profile{
     margin-left: 20px;
+}
+
+#move {
+    margin-left: 5rem;
+}
+
+@media screen and (max-width: 550px) {
+    #move {
+        margin-left: 0rem;
+        margin-bottom: 100px;
+    }
+    #editbtn{
+        margin-left: 40px;
+        width: 130px;
+        height: 30px;
+        background-color: #49A1B9;
+        color: white;
+        border-radius: 8px;
+    
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        align-items: center;
+    
+        color: #EFF0F3;
+    
+        
+    
+    }
+    #msgbtn{
+        
+        width: 130px;
+        height: 30px;
+        background-color: #49A1B9;
+        color: white;
+        border-radius: 8px;
+        margin-top: 70px;
+    
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        align-items: center;
+    
+        color: #EFF0F3;
+    
+    
+    
+    }
+    #following{
+        margin-left: 50px;
+        text-align:justify;
+        margin-top: 50px;
+        font-size: 14pt;
+    
+    }
+    #posts{
+        margin-left: 130px;
+        margin-top: -25px;
+        font-size: 14pt;
+    }
+    #followers{
+        margin-left: 245px;
+        margin-top: -25px;
+        font-size: 14pt;
+    
+
 }

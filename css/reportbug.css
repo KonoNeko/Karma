@@ -27,6 +27,9 @@ label {
     text-align: left;
 }
 
+.bugbutton {
+    width: 100%;
+}
 input, textarea {
 
     font: 1em sans-serif;
