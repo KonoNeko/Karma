@@ -72,3 +72,28 @@ div > * {
 }
 
 
+.shadow-textarea textarea.form-control::placeholder {
+  font-weight: 300;
+}
+.shadow-textarea textarea.form-control {
+  padding-left: 0.8rem;
+}
+
+.sizing {
+  margin-left: 245px;
+  margin-top: -225px;
+  width: 938px;
+  height: 154px;
+  background: #FFFFFF;
+}
+
+
+#rectangle { 
+width: 978px;
+height: 252px;
+margin-left: 225px;
+margin-top: 100px;
+
+background: #EFF0F3;
+border-radius: 10px;
+}
