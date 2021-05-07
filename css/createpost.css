@@ -1,113 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
 
+.create-post-container {
+  display: flex;
+}
 
+.profilepicture > img {
+  width: 80px !important;
+  height: 80px !important;
+}
 
-@media screen and (max-width: 550px) {
-  body {
-      margin: 0;
-  } 
-
-
-#window {
+.caption {
   width: 100%;
+  background-color: #eff0f3;
+  border-radius: 12px;
+  margin-left: 20px;
+  padding: 20px;
 }
 
-.center {
-  margin-top: 16px;
+textarea {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #51b09f;
+  outline: none;
 }
 
-
-#addpicture {
-  width: 216px;
-height: 118px;
-background: #49A1B9;
-border-radius: 12px;
+.icons {
+  display: flex;
+  justify-content: flex-end;
+  color: #49a1b9;
 }
 
-#real-file {
-  margin-top: 100px;
-  margin-left: 100px;
+.icons > i {
+  margin: 10px;
 }
 
-
-#post {
-  margin-top: 32px;
-  width: 218px;
-  height: 50px;
-  background: #49A1B9;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 12px;
+.button > .secondarybutton {
+  background-color: #49a1b9;
+  width: 100px;
+  border-radius: 10px;
 }
 
-.heading-2 {
-  font-size: 24px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 700; /* bold */
-}
-
-.heading-3 {
-  margin-top: 10px;
-  font-size: 18px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600; /* semibold */
-  
-}
-
-#textbox {
-  margin-top: 24px;
-  border: 2px solid #000000;
-box-sizing: border-box;
-border-radius: 10px;
-width: 218px;
-height: 116px;
-}
-
-div > * {
-  margin: auto;
-  text-align: center;
- }
-
-
-}
-
-
-.shadow-textarea textarea.form-control::placeholder {
-  font-weight: 300;
-}
-.shadow-textarea textarea.form-control {
-  padding-left: 0.8rem;
-}
-
-.sizing {
-  margin-left: 120px;
-  margin-top: -225px;
-  width: 938px;
-  height: 200px;
-  background: #FFFFFF;
-}
-
-
-#rectangle { 
-width: 978px;
-height: 252px;
-margin-left: 100px;
-margin-top: 150px;
-
-background: #EFF0F3;
-border-radius: 10px;
-}
-
-
-#icon-1 {
-margin-top: 100px;
-margin-left: 1150px;
-width: 48px;
-height: 48px;
-
-background: #0367A6;
-}
-
-#globeicon {
-  font-size: 40px;
+.button {
+  display: flex;
+  justify-content: flex-end;
 }

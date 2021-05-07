@@ -1,42 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
+    />
+    <title></title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/createpost.css" />
+    <link rel="stylesheet" href="css/base.css" />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover" />
-  <title></title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/createpost.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
+    <script src="js/createpost.js"></script>
+  </head>
 
-  <script src="js/createpost.js"></script>
-</head>
-
-<body>
-
-  <svg id="rectangle">
-      <rect/>
+  <body>
+    <!-- <svg id="rectangle">
+      <rect />
     </svg>
 
-  <div class="form-group shadow-textarea sizing">
-      <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Caption..."></textarea>
+    <div class="form-group shadow-textarea sizing">
+      <textarea
+        class="form-control z-depth-1"
+        id="exampleFormControlTextarea6"
+        rows="3"
+        placeholder="Caption..."
+      ></textarea>
     </div>
 
-    <!-- <img id="icon-1" src="images/upload.png"> -->
+     <img id="icon-1" src="images/upload.png"> -->
 
-    <i id="globeicon" class="fa fa-globe"></i>
-
-
-    
-
-
-</body>
-
+    <div class="create-post-container">
+      <div class="image-poster profilepicture">
+        <img src="images/placeholder2.png" />
+      </div>
+      <div class="caption">
+        <div>
+          <textarea rows="4" cols="50">
+Write a caption here...
+          </textarea>
+        </div>
+        <div style="font-size: 3rem" class="icons">
+          <i class="fa fa-image"></i><i class="fas fa-map-marker-alt"></i
+          ><i class="fas fa-users"></i>
+        </div>
+        <div class="button">
+          <button class="secondarybutton">Post</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://kit.fontawesome.com/2ec3384389.js"
+    crossorigin="anonymous"
+  ></script>
 </html>
