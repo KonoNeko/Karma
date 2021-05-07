@@ -154,7 +154,7 @@
 <!--Post form-->
                 <div class="container">
                     <h1 class="heading1 heading-title">Create Volunteer opportunity</h1>
-                    <form target="_blank" id="create_volunteers" method="POST">
+                    <form target="_self" id="create_volunteers">
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col">
@@ -176,9 +176,8 @@
                         <div class="form-group">
                             <textarea placeholder="Volunteer Details" id="messages" class="form-control" name="message" rows="10" required></textarea>
                         </div>
-                        <button onclick="writeDate()" type="submit" class="bugbutton">Report The Bug</button>
+                        <button onclick="writeDate()" class="bugbutton">Post</button>
                     </form>
-
                 </div>
             </div>
         </div>
@@ -226,7 +225,7 @@
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
     function writeDate(){
-        firebase.database().red("Users").set({
+        firebase.database().referrer("Post").set({
             title: document.getElementById("title").value,
             date: document.getElementById("date").value,
             location: document.getElementById("location").value,
