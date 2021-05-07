@@ -1,6 +1,5 @@
 function loadAll() {
   loadAllMessagers();
-  loadAllMessages();
 }
 
 function loadAllMessagers() {
@@ -19,6 +18,7 @@ function loadAllMessages() {
   generateMessages();
   createMessageSentByOtherUser();
   createMessageSentByOtherUser();
+  createMessageSentByYou();
 }
 
 function generateMessager() {
@@ -57,7 +57,22 @@ function generateMessager() {
   messagerText.appendChild(messagerMessage);
   messagerText.appendChild(messagerTime);
 
+  messagerDiv.setAttribute("onclick", "revealMessages()");
+
   mainMessagesDiv.appendChild(messagerDiv);
+}
+
+function revealMessages() {
+  document.getElementById("messages-user-information").innerHTML = "";
+  document.getElementById("messages-expanded").innerHTML = "";
+
+  document.getElementById("mainmain").setAttribute("style", "width: 50%");
+  document.getElementById("sidemain").setAttribute("style", "display: unset");
+
+  generateMessages();
+  createMessageSentByOtherUser();
+  createMessageSentByOtherUser();
+  createMessageSentByYou();
 }
 
 function generateMessages() {
@@ -97,7 +112,48 @@ function generateLine() {
   mainMessagesDiv.appendChild(hr);
 }
 
-function createMessageSentByYou() {}
+function createMessageSentByYou() {
+  let messagesExpandedDiv = document.getElementById("messages-expanded");
+
+  let messagesSentDiv = document.createElement("div");
+  messagesSentDiv.setAttribute("class", "messagesSentByYouDiv");
+
+  let messagesSentImgDiv = document.createElement("div");
+  let messagesSentImg = document.createElement("img");
+  messagesSentImg.src = "./images/placeholder1.png";
+  messagesSentImgDiv.setAttribute(
+    "class",
+    "messagesSentByYouImgDiv profilepicture"
+  );
+  messagesSentImgDiv.appendChild(messagesSentImg);
+
+  let messagesSentTextDiv = document.createElement("div");
+  messagesSentTextDiv.setAttribute("class", "messagesSentByYouTextDiv");
+  let messagesSentAuthor = document.createElement("p");
+  let messagesSentText = document.createElement("div");
+  let messagesSentTime = document.createElement("p");
+
+  messagesSentAuthor.setAttribute("class", "bodytitle");
+  messagesSentText.setAttribute(
+    "class",
+    "bodytext messagerText messagesSentByYouText"
+  );
+  messagesSentTime.setAttribute("class", "smalltext");
+
+  messagesSentTextDiv.appendChild(messagesSentAuthor);
+  messagesSentTextDiv.appendChild(messagesSentText);
+  messagesSentTextDiv.appendChild(messagesSentTime);
+
+  messagesSentAuthor.innerHTML = "astrisfrost";
+  messagesSentText.innerHTML = "why... are you messaging like that?";
+  messagesSentTime.innerHTML = "3 minutes " + "ago";
+
+  messagesSentDiv.appendChild(messagesSentTextDiv);
+  messagesSentDiv.appendChild(messagesSentImgDiv);
+  messagesSentDiv.setAttribute("style", "padding-top: 10px");
+
+  messagesExpandedDiv.appendChild(messagesSentDiv);
+}
 
 function createMessageSentByOtherUser() {
   let messagesExpandedDiv = document.getElementById("messages-expanded");
