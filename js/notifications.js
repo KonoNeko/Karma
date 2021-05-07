@@ -182,7 +182,7 @@ function generatePostNotificationFollowedYou() {
 
   let notificationFollowButton = document.createElement("button");
   followDiv.setAttribute("class", "follow-btn");
-  notificationFollowButton.innerHTML = "Follow";
+  notificationFollowButton.innerHTML = "<i class='fas fa-user-plus'></i>";
   followDiv.appendChild(notificationFollowButton);
 
   notificationDiv.appendChild(notificationImgDiv);
@@ -236,11 +236,17 @@ function generatePostNotificationFollowedYouRequest() {
   let deleteDiv = document.createElement("div");
   deleteDiv.setAttribute("class", "delete-btn");
 
+  let followI = document.createElement("i");
+  followI.setAttribute("class", "fas fa-check-circle");
+
+  let deleteI = document.createElement("i");
+  deleteI.setAttribute("class", "fas fa-trash-alt");
+
   let notificationConfirmButton = document.createElement("button");
-  notificationConfirmButton.innerHTML = "Confirm";
+  notificationConfirmButton.innerHTML = "<i class='fas fa-check-circle'></i>";
 
   notificationDeleteButton = document.createElement("button");
-  notificationDeleteButton.innerHTML = "Delete";
+  notificationDeleteButton.innerHTML = "<i class='fas fa-trash-alt'></i>";
   followDiv.appendChild(notificationConfirmButton);
   deleteDiv.appendChild(notificationDeleteButton);
 

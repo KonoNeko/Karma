@@ -25,9 +25,7 @@
 }
 
 #mainmain > #notifications {
-  background-color: red; /* temp */
   margin-top: 24px;
-  height: 400px; /* temp */
   width: 100%;
 }
 
@@ -60,7 +58,7 @@
 .notificationDiv {
   display: flex;
   flex-direction: row;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 }
 
 .notificationText {
@@ -71,6 +69,7 @@
 }
 
 hr {
+  border: 0.1px solid #51b09f;
   margin-top: 10px;
 }
 
