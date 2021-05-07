@@ -154,7 +154,6 @@
 <!--Post form-->
                 <div class="container">
                     <h1 class="heading1 heading-title">Create Volunteer opportunity</h1>
-                    <form target="_self" id="create_volunteers">
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col">
@@ -177,7 +176,6 @@
                             <textarea placeholder="Volunteer Details" id="messages" class="form-control" name="message" rows="10" required></textarea>
                         </div>
                         <button onclick="writeDate()" class="bugbutton">Post</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -204,12 +202,15 @@
 </div>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-analytics.js"></script>
 
 <script>
+
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     var firebaseConfig = {
@@ -225,7 +226,7 @@
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
     function writeDate(){
-        firebase.database().referrer("Post").set({
+            firebase.database().ref("Post").set({
             title: document.getElementById("title").value,
             date: document.getElementById("date").value,
             location: document.getElementById("location").value,
