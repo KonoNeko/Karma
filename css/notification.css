@@ -57,6 +57,80 @@
   padding-top: 24px;
 }
 
+.notificationDiv {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0px;
+}
+
+.notificationText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: right;
+}
+
+hr {
+  margin-top: 10px;
+}
+
+.follow-btn,
+.delete-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: right;
+}
+
+.delete-btn {
+  padding-left: 10px;
+}
+
+.follow-btn > button {
+  padding: 10px 20px;
+  outline: none;
+  border-radius: 5px;
+  margin: 0px;
+  background-color: #0367a6;
+  border: none;
+  color: #eff0f3;
+  font-family: "Open Sans";
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.delete-btn > button {
+  padding: 10px 20px;
+  outline: none;
+  border-radius: 5px;
+  margin: 0px;
+  color: #214049;
+  background-color: transparent;
+  border: 1px solid #214049;
+  font-family: "Open Sans";
+  font-weight: 500;
+  font-size: 14px;
+  transition-duration: 0.4s;
+}
+
+.delete-btn > button:hover {
+  background-color: #214049;
+  color: #eff0f3;
+}
+
+.notificationImgDiv,
+.notificationImgDiv > img,
+.notificationPostImgDiv,
+.notificationPostImgDiv > img {
+  height: 60px;
+  width: 60px !important;
+}
+
+.notificationPostImgDiv {
+  margin-left: 20px;
+  float: right;
+}
+
 @media screen and (max-width: 550px) {
   .above {
     margin-left: 0;
@@ -119,6 +193,10 @@
     padding-bottom: 8px;
     width: 80%;
     height: 100%;
+  }
+
+  #notifications {
+    margin-bottom: 100px;
   }
 
   .search {
