@@ -28,6 +28,7 @@
 
 #mainmain {
   width: 50%;
+  margin-bottom: 20px;
 }
 
 #sidemain {
@@ -40,19 +41,50 @@
   margin-bottom: 24px;
 }
 
-.main-messages {
+.main-messages,
+.messages-user-information,
+.messagesSentDiv {
   display: flex;
   flex-direction: row;
 }
 
+.messagesSentDiv {
+  margin-top: 20px;
+}
+
 .messagerImgDiv {
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
 }
 
 .messagerImgDiv > img {
-  height: 100px;
-  width: 100px !important;
+  height: 80px;
+  width: 80px !important;
+}
+
+.smallMessagerImgDiv,
+.smallMessagerImgDiv > img {
+  height: 60px;
+  width: 60px !important;
+}
+
+.messagesSentImgDiv,
+.messagesSentImgDiv > img {
+  height: 60px;
+  width: 60px !important;
+}
+
+.messagesSentText {
+  padding: 10px;
+  background-color: #51b09f;
+  border-radius: 12px;
+  margin: 5px;
+  margin-left: 0px;
+}
+
+.messagesSentTextDiv {
+  padding-left: 20px;
+  padding-right: 5rem;
 }
 
 .messagerText {
