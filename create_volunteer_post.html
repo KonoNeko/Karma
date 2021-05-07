@@ -4,6 +4,7 @@
     <title>Create Volunteer Post</title>
     <link rel="stylesheet" href="css/createvolunteerpost.css" />
     <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
     <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -149,10 +150,36 @@
 
     <div class="flex-main">
         <div class="column" id="mainmain">
-            <h1 class="heading1 heading-title">Create Volunteer opportunity</h1>
             <div id="opportunity_post" class="opportunity_post">
 <!--Post form-->
+                <div class="container">
+                    <h1 class="heading1 heading-title">Create Volunteer opportunity</h1>
+                    <form target="_blank" action="https://formsubmit.co/dhc20067227@gmail.com" method="POST">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="text" name="Title" class="form-control" placeholder="Title" required>
+                                </div>
+                                <div class="col">
+                                    <input type="datetime-local" name="date" class="form-control" placeholder="date" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="text" name="Location" class="form-control" placeholder="Location" required>
+                                </div>
+                                <div class="col">
+                                    <input type="text" name="conctact" class="form-control" placeholder="Conctact" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Volunteer Details" class="form-control" name="message" rows="10" required></textarea>
+                        </div>
+                        <button type="submit" class="bugbutton">Report The Bug</button>
+                    </form>
 
+                </div>
             </div>
         </div>
 

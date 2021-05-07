@@ -25,9 +25,9 @@
 }
 
 #mainmain > #opportunity_post{
-    background-color: antiquewhite; /* temp */
+    background-color: #EFF0F3; /* temp */
     margin-top: 24px;
-    height: 400px; /* temp */
+    /*height: 500px; !* temp *!*/
     width: 100%;
 }
 
