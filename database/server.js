@@ -67,7 +67,7 @@ app.post(ENDPOINT + '/profiles', (req, res) => {
     const sql = `CALL create_new_profile("${userID}", "${fullname}", ${isVolunteer});`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        if (result['affectedRows']) {
+        if (result.affectedRows) {
             res.send("Success creating profile");
         } else {
             res.send("Error creating profile");
@@ -88,7 +88,7 @@ app.put(ENDPOINT + '/profiles/skills', (req, res) => {
     const sql = `CALL new_skill_entry("${userID}", "${skill}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        if (result['affectedRows']) {
+        if (result.affectedRows) {
             res.send("Success adding skill");
         } else {
             res.send("Error adding skill");
@@ -109,7 +109,7 @@ app.delete(ENDPOINT + '/profiles/skills', (req, res) => {
     const sql = `CALL remove_skill_entry("${userID}", "${skill}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        if (result['affectedRows']) {
+        if (result.affectedRows) {
             res.send("Success removing skill");
         } else {
             res.send("Error removing skill");
@@ -137,7 +137,7 @@ app.post(ENDPOINT + '/profiles/education', (req, res) => {
         );`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        if (result['affectedRows']) {
+        if (result.affectedRows) {
             res.send("Success adding education");
         } else {
             res.send("Error adding education");
@@ -160,11 +160,11 @@ app.put(ENDPOINT + '/profiles/education', (req, res) => {
     const imageUrl = req.query.img;
     const schoolName = req.query.name;
     const sql = `CALL edit_education_entry(
-        "${educationID}", "${startDate}", "${endDate}", "${gpa}", "${certificationType}", "${imageUrl}", "${schoolName}"
+        ${educationID}, "${startDate}", "${endDate}", "${gpa}", "${certificationType}", "${imageUrl}", "${schoolName}"
         );`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        if (result['affectedRows']) {
+        if (result.affectedRows) {
             res.send("Success editing education");
         } else {
             res.send("No changes were made to education");
@@ -187,11 +187,10 @@ app.post(ENDPOINT + '/profiles/experience', (req, res) => {
     const imageUrl = req.query.img;
     const employer = req.query.employer;
     const sql = `CALL new_experience_entry(
-        "${userID}", "${startDate}", "${endDate}", "${jobTitle}", "${imageUrl}", "${employer}");
-        );`;
+        "${userID}", "${startDate}", "${endDate}", "${jobTitle}", "${imageUrl}", "${employer}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        if (result['affectedRows']) {
+        if (result.affectedRows) {
             res.send("Success adding experience");
         } else {
             res.send("Error adding experience");
@@ -207,18 +206,18 @@ app.post(ENDPOINT + '/profiles/experience', (req, res) => {
  * https://marlonfajardo.ca/karma/v1/profiles/experience?id=value&start=value&end=value&job=value&img=value&employer=value
  */
 app.put(ENDPOINT + '/profiles/experience', (req, res) => {
-    const experienceID = req.params.id;
-    const startDate = req.params.start;
-    const endDate = req.params.end;
-    const jobTitle = req.params.job;
-    const imageUrl = req.params.img;
-    const employer = req.params.employer;
+    const experienceID = req.query.id;
+    const startDate = req.query.start;
+    const endDate = req.query.end;
+    const jobTitle = req.query.job;
+    const imageUrl = req.query.img;
+    const employer = req.query.employer;
     const sql = `CALL edit_experience_entry(
-        "${experienceID}", "${startDate}", "${endDate}", "job title", "image url", "employer"
+        ${experienceID}, "${startDate}", "${endDate}", "${jobTitle}", "${imageUrl}", "${employer}"
         );`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        if (result['affectedRows']) {
+        if (result.affectedRows) {
             res.send("Success editing experience");
         } else {
             res.send("No changes were made to experience");
@@ -234,14 +233,14 @@ app.put(ENDPOINT + '/profiles/experience', (req, res) => {
  * https://marlonfajardo.ca/karma/v1/profiles/awardsAndCertification?id=value&title=value&date=value&img=value
  */
 app.post(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
-    const userID = req.params.id;
-    const awardTitle = req.params.title;
-    const dateReceived = req.params.date;
-    const imageUrl = req.params.img;
+    const userID = req.query.id;
+    const awardTitle = req.query.title;
+    const dateReceived = req.query.date;
+    const imageUrl = req.query.img;
     const sql = `CALL new_award_entry("${userID}", "${awardTitle}", "${dateReceived}", "${imageUrl}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        if (result['affectedRows']) {
+        if (result.affectedRows) {
             res.send("Success adding award/certificate");
         } else {
             res.send("Error adding award/certificate");
@@ -257,14 +256,14 @@ app.post(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
  * https://marlonfajardo.ca/karma/v1/profiles/awardsAndCertification?id=value&title=value&date=value&img=value
  */
 app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
-    const awardID = req.params.id;
-    const awardTitle = req.params.title;
-    const dateReceived = req.params.date;
-    const imageUrl = req.params.img;
-    const sql = `CALL edit_award_entry("${awardID}", "${awardTitle}", "${dateReceived}", "${imageUrl}");`;
+    const awardID = req.query.id;
+    const awardTitle = req.query.title;
+    const dateReceived = req.query.date;
+    const imageUrl = req.query.img;
+    const sql = `CALL edit_award_entry(${awardID}, "${awardTitle}", "${dateReceived}", "${imageUrl}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        if (result['affectedRows']) {
+        if (result.affectedRows) {
             res.send("Success editing award/certificate");
         } else {
             res.send("No changes were made to award/certificate");
