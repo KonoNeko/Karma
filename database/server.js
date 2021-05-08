@@ -105,7 +105,7 @@ app.put(ENDPOINT + '/profiles/skills', (req, res) => {
  */
 app.delete(ENDPOINT + '/profiles/skills', (req, res) => {
     const userID = req.query.id;
-    const skill = req.params.skill;
+    const skill = req.query.skill;
     const sql = `CALL remove_skill_entry("${userID}", "${skill}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
