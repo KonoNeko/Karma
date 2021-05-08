@@ -293,6 +293,26 @@ app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
 });
 
 
+/**
+ * Changes a user's profile picture url.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/picture?id=value&picUrl=value
+ */
+ app.put(ENDPOINT + '/profiles/picture', (req, res) => {
+    const userID = req.query.id;
+    const newPic = req.query.picUrl;
+    const sql = `CALL change_bio("${userID}", "${newPic}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success editing profile pic");
+        } else {
+            res.send("No changes were made to profile pic");
+        }
+    });
+});
+
 
 /*
 TODO:
