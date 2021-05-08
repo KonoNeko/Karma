@@ -99,16 +99,20 @@ app.delete(ENDPOINT + '/profiles/skills/:userID/:skill', (req, res) => {
 });
 
 
-// Adds a new education entry to a user's profile
-// app.post(ENDPOINT + '/profiles/education/:userID/:startDate/:endDate/:gpa/:certificationType/:schoolName/:imageUrl', (req, res) => {
+/**
+ * Adds a new education entry to a user's profile.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/education?id=value&start=value&end=value&gpa=value&type=value&img=value&name=value
+ */
 app.post(ENDPOINT + '/profiles/education', (req, res) => {
-    const userID = req.query.userID;
-    const startDate = req.query.startDate;
-    const endDate = req.query.endDate;
+    const userID = req.query.id;
+    const startDate = req.query.start;
+    const endDate = req.query.end;
     const gpa = req.query.gpa;
-    const certificationType = req.query.certificationType;
-    const schoolName = req.query.schoolName;
-    const imageUrl = req.query.imageUrl;
+    const certificationType = req.query.type;
+    const imageUrl = req.query.img;
+    const schoolName = req.query.name;
     const sql = `CALL new_education_entry(
         "${userID}", "${startDate}", "${endDate}", "${gpa}", "${certificationType}", "${imageUrl}", "${schoolName}"
         );`;
@@ -122,15 +126,20 @@ app.post(ENDPOINT + '/profiles/education', (req, res) => {
     });
 });
 
-// Edits an existing education entry in a users profile
-app.put(ENDPOINT + '/profiles/education/:educationID/:startDate/:endDate/:gpa/:certificationType/:imageUrl/:schoolName', (req, res) => {
-    const educationID = req.params.educationID;
-    const startDate = req.params.startDate;
-    const endDate = req.params.endDate;
-    const gpa = req.params.gpa;
-    const certificationType = req.params.certificationType;
-    const imageUrl = req.params.imageUrl;
-    const schoolName = req.params.schoolName;
+/**
+ * Edits an existing education entry in a users profile
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/education?id=value&start=value&end=value&gpa=value&type=value&img=value&name=value
+ */
+app.put(ENDPOINT + '/profiles/education', (req, res) => {
+    const educationID = req.query.id;
+    const startDate = req.query.start;
+    const endDate = req.query.end;
+    const gpa = req.query.gpa;
+    const certificationType = req.query.type;
+    const imageUrl = req.query.img;
+    const schoolName = req.query.name;
     const sql = `CALL edit_education_entry(
         "${educationID}", "${startDate}", "${endDate}", "${gpa}", "${certificationType}", "${imageUrl}", "${schoolName}"
         );`;
