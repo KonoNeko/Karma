@@ -160,6 +160,17 @@ CREATE TABLE notifications (
     'notifiation_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
     'profile_id' INTEGER NOT NULL,
     'message' TEXT NOT NULL,
+    'link_to_event' TEXT NOT NULL
     'timestamp' TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id');
 );
+
+--TODO
+CREATE TABLE stories (
+    'story_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'profile_id' INTEGER NOT NULL,
+    'image_url' TEXT NOT NULL,
+    'timestamp' TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id');
+);
+
