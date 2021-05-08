@@ -20,7 +20,9 @@ app.use((req, res, next) => {
 app.use(express.urlencoded( {extended: true} ));
 
 
-// Gets all posts in order of date posted.
+/**
+ * Gets all posts in order of date posted.
+ */
 app.get(ENDPOINT + '/posts', (req, res) => {
     const sql = "SELECT * FROM posts_feed";
     db.query(sql, (err, result) => {
@@ -31,9 +33,11 @@ app.get(ENDPOINT + '/posts', (req, res) => {
 });
 
 
-// Gets the profile information for a given user
-app.get(ENDPOINT + '/profiles/:id', (req, res) => {
-    const id = req.params.id;
+/**
+ * Gets the profile information for a given user.
+ */
+app.get(ENDPOINT + '/profiles/:userID', (req, res) => {
+    const id = req.params.userID;
     const sql = `CALL get_profile_info('${id}');`;
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -50,13 +54,17 @@ app.get(ENDPOINT + '/profiles/:id', (req, res) => {
 });
 
 
-// Creates a new profile with a given username, full name and if the profile was a volunteer
-app.post(ENDPOINT + '/profiles/:username/:fullname/:isVolunteer', (req, res) => {
-    const username = req.params.username;
-    let fullname = req.params.fullname;
-    fullname = fullname.replace("%", " ");
-    const isVolunteer = parseInt(req.params.isVolunteer);
-    const sql = `CALL create_new_profile("${username}", "${fullname}", ${isVolunteer});`;
+/**
+ * Creates a new profile with a given username, full name and if the profile was a volunteer.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles?id=value&name=value&isVolunteer=value
+ */
+app.post(ENDPOINT + '/profiles', (req, res) => {
+    const userID = req.query.id;
+    const fullname = req.query.name;
+    const isVolunteer = parseInt(req.query.isVolunteer);
+    const sql = `CALL create_new_profile("${userID}", "${fullname}", ${isVolunteer});`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         if (result['affectedRows']) {
@@ -68,10 +76,37 @@ app.post(ENDPOINT + '/profiles/:username/:fullname/:isVolunteer', (req, res) => 
 });
 
 
-app.delete(ENDPOINT + '/profiles/skills/:id/:toRemove', (req, res) => {
-    const id = req.params.id;
-    const toRemove = req.params.toRemove;
-    const sql = `CALL remove_skill_entry("${id}", "${toRemove}");`;
+/**
+ * Associates a new skill to a user.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/skills?id=value&skill=value
+ */
+app.put(ENDPOINT + '/profiles/skills', (req, res) => {
+    const userID = req.query.id;
+    const skill = req.query.skill;
+    const sql = `CALL new_skill_entry("${userID}", "${skill}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success adding skill");
+        } else {
+            res.send("Error adding skill");
+        }
+    });
+});
+
+
+/**
+ * Unassociates a skill to a user.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/skills?id=value&skill=value
+ */
+app.delete(ENDPOINT + '/profiles/skills', (req, res) => {
+    const userID = req.query.id;
+    const skill = req.params.skill;
+    const sql = `CALL remove_skill_entry("${userID}", "${skill}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         if (result['affectedRows']) {
@@ -82,17 +117,175 @@ app.delete(ENDPOINT + '/profiles/skills/:id/:toRemove', (req, res) => {
     });
 });
 
+
+/**
+ * Adds a new education entry to a user's profile.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/education?id=value&start=value&end=value&gpa=value&type=value&img=value&name=value
+ */
+app.post(ENDPOINT + '/profiles/education', (req, res) => {
+    const userID = req.query.id;
+    const startDate = req.query.start;
+    const endDate = req.query.end;
+    const gpa = req.query.gpa;
+    const certificationType = req.query.type;
+    const imageUrl = req.query.img;
+    const schoolName = req.query.name;
+    const sql = `CALL new_education_entry(
+        "${userID}", "${startDate}", "${endDate}", "${gpa}", "${certificationType}", "${imageUrl}", "${schoolName}"
+        );`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success adding education");
+        } else {
+            res.send("Error adding education");
+        }
+    });
+});
+
+/**
+ * Edits an existing education entry in a users profile
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/education?id=value&start=value&end=value&gpa=value&type=value&img=value&name=value
+ */
+app.put(ENDPOINT + '/profiles/education', (req, res) => {
+    const educationID = req.query.id;
+    const startDate = req.query.start;
+    const endDate = req.query.end;
+    const gpa = req.query.gpa;
+    const certificationType = req.query.type;
+    const imageUrl = req.query.img;
+    const schoolName = req.query.name;
+    const sql = `CALL edit_education_entry(
+        "${educationID}", "${startDate}", "${endDate}", "${gpa}", "${certificationType}", "${imageUrl}", "${schoolName}"
+        );`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success editing education");
+        } else {
+            res.send("No changes were made to education");
+        }
+    });
+});
+
+
+/**
+ * Adds a new experience entry to a user's profile.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/experience?id=value&start=value&end=value&job=value&img=value&employer=value
+ */ 
+app.post(ENDPOINT + '/profiles/experience', (req, res) => {
+    const userID = req.query.id;
+    const startDate = req.query.start;
+    const endDate = req.query.end;
+    const jobTitle = req.query.job;
+    const imageUrl = req.query.img;
+    const employer = req.query.employer;
+    const sql = `CALL new_experience_entry(
+        "${userID}", "${startDate}", "${endDate}", "${jobTitle}", "${imageUrl}", "${employer}");
+        );`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success adding experience");
+        } else {
+            res.send("Error adding experience");
+        }
+    });
+});
+
+
+/**
+ * Edits an existing experience entry in a users profile.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/experience?id=value&start=value&end=value&job=value&img=value&employer=value
+ */
+app.put(ENDPOINT + '/profiles/experience', (req, res) => {
+    const experienceID = req.params.id;
+    const startDate = req.params.start;
+    const endDate = req.params.end;
+    const jobTitle = req.params.job;
+    const imageUrl = req.params.img;
+    const employer = req.params.employer;
+    const sql = `CALL edit_experience_entry(
+        "${experienceID}", "${startDate}", "${endDate}", "job title", "image url", "employer"
+        );`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success editing experience");
+        } else {
+            res.send("No changes were made to experience");
+        }
+    });
+});
+
+
+/**
+ * Adds a new award/certificate to a user's profile.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/awardsAndCertification?id=value&title=value&date=value&img=value
+ */
+app.post(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
+    const userID = req.params.id;
+    const awardTitle = req.params.title;
+    const dateReceived = req.params.date;
+    const imageUrl = req.params.img;
+    const sql = `CALL new_award_entry("${userID}", "${awardTitle}", "${dateReceived}", "${imageUrl}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success adding award/certificate");
+        } else {
+            res.send("Error adding award/certificate");
+        }
+    });
+});
+
+
+/**
+ * Edits an award/certificate entry in a user's profile.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/awardsAndCertification?id=value&title=value&date=value&img=value
+ */
+app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
+    const awardID = req.params.id;
+    const awardTitle = req.params.title;
+    const dateReceived = req.params.date;
+    const imageUrl = req.params.img;
+    const sql = `CALL edit_award_entry("${awardID}", "${awardTitle}", "${dateReceived}", "${imageUrl}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success editing award/certificate");
+        } else {
+            res.send("No changes were made to award/certificate");
+        }
+    });
+});
+
+
 /*
 TODO:
 -Profile
-    a) Add skills (PUT - new_skill_entry)
-    b) Remove skills (DELETE - remove_skill_entry)
-    c) Add education (POST - new_education_entry)
-    d) Edit education (PUT - _______)
-    e) Add experience (POST - new_experience_entry)
-    f) Edit experience (PUT - _______)
-    g) Add award/certification (POST - new_award_entry)
-    h) Edit award/certification (PUT - _____)
+DONEa) Add skills (PUT - new_skill_entry)
+DONEb) Remove skills (DELETE - remove_skill_entry)
+DONEc) Add education (POST - new_education_entry)
+DONEd) Edit education (PUT - edit_education_entry)
+DONEe) Add experience (POST - new_experience_entry)
+DONEf) Edit experience (PUT - edit_experience_entry)
+DONEg) Add award/certification (POST - new_award_entry)
+DONEh) Edit award/certification (PUT - edit_award_entry)
+    i) Edit profile pic
+    h) Edit bio
 
 
 */
