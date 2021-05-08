@@ -284,8 +284,8 @@ DONEe) Add experience (POST - new_experience_entry)
 DONEf) Edit experience (PUT - edit_experience_entry)
 DONEg) Add award/certification (POST - new_award_entry)
 DONEh) Edit award/certification (PUT - edit_award_entry)
-    i) Edit profile pic
-    h) Edit bio
+    i) Edit profile pic (PUT - change_profile_pic)
+    h) Edit bio (PUT - change_bio)
 
 
 */
