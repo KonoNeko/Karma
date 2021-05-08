@@ -217,7 +217,7 @@ CREATE PROCEDURE edit_experience_entry(IN exp_id INTEGER,
 IN new_start CHAR(50), IN new_end CHAR(50), IN new_title CHAR(50), 
 IN new_image TEXT, IN new_employer CHAR(50))
 BEGIN
-    UPDATE education
+    UPDATE experiences
     SET 
     `job_title` = new_title,
     `exp_start_date` = new_start,
