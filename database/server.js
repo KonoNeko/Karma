@@ -50,11 +50,16 @@ app.get(ENDPOINT + '/profiles/:userID', (req, res) => {
 });
 
 
-// Creates a new profile with a given username, full name and if the profile was a volunteer
-app.post(ENDPOINT + '/profiles/:userID/:fullname/:isVolunteer', (req, res) => {
-    const userID = req.params.userID;
-    const fullname = req.params.fullname;
-    const isVolunteer = parseInt(req.params.isVolunteer);
+/**
+ * Creates a new profile with a given username, full name and if the profile was a volunteer.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles?id=value&name=value&isVolunteer=value
+ */
+app.post(ENDPOINT + '/profiles', (req, res) => {
+    const userID = req.query.id;
+    const fullname = req.query.name;
+    const isVolunteer = parseInt(req.query.isVolunteer);
     const sql = `CALL create_new_profile("${userID}", "${fullname}", ${isVolunteer});`;
     db.query(sql, (err, result) => {
         if (err) throw err;
