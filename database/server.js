@@ -20,7 +20,9 @@ app.use((req, res, next) => {
 app.use(express.urlencoded( {extended: true} ));
 
 
-// Gets all posts in order of date posted.
+/**
+ * Gets all posts in order of date posted.
+ */
 app.get(ENDPOINT + '/posts', (req, res) => {
     const sql = "SELECT * FROM posts_feed";
     db.query(sql, (err, result) => {
@@ -31,7 +33,9 @@ app.get(ENDPOINT + '/posts', (req, res) => {
 });
 
 
-// Gets the profile information for a given user
+/**
+ * Gets the profile information for a given user.
+ */
 app.get(ENDPOINT + '/profiles/:userID', (req, res) => {
     const id = req.params.userID;
     const sql = `CALL get_profile_info('${id}');`;
@@ -72,10 +76,15 @@ app.post(ENDPOINT + '/profiles', (req, res) => {
 });
 
 
-// Associates a new skill to a user
-app.put(ENDPOINT + '/profiles/skills/:userID/:skill', (req, res) => {
-    const userID = req.params.userID;
-    const skill = req.params.skill;
+/**
+ * Associates a new skill to a user.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/skills?id=value&skill=value
+ */
+app.put(ENDPOINT + '/profiles/skills', (req, res) => {
+    const userID = req.query.id;
+    const skill = req.query.skill;
     const sql = `CALL new_skill_entry("${userID}", "${skill}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -88,9 +97,14 @@ app.put(ENDPOINT + '/profiles/skills/:userID/:skill', (req, res) => {
 });
 
 
-// Unassociates a skill to a user
-app.delete(ENDPOINT + '/profiles/skills/:userID/:skill', (req, res) => {
-    const userID = req.params.userID;
+/**
+ * Unassociates a skill to a user.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/skills?id=value&skill=value
+ */
+app.delete(ENDPOINT + '/profiles/skills', (req, res) => {
+    const userID = req.query.id;
     const skill = req.params.skill;
     const sql = `CALL remove_skill_entry("${userID}", "${skill}");`;
     db.query(sql, (err, result) => {
