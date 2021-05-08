@@ -3,8 +3,9 @@ TODO:
 -Profile
 DONEa) Gather profile info (with education, skills, experience, etc.)
 DONEb) Create a new profile/signup
-    c) Sign a user in
-    d) Edit a profile/add information
+DONEc) Edit a profile/add information
+    d) Request to follow a user
+    e) Accept a follow request
 
 -Messaging
     a) View all messages
@@ -24,6 +25,11 @@ DONEd) View number of likes
 DONEe) View timestamp posted
 DONEf) Like a post
     g) Comment on a post
+
+-Notifications
+    a) View all notifications
+    b) Trigger for like notification
+    c) Trigger for follow request notification
 */
 
 
