@@ -165,25 +165,12 @@
           }
   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           
+
+
+
+
+
 
 
 #above-search {
@@ -210,10 +197,11 @@
 }
 
 #mainmain > #stories {
-  background-color: red; /* temp */
-  margin-top: 24px;
-  height: 400px; /* temp */
-  width: 100%;
+  background-color: grey; /* temp */
+  margin-top: 70px;
+  height: 475px; /* temp */
+  width: 150%;
+  border-radius: 25px;
 }
 
 #mainmain > #posts {
@@ -326,3 +314,8 @@
     height: 100%;
   }
 }
+
+
+
+
+
