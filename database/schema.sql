@@ -16,6 +16,7 @@ CREATE TABLE profile_follows (
     `follow_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `profile_id` INTEGER NOT NULL,
     `follower_id` INTEGER NOT NULL,
+    'is_a_request' TINYINT(1) DEFAULT 1;
     FOREIGN KEY (`profile_id`) REFERENCES profiles (`profile_id`),
     FOREIGN KEY (`follower_id`) REFERENCES profiles (`profile_id`)
 );
@@ -153,4 +154,12 @@ CREATE TABLE opportunites_applicants (
 CREATE TABLE volunteer_categories (
     `category_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `category` CHAR(50) NOT NULL
+);
+
+CREATE TABLE notifications (
+    'notifiation_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
+    'profile_id' INTEGER NOT NULL,
+    'message' TEXT NOT NULL,
+    'timestamp' TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id');
 );
