@@ -301,6 +301,17 @@ ORDER BY s.post_date
 
 
 /*
+Gathers all the posts on the bulletin board.
+*/
+CREATE VIEW bulletin_board as
+SELECT *
+FROM opportunites
+ORDER BY post_date
+GROUP BY 
+
+
+
+/*
 Gets the user id using a username.
 */
 DROP FUNCTION IF EXISTS get_user_id;
