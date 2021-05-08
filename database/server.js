@@ -302,7 +302,7 @@ app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
  app.put(ENDPOINT + '/profiles/picture', (req, res) => {
     const userID = req.query.id;
     const newPic = req.query.picUrl;
-    const sql = `CALL change_bio("${userID}", "${newPic}");`;
+    const sql = `CALL change_profile_pic("${userID}", "${newPic}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         if (result.affectedRows) {
