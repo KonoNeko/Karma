@@ -317,18 +317,30 @@ app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
 /*
 TODO:
 -Profile
-DONEa) Add skills (PUT - new_skill_entry)
-DONEb) Remove skills (DELETE - remove_skill_entry)
-DONEc) Add education (POST - new_education_entry)
-DONEd) Edit education (PUT - edit_education_entry)
-DONEe) Add experience (POST - new_experience_entry)
-DONEf) Edit experience (PUT - edit_experience_entry)
-DONEg) Add award/certification (POST - new_award_entry)
-DONEh) Edit award/certification (PUT - edit_award_entry)
-    i) Edit profile pic (PUT - change_profile_pic)
-    h) Edit bio (PUT - change_bio)
+DONEa) Add skills (PUT - new_skill_entry) TESTED
+DONEb) Remove skills (DELETE - remove_skill_entry) TESTED
+DONEc) Add education (POST - new_education_entry) TESTED
+DONEd) Edit education (PUT - edit_education_entry) TESTED
+DONEe) Add experience (POST - new_experience_entry) TESTED
+DONEf) Edit experience (PUT - edit_experience_entry) TESTED
+DONEg) Add award/certification (POST - new_award_entry) TESTED
+DONEh) Edit award/certification (PUT - edit_award_entry) TESTED
+DONEi) Edit profile pic (PUT - change_profile_pic) TESTED
+DONEh) Edit bio (PUT - change_bio) TESTED
 
+-Bulletin Board
+    a) View all opportunities (GET - _______)
+    b) Post new opportunity (POST - _______)
+    c) Apply to opportunity (PUT - _______)
+    d) View applicants (GET - _______)
+    e) View opportunites applied for (GET - _____)
 
+-Messages
+    a) View all messages for a user (GET - _____)
+    b) Send message to another user (POST - _____)
+
+-Notifications
+    a) View all notifications
 */
 
 
