@@ -272,6 +272,28 @@ app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
 });
 
 
+/**
+ * Changes a user's bio.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/bio?id=value&bio=value
+ */
+ app.put(ENDPOINT + '/profiles/bio', (req, res) => {
+    const userID = req.query.id;
+    const newBio = req.query.bio;
+    const sql = `CALL change_bio("${userID}", "${newBio}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success editing bio");
+        } else {
+            res.send("No changes were made to bio");
+        }
+    });
+});
+
+
+
 /*
 TODO:
 -Profile
