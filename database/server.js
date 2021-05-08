@@ -173,14 +173,19 @@ app.put(ENDPOINT + '/profiles/education', (req, res) => {
 });
 
 
-// Adds a new experience entry to a user's profile
-app.post(ENDPOINT + '/profiles/experience/:userID/:startDate/:endDate/:jobTitle/:imageUrl/:employer', (req, res) => {
-    const userID = req.params.userID;
-    const startDate = req.params.startDate;
-    const endDate = req.params.endDate;
-    const jobTitle = req.params.jobTitle;
-    const imageUrl = req.params.imageUrl;
-    const employer = req.params.employer;
+/**
+ * Adds a new experience entry to a user's profile.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/experience?id=value&start=value&end=value&job=value&img=value&employer=value
+ */ 
+app.post(ENDPOINT + '/profiles/experience', (req, res) => {
+    const userID = req.query.id;
+    const startDate = req.query.start;
+    const endDate = req.query.end;
+    const jobTitle = req.query.job;
+    const imageUrl = req.query.img;
+    const employer = req.query.employer;
     const sql = `CALL new_experience_entry(
         "${userID}", "${startDate}", "${endDate}", "${jobTitle}", "${imageUrl}", "${employer}");
         );`;
