@@ -249,6 +249,38 @@ BEGIN
 END//
 DELIMITER ;
 
+/*
+Changes the current profile picture of a user.
+
+Example of the procedure being called:
+CALL change_profile_pic("user id", "image url");
+*/
+DROP PROCEDURE IF EXISTS change_profile_pic;
+DELIMITER //
+CREATE PROCEDURE change_profile_pic(IN current_username CHAR(50), IN new_img TEXT)
+BEGIN
+    UPDATE profiles
+    SET profile_pic_url = new_img
+    WHERE username = current_username;
+END//
+DELIMITER ;
+
+
+/*
+Changes the current bio of a user.
+
+Example of the procedure being called:
+CALL change_bio("user id", "bio");
+*/
+DROP PROCEDURE IF EXISTS change_bio;
+DELIMITER //
+CREATE PROCEDURE change_bio(IN current_username CHAR(50), IN new_bio TEXT)
+BEGIN
+    UPDATE profiles
+    SET bio = new_bio
+    WHERE username = current_username;
+END//
+DELIMITER ;
 
 
 /*
