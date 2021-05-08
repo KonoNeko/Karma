@@ -182,6 +182,76 @@ DELIMITER ;
 
 
 /*
+Makes changes to an education entry.
+
+Example of the procedure being called:
+CALL edit_education_entry("Education ID", "start", "end", "gpa", "certification type", "image url", "school name");
+*/
+DROP PROCEDURE IF EXISTS edit_education_entry;
+DELIMITER //
+CREATE PROCEDURE edit_education_entry(IN edu_id INTEGER,
+IN new_start CHAR(50), IN new_end CHAR(50), IN new_gpa DECIMAL(2, 1),
+IN new_type CHAR(50), IN new_image TEXT, IN new_name CHAR(50))
+BEGIN
+    UPDATE education
+    SET 
+    `school_name` = new_name,
+    `edu_start_date` = new_start, 
+    `edu_end_date` = new_end,
+    `gpa` = new_gpa, 
+    `certification_type` = new_type, 
+    `edu_image_url` = new_image
+    WHERE education_id = edu_id;
+END//
+DELIMITER ;
+
+/*
+Makes changes to an experience entry.
+
+Example of the procedure being called:
+CALL edit_experience_entry("Experience ID", "start", "end", "job title", "image url", "employer");
+*/
+DROP PROCEDURE IF EXISTS edit_experience_entry;
+DELIMITER //
+CREATE PROCEDURE edit_experience_entry(IN exp_id INTEGER,
+IN new_start CHAR(50), IN new_end CHAR(50), IN new_title CHAR(50), 
+IN new_image TEXT, IN new_employer CHAR(50))
+BEGIN
+    UPDATE education
+    SET 
+    `job_title` = new_title,
+    `exp_start_date` = new_start,
+    `exp_end_date` = new_end,
+    `employer` = new_employer,
+    `exp_image_url` = new_image
+    WHERE experience_id = exp_id;
+END//
+DELIMITER ;
+
+
+/*
+Makes changes to an existing award/certificate entry.
+
+Example of the procedure being called:
+CALL new_award_entry("Award ID", "award title", "date received", "image url");
+*/
+DROP PROCEDURE IF EXISTS edit_award_entry;
+DELIMITER //
+CREATE PROCEDURE edit_award_entry(IN awrd_id INTEGER,
+IN new_title CHAR(50), IN new_date CHAR(50), IN new_img TEXT)
+BEGIN
+    UPDATE awards_certifications
+    SET
+    `title` = new_title,
+    `date_received` = new_date, 
+    `awards_image_url` = new_img
+    WHERE award_id = awrd_id;
+END//
+DELIMITER ;
+
+
+
+/*
 Gathers all the posts to fill a social feed
 */
 CREATE VIEW posts_feed as
@@ -266,6 +336,33 @@ CREATE trigger update_post_number_del
     AFTER DELETE ON social_posts
     FOR EACH ROW
     CALL decrement_post_number(OLD.user_id);
+
+
+/*
+Disconnects a deleted education entry from the original user.
+*/
+CREATE trigger disconnect_education
+    AFTER DELETE ON education
+    FOR EACH ROW
+    DELETE FROM profile_education WHERE education_id = OLD.education_id;
+
+
+/*
+Disconnects a deleted experience entry from the original user.
+*/
+CREATE trigger disconnect_experience
+    AFTER DELETE ON experiences
+    FOR EACH ROW
+    DELETE FROM profile_experiences WHERE experience_id = OLD.experience_id;
+
+
+/*
+Disconnects a deleted award/certificate entry from the original user.
+*/
+CREATE trigger disconnect_award
+    AFTER DELETE ON awards_certifications
+    FOR EACH ROW
+    DELETE FROM profile_awards WHERE award_id = OLD.award_id;
 
 
 /*
