@@ -32,8 +32,8 @@ app.get(ENDPOINT + '/posts', (req, res) => {
 
 
 // Gets the profile information for a given user
-app.get(ENDPOINT + '/profiles/:id', (req, res) => {
-    const id = req.params.id;
+app.get(ENDPOINT + '/profiles/:userID', (req, res) => {
+    const id = req.params.userID;
     const sql = `CALL get_profile_info('${id}');`;
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -51,12 +51,11 @@ app.get(ENDPOINT + '/profiles/:id', (req, res) => {
 
 
 // Creates a new profile with a given username, full name and if the profile was a volunteer
-app.post(ENDPOINT + '/profiles/:username/:fullname/:isVolunteer', (req, res) => {
-    const username = req.params.username;
-    let fullname = req.params.fullname;
-    fullname = fullname.replace("%", " ");
+app.post(ENDPOINT + '/profiles/:userID/:fullname/:isVolunteer', (req, res) => {
+    const userID = req.params.userID;
+    const fullname = req.params.fullname;
     const isVolunteer = parseInt(req.params.isVolunteer);
-    const sql = `CALL create_new_profile("${username}", "${fullname}", ${isVolunteer});`;
+    const sql = `CALL create_new_profile("${userID}", "${fullname}", ${isVolunteer});`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         if (result['affectedRows']) {
@@ -68,10 +67,27 @@ app.post(ENDPOINT + '/profiles/:username/:fullname/:isVolunteer', (req, res) => 
 });
 
 
-app.delete(ENDPOINT + '/profiles/skills/:id/:toRemove', (req, res) => {
-    const id = req.params.id;
-    const toRemove = req.params.toRemove;
-    const sql = `CALL remove_skill_entry("${id}", "${toRemove}");`;
+// Associates a new skill to a user
+app.put(ENDPOINT + '/profiles/skills/:userID/:skill', (req, res) => {
+    const userID = req.params.userID;
+    const skill = req.params.skill;
+    const sql = `CALL new_skill_entry("${userID}", "${skill}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success adding skill");
+        } else {
+            res.send("Error adding skill");
+        }
+    });
+});
+
+
+// Unassociates a skill to a user
+app.delete(ENDPOINT + '/profiles/skills/:userID/:skill', (req, res) => {
+    const userID = req.params.userID;
+    const skill = req.params.skill;
+    const sql = `CALL remove_skill_entry("${userID}", "${skill}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         if (result['affectedRows']) {
@@ -82,17 +98,146 @@ app.delete(ENDPOINT + '/profiles/skills/:id/:toRemove', (req, res) => {
     });
 });
 
+
+// Adds a new education entry to a user's profile
+// app.post(ENDPOINT + '/profiles/education/:userID/:startDate/:endDate/:gpa/:certificationType/:schoolName/:imageUrl', (req, res) => {
+app.post(ENDPOINT + '/profiles/education', (req, res) => {
+    const userID = req.query.userID;
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
+    const gpa = req.query.gpa;
+    const certificationType = req.query.certificationType;
+    const schoolName = req.query.schoolName;
+    const imageUrl = req.query.imageUrl;
+    const sql = `CALL new_education_entry(
+        "${userID}", "${startDate}", "${endDate}", "${gpa}", "${certificationType}", "${imageUrl}", "${schoolName}"
+        );`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success adding education");
+        } else {
+            res.send("Error adding education");
+        }
+    });
+});
+
+// Edits an existing education entry in a users profile
+app.put(ENDPOINT + '/profiles/education/:educationID/:startDate/:endDate/:gpa/:certificationType/:imageUrl/:schoolName', (req, res) => {
+    const educationID = req.params.educationID;
+    const startDate = req.params.startDate;
+    const endDate = req.params.endDate;
+    const gpa = req.params.gpa;
+    const certificationType = req.params.certificationType;
+    const imageUrl = req.params.imageUrl;
+    const schoolName = req.params.schoolName;
+    const sql = `CALL edit_education_entry(
+        "${educationID}", "${startDate}", "${endDate}", "${gpa}", "${certificationType}", "${imageUrl}", "${schoolName}"
+        );`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success editing education");
+        } else {
+            res.send("No changes were made to education");
+        }
+    });
+});
+
+
+// Adds a new experience entry to a user's profile
+app.post(ENDPOINT + '/profiles/experience/:userID/:startDate/:endDate/:jobTitle/:imageUrl/:employer', (req, res) => {
+    const userID = req.params.userID;
+    const startDate = req.params.startDate;
+    const endDate = req.params.endDate;
+    const jobTitle = req.params.jobTitle;
+    const imageUrl = req.params.imageUrl;
+    const employer = req.params.employer;
+    const sql = `CALL new_experience_entry(
+        "${userID}", "${startDate}", "${endDate}", "${jobTitle}", "${imageUrl}", "${employer}");
+        );`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success adding experience");
+        } else {
+            res.send("Error adding experience");
+        }
+    });
+});
+
+
+// Edits an existing experience entry in a users profile
+app.put(ENDPOINT + '/profiles/experience/:experienceID/:startDate/:endDate/:jobTitle/:imageUrl/:employer', (req, res) => {
+    const experienceID = req.params.experienceID;
+    const startDate = req.params.startDate;
+    const endDate = req.params.endDate;
+    const jobTitle = req.params.jobTitle;
+    const imageUrl = req.params.imageUrl;
+    const employer = req.params.employer;
+    const sql = `CALL edit_experience_entry(
+        "${experienceID}", "${startDate}", "${endDate}", "job title", "image url", "employer"
+        );`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success editing experience");
+        } else {
+            res.send("No changes were made to experience");
+        }
+    });
+});
+
+
+// Adds a new award/certificate to a user's profile
+app.post(ENDPOINT + '/profiles/awardsAndCertification/:userID/:awardTitle/:dateReceived/:imageUrl', (req, res) => {
+    const userID = req.params.userID;
+    const awardTitle = req.params.awardTitle;
+    const dateReceived = req.params.dateReceived;
+    const imageUrl = req.params.imageUrl;
+    const sql = `CALL new_award_entry("${userID}", "${awardTitle}", "${dateReceived}", "${imageUrl}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success adding award/certificate");
+        } else {
+            res.send("Error adding award/certificate");
+        }
+    });
+});
+
+
+// Edits an award/certificate entry in a user's profile
+app.put(ENDPOINT + '/profiles/awardsAndCertification/:awardID/:awardTitle/:dateReceived/:imageUrl', (req, res) => {
+    const awardID = req.params.awardID;
+    const awardTitle = req.params.awardTitle;
+    const dateReceived = req.params.dateReceived;
+    const imageUrl = req.params.imageUrl;
+    const sql = `CALL edit_award_entry("${awardID}", "${awardTitle}", "${dateReceived}", "${imageUrl}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result['affectedRows']) {
+            res.send("Success editing award/certificate");
+        } else {
+            res.send("No changes were made to award/certificate");
+        }
+    });
+});
+
+
 /*
 TODO:
 -Profile
-    a) Add skills (PUT - new_skill_entry)
-    b) Remove skills (DELETE - remove_skill_entry)
-    c) Add education (POST - new_education_entry)
-    d) Edit education (PUT - _______)
-    e) Add experience (POST - new_experience_entry)
-    f) Edit experience (PUT - _______)
-    g) Add award/certification (POST - new_award_entry)
-    h) Edit award/certification (PUT - _____)
+DONEa) Add skills (PUT - new_skill_entry)
+DONEb) Remove skills (DELETE - remove_skill_entry)
+DONEc) Add education (POST - new_education_entry)
+DONEd) Edit education (PUT - edit_education_entry)
+DONEe) Add experience (POST - new_experience_entry)
+DONEf) Edit experience (PUT - edit_experience_entry)
+DONEg) Add award/certification (POST - new_award_entry)
+DONEh) Edit award/certification (PUT - edit_award_entry)
+    i) Edit profile pic
+    h) Edit bio
 
 
 */
