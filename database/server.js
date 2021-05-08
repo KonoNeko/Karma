@@ -227,12 +227,17 @@ app.put(ENDPOINT + '/profiles/experience', (req, res) => {
 });
 
 
-// Adds a new award/certificate to a user's profile
-app.post(ENDPOINT + '/profiles/awardsAndCertification/:userID/:awardTitle/:dateReceived/:imageUrl', (req, res) => {
-    const userID = req.params.userID;
-    const awardTitle = req.params.awardTitle;
-    const dateReceived = req.params.dateReceived;
-    const imageUrl = req.params.imageUrl;
+/**
+ * Adds a new award/certificate to a user's profile.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/awardsAndCertification?id=value&title=value&date=value&img=value
+ */
+app.post(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
+    const userID = req.params.id;
+    const awardTitle = req.params.title;
+    const dateReceived = req.params.date;
+    const imageUrl = req.params.img;
     const sql = `CALL new_award_entry("${userID}", "${awardTitle}", "${dateReceived}", "${imageUrl}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -245,12 +250,17 @@ app.post(ENDPOINT + '/profiles/awardsAndCertification/:userID/:awardTitle/:dateR
 });
 
 
-// Edits an award/certificate entry in a user's profile
-app.put(ENDPOINT + '/profiles/awardsAndCertification/:awardID/:awardTitle/:dateReceived/:imageUrl', (req, res) => {
-    const awardID = req.params.awardID;
-    const awardTitle = req.params.awardTitle;
-    const dateReceived = req.params.dateReceived;
-    const imageUrl = req.params.imageUrl;
+/**
+ * Edits an award/certificate entry in a user's profile.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/awardsAndCertification?id=value&title=value&date=value&img=value
+ */
+app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
+    const awardID = req.params.id;
+    const awardTitle = req.params.title;
+    const dateReceived = req.params.date;
+    const imageUrl = req.params.img;
     const sql = `CALL edit_award_entry("${awardID}", "${awardTitle}", "${dateReceived}", "${imageUrl}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
