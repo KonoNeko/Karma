@@ -200,13 +200,18 @@ app.post(ENDPOINT + '/profiles/experience', (req, res) => {
 });
 
 
-// Edits an existing experience entry in a users profile
-app.put(ENDPOINT + '/profiles/experience/:experienceID/:startDate/:endDate/:jobTitle/:imageUrl/:employer', (req, res) => {
-    const experienceID = req.params.experienceID;
-    const startDate = req.params.startDate;
-    const endDate = req.params.endDate;
-    const jobTitle = req.params.jobTitle;
-    const imageUrl = req.params.imageUrl;
+/**
+ * Edits an existing experience entry in a users profile.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/experience?id=value&start=value&end=value&job=value&img=value&employer=value
+ */
+app.put(ENDPOINT + '/profiles/experience', (req, res) => {
+    const experienceID = req.params.id;
+    const startDate = req.params.start;
+    const endDate = req.params.end;
+    const jobTitle = req.params.job;
+    const imageUrl = req.params.img;
     const employer = req.params.employer;
     const sql = `CALL edit_experience_entry(
         "${experienceID}", "${startDate}", "${endDate}", "job title", "image url", "employer"
