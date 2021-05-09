@@ -314,6 +314,19 @@ app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
 });
 
 
+/**
+ * Gets all categories of volunteer work.
+ */
+ app.get(ENDPOINT + '/categories', (req, res) => {
+    const sql = "SELECT * FROM volunteer_categories;";
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        let resultText = JSON.stringify(result);
+        res.end(resultText);
+    });
+});
+
+
 /*
 TODO:
 -Profile
