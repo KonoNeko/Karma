@@ -3,8 +3,9 @@ TODO:
 -Profile
 DONEa) Gather profile info (with education, skills, experience, etc.)
 DONEb) Create a new profile/signup
-    c) Sign a user in
-    d) Edit a profile/add information
+DONEc) Edit a profile/add information
+    d) Request to follow a user
+    e) Accept a follow request
 
 -Messaging
     a) View all messages
@@ -24,6 +25,11 @@ DONEd) View number of likes
 DONEe) View timestamp posted
 DONEf) Like a post
     g) Comment on a post
+
+-Notifications
+    a) View all notifications
+    b) Trigger for like notification
+    c) Trigger for follow request notification
 */
 
 
@@ -217,7 +223,7 @@ CREATE PROCEDURE edit_experience_entry(IN exp_id INTEGER,
 IN new_start CHAR(50), IN new_end CHAR(50), IN new_title CHAR(50), 
 IN new_image TEXT, IN new_employer CHAR(50))
 BEGIN
-    UPDATE education
+    UPDATE experiences
     SET 
     `job_title` = new_title,
     `exp_start_date` = new_start,
@@ -249,6 +255,38 @@ BEGIN
 END//
 DELIMITER ;
 
+/*
+Changes the current profile picture of a user.
+
+Example of the procedure being called:
+CALL change_profile_pic("user id", "image url");
+*/
+DROP PROCEDURE IF EXISTS change_profile_pic;
+DELIMITER //
+CREATE PROCEDURE change_profile_pic(IN current_username CHAR(50), IN new_img TEXT)
+BEGIN
+    UPDATE profiles
+    SET profile_pic_url = new_img
+    WHERE username = current_username;
+END//
+DELIMITER ;
+
+
+/*
+Changes the current bio of a user.
+
+Example of the procedure being called:
+CALL change_bio("user id", "bio");
+*/
+DROP PROCEDURE IF EXISTS change_bio;
+DELIMITER //
+CREATE PROCEDURE change_bio(IN current_username CHAR(50), IN new_bio TEXT)
+BEGIN
+    UPDATE profiles
+    SET bio = new_bio
+    WHERE username = current_username;
+END//
+DELIMITER ;
 
 
 /*
@@ -260,6 +298,17 @@ s.likes, p.username, p.profile_pic_url, s.user_id, s.post_id
 FROM social_posts s JOIN profiles p
 ON s.user_id = p.profile_id
 ORDER BY s.post_date
+
+
+/*
+Gathers all the posts on the bulletin board.
+*/
+CREATE VIEW bulletin_board as
+SELECT *
+FROM opportunites
+ORDER BY post_date
+GROUP BY 
+
 
 
 /*
