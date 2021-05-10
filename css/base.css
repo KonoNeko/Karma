@@ -269,6 +269,23 @@ svg {
   border-radius: 10px;
   outline: none;
 }
+
+.creatopportunity {
+  background-color: #49a1b9;
+  width: 200px;
+  border-radius: 10px;
+  padding: 12px 20px;
+  border: none;
+  color: #eff0f3;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 10px;
+  outline: none;
+  float: right;
+
+  margin-right: 120px;
+}
 .bugbutton {
   background-color: #0367a6;
   padding: 12px 20px;
@@ -320,6 +337,10 @@ svg {
     display: none;
   }
 }
+
+  .moveRight{
+    margin-right: 50px;
+  }
 
 @media screen and (min-width: 550px) {
   /* SCROLLBAR */
