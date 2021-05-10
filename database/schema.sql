@@ -133,12 +133,14 @@ CREATE TABLE messages (
 
 CREATE TABLE opportunites (
     `opportunity_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `category` CHAR(50) NOT NULL,
     `poster_id` INTEGER NOT NULL,
     `title` CHAR(50) NOT NULL,
     `description` TEXT NOT NULL,
     `requirements` TEXT,
-    'image_url' TEXT NOT NULL,
+    `image_url` TEXT NOT NULL,
     `post_date` TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (`category`) REFERENCES volunteer_categories (`category`),
     FOREIGN KEY (`poster_id`) REFERENCES profiles (`profile_id`)
 );
 
@@ -152,8 +154,7 @@ CREATE TABLE opportunites_applicants (
 );
 
 CREATE TABLE volunteer_categories (
-    `category_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `category` CHAR(50) NOT NULL
+    `category` CHAR(50) PRIMARY KEY NOT NULL
 );
 
 CREATE TABLE notifications (
