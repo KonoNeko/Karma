@@ -18,7 +18,8 @@ DONEa) See all opportunities (by category)
 DONEb) Apply for an opportunity
 DONEc) Post a new opportunity (+ selecting categories)
 DONEd) View applicants for the posted opportunites
-    e) Accept/hire applicants for an opportunity
+DONEe) Accept/hire applicants for an opportunity
+DONEf) View opportunities a user applied for
 
 -Social Posts
 DONEa) View all posts (social feed)
@@ -376,6 +377,21 @@ BEGIN
     SET accepted = 1
     WHERE opportunity_id = current_opportunity_id
     AND applicant_username = applicant_name;
+END//
+DELIMITER ;
+
+
+/*
+View opportunites that a user applied for.
+*/
+DROP PROCEDURE IF EXISTS view_user_applications;
+DELIMITER //
+CREATE PROCEDURE view_user_applications(IN current_username CHAR(50))
+BEGIN
+    SELECT * 
+    FROM opportunites JOIN opportunites_applicants 
+    ON opportunites.opportunity_id = opportunites_applicants.opportunity_id
+    WHERE opportunites_applicants.applicant_username = current_username;
 END//
 DELIMITER ;
 
