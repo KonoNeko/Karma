@@ -314,6 +314,19 @@ app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
 });
 
 
+/**
+ * Gets all categories of volunteer work.
+ */
+ app.get(ENDPOINT + '/categories', (req, res) => {
+    const sql = "SELECT * FROM volunteer_categories;";
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        let resultText = JSON.stringify(result);
+        res.end(resultText);
+    });
+});
+
+
 /*
 TODO:
 -Profile
@@ -326,7 +339,10 @@ DONEf) Edit experience (PUT - edit_experience_entry) TESTED
 DONEg) Add award/certification (POST - new_award_entry) TESTED
 DONEh) Edit award/certification (PUT - edit_award_entry) TESTED
 DONEi) Edit profile pic (PUT - change_profile_pic) TESTED
-DONEh) Edit bio (PUT - change_bio) TESTED
+DONEj) Edit bio (PUT - change_bio) TESTED
+    k) Request to follow a user
+    l) Accept a follow request
+    m) Unfollow a user
 
 -Bulletin Board
     a) View all opportunities (GET - _______)
@@ -334,6 +350,7 @@ DONEh) Edit bio (PUT - change_bio) TESTED
     c) Apply to opportunity (PUT - _______)
     d) View applicants (GET - _______)
     e) View opportunites applied for (GET - _____)
+    f) View all categories (GET - SELECT...)
 
 -Social Posts
 DONEa) View social feed (GET - posts_feed) TESTED
@@ -342,10 +359,12 @@ DONEa) View social feed (GET - posts_feed) TESTED
     d) Unlike post (DELETE - unlike_post)
     e) Comment on a post (POST - _____)
     f) View all comments (GET - _____)
+    g) View stories
 
 -Messages
-    a) View all messages for a user (GET - _____)
+    a) View all messages for a conversation (GET - _____)
     b) Send message to another user (POST - _____)
+    c) View all conversations for a user (GET - _____)
 
 -Notifications
     a) View all notifications
