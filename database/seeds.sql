@@ -8,7 +8,7 @@ VALUES
 ("Computers and Information Technology");
 
 
-INSERT INTO opportunites (`poster_id`, `title`, `employer`, `category`, `description`, `requirements`, `image_url`)
+INSERT INTO opportunites (`poster_id`, `title`, `employer`, `category`, `description`, `requirements`, `event_date`, `image_url`)
 VALUES
-(1, 'title', 'employer', 'category', 'description', 'requirements', 'image url'),
-(1, 'Library Assistant', 'Guildford Library', 'Literacy, Libraries, and Learning', 'Be an assistant at a Library', '1-2 years experience at a library', 'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder-1024x512.png ')
+(1, 'title', 'employer', 'category', 'description', 'requirements', 'format YYYY-MM-DD' 'image url'),
+(1, 'Library Assistant', 'Guildford Library', 'Literacy, Libraries, and Learning', 'Be an assistant at a Library', '1-2 years experience at a library', '2021-05-30', 'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder-1024x512.png ')

@@ -133,7 +133,9 @@ CREATE TABLE messages (
 
 CREATE TABLE opportunites (
     `opportunity_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `employer` CHAR(50) NOT NULL,
     `category` CHAR(50) NOT NULL,
+    `event_date` DATE NOT NULL,
     `poster_id` INTEGER NOT NULL,
     `title` CHAR(50) NOT NULL,
     `description` TEXT NOT NULL,
