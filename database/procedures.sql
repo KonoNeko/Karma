@@ -6,6 +6,7 @@ DONEb) Create a new profile/signup
 DONEc) Edit a profile/add information
     d) Request to follow a user
     e) Accept a follow request
+    f) Unfollow a user
 
 -Messaging
     a) View all messages for a conversation
@@ -32,6 +33,7 @@ DONEf) Like a post
     a) View all notifications
     b) Trigger for like notification
     c) Trigger for follow request notification
+    d) Trigger for application acceptance
 */
 
 
