@@ -17,7 +17,7 @@ DONEc) Edit a profile/add information
 DONEa) See all opportunities (by category)
 DONEb) Apply for an opportunity
 DONEc) Post a new opportunity (+ selecting categories)
-    d) View applicants for the posted opportunites
+DONEd) View applicants for the posted opportunites
     e) Accept/hire applicants for an opportunity
 
 -Social Posts
@@ -315,13 +315,18 @@ ORDER BY post_date
 
 /*
 Applies for an opportunity.
+
+Test call:
+CALL apply_for_opportunity("marlon", 5, "Hire me 2", "marlonrfajardo@gmail.com", "7782313497", "Langley, British Columbia");
 */
 DROP PROCEDURE IF EXISTS apply_for_opportunity;
 DELIMITER //
-CREATE PROCEDURE apply_for_opportunity(IN current_user_id CHAR(50), IN posting_id INTEGER, IN new_message TEXT)
+CREATE PROCEDURE apply_for_opportunity(IN current_user_id CHAR(50), IN posting_id INTEGER, IN new_message TEXT,
+IN new_email CHAR(100), IN new_phone CHAR(10), IN new_city CHAR(100))
 BEGIN
-    INSERT INTO opportunites_applicants(`applicant_username`, `opportunity_id`,`message`)
-    VALUES (current_user_id, posting_id, new_message);
+    INSERT INTO opportunites_applicants(`applicant_username`, `opportunity_id`, `message`,
+    `email`, `phone_num`, `city`)
+    VALUES (current_user_id, posting_id, new_message, new_email, new_phone, new_city);
 END//
 DELIMITER ;
 
@@ -345,6 +350,20 @@ BEGIN
     get_user_id(current_user_id), new_title, new_desc, new_req, new_img);
 END//
 DELIMITER ;
+
+
+/*
+Gets all the applicants for an opportunity.
+*/
+DROP PROCEDURE IF EXISTS view_applicants;
+DELIMITER //
+CREATE PROCEDURE view_applicants(IN current_opportunity_id INTEGER)
+BEGIN
+    SELECT * FROM opportunites_applicants
+    WHERE opportunity_id = current_opportunity_id;
+END//
+DELIMITER ;
+
 
 
 /*
