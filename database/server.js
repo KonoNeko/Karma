@@ -347,6 +347,7 @@ DONEh) Edit bio (PUT - change_bio) TESTED
     c) Apply to opportunity (PUT - _______)
     d) View applicants (GET - _______)
     e) View opportunites applied for (GET - _____)
+    f) View all categories (GET - SELECT...)
 
 -Social Posts
 DONEa) View social feed (GET - posts_feed) TESTED
@@ -355,6 +356,7 @@ DONEa) View social feed (GET - posts_feed) TESTED
     d) Unlike post (DELETE - unlike_post)
     e) Comment on a post (POST - _____)
     f) View all comments (GET - _____)
+    g) View stories
 
 -Messages
     a) View all messages for a user (GET - _____)
