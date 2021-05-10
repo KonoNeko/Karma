@@ -148,7 +148,7 @@ CREATE TABLE opportunites (
 
 CREATE TABLE opportunites_applicants (
     `application_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `applicant_id` INTEGER NOT NULL,
+    `applicant_username` INTEGER NOT NULL,
     `opportunity_id` INTEGER NOT NULL,
     `message` TEXT NOT NULL,
     FOREIGN KEY (`opportunity_id`) REFERENCES opportunites (`opportunity_id`),
