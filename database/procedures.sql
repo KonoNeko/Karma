@@ -364,7 +364,20 @@ BEGIN
 END//
 DELIMITER ;
 
-
+/*
+Marks an application as 'accepted'.
+*/
+DROP PROCEDURE IF EXISTS accept_application;
+DELIMITER //
+CREATE PROCEDURE accept_application(IN current_opportunity_id INTEGER, 
+IN applicant_name CHAR(50))
+BEGIN
+    UPDATE opportunites_applicants
+    SET accepted = 1
+    WHERE opportunity_id = current_opportunity_id
+    AND applicant_username = applicant_name;
+END//
+DELIMITER ;
 
 /*
 Gets the user id using a username.
