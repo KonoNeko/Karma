@@ -14,9 +14,9 @@ DONEc) Edit a profile/add information
     c) View all conversations of a user
 
 -Bulletin Board
-    a) See all opportunities (by category)
-    b) Apply for an opportunity
-    c) Post a new opportunity (+ selecting categories)
+DONEa) See all opportunities (by category)
+DONEb) Apply for an opportunity
+DONEc) Post a new opportunity (+ selecting categories)
     d) View applicants for the posted opportunites
     e) Accept/hire applicants for an opportunity
 
@@ -311,8 +311,40 @@ CREATE VIEW bulletin_board as
 SELECT *
 FROM opportunites
 ORDER BY post_date
-GROUP BY 
 
+
+/*
+Applies for an opportunity.
+*/
+DROP PROCEDURE IF EXISTS apply_for_opportunity;
+DELIMITER //
+CREATE PROCEDURE apply_for_opportunity(IN current_user_id CHAR(50), IN posting_id INTEGER, IN new_message TEXT)
+BEGIN
+    INSERT INTO opportunites_applicants(`applicant_username`, `opportunity_id`,`message`)
+    VALUES (current_user_id, posting_id, new_message);
+END//
+DELIMITER ;
+
+
+/*
+Creates a new opportunity.
+
+Test call:
+CALL new_opportunity("Karma", "Environment", "2021-05-30", "Clean Up Crew Member", 
+"Clean up the Fraser river. All clothing and equipment provided", "No requirements",
+"https://coconuts.co/wp-content/uploads/2018/03/dirty-river.jpg");
+*/
+DROP PROCEDURE IF EXISTS new_opportunity;
+DELIMITER //
+CREATE PROCEDURE new_opportunity(IN current_user_id CHAR(50), IN new_category CHAR(50), IN new_date DATE, 
+IN new_title CHAR(50), IN new_desc TEXT, IN new_req TEXT, IN new_img TEXT)
+BEGIN
+    INSERT INTO opportunites(`employer`, `category`, `event_date`, 
+    `poster_id`, `title`, `description`, `requirements`, `image_url`)
+    VALUES (get_full_name(current_user_id), new_category, new_date, 
+    get_user_id(current_user_id), new_title, new_desc, new_req, new_img);
+END//
+DELIMITER ;
 
 
 /*
@@ -320,11 +352,28 @@ Gets the user id using a username.
 */
 DROP FUNCTION IF EXISTS get_user_id;
 DELIMITER //
-CREATE FUNCTION get_user_id(current_username VARCHAR(30)) 
-RETURNS INT READS SQL DATA
+CREATE FUNCTION get_user_id(current_username CHAR(50)) 
+RETURNS CHAR(50) READS SQL DATA
 BEGIN
     RETURN (
       SELECT profile_id
+      FROM profiles
+      WHERE username = current_username
+    );
+END //
+DELIMITER ;
+
+
+/*
+Gets the fullname using a username.
+*/
+DROP FUNCTION IF EXISTS get_full_name;
+DELIMITER //
+CREATE FUNCTION get_full_name(current_username CHAR(50)) 
+RETURNS CHAR(50) READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT full_name
       FROM profiles
       WHERE username = current_username
     );
