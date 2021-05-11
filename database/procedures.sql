@@ -1,34 +1,34 @@
 /*
 TODO:
 -Profile
-DONEa) Gather profile info (with education, skills, experience, etc.)
-DONEb) Create a new profile/signup
-DONEc) Edit a profile/add information
-DONEd) Request to follow a user
-DONEe) Accept a follow request
-DONEf) Unfollow a user
+DONEa) Gather profile info (with education, skills, experience, etc.) - get_profile_info
+DONEb) Create a new profile/signup - create_new_profile
+DONEc) Edit a profile/add information - new___entry or edit____entry
+DONEd) Request to follow a user - request_to_follow_user
+DONEe) Accept a follow request - accept_a_follow_request
+DONEf) Unfollow a user - unfollow_user
 
 -Messaging
     a) View all messages for a conversation
-    b) Send a message to a user
+    b) Send a message to a user - 
     c) View all conversations of a user
 
 -Bulletin Board
-DONEa) See all opportunities (by category)
-DONEb) Apply for an opportunity
-DONEc) Post a new opportunity (+ selecting categories)
-DONEd) View applicants for the posted opportunites
-DONEe) Accept/hire applicants for an opportunity
-DONEf) View opportunities a user applied for
+DONEa) See all opportunities (by category) - bulletin_board
+DONEb) Apply for an opportunity - apply_for_opportunity
+DONEc) Post a new opportunity - new_opportunity
+DONEd) View applicants for the posted opportunites - view_applicants
+DONEe) Accept/hire applicants for an opportunity - accept_application
+DONEf) View opportunities a user applied for - view_user_applications
 
 -Social Posts
-DONEa) View all posts (social feed)
-DONEb) View comments
-DONEc) Get caption, location and image??
-DONEd) View number of likes
+DONEa) View all posts (social feed) - posts_feed
+DONEb) View comments - view_comments
+DONEc) Get caption, location and image
+DONEd) View number of likes 
 DONEe) View timestamp posted
-DONEf) Like a post
-DONEg) Comment on a post
+DONEf) Like a post - like_post
+DONEg) Comment on a post - comment_on_post
 
 -Notifications
     a) View all notifications
@@ -382,6 +382,21 @@ DELIMITER ;
 
 
 /*
+View opportunites that a user applied for.
+*/
+DROP PROCEDURE IF EXISTS view_user_applications;
+DELIMITER //
+CREATE PROCEDURE view_user_applications(IN current_username CHAR(50))
+BEGIN
+    SELECT * 
+    FROM opportunites JOIN opportunites_applicants 
+    ON opportunites.opportunity_id = opportunites_applicants.opportunity_id
+    WHERE opportunites_applicants.applicant_username = current_username;
+END//
+DELIMITER ;
+
+
+/*
 Creates a request to follow a user.
 
 CALL request_to_follow_user("The user following", "The user being followed");
@@ -481,20 +496,6 @@ CREATE trigger update_follower_number_unfollow
     FOR EACH ROW
     CALL decrement_followers(OLD.profile_id);
 
-
-/*
-View opportunites that a user applied for.
-*/
-DROP PROCEDURE IF EXISTS view_user_applications;
-DELIMITER //
-CREATE PROCEDURE view_user_applications(IN current_username CHAR(50))
-BEGIN
-    SELECT * 
-    FROM opportunites JOIN opportunites_applicants 
-    ON opportunites.opportunity_id = opportunites_applicants.opportunity_id
-    WHERE opportunites_applicants.applicant_username = current_username;
-END//
-DELIMITER ;
 
 /*
 Gets the user id using a username.
