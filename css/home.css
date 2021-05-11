@@ -25,14 +25,13 @@
 }
 
 #mainmain > #stories {
-  background-color: red; /* temp */
+  background-color: #eff0f3; /* temp */
   margin-top: 24px;
-  height: 400px; /* temp */
   width: 100%;
 }
 
 #mainmain > #posts {
-  background-color: purple; /* temp */
+  background-color: #eff0f3; /* temp */
   margin-top: 24px;
   height: 400px; /* temp */
   width: 100%;
@@ -140,4 +139,47 @@
     width: 20%;
     height: 100%;
   }
+}
+
+
+.profilepic {
+  height: 71px;
+  width: 71px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  background-size: 71px;
+}
+
+.userName {
+/* Body text */
+/* width: 59px;
+height: 19px; */
+font-family: "Open Sans";
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+
+text-align: center;
+
+color: #000000;
+}
+
+
+.stories {
+  display: flex;
+  overflow: auto;
+  height: 130px;
+}
+
+.story {
+  margin-right: 20px;
+  text-align: center;
+  width: 81px;
+}
+
+#stories::-webkit-scrollbar {
+  display: none;
 }
