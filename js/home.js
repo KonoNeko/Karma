@@ -190,6 +190,14 @@ function createWhatsNew(newPost) {
   let firstDiv = document.createElement("div");
   firstDiv.setAttribute("class", "postDiv");
 
+  let firstDivPicture = document.createElement("div");
+  firstDivPicture.setAttribute("class", "postpicture");
+  firstDivPicture.setAttribute(
+    "style",
+    "background-image: url('./images/placeholder.jpg')"
+  );
+  newPost.appendChild(firstDivPicture);
+
   let firstDivLocation = document.createElement("p");
   firstDivLocation.setAttribute("class", "divLocation");
   firstDivLocation.innerHTML = "Burnaby Library";
@@ -203,6 +211,14 @@ function createWhatsNew(newPost) {
   let secondDiv = document.createElement("div");
   secondDiv.setAttribute("class", "postDiv");
 
+  let secondDivPicture = document.createElement("div");
+  secondDivPicture.setAttribute("class", "postpicture");
+  secondDivPicture.setAttribute(
+    "style",
+    "background-image: url('./images/placeholder.jpg')"
+  );
+  newPost.appendChild(secondDivPicture);
+
   let secondDivLocation = document.createElement("p");
   secondDivLocation.setAttribute("class", "divLocation");
   secondDivLocation.innerHTML = "Burnaby Library";
@@ -215,6 +231,14 @@ function createWhatsNew(newPost) {
 
   let thirdDiv = document.createElement("div");
   thirdDiv.setAttribute("class", "postDiv");
+
+  let thirdDivPicture = document.createElement("div");
+  thirdDivPicture.setAttribute("class", "postpicture");
+  thirdDivPicture.setAttribute(
+    "style",
+    "background-image: url('./images/placeholder.jpg')"
+  );
+  newPost.appendChild(thirdDivPicture);
 
   let thirdDivLocation = document.createElement("p");
   thirdDivLocation.setAttribute("class", "divLocation");
