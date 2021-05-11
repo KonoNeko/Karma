@@ -23,12 +23,12 @@ DONEf) View opportunities a user applied for
 
 -Social Posts
 DONEa) View all posts (social feed)
-    b) View comments
+DONEb) View comments
 DONEc) Get caption, location and image??
 DONEd) View number of likes
 DONEe) View timestamp posted
 DONEf) Like a post
-    g) Comment on a post
+DONEg) Comment on a post
 
 -Notifications
     a) View all notifications
@@ -615,6 +615,19 @@ CREATE trigger disconnect_award
     FOR EACH ROW
     DELETE FROM profile_awards WHERE award_id = OLD.award_id;
 
+
+/*
+Gets all the comments for a social post.
+*/
+DROP PROCEDURE IF EXISTS view_comments;
+DELIMITER //
+CREATE PROCEDURE view_comments(IN current_post INTEGER)
+BEGIN
+    SELECT * FROM post_comments
+    WHERE post_id = current_post
+    ORDER BY post_date;
+END//
+DELIMITER ;
 
 
 /*
