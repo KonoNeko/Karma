@@ -24,9 +24,9 @@ DONEf) View opportunities a user applied for - view_user_applications
 -Social Posts
 DONEa) View all posts (social feed) - posts_feed
 DONEb) View comments - view_comments
-DONEc) Get caption, location and image
-DONEd) View number of likes 
-DONEe) View timestamp posted
+DONEc) Get caption, location and image - posts_feed
+DONEd) View number of likes - posts_feed
+DONEe) View timestamp posted - posts_feed
 DONEf) Like a post - like_post
 DONEg) Comment on a post - comment_on_post
     h) View all stories
@@ -298,6 +298,100 @@ END//
 DELIMITER ;
 
 
+/*
+Gets all the conversations from 
+*/
+DROP PROCEDURE IF EXISTS view_conversations;
+DELIMITER //
+CREATE PROCEDURE view_conversations(IN current_username CHAR(50))
+BEGIN
+    SELECT DISTINCT con.conversation_id, 
+    get_other_user(con.conversation_id, current_username) as other_user,
+    get_latest_message(con.conversation_id) as latest_message,
+    get_latest_message_timestamp(con.conversation_id) as latest_message_timestamp
+    FROM conversations con JOIN messages m
+    WHERE con.user_id_1 = get_user_id(current_username)
+    OR con.user_id_2 = get_user_id(current_username);
+END//
+DELIMITER ;
+
+
+/*
+Gets all the messages in a conversation.
+*/
+DROP PROCEDURE IF EXISTS view_a_conversation;
+DELIMITER //
+CREATE PROCEDURE view_a_conversation(IN current_conversation INTEGER, IN current_username CHAR(50))
+BEGIN
+    SELECT *, get_other_user(current_conversation, current_username) as other_user FROM messages
+    WHERE conversation_id = current_conversation
+    ORDER BY message_id;
+END//
+DELIMITER ;
+
+
+/*
+Returns the full name of the opposite user of a user's conversation.
+*/
+DROP FUNCTION IF EXISTS get_other_user;
+DELIMITER //
+CREATE FUNCTION get_other_user(current_conversation INTEGER, current_username CHAR(50)) 
+RETURNS CHAR(100) READS SQL DATA
+BEGIN
+    IF (SELECT true FROM conversations where conversation_id = current_conversation AND user_id_1 = get_user_id(current_username)) THEN
+        RETURN (
+            SELECT get_full_name_with_id(user_id_2) FROM conversations WHERE conversation_id = current_conversation AND user_id_1 = get_user_id(current_username)
+        );
+    ELSEIF (SELECT true FROM conversations where conversation_id = current_conversation AND user_id_2 = get_user_id(current_username)) THEN
+        RETURN (
+            SELECT get_full_name_with_id(user_id_1) FROM conversations WHERE conversation_id = current_conversation AND user_id_2 = get_user_id(current_username)
+        );
+    END IF;
+END //
+DELIMITER ;
+
+
+/*
+Returns the latest message of a given conversation.
+*/
+DROP FUNCTION IF EXISTS get_latest_message;
+DELIMITER //
+CREATE FUNCTION get_latest_message(current_conversation INTEGER) 
+RETURNS TEXT READS SQL DATA
+BEGIN
+    RETURN(
+        SELECT `message` FROM messages 
+        WHERE message_id = (
+            SELECT max(message_id) FROM messages
+            WHERE conversation_id = current_conversation
+        )
+    );
+END //
+DELIMITER ;
+
+
+/*
+Returns the timestamp of the latest message of a given conversation. 
+*/
+DROP FUNCTION IF EXISTS get_latest_message_timestamp;
+DELIMITER //
+CREATE FUNCTION get_latest_message_timestamp(current_conversation INTEGER) 
+RETURNS TEXT READS SQL DATA
+BEGIN
+    RETURN(
+        SELECT `timestamp` FROM messages 
+        WHERE message_id = (
+            SELECT max(message_id) FROM messages
+            WHERE conversation_id = current_conversation
+        )
+    );
+END //
+DELIMITER ;
+
+
+/*
+Sends a message to another user.
+*/
 DROP PROCEDURE IF EXISTS send_message;
 DELIMITER //
 CREATE PROCEDURE send_message(IN sender_id CHAR(50), IN receiver_id CHAR(50), 
@@ -314,6 +408,9 @@ END//
 DELIMITER ;
 
 
+/*
+Returns the conversation id between two user (if it exists).
+*/
 DROP FUNCTION IF EXISTS get_conversation_id;
 DELIMITER //
 CREATE FUNCTION get_conversation_id(user_1 CHAR(50), user_2 CHAR(50)) 
@@ -561,6 +658,22 @@ BEGIN
       SELECT full_name
       FROM profiles
       WHERE username = current_username
+    );
+END //
+DELIMITER ;
+
+/*
+Gets the fullname using an id.
+*/
+DROP FUNCTION IF EXISTS get_full_name_with_id;
+DELIMITER //
+CREATE FUNCTION get_full_name_with_id(current_user_id INTEGER) 
+RETURNS CHAR(50) READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT full_name
+      FROM profiles
+      WHERE profile_id = current_user_id
     );
 END //
 DELIMITER ;
