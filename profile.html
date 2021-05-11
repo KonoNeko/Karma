@@ -164,6 +164,31 @@
           <br />
           <br />
 
+          <!-- The Modal -->
+          <div id="myModal" class="modal">
+          
+            <!-- Modal content -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <span class="close">&times;</span>
+                <h1>Edit Profile</h1>
+              </div>
+              <div class="modal-body">
+                <h3>Add description for your bio</h3>
+                <textarea> </textarea>
+              </div>
+            <button id="save">Save</button>
+            
+              <buton id="addskills">Add skills</buton>
+
+              <buton id="addedu">Add education</buton>
+              
+              <buton id="addexp">Add expereince</buton>
+            
+            </div>
+          
+          </div>
+
           <h2>About</h2>
           <br /><br /><br /><br />
 
@@ -204,6 +229,64 @@
         </div>
       </div>
     </div>
+
+    <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
+      
+      // Get the button that opens the modal
+      var btn = document.getElementById("editbtn");
+      
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+      
+      // When the user clicks the button, open the modal 
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
+      
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+      
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+      </script>
+
+<script>
+  // Get the modal
+  var modal = document.getElementById("myModal");
+  
+  // Get the button that opens the modal
+  var btn = document.getElementById("addskills");
+  
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+  
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  </script>
+
+
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -233,10 +316,10 @@
     <script>
       showImages();
     </script>
-    <script>
+    <!-- <script>
       document.getElementById("editbtn").onclick = function () {
         location.href = "editprofile.html";
       };
-    </script>
+    </script> -->
   </body>
 </html>
