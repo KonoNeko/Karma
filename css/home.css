@@ -16,6 +16,25 @@
   flex-wrap: nowrap;
 }
 
+.topPartDiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.name-and-time {
+  justify-content: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.topPartDiv > .name-and-time {
+  width: 50%;
+  justify-content: center;
+  align-items: left;
+}
+
 .flex-main > .column {
   width: 50%;
   margin-left: 24px;
@@ -25,18 +44,19 @@
 }
 
 #mainmain > #stories {
-  background-color: red; /* temp */
+  background-color: #eff0f3; /* temp */
   margin-top: 24px;
-  height: 400px; /* temp */
   width: 100%;
+  border-radius: 12px;
 }
 
 #mainmain > #posts {
-  background-color: purple; /* temp */
+  background-color: #eff0f3; /* temp */
   margin-top: 24px;
-  height: 400px; /* temp */
+  height: 510x; /* temp */
   width: 100%;
   margin-bottom: 24px;
+  border-radius: 12px;
 }
 
 #sidemain > #whats-new {
@@ -140,4 +160,50 @@
     width: 20%;
     height: 100%;
   }
+}
+
+.profilepic {
+  height: 60px;
+  width: 60px;
+  background-color: #bbb;
+  border-radius: 50%;
+  background-size: 60px;
+}
+
+.userName {
+  /* Body text */
+  /* width: 59px;
+height: 19px; */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  /* identical to box height */
+
+  color: #000000;
+}
+
+.stories {
+  display: flex;
+  overflow: auto;
+  height: 130px;
+}
+
+.story {
+  margin-right: 20px;
+  text-align: center;
+  width: 80px;
+}
+
+#stories::-webkit-scrollbar {
+  display: none;
+}
+
+.postpicture {
+  width: 100%;
+  height: 160%;
+  border-radius: 10px;
+  background-position: center;
+  display: flex;
+  flex-direction: row;
 }

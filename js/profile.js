@@ -29,7 +29,7 @@ function showProfile(){
     
     var i =0;
     
-    storageRef.child('images/').listAll().then(function(result){
+    storageRef.child('images/'+ 'profilePicture/').listAll().then(function(result){
      result.items.forEach(function(imageRef){
     
        i++
@@ -66,6 +66,9 @@ function showProfile(){
     });
     }
     }
+
+
+    
     
     
 

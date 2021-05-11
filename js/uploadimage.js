@@ -1,6 +1,5 @@
 function post() {
 
-    //alert("in post fun");
     console.log("in post");
     let caption = document.getElementById("inputCaption").value;
     console.log(caption);
