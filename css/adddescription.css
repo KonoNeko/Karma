@@ -10,10 +10,6 @@ textarea {
     width: 600px;
     height: 300px;
 }
-h3{
-   
-    margin-left: 330px;
-}
 
 #save {
     /* 
@@ -43,13 +39,14 @@ h3{
 }
 
 
-.heading-3 {
+h3{
     margin-top: 10px;
     font-size: 18px;
     font-family: "Montserrat", sans-serif;
     font-weight: 600; /* semibold */
-    margin-left: 30px;
+    margin-left: 200px;
 }
+
 
 #container-1 {
     padding-left: 350px;
