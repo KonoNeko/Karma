@@ -70,7 +70,7 @@
 
 
 #editbtn{
-    margin-left: 325px;
+    margin-left: 330px;
 
     background-color: #0367a6;
   padding: 12px 20px;
@@ -88,7 +88,7 @@
 #msgbtn{
     
     
-    margin-top: 70px;
+    margin-top: 20px;
 
     background-color: #0367a6;
     padding: 12px 20px;
@@ -103,9 +103,14 @@
 
 
 }
+#greyback {
+    background-color: #eff0f3;
+    width: 700px;
+    height: 300px;
+}
 
 #following{
-    margin-left: 300px;
+    margin-left: 280px;
     text-align:justify;
     margin-top: -50px;
     font-size: 14pt;
@@ -129,6 +134,10 @@ p{
 
 h2{
     margin-left: 30px;
+    font-family: "Montserrat";
+    font-weight: 700;
+    font-size: 24px;
+    color: #0367a6;
 }
 #name {
     margin-top: 100px;
