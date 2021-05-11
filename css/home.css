@@ -28,6 +28,7 @@
   background-color: #eff0f3; /* temp */
   margin-top: 24px;
   width: 100%;
+  border-radius: 12px;  
 }
 
 #mainmain > #posts {
@@ -36,6 +37,7 @@
   height: 400px; /* temp */
   width: 100%;
   margin-bottom: 24px;
+  border-radius: 12px;
 }
 
 #sidemain > #whats-new {
@@ -182,4 +184,11 @@ color: #000000;
 
 #stories::-webkit-scrollbar {
   display: none;
+}
+
+.postpicture {
+width: 535px;
+height: 212px;
+border-radius: 10px;
+background-position: center;
 }

@@ -29,6 +29,12 @@ function loadStories() {
 }
 
 
+function loadPosts() {
+  let post = document.getElementById("posts");
+  createPost(post);
+}
+
+
 function loadWhatsNew() {
   createWhatsNew();
 }
@@ -37,9 +43,6 @@ function loadRecommendedConnections() {
   createRecommendedConnection();
 }
 
-function loadPosts() {
-  createPost();
-}
 
 // CREATE INDIVIDUAL UI ELEMENTS
 function createStory(stories) {
@@ -63,8 +66,93 @@ function createStory(stories) {
 
 }
 
+function createPost(post) {
+
+  let topPartDiv = document.createElement("div");
+
+  let postImgDiv = document.createElement("div")
+  postImgDiv.setAttribute("class", "profilepic");
+  postImgDiv.setAttribute("style", "padding-bottom: 10px");
+
+  postImgDiv.setAttribute("style", "background-image: url('./images/placeholder.jpg')");
+
+  let userName = document.createElement("p");
+  userName.setAttribute("class", "userName")
+  userName.innerHTML = "User name";
+
+  let timePosted = document.createElement("p");
+  timePosted.setAttribute("class", "timePosted");
+  timePosted.innerHTML = "30 minutes ago";
+
+  topPartDiv.appendChild(postImgDiv);
+  topPartDiv.appendChild(userName);
+  topPartDiv.appendChild(timePosted);
+
+  post.appendChild(topPartDiv);
+
+
+  let picture = document.createElement("div");
+  picture.setAttribute("class", "postpicture")
+  picture.setAttribute("style", "background-image: url('./images/placeholder.jpg')");
+  post.appendChild(picture);
+
+
+  let captionAndComments = document.createElement("div");
+  captionAndComments.setAttribute("class", "captionAndComments");
+  let likes = document.createElement("p");
+  let caption = document.createElement("p");
+  let comments = document.createElement("p");
+  likes.setAttribute("class", "likes")
+  caption.setAttribute("class", "caption")
+  comments.setAttribute("class", "comments")
+
+  likes.innerHTML = "williamblack and 103 others like this post";
+  caption.innerHTML = "john.doe “The best way to find yourself is to lose yourself in the service of others.” - Mahatma Gandhi";
+  comments.innerHTML = "View all 54 comments";
+
+  post.appendChild(likes);
+  post.appendChild(caption);
+  post.appendChild(comments);
+  
+
+
+  // let postImgDiv = document.createElement("div")
+  // postImgDiv.setAttribute("class", "profilepic");
+  // postImgDiv.setAttribute("style", "padding-bottom: 10px");
+
+  // postImgDiv.setAttribute("style", "background-image: url('./images/placeholder.jpg')");
+
+  // let userName = document.createElement("p");
+  // userName.setAttribute("class", "userName")
+  // userName.innerHTML = "User name";
+
+  // let timePosted = document.createElement("p");
+  // timePosted.setAttribute("class", "timePosted");
+  // timePosted.innerHTML = "30 minutes ago";
+
+  // let likes = document.createElement("p");
+  // likes.setAttribute("class", "likes");
+  // likes.innerHTML = "User name and 100 others like this";
+
+  // let userNameAndCaption = document.createElement("p");
+  // userNameAndCaption.setAttribute("class", "userNameAndCaption");
+  // userNameAndCaption.innerHTML = "User name - asdakdjkaljdlkajdklajdlkajdakl";
+
+
+  // let postsDiv = document.createElement("div");
+  // postsDiv.setAttribute("class", "posts");
+  // postsDiv.appendChild(postImgDiv);
+  // postsDiv.appendChild(userName);
+  // postsDiv.appendChild(timePosted);
+  // postsDiv.appendChild(likes);
+  // postsDiv.appendChild(userNameAndCaption);
+  
+  // post.appendChild(postsDiv);
+
+}
+
 function createWhatsNew() {}
 
 function createRecommendedConnection() {}
 
-function createPost() {}
+
