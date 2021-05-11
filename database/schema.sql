@@ -16,7 +16,7 @@ CREATE TABLE profile_follows (
     `follow_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `profile_id` INTEGER NOT NULL,
     `follower_id` INTEGER NOT NULL,
-    'is_a_request' TINYINT(1) DEFAULT 1;
+    `is_a_request` TINYINT(1) DEFAULT 1;
     FOREIGN KEY (`profile_id`) REFERENCES profiles (`profile_id`),
     FOREIGN KEY (`follower_id`) REFERENCES profiles (`profile_id`)
 );
@@ -133,12 +133,16 @@ CREATE TABLE messages (
 
 CREATE TABLE opportunites (
     `opportunity_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `employer` CHAR(50) NOT NULL,
+    `category` CHAR(50) NOT NULL,
+    `event_date` DATE NOT NULL,
     `poster_id` INTEGER NOT NULL,
     `title` CHAR(50) NOT NULL,
     `description` TEXT NOT NULL,
     `requirements` TEXT,
-    'image_url' TEXT NOT NULL,
+    `image_url` TEXT NOT NULL,
     `post_date` TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (`category`) REFERENCES volunteer_categories (`category`),
     FOREIGN KEY (`poster_id`) REFERENCES profiles (`profile_id`)
 );
 
@@ -152,26 +156,33 @@ CREATE TABLE opportunites_applicants (
 );
 
 CREATE TABLE volunteer_categories (
-    `category_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `category` CHAR(50) NOT NULL
+    `category` CHAR(50) PRIMARY KEY NOT NULL
 );
 
 CREATE TABLE notifications (
-    'notifiation_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
-    'profile_id' INTEGER NOT NULL,
-    'message' TEXT NOT NULL,
-    'link_to_event' TEXT NOT NULL
-    'timestamp' TIMESTAMP DEFAULT NOW(),
-    FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id');
+    `notifiation_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `profile_id` INTEGER NOT NULL,
+    `message` TEXT NOT NULL,
+    `link_to_event` TEXT NOT NULL
+    `timestamp` TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (`profile_id`) REFERENCES profiles (`profile_id`);
 );
 
 --TODO
 CREATE TABLE stories (
-    'story_id' INTEGER PRIMARY KEY AUTO_INCREMENT,
-    'profile_id' INTEGER NOT NULL,
-    'image_url' TEXT NOT NULL,
-    'timestamp' TIMESTAMP DEFAULT NOW(),
-    FOREIGN KEY ('profile_id') REFERENCES profiles ('profile_id');
+    `story_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `profile_id` INTEGER NOT NULL,
+    `image_url` TEXT NOT NULL,
+    `timestamp` TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (`profile_id`) REFERENCES profiles (`profile_id`);
+);
+
+CREATE TABLE conversations (
+    `conversation_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `user_id_1` INTEGER NOT NULL,
+    `user_id_2` INTEGER NOT NULL,
+    FOREIGN KEY (`user_id_1`) REFERENCES profiles (`profile_id`),
+    FOREIGN KEY (`user_id_2`) REFERENCES profiles (`profile_id`)
 );
 
 CREATE TABLE volunteer_categories (
