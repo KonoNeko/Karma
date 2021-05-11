@@ -270,8 +270,9 @@ h1 {
   font-size: 14px;
   border-radius: 10px;
   outline: none;
-  margin-top: 50px;
-  margin-left: 130px;
+  margin-right: 20px;
+
+ 
 
 }
 #addedu {
@@ -284,6 +285,7 @@ h1 {
   font-size: 14px;
   border-radius: 10px;
   outline: none;
+  margin-right: 20px;
 }
 #addexp {
   background-color: #0367a6;
@@ -297,9 +299,9 @@ h1 {
   outline: none;
 }
 
-#addbtn {
-  margin-top: 50px;
-  margin-left: 30px;
+#buttons {
+  margin-top: 90px;
+  margin-left: 150px;
 }
 
 h3 {
