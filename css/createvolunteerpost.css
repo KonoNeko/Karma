@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-
+    border-radius: 10px;
 }
 .box{
     border-radius: 10px;
@@ -58,7 +58,9 @@
 
     margin-right: 120px;
 }
-
+.opportunity_post{
+    border-radius: 10px;
+}
 #mainmain > #opportunity_post{
     background-color: #EFF0F3; /* temp */
     margin-top: 24px;
