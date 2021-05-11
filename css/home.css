@@ -34,7 +34,7 @@
 #mainmain > #posts {
   background-color: #eff0f3; /* temp */
   margin-top: 24px;
-  height: 400px; /* temp */
+  height: 510x; /* temp */
   width: 100%;
   margin-bottom: 24px;
   border-radius: 12px;
@@ -189,4 +189,15 @@ width: 535px;
 height: 212px;
 border-radius: 10px;
 background-position: center;
+display: flex;
+flex-direction: row;
+}
+
+
+.userName{
+  flex: 50%;
+}
+
+.timePosted {
+  flex: 50%;
 }
