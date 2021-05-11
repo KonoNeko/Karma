@@ -1,6 +1,17 @@
 body {
   font-family: "Open Sans";
 }
+.containerbox{
+  margin-left: 80px;
+
+}
+.heading{
+  margin-left: 60px;
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 36px;
+  color: #0367a6;
+}
 
 input,
 select,

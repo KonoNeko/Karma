@@ -270,34 +270,6 @@ svg {
   outline: none;
 }
 
-.creatopportunity {
-  background-color: #49a1b9;
-  width: 200px;
-  border-radius: 10px;
-  padding: 12px 20px;
-  border: none;
-  color: #eff0f3;
-  font-family: "Montserrat";
-  font-weight: 500;
-  font-size: 14px;
-  border-radius: 10px;
-  outline: none;
-  float: right;
-
-  margin-right: 120px;
-}
-.bugbutton {
-  background-color: #0367a6;
-  padding: 12px 20px;
-  border: none;
-  color: #eff0f3;
-  font-family: "Montserrat";
-  font-weight: 500;
-  font-size: 14px;
-  border-radius: 10px;
-  outline: none;
-}
-
 .primarybutton:hover,
 .secondarybutton:hover {
   box-shadow: 0 5px 15px rgba(3, 103, 166, 0.4);

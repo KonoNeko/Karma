@@ -2,6 +2,7 @@
   padding-top: 12px;
   padding-left: 24px;
   padding-right: 24px;
+  margin-left: 10px;
 }
 
 .settings-tabs {
@@ -10,7 +11,9 @@
   margin-left: 24px;
   margin-right: 24px;
 }
-
+.box{
+  margin-left: 80px;
+}
 .setting {
   font-family: Montserrat;
   cursor: pointer;

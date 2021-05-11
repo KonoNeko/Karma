@@ -24,6 +24,23 @@
     flex-direction: column;
 }
 
+.creatopportunity {
+    background-color: #49a1b9;
+    width: 200px;
+    border-radius: 10px;
+    padding: 12px 20px;
+    border: none;
+    color: #eff0f3;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 10px;
+    outline: none;
+    float: right;
+
+    margin-right: 120px;
+}
+
 #mainmain > #opportunity_post{
     background-color: #EFF0F3; /* temp */
     margin-top: 24px;
