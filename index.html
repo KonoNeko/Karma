@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Page Title</title>
-    <style>
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-      }
-
-      .full-height {
-        height: 100%;
-        background: yellow;
-      }
-    </style>
+    <title>Karma</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/base.css" />
   </head>
+
   <body>
-    <div class="full-height">
-      <div class="">Sign in</div>
-      I am a DIV that will stretch to fit the whole width and height of the
-      browser window!
+    <div class="flex-container">
+      <div id="flex-nav">
+        <div class="nav-column logo-and-text">Karma</div>
+        <div class="nav-column buttons">
+          <a href="./sign-in.html" class="buttons-column" id="signin-button"
+            >Sign in</a
+          >
+          <button class="buttons-column" id="signup-button">Sign up</button>
+        </div>
+      </div>
+
+      <div id="introduction">
+        <p class="title">Welcome to Karma.</p>
+        <p class="heading3">
+          Karma is a social media platform that provides aspiring volunteers
+          with opportunities to contribute to their communities and make a
+          change for the better.
+        </p>
+      </div>
     </div>
-    <div class="">HELLO THIS IS KARMA STUFF</div>
   </body>
 </html>

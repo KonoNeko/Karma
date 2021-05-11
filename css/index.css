@@ -4,7 +4,55 @@ body {
   margin: 0;
 }
 
-#main-container > #title-div {
-  background-color: red; /* temp */
+.flex-container {
   height: 100%;
+  background: yellow;
+  display: flex;
+  flex-direction: column;
+}
+
+#flex-nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-column {
+  width: 50%;
+}
+
+.logo-and-text {
+  margin: 20px;
+}
+
+.buttons {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  align-content: flex-end;
+}
+
+.buttons-column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#signin-button {
+  display: flex;
+  align-items: flex-end;
+  margin-right: 20px;
+}
+
+#introduction {
+  margin: 40px;
+  width: 40%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#introduction > .heading3 {
+  font-weight: 500;
 }
