@@ -67,8 +67,75 @@ function showProfile(){
     }
     }
 
+// WINDOW ONLOAD FUNCTION FOR THE PROFILE PAGE
+    function loadProfile() {
+      loadAboutMe();
+      loadPosts();
+      loadSkills();
+      loadEducation();
+      loadExperience();
+      loadAwards();
+      loadProfilepic();
+      loadFollowers();
+      loadFollowing();
+    }
 
-    
+    // READING INFORMATION FROM THE DATABASE
+function loadAboutMe() {
+  let aboutme = document.getElementById("aboutme");
+  createAboutMe(aboutme);
+}
+
+function loadPosts() {
+  let post = document.getElementById("posts");
+  createPost(post);
+}
+
+function loadSkills() {
+  let skills = document.getElementById("skills");
+  createSkills(skills);
+}
+
+function loadEducation() {
+  let education = document.getElementById("education");
+  createEducation(education);
+}
+
+function loadExperience() {
+  let experience = document.getElementById("experience");
+  createExperience(experience);
+}
+
+function loadAwards() {
+  let awards = document.getElementById("awards");
+  createAwards(awards);
+}
+
+function loadProfilepic() {
+  let profilepic = document.getElementById("profile");
+  createProfilePic(profilepic);
+}
+
+function loadFollowing() {
+  let following = document.getElementById("following");
+  createFollowing(following);
+}
+
+function loadFollowers() {
+  let follower = document.getElementById("followers");
+  createFollowers(follower);
+}
+
+
+function loadWhatsNew() {
+  createWhatsNew();
+}
+
+function loadRecommendedConnections() {
+  createRecommendedConnection();
+}
+
+
     
     
 
