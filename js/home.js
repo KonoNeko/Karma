@@ -40,6 +40,8 @@ function loadWhatsNew() {
 function loadRecommendedConnections() {
   let recommendedUsers = document.getElementById("recommended-connections");
   createRecommendedConnection(recommendedUsers);
+  createRecommendedConnection(recommendedUsers);
+  createRecommendedConnection(recommendedUsers);
 }
 
 // CREATE INDIVIDUAL UI ELEMENTS
@@ -127,6 +129,11 @@ function createPost(post) {
 
 function createRecommendedConnection(recommended) {
 
+  let heading = document.createElement("hr");
+  heading.setAttribute("class", "headers");
+
+  recommended.appendChild(heading);
+
   let recommendedUserDiv = document.createElement("div");
   recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
 
@@ -140,11 +147,11 @@ function createRecommendedConnection(recommended) {
   );
 
   let userName = document.createElement("p");
-  userName.setAttribute("class", "userName");
+  userName.setAttribute("class", "userNames");
   userName.innerHTML = "User name";
 
   let userNameAt = document.createElement("p");
-  userNameAt.setAttribute("class", "user@");
+  userNameAt.setAttribute("class", "userAt");
   userNameAt.innerHTML = "@Username";
 
 
@@ -154,11 +161,24 @@ function createRecommendedConnection(recommended) {
 
   recommended.appendChild(recommendedUserDiv);
 
-  let recommendedConnections = document.createElement("p");
-  recommendedConnections.setAttribute("class", "recommendedConnections");
-  recommendedConnections.innerHTML = "View all recommended connections";
 
-  recommended.appendChild(recommendedConnections);
+  let followUser = document.createElement("div");
+  followUser.innerHTML = "FOLLOW";
+  followUser.setAttribute("class", "followUser");
+
+  recommended.appendChild(followUser);
+
+  let heading2 = document.createElement("hr");
+  heading2.setAttribute("class", "headers");
+
+  recommended.appendChild(heading2);
+
+
+  // let recommendedConnections = document.createElement("p");
+  // recommendedConnections.setAttribute("class", "recommendedConnections");
+  // recommendedConnections.innerHTML = "View all recommended connections";
+
+  // recommended.appendChild(recommendedConnections);
 }
 
 function createWhatsNew() {}
