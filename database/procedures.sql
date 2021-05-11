@@ -382,6 +382,107 @@ DELIMITER ;
 
 
 /*
+Creates a request to follow a user.
+
+CALL request_to_follow_user("The user following", "The user being followed");
+CALL accept_a_follow_request("The user following", "The user being followed");
+CALL accept_a_follow_request("Marlon", "karma");
+*/
+DROP PROCEDURE IF EXISTS request_to_follow_user;
+DELIMITER //
+CREATE PROCEDURE request_to_follow_user(IN user_following CHAR(50), 
+IN user_being_followed CHAR(50))
+BEGIN
+    INSERT INTO profile_follows (profile_id, follower_id)
+    VALUES (get_user_id(user_being_followed), get_user_id(user_following));
+END//
+DELIMITER ;
+
+/*
+Updates a request to an accepted state.
+*/
+DROP PROCEDURE IF EXISTS accept_a_follow_request;
+DELIMITER //
+CREATE PROCEDURE accept_a_follow_request(IN user_following CHAR(50), 
+IN user_being_followed CHAR(50))
+BEGIN
+    UPDATE profile_follows
+    SET request_accepted = 1
+    WHERE profile_id = get_user_id(user_being_followed)
+    AND follower_id = get_user_id(user_following);
+END//
+DELIMITER ;
+
+
+/*
+Unfollows a user and deletes a follow entry.
+*/
+DROP PROCEDURE IF EXISTS unfollow_user;
+DELIMITER //
+CREATE PROCEDURE unfollow_user(IN user_following CHAR(50), 
+IN user_being_followed CHAR(50))
+BEGIN
+    DELETE FROM profile_follows
+    WHERE profile_id = get_user_id(user_being_followed)
+    AND follower_id = get_user_id(user_following);
+END//
+DELIMITER ;
+
+
+/*
+Increments the number of posts that a profile has.
+*/
+DROP PROCEDURE IF EXISTS increment_followers;
+DELIMITER //
+CREATE PROCEDURE increment_followers (IN current_username INTEGER)
+BEGIN
+    UPDATE profiles
+    SET followers = followers + 1
+    WHERE profile_id = current_username;
+END//
+DELIMITER ;
+
+
+/*
+Increments the number of posts that a profile has.
+*/
+DROP PROCEDURE IF EXISTS decrement_followers;
+DELIMITER //
+CREATE PROCEDURE decrement_followers (IN current_username INTEGER)
+BEGIN
+    UPDATE profiles
+    SET followers = followers - 1
+    WHERE profile_id = current_username;
+END//
+DELIMITER ;
+
+
+/*
+Automatically updates the value of followers a user has.
+*/
+DROP TRIGGER IF EXISTS update_follower_number;
+DELIMITER //
+CREATE trigger update_follower_number
+    AFTER UPDATE ON profile_follows
+    FOR EACH ROW
+    BEGIN
+        IF OLD.request_accepted <> new.request_accepted THEN
+            CALL increment_followers(NEW.profile_id);
+        END IF;
+    END//
+DELIMITER ;
+
+
+/*
+Automatically updates the value of followers a user has.
+*/
+CREATE trigger update_follower_number_unfollow
+    AFTER DELETE ON profile_follows
+    FOR EACH ROW
+    CALL decrement_followers(OLD.profile_id);
+
+
+/*
 View opportunites that a user applied for.
 */
 DROP PROCEDURE IF EXISTS view_user_applications;
@@ -513,6 +614,8 @@ CREATE trigger disconnect_award
     AFTER DELETE ON awards_certifications
     FOR EACH ROW
     DELETE FROM profile_awards WHERE award_id = OLD.award_id;
+
+
 
 
 /*

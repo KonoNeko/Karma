@@ -16,7 +16,7 @@ CREATE TABLE profile_follows (
     `follow_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `profile_id` INTEGER NOT NULL,
     `follower_id` INTEGER NOT NULL,
-    `is_a_request` TINYINT(1) DEFAULT 1;
+    `request_accepted` TINYINT(1) DEFAULT 0,
     FOREIGN KEY (`profile_id`) REFERENCES profiles (`profile_id`),
     FOREIGN KEY (`follower_id`) REFERENCES profiles (`profile_id`)
 );
