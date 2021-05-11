@@ -1,59 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+
+#above-search {
+    display: none;
+  }
+  
+  .above {
+    margin-left: 5rem;
+  }
+  
+  .flex-main {
+    margin-left: 5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  
+  .flex-main > .column {
+    width: 50%;
+    margin-left: 24px;
+    margin-right: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #mainmain > #stories {
+    background-color: red; /* temp */
+    margin-top: 24px;
+    height: 400px; /* temp */
+    width: 100%;
+  }
+  
+  #mainmain > #posts {
+    background-color: purple; /* temp */
+    margin-top: 24px;
+    height: 400px; /* temp */
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  
+  #sidemain > #whats-new {
+    background-color: #eff0f3;
+    margin-top: 24px;
+    padding-left: 24px;
+    height: 400px; /* temp */
+    padding: 24px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+  }
+  
+  #sidemain > #recommended-connections {
+    background-color: #eff0f3;
+    margin-top: 24px;
+    padding: 24px;
+    width: 100%;
+    height: 400px; /* temp */
+    border-radius: 12px;
+    box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+    margin-bottom: 24px;
+  }
+  
+  .heading-title {
+    padding-top: 24px;
+    padding-left: 24px;
+  }
+
+
+
+
 #editbtn{
-    margin-left: 440px;
-    width: 130px;
-    height: 30px;
-    background-color: #49A1B9;
-    color: white;
-    border-radius: 8px;
+    margin-left: 325px;
 
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
-    align-items: center;
-
-    color: #EFF0F3;
+    background-color: #0367a6;
+  padding: 12px 20px;
+  border: none;
+  color: #eff0f3;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 10px;
+  outline: none;
 
     
 
 }
 #msgbtn{
     
-    width: 130px;
-    height: 30px;
-    background-color: #49A1B9;
-    color: white;
-    border-radius: 8px;
+    
     margin-top: 70px;
 
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
-    align-items: center;
-
-    color: #EFF0F3;
+    background-color: #0367a6;
+    padding: 12px 20px;
+    border: none;
+    color: #eff0f3;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 10px;
+    outline: none;
 
 
 
 }
 
 #following{
-    margin-left: 450px;
+    margin-left: 300px;
     text-align:justify;
     margin-top: -50px;
     font-size: 14pt;
 
 }
 #posts{
-    margin-left: 530px;
+    margin-left: 400px;
     margin-top: -25px;
     font-size: 14pt;
 }
 #followers{
-    margin-left: 645px;
+    margin-left: 545px;
     margin-top: -25px;
     font-size: 14pt;
   
@@ -68,7 +132,7 @@ h2{
 }
 #name {
     margin-top: 100px;
-    margin-left: 30px;
+    margin-left: 330px;
     font-size: 36px;
     font-family: "Montserrat", sans-serif;
     font-weight: 700; /* bold */
@@ -78,6 +142,7 @@ h2{
 
 #profile{
     margin-left: 20px;
+    margin-top: -150px;
 }
 
 #move {
@@ -146,6 +211,7 @@ h2{
         margin-left: 245px;
         margin-top: -25px;
         font-size: 14pt;
+    }
     
 
 }
