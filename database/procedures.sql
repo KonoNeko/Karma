@@ -9,9 +9,9 @@ DONEe) Accept a follow request - accept_a_follow_request
 DONEf) Unfollow a user - unfollow_user
 
 -Messaging
-    a) View all messages for a conversation
+DONEa) View all messages for a conversation
 DONEb) Send a message to a user - 
-    c) View all conversations of a user
+DONEc) View all conversations of a user
 
 -Bulletin Board
 DONEa) See all opportunities (by category) - bulletin_board
@@ -40,7 +40,6 @@ DONEg) Comment on a post - comment_on_post
     c) Trigger for follow request notification
     d) Trigger for application acceptance
 */
-
 
 
 /*
@@ -220,6 +219,7 @@ BEGIN
 END//
 DELIMITER ;
 
+
 /*
 Makes changes to an experience entry.
 
@@ -263,6 +263,7 @@ BEGIN
     WHERE award_id = awrd_id;
 END//
 DELIMITER ;
+
 
 /*
 Changes the current profile picture of a user.
@@ -323,7 +324,9 @@ DROP PROCEDURE IF EXISTS view_a_conversation;
 DELIMITER //
 CREATE PROCEDURE view_a_conversation(IN current_conversation INTEGER, IN current_username CHAR(50))
 BEGIN
-    SELECT *, get_other_user(current_conversation, current_username) as other_user FROM messages
+    SELECT message_id, get_user_name(sender_id) as sender, `message`, `timestamp`,
+    get_other_user(current_conversation, current_username) as other_user
+    FROM messages
     WHERE conversation_id = current_conversation
     ORDER BY message_id;
 END//
@@ -672,6 +675,22 @@ RETURNS CHAR(50) READS SQL DATA
 BEGIN
     RETURN (
       SELECT full_name
+      FROM profiles
+      WHERE profile_id = current_user_id
+    );
+END //
+DELIMITER ;
+
+/*
+Gets the username using an id.
+*/
+DROP FUNCTION IF EXISTS get_user_name;
+DELIMITER //
+CREATE FUNCTION get_user_name(current_user_id INTEGER) 
+RETURNS CHAR(50) READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT username
       FROM profiles
       WHERE profile_id = current_user_id
     );
