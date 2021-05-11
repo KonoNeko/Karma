@@ -143,7 +143,6 @@
   }
 }
 
-
 .profilepic {
   height: 71px;
   width: 71px;
@@ -154,21 +153,20 @@
 }
 
 .userName {
-/* Body text */
-/* width: 59px;
+  /* Body text */
+  /* width: 59px;
 height: 19px; */
-font-family: "Open Sans";
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 19px;
-/* identical to box height */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  /* identical to box height */
 
-text-align: center;
+  text-align: center;
 
-color: #000000;
+  color: #000000;
 }
-
 
 .stories {
   display: flex;
