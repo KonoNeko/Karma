@@ -4,9 +4,9 @@ TODO:
 DONEa) Gather profile info (with education, skills, experience, etc.)
 DONEb) Create a new profile/signup
 DONEc) Edit a profile/add information
-    d) Request to follow a user
-    e) Accept a follow request
-    f) Unfollow a user
+DONEd) Request to follow a user
+DONEe) Accept a follow request
+DONEf) Unfollow a user
 
 -Messaging
     a) View all messages for a conversation
@@ -617,16 +617,102 @@ CREATE trigger disconnect_award
 
 
 
+/*
+Comment on a social post.
+*/
+DROP PROCEDURE IF EXISTS comment_on_post;
+DELIMITER //
+CREATE PROCEDURE comment_on_post(IN current_post INTEGER, IN commenter_id CHAR(50),
+IN new_msg TEXT)
+BEGIN
+    INSERT INTO post_comments (post_id, user_id, comment)
+    VALUES (current_post, get_user_id(commenter_id), new_msg);
+END//
+DELIMITER ;
+
+
+/*
+Replies to a comment on a social post.
+*/
+DROP PROCEDURE IF EXISTS reply_to_comment;
+DELIMITER //
+CREATE PROCEDURE reply_to_comment(IN current_post INTEGER, IN commenter_id CHAR(50),
+IN new_msg TEXT, IN comment_id INTEGER)
+BEGIN
+    INSERT INTO post_comments (post_id, user_id, comment, is_a_reply, id_of_comment_receiving_reply)
+    VALUES (current_post, get_user_id(commenter_id), new_msg, 1, comment_id);
+END//
+DELIMITER ;
+
+
+/*
+Removes a comment from a social post.
+*/
+DROP PROCEDURE IF EXISTS delete_comment;
+DELIMITER //
+CREATE PROCEDURE delete_comment(IN del_comment_id INTEGER)
+BEGIN
+    DELETE FROM post_comments
+    WHERE comment_id = del_comment_id;
+END//
+DELIMITER ;
+
+
+/*
+Increments the number of likes that a post has.
+*/
+DROP PROCEDURE IF EXISTS increment_post_comments;
+DELIMITER //
+CREATE PROCEDURE increment_post_comments (IN current_post_id INT)
+BEGIN
+    UPDATE social_posts
+    SET comments = comments + 1
+    WHERE post_id = current_post_id;
+END//
+DELIMITER ;
+
+
+/*
+Automatically updates the number of comments a post has.
+*/
+CREATE trigger update_comment_number
+    AFTER INSERT ON post_comments
+    FOR EACH ROW
+    CALL increment_post_comments(NEW.post_id);
+
+
+/*
+Decrements the number of comments that a post has.
+*/
+DROP PROCEDURE IF EXISTS decrement_post_comments;
+DELIMITER //
+CREATE PROCEDURE decrement_post_comments (IN current_post_id INT)
+BEGIN
+    UPDATE social_posts
+    SET comments = comments - 1
+    WHERE post_id = current_post_id;
+END//
+DELIMITER ;
+
+
+/*
+Automatically updates the number of comments a post has.
+*/
+CREATE trigger update_comment_number_delete
+    AFTER DELETE ON post_comments
+    FOR EACH ROW
+    CALL decrement_post_comments(OLD.post_id);
+
 
 /*
 Likes a social post.
 */
 DROP PROCEDURE IF EXISTS like_post;
 DELIMITER //
-CREATE PROCEDURE like_post(IN current_post INTEGER, IN liker_id INTEGER)
+CREATE PROCEDURE like_post(IN current_post INTEGER, IN liker_id CHAR(50))
 BEGIN
     INSERT INTO post_likes (post_id, user_id)
-    VALUES (current_post, liker_id);
+    VALUES (current_post, get_user_id(liker_id));
 END//
 DELIMITER ;
 

@@ -99,6 +99,7 @@ CREATE TABLE social_posts (
     `location` CHAR(50),
     `post_date` TIMESTAMP DEFAULT NOW(),
     `likes` INTEGER NOT NULL DEFAULT 0,
+    `comments` INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (`user_id`) REFERENCES profiles (`profile_id`)
 );
 
@@ -107,7 +108,9 @@ CREATE TABLE post_comments (
     `post_id` INTEGER NOT NULL,
     `user_id` INTEGER NOT NULL, 
     `comment` CHAR(255) NOT NULL,
-    `post_date` DATE DEFAULT NOW(), 
+    `is_a_reply` TINYINT(1) DEFAULT 0,
+    `id_of_comment_receiving_reply` INTEGER, 
+    `post_date` TIMESTAMP DEFAULT NOW(), 
     FOREIGN KEY (`post_id`) REFERENCES social_posts (`post_id`),
     FOREIGN KEY (`user_id`) REFERENCES profiles (`profile_id`)
 );
