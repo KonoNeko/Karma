@@ -163,11 +163,6 @@ h2 {
   margin-right: 20px;
 }
 
-
-
-
-
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -179,8 +174,8 @@ h2 {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -192,22 +187,34 @@ h2 {
   border: 1px solid #888;
   width: 800px;
   height: 400px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
-  animation-duration: 0.4s
+  animation-duration: 0.4s;
 }
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
-  from {top:-300px; opacity:0} 
-  to {top:0; opacity:1}
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 @keyframes animatetop {
-  from {top:-300px; opacity:0}
-  to {top:0; opacity:1}
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 /* The Close Button */
@@ -230,7 +237,9 @@ h2 {
   color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {
+  padding: 2px 16px;
+}
 
 .modal-footer {
   padding: 2px 16px;
@@ -272,8 +281,7 @@ h1 {
   outline: none;
   margin-right: 20px;
 
- 
-
+  cursor: pointer;
 }
 #addedu {
   background-color: #0367a6;
@@ -286,7 +294,9 @@ h1 {
   border-radius: 10px;
   outline: none;
   margin-right: 20px;
+  cursor: pointer;
 }
+
 #addexp {
   background-color: #0367a6;
   padding: 12px 20px;
@@ -297,11 +307,8 @@ h1 {
   font-size: 14px;
   border-radius: 10px;
   outline: none;
-}
 
-#buttons {
-  margin-top: 90px;
-  margin-left: 150px;
+  cursor: pointer;
 }
 
 h3 {
@@ -310,10 +317,6 @@ h3 {
   font-size: 18px;
   color: #0367a6;
 }
-
-
-
-
 
 @media screen and (max-width: 550px) {
   #move {

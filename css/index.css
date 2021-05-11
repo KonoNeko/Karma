@@ -4,7 +4,102 @@ body {
   margin: 0;
 }
 
-#main-container > #title-div {
-  background-color: red; /* temp */
+.flex-container {
   height: 100%;
+  background: yellow;
+  display: flex;
+  flex-direction: column;
+}
+
+#flex-nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-column {
+  width: 50%;
+}
+
+.logo-and-text {
+  margin: 20px;
+}
+
+.buttons {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  align-content: flex-end;
+}
+
+.buttons-column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#signin-button {
+  display: flex;
+  align-items: flex-end;
+  margin-right: 20px;
+}
+
+#introduction {
+  margin: 40px;
+  width: 40%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#introduction > .heading3 {
+  font-weight: 500;
+}
+
+#flex-about {
+  margin: 40px;
+}
+
+.featureimg {
+  margin: 20px 20px 20px 0px;
+  border-radius: 10px;
+  width: 15%;
+  height: auto;
+}
+
+.flex-column {
+  display: flex;
+  align-items: center;
+}
+
+.flex-column-information {
+  width: 30%;
+}
+
+#flex-features-div {
+  text-align: center;
+  margin: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+#flex-features {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-features-column {
+  width: 10%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.flexfeatureimg {
+  margin: 20px 20px 20px 0px;
+  border-radius: 10px;
+  width: 40%;
+  height: auto;
 }

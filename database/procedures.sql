@@ -10,7 +10,7 @@ DONEf) Unfollow a user - unfollow_user
 
 -Messaging
     a) View all messages for a conversation
-    b) Send a message to a user - 
+DONEb) Send a message to a user - 
     c) View all conversations of a user
 
 -Bulletin Board
@@ -29,6 +29,10 @@ DONEd) View number of likes
 DONEe) View timestamp posted
 DONEf) Like a post - like_post
 DONEg) Comment on a post - comment_on_post
+    h) View all stories
+    i) Post a story
+    j) View all stories for 1 user
+    h) View a single story
 
 -Notifications
     a) View all notifications
@@ -294,6 +298,37 @@ END//
 DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS send_message;
+DELIMITER //
+CREATE PROCEDURE send_message(IN sender_id CHAR(50), IN receiver_id CHAR(50), 
+IN new_msg TEXT)
+BEGIN
+    IF (SELECT (SELECT get_conversation_id(sender_id, receiver_id) IS NULL)) THEN
+        INSERT INTO conversations (`user_id_1`, `user_id_2`)
+        VALUES (get_user_id(sender_id), get_user_id(receiver_id));
+    END IF;
+    INSERT INTO messages(`sender_id`, `receiver_id`, `conversation_id`, `message`)
+    VALUES (get_user_id(sender_id), get_user_id(receiver_id), 
+    get_conversation_id(sender_id, receiver_id), new_msg);
+END//
+DELIMITER ;
+
+
+DROP FUNCTION IF EXISTS get_conversation_id;
+DELIMITER //
+CREATE FUNCTION get_conversation_id(user_1 CHAR(50), user_2 CHAR(50)) 
+RETURNS INTEGER READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT conversation_id
+      FROM conversations
+      WHERE (user_id_1 = get_user_id(user_1) AND user_id_2 = get_user_id(user_2))
+      OR (user_id_1 = get_user_id(user_2) AND user_id_2 = get_user_id(user_1))
+    );
+END //
+DELIMITER ;
+
+
 /*
 Gathers all the posts to fill a social feed
 */
@@ -503,7 +538,7 @@ Gets the user id using a username.
 DROP FUNCTION IF EXISTS get_user_id;
 DELIMITER //
 CREATE FUNCTION get_user_id(current_username CHAR(50)) 
-RETURNS CHAR(50) READS SQL DATA
+RETURNS INTEGER READS SQL DATA
 BEGIN
     RETURN (
       SELECT profile_id
