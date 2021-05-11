@@ -107,6 +107,7 @@
     background-color: #eff0f3;
     width: 700px;
     height: 300px;
+
 }
 
 #following{
@@ -114,17 +115,20 @@
     text-align:justify;
     margin-top: -50px;
     font-size: 14pt;
+    font-family: "Open Sans";
 
 }
 #posts{
     margin-left: 400px;
     margin-top: -25px;
     font-size: 14pt;
+    font-family: "Open Sans";
 }
 #followers{
     margin-left: 545px;
     margin-top: -25px;
     font-size: 14pt;
+    font-family: "Open Sans";
   
 
 }
