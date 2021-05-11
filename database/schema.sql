@@ -128,10 +128,12 @@ CREATE TABLE messages (
     `message_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `sender_id` INTEGER NOT NULL,
     `receiver_id` INTEGER NOT NULL,
+    `conversation_id` INTEGER NOT NULL,
     `message` CHAR(255) NOT NULL,
     `timestamp` TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (`sender_id`) REFERENCES profiles (`profile_id`),
-    FOREIGN KEY (`receiver_id`) REFERENCES profiles (`profile_id`)
+    FOREIGN KEY (`receiver_id`) REFERENCES profiles (`profile_id`),
+    FOREIGN KEY (`conversation_id`) REFERENCES conversations (`conversation_id`)
 );
 
 CREATE TABLE opportunites (
