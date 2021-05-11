@@ -199,6 +199,10 @@ height: 19px; */
   display: none;
 }
 
+#posts::-webkit-scrollbar {
+  display: none;
+}
+
 .postpicture {
   width: 100%;
   height: 160%;

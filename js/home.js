@@ -38,7 +38,8 @@ function loadWhatsNew() {
 }
 
 function loadRecommendedConnections() {
-  createRecommendedConnection();
+  let recommendedUsers = document.getElementById("recommended-connections");
+  createRecommendedConnection(recommendedUsers);
 }
 
 // CREATE INDIVIDUAL UI ELEMENTS
@@ -121,40 +122,44 @@ function createPost(post) {
   post.appendChild(likes);
   post.appendChild(caption);
   post.appendChild(comments);
+}
 
-  // let postImgDiv = document.createElement("div")
-  // postImgDiv.setAttribute("class", "profilepic");
-  // postImgDiv.setAttribute("style", "padding-bottom: 10px");
 
-  // postImgDiv.setAttribute("style", "background-image: url('./images/placeholder.jpg')");
+function createRecommendedConnection(recommended) {
 
-  // let userName = document.createElement("p");
-  // userName.setAttribute("class", "userName")
-  // userName.innerHTML = "User name";
+  let recommendedUserDiv = document.createElement("div");
+  recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
 
-  // let timePosted = document.createElement("p");
-  // timePosted.setAttribute("class", "timePosted");
-  // timePosted.innerHTML = "30 minutes ago";
+  let storyImgDiv = document.createElement("div");
+  storyImgDiv.setAttribute("class", "profilepic");
+  storyImgDiv.setAttribute("style", "padding-bottom: 10px");
 
-  // let likes = document.createElement("p");
-  // likes.setAttribute("class", "likes");
-  // likes.innerHTML = "User name and 100 others like this";
+  storyImgDiv.setAttribute(
+    "style",
+    "background-image: url('./images/placeholder.jpg')"
+  );
 
-  // let userNameAndCaption = document.createElement("p");
-  // userNameAndCaption.setAttribute("class", "userNameAndCaption");
-  // userNameAndCaption.innerHTML = "User name - asdakdjkaljdlkajdklajdlkajdakl";
+  let userName = document.createElement("p");
+  userName.setAttribute("class", "userName");
+  userName.innerHTML = "User name";
 
-  // let postsDiv = document.createElement("div");
-  // postsDiv.setAttribute("class", "posts");
-  // postsDiv.appendChild(postImgDiv);
-  // postsDiv.appendChild(userName);
-  // postsDiv.appendChild(timePosted);
-  // postsDiv.appendChild(likes);
-  // postsDiv.appendChild(userNameAndCaption);
+  let userNameAt = document.createElement("p");
+  userNameAt.setAttribute("class", "user@");
+  userNameAt.innerHTML = "@Username";
 
-  // post.appendChild(postsDiv);
+
+  recommendedUserDiv.appendChild(storyImgDiv);
+  recommendedUserDiv.appendChild(userName);
+  recommendedUserDiv.appendChild(userNameAt);
+
+  recommended.appendChild(recommendedUserDiv);
+
+  let recommendedConnections = document.createElement("p");
+  recommendedConnections.setAttribute("class", "recommendedConnections");
+  recommendedConnections.innerHTML = "View all recommended connections";
+
+  recommended.appendChild(recommendedConnections);
 }
 
 function createWhatsNew() {}
 
-function createRecommendedConnection() {}
