@@ -16,7 +16,7 @@ CREATE TABLE profile_follows (
     `follow_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `profile_id` INTEGER NOT NULL,
     `follower_id` INTEGER NOT NULL,
-    `is_a_request` TINYINT(1) DEFAULT 1;
+    `request_accepted` TINYINT(1) DEFAULT 0,
     FOREIGN KEY (`profile_id`) REFERENCES profiles (`profile_id`),
     FOREIGN KEY (`follower_id`) REFERENCES profiles (`profile_id`)
 );
@@ -99,6 +99,7 @@ CREATE TABLE social_posts (
     `location` CHAR(50),
     `post_date` TIMESTAMP DEFAULT NOW(),
     `likes` INTEGER NOT NULL DEFAULT 0,
+    `comments` INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (`user_id`) REFERENCES profiles (`profile_id`)
 );
 
@@ -107,7 +108,9 @@ CREATE TABLE post_comments (
     `post_id` INTEGER NOT NULL,
     `user_id` INTEGER NOT NULL, 
     `comment` CHAR(255) NOT NULL,
-    `post_date` DATE DEFAULT NOW(), 
+    `is_a_reply` TINYINT(1) DEFAULT 0,
+    `id_of_comment_receiving_reply` INTEGER, 
+    `post_date` TIMESTAMP DEFAULT NOW(), 
     FOREIGN KEY (`post_id`) REFERENCES social_posts (`post_id`),
     FOREIGN KEY (`user_id`) REFERENCES profiles (`profile_id`)
 );
@@ -148,9 +151,13 @@ CREATE TABLE opportunites (
 
 CREATE TABLE opportunites_applicants (
     `application_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `applicant_id` INTEGER NOT NULL,
+    `applicant_username` INTEGER NOT NULL,
+    `email` CHAR(100) NOT NULL,
+    `phone_num` CHAR(10) NOT NULL,
+    `city` CHAR(100) NOT NULL,
     `opportunity_id` INTEGER NOT NULL,
     `message` TEXT NOT NULL,
+    `accepted` TINYINT(1) DEFAULT 0,
     FOREIGN KEY (`opportunity_id`) REFERENCES opportunites (`opportunity_id`),
     FOREIGN KEY (`applicant_id`) REFERENCES profiles (`profile_id`)
 );

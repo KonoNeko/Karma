@@ -351,6 +351,7 @@ DONEj) Edit bio (PUT - change_bio) TESTED
     d) View applicants (GET - _______)
     e) View opportunites applied for (GET - _____)
     f) View all categories (GET - SELECT...)
+    g) View recommended opportunitues (GET - ____)
 
 -Social Posts
 DONEa) View social feed (GET - posts_feed) TESTED

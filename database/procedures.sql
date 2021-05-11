@@ -1,33 +1,34 @@
 /*
 TODO:
 -Profile
-DONEa) Gather profile info (with education, skills, experience, etc.)
-DONEb) Create a new profile/signup
-DONEc) Edit a profile/add information
-    d) Request to follow a user
-    e) Accept a follow request
-    f) Unfollow a user
+DONEa) Gather profile info (with education, skills, experience, etc.) - get_profile_info
+DONEb) Create a new profile/signup - create_new_profile
+DONEc) Edit a profile/add information - new___entry or edit____entry
+DONEd) Request to follow a user - request_to_follow_user
+DONEe) Accept a follow request - accept_a_follow_request
+DONEf) Unfollow a user - unfollow_user
 
 -Messaging
     a) View all messages for a conversation
-    b) Send a message to a user
+    b) Send a message to a user - 
     c) View all conversations of a user
 
 -Bulletin Board
-    a) See all opportunities (by category)
-    b) Apply for an opportunity
-    c) Post a new opportunity (+ selecting categories)
-    d) View applicants for the posted opportunites
-    e) Accept/hire applicants for an opportunity
+DONEa) See all opportunities (by category) - bulletin_board
+DONEb) Apply for an opportunity - apply_for_opportunity
+DONEc) Post a new opportunity - new_opportunity
+DONEd) View applicants for the posted opportunites - view_applicants
+DONEe) Accept/hire applicants for an opportunity - accept_application
+DONEf) View opportunities a user applied for - view_user_applications
 
 -Social Posts
-DONEa) View all posts (social feed)
-    b) View comments
-DONEc) Get caption, location and image??
-DONEd) View number of likes
+DONEa) View all posts (social feed) - posts_feed
+DONEb) View comments - view_comments
+DONEc) Get caption, location and image
+DONEd) View number of likes 
 DONEe) View timestamp posted
-DONEf) Like a post
-    g) Comment on a post
+DONEf) Like a post - like_post
+DONEg) Comment on a post - comment_on_post
 
 -Notifications
     a) View all notifications
@@ -311,8 +312,189 @@ CREATE VIEW bulletin_board as
 SELECT *
 FROM opportunites
 ORDER BY post_date
-GROUP BY 
 
+
+/*
+Applies for an opportunity.
+
+Test call:
+CALL apply_for_opportunity("marlon", 5, "Hire me 2", "marlonrfajardo@gmail.com", "7782313497", "Langley, British Columbia");
+*/
+DROP PROCEDURE IF EXISTS apply_for_opportunity;
+DELIMITER //
+CREATE PROCEDURE apply_for_opportunity(IN current_user_id CHAR(50), IN posting_id INTEGER, IN new_message TEXT,
+IN new_email CHAR(100), IN new_phone CHAR(10), IN new_city CHAR(100))
+BEGIN
+    INSERT INTO opportunites_applicants(`applicant_username`, `opportunity_id`, `message`,
+    `email`, `phone_num`, `city`)
+    VALUES (current_user_id, posting_id, new_message, new_email, new_phone, new_city);
+END//
+DELIMITER ;
+
+
+/*
+Creates a new opportunity.
+
+Test call:
+CALL new_opportunity("Karma", "Environment", "2021-05-30", "Clean Up Crew Member", 
+"Clean up the Fraser river. All clothing and equipment provided", "No requirements",
+"https://coconuts.co/wp-content/uploads/2018/03/dirty-river.jpg");
+*/
+DROP PROCEDURE IF EXISTS new_opportunity;
+DELIMITER //
+CREATE PROCEDURE new_opportunity(IN current_user_id CHAR(50), IN new_category CHAR(50), IN new_date DATE, 
+IN new_title CHAR(50), IN new_desc TEXT, IN new_req TEXT, IN new_img TEXT)
+BEGIN
+    INSERT INTO opportunites(`employer`, `category`, `event_date`, 
+    `poster_id`, `title`, `description`, `requirements`, `image_url`)
+    VALUES (get_full_name(current_user_id), new_category, new_date, 
+    get_user_id(current_user_id), new_title, new_desc, new_req, new_img);
+END//
+DELIMITER ;
+
+
+/*
+Gets all the applicants for an opportunity.
+*/
+DROP PROCEDURE IF EXISTS view_applicants;
+DELIMITER //
+CREATE PROCEDURE view_applicants(IN current_opportunity_id INTEGER)
+BEGIN
+    SELECT * FROM opportunites_applicants
+    WHERE opportunity_id = current_opportunity_id;
+END//
+DELIMITER ;
+
+/*
+Marks an application as 'accepted'.
+*/
+DROP PROCEDURE IF EXISTS accept_application;
+DELIMITER //
+CREATE PROCEDURE accept_application(IN current_opportunity_id INTEGER, 
+IN applicant_name CHAR(50))
+BEGIN
+    UPDATE opportunites_applicants
+    SET accepted = 1
+    WHERE opportunity_id = current_opportunity_id
+    AND applicant_username = applicant_name;
+END//
+DELIMITER ;
+
+
+/*
+View opportunites that a user applied for.
+*/
+DROP PROCEDURE IF EXISTS view_user_applications;
+DELIMITER //
+CREATE PROCEDURE view_user_applications(IN current_username CHAR(50))
+BEGIN
+    SELECT * 
+    FROM opportunites JOIN opportunites_applicants 
+    ON opportunites.opportunity_id = opportunites_applicants.opportunity_id
+    WHERE opportunites_applicants.applicant_username = current_username;
+END//
+DELIMITER ;
+
+
+/*
+Creates a request to follow a user.
+
+CALL request_to_follow_user("The user following", "The user being followed");
+CALL accept_a_follow_request("The user following", "The user being followed");
+CALL accept_a_follow_request("Marlon", "karma");
+*/
+DROP PROCEDURE IF EXISTS request_to_follow_user;
+DELIMITER //
+CREATE PROCEDURE request_to_follow_user(IN user_following CHAR(50), 
+IN user_being_followed CHAR(50))
+BEGIN
+    INSERT INTO profile_follows (profile_id, follower_id)
+    VALUES (get_user_id(user_being_followed), get_user_id(user_following));
+END//
+DELIMITER ;
+
+/*
+Updates a request to an accepted state.
+*/
+DROP PROCEDURE IF EXISTS accept_a_follow_request;
+DELIMITER //
+CREATE PROCEDURE accept_a_follow_request(IN user_following CHAR(50), 
+IN user_being_followed CHAR(50))
+BEGIN
+    UPDATE profile_follows
+    SET request_accepted = 1
+    WHERE profile_id = get_user_id(user_being_followed)
+    AND follower_id = get_user_id(user_following);
+END//
+DELIMITER ;
+
+
+/*
+Unfollows a user and deletes a follow entry.
+*/
+DROP PROCEDURE IF EXISTS unfollow_user;
+DELIMITER //
+CREATE PROCEDURE unfollow_user(IN user_following CHAR(50), 
+IN user_being_followed CHAR(50))
+BEGIN
+    DELETE FROM profile_follows
+    WHERE profile_id = get_user_id(user_being_followed)
+    AND follower_id = get_user_id(user_following);
+END//
+DELIMITER ;
+
+
+/*
+Increments the number of posts that a profile has.
+*/
+DROP PROCEDURE IF EXISTS increment_followers;
+DELIMITER //
+CREATE PROCEDURE increment_followers (IN current_username INTEGER)
+BEGIN
+    UPDATE profiles
+    SET followers = followers + 1
+    WHERE profile_id = current_username;
+END//
+DELIMITER ;
+
+
+/*
+Increments the number of posts that a profile has.
+*/
+DROP PROCEDURE IF EXISTS decrement_followers;
+DELIMITER //
+CREATE PROCEDURE decrement_followers (IN current_username INTEGER)
+BEGIN
+    UPDATE profiles
+    SET followers = followers - 1
+    WHERE profile_id = current_username;
+END//
+DELIMITER ;
+
+
+/*
+Automatically updates the value of followers a user has.
+*/
+DROP TRIGGER IF EXISTS update_follower_number;
+DELIMITER //
+CREATE trigger update_follower_number
+    AFTER UPDATE ON profile_follows
+    FOR EACH ROW
+    BEGIN
+        IF OLD.request_accepted <> new.request_accepted THEN
+            CALL increment_followers(NEW.profile_id);
+        END IF;
+    END//
+DELIMITER ;
+
+
+/*
+Automatically updates the value of followers a user has.
+*/
+CREATE trigger update_follower_number_unfollow
+    AFTER DELETE ON profile_follows
+    FOR EACH ROW
+    CALL decrement_followers(OLD.profile_id);
 
 
 /*
@@ -320,11 +502,28 @@ Gets the user id using a username.
 */
 DROP FUNCTION IF EXISTS get_user_id;
 DELIMITER //
-CREATE FUNCTION get_user_id(current_username VARCHAR(30)) 
-RETURNS INT READS SQL DATA
+CREATE FUNCTION get_user_id(current_username CHAR(50)) 
+RETURNS CHAR(50) READS SQL DATA
 BEGIN
     RETURN (
       SELECT profile_id
+      FROM profiles
+      WHERE username = current_username
+    );
+END //
+DELIMITER ;
+
+
+/*
+Gets the fullname using a username.
+*/
+DROP FUNCTION IF EXISTS get_full_name;
+DELIMITER //
+CREATE FUNCTION get_full_name(current_username CHAR(50)) 
+RETURNS CHAR(50) READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT full_name
       FROM profiles
       WHERE username = current_username
     );
@@ -419,14 +618,115 @@ CREATE trigger disconnect_award
 
 
 /*
+Gets all the comments for a social post.
+*/
+DROP PROCEDURE IF EXISTS view_comments;
+DELIMITER //
+CREATE PROCEDURE view_comments(IN current_post INTEGER)
+BEGIN
+    SELECT * FROM post_comments
+    WHERE post_id = current_post
+    ORDER BY post_date;
+END//
+DELIMITER ;
+
+
+/*
+Comment on a social post.
+*/
+DROP PROCEDURE IF EXISTS comment_on_post;
+DELIMITER //
+CREATE PROCEDURE comment_on_post(IN current_post INTEGER, IN commenter_id CHAR(50),
+IN new_msg TEXT)
+BEGIN
+    INSERT INTO post_comments (post_id, user_id, comment)
+    VALUES (current_post, get_user_id(commenter_id), new_msg);
+END//
+DELIMITER ;
+
+
+/*
+Replies to a comment on a social post.
+*/
+DROP PROCEDURE IF EXISTS reply_to_comment;
+DELIMITER //
+CREATE PROCEDURE reply_to_comment(IN current_post INTEGER, IN commenter_id CHAR(50),
+IN new_msg TEXT, IN comment_id INTEGER)
+BEGIN
+    INSERT INTO post_comments (post_id, user_id, comment, is_a_reply, id_of_comment_receiving_reply)
+    VALUES (current_post, get_user_id(commenter_id), new_msg, 1, comment_id);
+END//
+DELIMITER ;
+
+
+/*
+Removes a comment from a social post.
+*/
+DROP PROCEDURE IF EXISTS delete_comment;
+DELIMITER //
+CREATE PROCEDURE delete_comment(IN del_comment_id INTEGER)
+BEGIN
+    DELETE FROM post_comments
+    WHERE comment_id = del_comment_id;
+END//
+DELIMITER ;
+
+
+/*
+Increments the number of likes that a post has.
+*/
+DROP PROCEDURE IF EXISTS increment_post_comments;
+DELIMITER //
+CREATE PROCEDURE increment_post_comments (IN current_post_id INT)
+BEGIN
+    UPDATE social_posts
+    SET comments = comments + 1
+    WHERE post_id = current_post_id;
+END//
+DELIMITER ;
+
+
+/*
+Automatically updates the number of comments a post has.
+*/
+CREATE trigger update_comment_number
+    AFTER INSERT ON post_comments
+    FOR EACH ROW
+    CALL increment_post_comments(NEW.post_id);
+
+
+/*
+Decrements the number of comments that a post has.
+*/
+DROP PROCEDURE IF EXISTS decrement_post_comments;
+DELIMITER //
+CREATE PROCEDURE decrement_post_comments (IN current_post_id INT)
+BEGIN
+    UPDATE social_posts
+    SET comments = comments - 1
+    WHERE post_id = current_post_id;
+END//
+DELIMITER ;
+
+
+/*
+Automatically updates the number of comments a post has.
+*/
+CREATE trigger update_comment_number_delete
+    AFTER DELETE ON post_comments
+    FOR EACH ROW
+    CALL decrement_post_comments(OLD.post_id);
+
+
+/*
 Likes a social post.
 */
 DROP PROCEDURE IF EXISTS like_post;
 DELIMITER //
-CREATE PROCEDURE like_post(IN current_post INTEGER, IN liker_id INTEGER)
+CREATE PROCEDURE like_post(IN current_post INTEGER, IN liker_id CHAR(50))
 BEGIN
     INSERT INTO post_likes (post_id, user_id)
-    VALUES (current_post, liker_id);
+    VALUES (current_post, get_user_id(liker_id));
 END//
 DELIMITER ;
 
