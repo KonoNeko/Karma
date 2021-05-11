@@ -56,3 +56,50 @@ body {
 #introduction > .heading3 {
   font-weight: 500;
 }
+
+#flex-about {
+  margin: 40px;
+}
+
+.featureimg {
+  margin: 20px 20px 20px 0px;
+  border-radius: 10px;
+  width: 15%;
+  height: auto;
+}
+
+.flex-column {
+  display: flex;
+  align-items: center;
+}
+
+.flex-column-information {
+  width: 30%;
+}
+
+#flex-features-div {
+  text-align: center;
+  margin: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+#flex-features {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-features-column {
+  width: 10%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.flexfeatureimg {
+  margin: 20px 20px 20px 0px;
+  border-radius: 10px;
+  width: 40%;
+  height: auto;
+}
