@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 
 <head>
-  <title>Home</title>
+  <title>Create Volunteer Post</title>
+  <link rel="stylesheet" href="css/createvolunteerpost.css" />
+  <link rel="stylesheet" href="css/contact-us.css" />
   <link rel="stylesheet" href="css/base.css" />
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+
   <meta charset="utf-8" />
   <meta
           name="viewport"
           content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
   />
-  <link rel="stylesheet" href="./css/contact-us.css" />
 </head>
 
-<body>
+<body onload="loadHome()">
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
   >&times;</a
@@ -77,7 +82,7 @@
     </li>
 
     <li class="nav__item">
-      <a href="bug.html">
+      <a href="#">
         <svg viewBox="0 0 16 16" width="100" title="profile">
           <path
                   d="M3 14s-1 0-1-1s1-4 6-4s6 3 6 4s-1 1-1 1H3zm5-6a3 3 0 1 0 0-6a3 3 0 0 0 0 6z"
@@ -108,15 +113,14 @@
           />
         </svg>
         <p class="nav__itemlabel">Menu</p>
-
         <div class="dropdown-content">
-          <a href="aboutus.html">About</a>
-          <a href="settings.html">Settings</a>
-          <a href="FAQ.html">FAQ</a>
-          <a href="contact-us.html">Contact us</a>
-          <a href="partnerwithus.html">Partner with us</a>
-          <a href="donate.html">Donate</a>
-          <a href="reportbug.html">Report a bug</a>
+          <a href="#">About</a>
+          <a href="#">Settings</a>
+          <a href="#">FAQ</a>
+          <a href="#">Contact us</a>
+          <a href="#">Partner with us</a>
+          <a href="#">Donate</a>
+          <a href="#">Report a bug</a>
         </div>
       </a>
     </li>
@@ -124,54 +128,67 @@
 </navbar>
 
 <div class="main" id="main">
-  <div class="mobile-menu" onclick="openNav()">
-    <a href="#">
-      <svg viewBox="0 0 24 24" width="100" title="menu">
-        <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M2 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2zm0 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2zm0 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2z"
-        />
-      </svg>
-    </a>
+  <div class="menu-and-search">
+    <div class="mobile-menu" onclick="openNav()">
+      <a href="#">
+        <svg viewBox="0 0 24 24" width="100" title="menu">
+          <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M2 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2zm0 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2zm0 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2z"
+          />
+        </svg>
+      </a>
+    </div>
+
+    <div id="above-search" class="search">
+      <form class="search-form">
+        <input type="text" placeholder="Search" />
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
   </div>
 
-<div id="move">
-  <h1 class="heading-1">Contact Us</h1>
+  <div class="flex-main">
+    <div class="column" id="mainmain">
+      <div id="box" class="box" style="text-align: center">
+        <h class="heading1" style="padding-top: 20px">Contact us</h>
+        <div>
+        <div  class="imgbox" style="padding-top: 20px">
+          <img src="images/phone.png">
+        </div>
+          <p class="headingone">Call us by</p>
+          <p class="headingtwo">+1 778-251-2054</p>
+          <img src="images/email.jpg">
+          <p class="headingone">Email Us</p>
+          <p class="headingtwo">Karmavolunteering@gmail.com</p>
+        </div>
+      </div>
+    </div>
 
-  <div id="phoneicon"> 
-  <div class="col-sm-12 col-md-6 col-lg-3 my-5">
-    <div class="card border-0">
-      <div class="card-body text-center">
-        <i class="fa fa-phone fa-5x mb-3" aria-hidden="true"></i>
+    <div class="column" id="sidemain">
+      <div class="search">
+        <form class="search-form">
+          <input type="text" placeholder="Search" />
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+      <div id="whats-new" class="whats-new">
+        <h1>What's new?</h1>
+        <p>Recommended volunteering opportunities for you</p>
+        <div id="whats-new-volunteering-opportunities"></div>
+        <a href="">View all volunteering opportunities</a>
+      </div>
+      <div id="recommended-connections" class="recommended-connections">
+        <h1>Who to connect with</h1>
+        <a href="">View all recommended connections</a>
       </div>
     </div>
   </div>
-</div>
 
-  <h4 id="callnow">CALL US NOW</h4>
-  <p id="callnow-two">+1 778-899-3824</p>
-  <div id="earthicon">
-  <div class="col-sm-12 col-md-6 col-lg-3 my-5">
-    <div class="card border-0">
-      <div class="card-body text-center">
-        <i class="fa fa-globe fa-5x mb-3" aria-hidden="true"></i>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <h4 id="email">EMAIL</h4>
-  <p id="email-two">karmavolunteering@gmail.com</p>
-
-  <p id="paragraph">We are more than happy to help if any problems arise. 
-    You can contact us with the two options above.</p>
-</div>
-  <div class="stories"></div>
-  <dib class="posts"> </dib>
 </body>
 
-<script src="js/home.js"></script>
+
 <script>
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

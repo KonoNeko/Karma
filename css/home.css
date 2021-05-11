@@ -295,3 +295,86 @@ height: 0px;
 
 border: 0.5px solid #51B09F;
 }
+
+#whats-new-title {
+width: 165px;
+height: 29px;
+
+/* Heading 2 */
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 29px;
+
+color: #0367A6;
+}
+
+
+#recommended-title {
+width: 531px;
+height: 22px;
+
+/* Heading 3 */
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 22px;
+/* identical to box height */
+
+
+color: #000000;
+}
+
+
+.divLocation {
+width: 129.02px;
+height: 48.11px;
+
+/* Heading 3 */
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 22px;
+
+color: #000000;
+}
+
+.divPosition {
+width: 116.99px;
+height: 20.77px;
+
+/* Body text */
+
+font-family: Open Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 19px;
+
+color: #000000;
+}
+
+
+#view-all {
+width: 328px;
+height: 22px;
+
+/* Heading 3 */
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 22px;
+/* identical to box height */
+
+
+color: #51B09F;
+
+}
