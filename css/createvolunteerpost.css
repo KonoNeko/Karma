@@ -16,11 +16,8 @@
     flex-wrap: nowrap;
 
 }
-.box{
-
+.imgbox{
     border-radius: 10px;
-    padding: 10px;
-
 }
 
 .flex-main > .column {
