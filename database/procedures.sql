@@ -32,7 +32,8 @@ DONEg) Comment on a post - comment_on_post
     h) View all stories
     i) Post a story
     j) View all stories for 1 user
-    h) View a single story
+    k) View a single story
+    l) Delete a story aftert 24hours
 
 -Notifications
     a) View all notifications
