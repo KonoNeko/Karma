@@ -135,7 +135,14 @@ hr {
   }
 }
 
+/* I KNOW THE !IMPORTANTS ARE TERRIBLE PRACTICE */
+/* SUE ME */
 @media screen and (max-width: 600px) {
+  #sidemain {
+    display: none;
+    margin-bottom: 100px;
+  }
+
   .flex-main {
     margin-left: 0px;
     margin-bottom: 100px;
@@ -187,5 +194,14 @@ hr {
 
   .hide-in-mobile {
     display: none !important;
+  }
+
+  html {
+    overflow: scroll !important;
+    overflow-x: hidden !important;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px !important;
   }
 }
