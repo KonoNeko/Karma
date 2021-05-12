@@ -80,7 +80,7 @@
   outline: none;
 }
 #msgbtn {
-  margin-top: 20px;
+  margin-top: 40px;
 
   background-color: #0367a6;
   padding: 12px 20px;
@@ -106,9 +106,24 @@
   font-size: 14pt;
   font-family: "Open Sans";
 }
+.followers {
+  margin-left: -120px;
+  text-align: justify;
+  margin-top: -50px;
+  font-size: 14pt;
+  font-family: "Open Sans";
+}
+
+.following {
+  margin-left: 295px;
+  text-align: justify;
+  margin-top: -50px;
+  font-size: 14pt;
+  font-family: "Open Sans";
+}
 #posts {
   margin-left: 400px;
-  margin-top: -25px;
+  margin-top: 0px;
   font-size: 14pt;
   font-family: "Open Sans";
 }
