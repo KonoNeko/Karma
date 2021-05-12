@@ -9,6 +9,7 @@ let height =
   document.body.clientHeight;
 
 window.onresize = function () {
+  location.reload();
   width =
     window.innerWidth ||
     document.documentElement.clientWidth ||
@@ -84,6 +85,13 @@ function generateMessager() {
   mainMessagesDiv.appendChild(messagerDiv);
 }
 
+function returnToMessages() {
+  document.getElementById("sidemain").setAttribute("style", "display: none");
+  document
+    .getElementById("mainmain")
+    .setAttribute("style", "display: unset; width: 100%;");
+}
+
 function revealMessages() {
   console.log(width);
   if (width > 600) {
@@ -92,6 +100,19 @@ function revealMessages() {
 
     document.getElementById("mainmain").setAttribute("style", "width: 50%");
     document.getElementById("sidemain").setAttribute("style", "display: unset");
+
+    generateMessages();
+    createMessageSentByOtherUser();
+    createMessageSentByOtherUser();
+    createMessageSentByYou();
+  } else {
+    document.getElementById("messages-user-information").innerHTML = "";
+    document.getElementById("messages-expanded").innerHTML = "";
+
+    document.getElementById("mainmain").setAttribute("style", "display: none");
+    document
+      .getElementById("sidemain")
+      .setAttribute("style", "display: unset; width: 100%;");
 
     generateMessages();
     createMessageSentByOtherUser();

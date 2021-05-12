@@ -123,6 +123,12 @@ hr {
   background-color: #51b09f;
 }
 
+.return-to-messages {
+  font-weight: bolder;
+  display: none;
+  margin-bottom: 10px;
+}
+
 @media screen and (max-width: 900px) {
   .messagesSentTextDiv {
     padding-left: 20px;
@@ -138,9 +144,24 @@ hr {
 /* I KNOW THE !IMPORTANTS ARE TERRIBLE PRACTICE */
 /* SUE ME */
 @media screen and (max-width: 600px) {
+  .return-to-messages {
+    display: unset;
+    font-weight: bolder;
+    margin-bottom: 10px;
+  }
+
+  .messagesSentTextDiv {
+    padding-left: 20px;
+    padding-right: 5rem;
+  }
+
+  .messagesSentByYouTextDiv {
+    padding-left: 5rem;
+    padding-right: 20px;
+  }
+
   #sidemain {
     display: none;
-    margin-bottom: 100px;
   }
 
   .flex-main {
