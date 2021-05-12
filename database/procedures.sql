@@ -38,8 +38,8 @@ DONEg) Comment on a post - comment_on_post
     l) Delete a story aftert 24hours
 
 -Notifications
-    a) View all notifications
-    b) Trigger for like notification
+DONEa) View all notifications - view_notifications
+DONEb) Trigger for like notification - like_notification
     c) Trigger for follow request notification
     d) Trigger for application acceptance
     e) Trigger for new message
@@ -1001,6 +1001,20 @@ CREATE trigger update_post_like_unlikes
 
 
 /*
+View all notifications for a user.
+*/
+DROP PROCEDURE IF EXISTS view_notifications;
+DELIMITER //
+CREATE PROCEDURE view_notifications(IN current_username CHAR(50))
+BEGIN
+    SELECT * FROM notifications
+    WHERE profile_id = get_user_id(current_username)
+    ORDER BY notifiation_id DESC;
+END//
+DELIMITER ;
+
+
+/*
 Creates a new notification.
 */
 DROP PROCEDURE IF EXISTS create_notification;
@@ -1018,6 +1032,9 @@ END//
 DELIMITER ;
 
 
+/*
+Automatically creates a new notification when a user likes a social post.
+*/
 DROP TRIGGER IF EXISTS like_notification;
 CREATE trigger like_notification
     AFTER INSERT ON post_likes
