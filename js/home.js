@@ -57,6 +57,7 @@ function loadRecommendedConnections() {
   viewAll.id = "view-all";
   viewAll.href = "";
   viewAll.innerHTML = "View all recommended connections";
+  viewAll.style = "margin-top: auto";
 
   recommendedUsers.appendChild(viewAll);
 }
