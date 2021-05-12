@@ -74,6 +74,8 @@ function loadProfile() {
   loadProfilepic();
   loadFollowers();
   loadFollowing();
+  loadWhatsNew();
+  loadRecommendedConnections();
 }
 
 // READING INFORMATION FROM THE DATABASE
@@ -183,20 +185,6 @@ function addExperience() {
   document.getElementById("button-content").appendChild(addExperienceHeading);
   document.getElementById("button-content").appendChild(addExperienceInput);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
