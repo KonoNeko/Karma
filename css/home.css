@@ -87,6 +87,8 @@
 }
 
 @media screen and (max-width: 550px) {
+
+
   .above {
     margin-left: 0;
   }
@@ -369,4 +371,203 @@ height: 19px; */
   /* identical to box height */
 
   color: #51b09f;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.content {
+  margin-left: 5rem;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.bodytext {
+  padding-top: 10px;
+  width: 75%;
+}
+
+.category {
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+#recommended-category,
+#fine-arts-category,
+#sports-category,
+#literacy-category,
+#environment-category,
+#health-category,
+#computers-category {
+  width: 100%;
+}
+
+#recommended-opportunities,
+#fine-arts-opportunities,
+#sports-opportunities,
+#literacy-opportunities,
+#environment-opportunities,
+#health-opportunities,
+#computers-opportunities {
+  display: flex;
+  overflow: auto;
+  flex-direction: row;
+  margin-right: 20px;
+}
+
+.heading3 {
+  width: 100%;
+}
+
+.opportunity {
+  flex: 1 0 18%; /* The important bit. This percentage decides your columns. 
+    The percent can be px. It just represents your minimum starting width.
+     */
+  padding: 20px;
+  margin-right: 10px;
+  width: 200px;
+  background-color: #eff0f3;
+  color: #214049;
+  border-radius: 12px;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+  box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  border-radius: 12px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  display: flex;
+}
+
+.modal-column {
+  flex: 1 0 50%; /* The important bit. This percentage decides your columns. 
+    The percent can be px. It just represents your minimum starting width.
+     */
+  color: #214049;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+}
+
+.modal-img {
+  width: 60%;
+  background-image: url("../images/placeholder1.png");
+  background-size: 100%;
+}
+
+.modal-text {
+  width: 20%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+
+/* The Close Button */
+.close {
+  color: #51b09f;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modalDescription {
+  padding-bottom: 10px;
+  padding-top: 0px;
+}
+
+.primarybutton {
+  width: 100%;
+  padding: 20px;
+}
+
+.heading2 {
+  padding-bottom: 10px;
+}
+
+@media screen and (max-width: 550px) {
+  .content {
+    margin-left: 0px;
+    margin-bottom: 100px;
+  }
+
+  .heading1 {
+    width: 75%;
+  }
+
+  .bodytext {
+    width: 100%;
+    padding-right: 10px;
+  }
+
+  .modal-content {
+    display: block;
+  }
+
+  .modal-column {
+    width: 100%;
+  }
+
+  .modal-img {
+    height: 200px;
+    margin-bottom: 10px;
+  }
+
+  #modalButton {
+    background-color: #0367a6;
+    padding: 12px 20px;
+    border: none;
+    color: #eff0f3;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 10px;
+    outline: none;
+  }
 }

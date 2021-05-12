@@ -180,74 +180,101 @@ function createRecommendedConnection(recommended) {
 }
 
 function createWhatsNew(newPost) {
-  let mainDiv = document.createElement("div");
-  mainDiv.setAttribute("class", "mainDiv");
 
-  let firstDiv = document.createElement("div");
-  firstDiv.setAttribute("class", "postDiv");
+  let opportunityRole = document.createElement("p");
+  opportunityRole.innerHTML = "opportunityRole Role Role";
+  opportunityRole.setAttribute("class", "heading3");
+  opportunityRole.setAttribute("style", "font-weight: 700 !important;");
 
-  let firstDivPicture = document.createElement("div");
-  firstDivPicture.setAttribute("class", "postpicture firstDivPicture");
-  firstDivImg = document.createElement("img");
-  firstDivImg.src = "./images/placeholder.jpg";
-  firstDivPicture.appendChild(firstDivImg);
-  newPost.appendChild(firstDivPicture);
+  let opportunityImgDiv = document.createElement("div");
+  opportunityImgDiv.setAttribute("class", "bulletinboardpicture");
+  opportunityImgDiv.setAttribute("style", "padding-bottom: 10px");
 
-  let firstDivLocation = document.createElement("p");
-  firstDivLocation.setAttribute("class", "divLocation");
-  firstDivLocation.innerHTML = "Burnaby Library";
-  firstDiv.appendChild(firstDivLocation);
+  let opportunityImg = document.createElement("img");
+  opportunityImg.src = "./images/placeholder.jpg";
+  opportunityImgDiv.appendChild(opportunityImg);
 
-  let firstDivPosition = document.createElement("p");
-  firstDivPosition.setAttribute("class", "divPosition");
-  firstDivPosition.innerHTML = "Languages Tutor";
-  firstDiv.appendChild(firstDivPosition);
+  let opportunityLocation = document.createElement("p");
+  opportunityLocation.innerHTML = "opportunityLocation";
+  opportunityLocation.setAttribute("class", "bodytext");
 
-  let secondDiv = document.createElement("div");
-  secondDiv.setAttribute("class", "postDiv");
+  let opportunityDiv = document.createElement("div");
+  opportunityDiv.setAttribute("class", "opportunity");
+  opportunityDiv.setAttribute("style", "margin-bottom: 10px;");
+  opportunityDiv.appendChild(opportunityImgDiv);
+  opportunityDiv.appendChild(opportunityRole);
+  opportunityDiv.appendChild(opportunityLocation);
 
-  let secondDivPicture = document.createElement("div");
-  secondDivPicture.setAttribute("class", "postpicture");
-  secondDivPicture.setAttribute(
-    "style",
-    "background-image: url('./images/placeholder.jpg')"
-  );
-  newPost.appendChild(secondDivPicture);
+  newPost.appendChild(opportunityDiv);
 
-  let secondDivLocation = document.createElement("p");
-  secondDivLocation.setAttribute("class", "divLocation");
-  secondDivLocation.innerHTML = "Burnaby Library";
-  firstDiv.appendChild(secondDivLocation);
+  // let mainDiv = document.createElement("div");
+  // mainDiv.setAttribute("class", "mainDiv");
 
-  let secondDivPosition = document.createElement("p");
-  secondDivPosition.setAttribute("class", "divPosition");
-  secondDivPosition.innerHTML = "Languages Tutor";
-  secondDiv.appendChild(secondDivPosition);
+  // let firstDiv = document.createElement("div");
+  // firstDiv.setAttribute("class", "postDiv");
 
-  let thirdDiv = document.createElement("div");
-  thirdDiv.setAttribute("class", "postDiv");
+  // let firstDivPicture = document.createElement("div");
+  // firstDivPicture.setAttribute("class", "postpicture firstDivPicture");
+  // firstDivImg = document.createElement("img");
+  // firstDivImg.src = "./images/placeholder.jpg";
+  // firstDivPicture.appendChild(firstDivImg);
+  // newPost.appendChild(firstDivPicture);
 
-  let thirdDivPicture = document.createElement("div");
-  thirdDivPicture.setAttribute("class", "postpicture");
-  thirdDivPicture.setAttribute(
-    "style",
-    "background-image: url('./images/placeholder.jpg')"
-  );
-  newPost.appendChild(thirdDivPicture);
+  // let firstDivLocation = document.createElement("p");
+  // firstDivLocation.setAttribute("class", "divLocation");
+  // firstDivLocation.innerHTML = "Burnaby Library";
+  // firstDiv.appendChild(firstDivLocation);
 
-  let thirdDivLocation = document.createElement("p");
-  thirdDivLocation.setAttribute("class", "divLocation");
-  thirdDivLocation.innerHTML = "Burnaby Library";
-  thirdDiv.appendChild(thirdDivLocation);
+  // let firstDivPosition = document.createElement("p");
+  // firstDivPosition.setAttribute("class", "divPosition");
+  // firstDivPosition.innerHTML = "Languages Tutor";
+  // firstDiv.appendChild(firstDivPosition);
 
-  let thirdDivPosition = document.createElement("p");
-  thirdDivPosition.setAttribute("class", "divPosition");
-  thirdDivPosition.innerHTML = "Languages Tutor";
-  thirdDiv.appendChild(thirdDivPosition);
+  // let secondDiv = document.createElement("div");
+  // secondDiv.setAttribute("class", "postDiv");
 
-  mainDiv.appendChild(firstDiv);
-  mainDiv.appendChild(secondDiv);
-  mainDiv.appendChild(thirdDiv);
+  // let secondDivPicture = document.createElement("div");
+  // secondDivPicture.setAttribute("class", "postpicture");
+  // secondDivPicture.setAttribute(
+  //   "style",
+  //   "background-image: url('./images/placeholder.jpg')"
+  // );
+  // newPost.appendChild(secondDivPicture);
 
-  newPost.appendChild(mainDiv);
+  // let secondDivLocation = document.createElement("p");
+  // secondDivLocation.setAttribute("class", "divLocation");
+  // secondDivLocation.innerHTML = "Burnaby Library";
+  // firstDiv.appendChild(secondDivLocation);
+
+  // let secondDivPosition = document.createElement("p");
+  // secondDivPosition.setAttribute("class", "divPosition");
+  // secondDivPosition.innerHTML = "Languages Tutor";
+  // secondDiv.appendChild(secondDivPosition);
+
+  // let thirdDiv = document.createElement("div");
+  // thirdDiv.setAttribute("class", "postDiv");
+
+  // let thirdDivPicture = document.createElement("div");
+  // thirdDivPicture.setAttribute("class", "postpicture");
+  // thirdDivPicture.setAttribute(
+  //   "style",
+  //   "background-image: url('./images/placeholder.jpg')"
+  // );
+  // newPost.appendChild(thirdDivPicture);
+
+  // let thirdDivLocation = document.createElement("p");
+  // thirdDivLocation.setAttribute("class", "divLocation");
+  // thirdDivLocation.innerHTML = "Burnaby Library";
+  // thirdDiv.appendChild(thirdDivLocation);
+
+  // let thirdDivPosition = document.createElement("p");
+  // thirdDivPosition.setAttribute("class", "divPosition");
+  // thirdDivPosition.innerHTML = "Languages Tutor";
+  // thirdDiv.appendChild(thirdDivPosition);
+
+  // mainDiv.appendChild(firstDiv);
+  // mainDiv.appendChild(secondDiv);
+  // mainDiv.appendChild(thirdDiv);
+
+  // newPost.appendChild(mainDiv);
 }
