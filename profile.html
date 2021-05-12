@@ -5,13 +5,14 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/Profile.css" />
     <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/home.css" />
 
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
   </head>
-  <body>
+  <body onload="loadProfile()">
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
         >&times;</a
@@ -263,7 +264,6 @@
 
     <script>
       showProfile();
-      showImages();
 
       // Get the modal
       var modal = document.getElementById("myModal");

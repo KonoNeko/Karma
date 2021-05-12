@@ -6,7 +6,6 @@ body {
 
 .flex-container {
   height: 100%;
-  background: yellow;
   display: flex;
   flex-direction: column;
 }
@@ -53,24 +52,50 @@ body {
   flex-direction: column;
 }
 
-#introduction > .heading3 {
+#signin-button {
+  color: #49a1b9;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+#signup-button {
+  color: #eff0f3;
+  background-color: #49a1b9;
+  border: none;
+  outline: none;
+  max-width: 110px;
+  border-radius: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
+  font-family: Montserrat;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#sign #introduction > .heading3 {
   font-weight: 500;
 }
 
 #flex-about {
-  margin: 40px;
+  margin: 80px;
 }
 
 .featureimg {
-  margin: 20px 20px 20px 0px;
   border-radius: 10px;
-  width: 15%;
+  margin-right: 20px;
+  width: 10%;
+  min-width: 100px;
   height: auto;
 }
 
 .flex-column {
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-right: 20px;
 }
 
 .flex-column-information {
@@ -79,7 +104,7 @@ body {
 
 #flex-features-div {
   text-align: center;
-  margin: 40px;
+  margin: 80px;
   display: flex;
   flex-direction: column;
 }
@@ -89,17 +114,78 @@ body {
   flex-direction: row;
 }
 
-.flex-features-column {
-  width: 10%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+.flexfeatureimg {
+  border-radius: 10px;
+  width: 50%;
+  height: auto;
+  margin-bottom: 20px;
 }
 
-.flexfeatureimg {
-  margin: 20px 20px 20px 0px;
-  border-radius: 10px;
+.flex-features-column {
+  width: 33%;
+  margin-left: 40px;
+  margin-top: 20px;
+  margin-right: 40px;
+}
+
+.flex-features-column > .heading3 {
+  margin-bottom: 10px;
+}
+
+.bottom-signup-button {
+  margin-top: 120px;
+  margin-bottom: 120px;
+}
+
+.bottom-signup-button > #bottom-signup-button {
   width: 40%;
-  height: auto;
+  max-width: 250px;
+}
+
+#create-account-button,
+#bottom-signup-button {
+  background-image: linear-gradient(
+    to right,
+    #49a1b9 0%,
+    #51b09f 51%,
+    #4d95bd 100%
+  );
+}
+#create-account-button,
+#bottom-signup-button {
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 50%;
+  font-family: Montserrat;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+  border: none;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: #eff0f3;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#create-account-button,
+#bottom-signup-button {
+  background-position: right center; /* change the direction of the change here */
+  color: #eff0f3;
+  text-decoration: none;
+}
+
+#introduction > .title {
+  color: #49a1b9;
+}
+
+#introduction > .heading3 {
+  color: #214049;
+}
+
+#introduction > .heading3 > .accent {
+  color: #51b09f;
+  font-weight: bold;
 }

@@ -34,14 +34,31 @@ function loadPosts() {
 }
 
 function loadWhatsNew() {
-  createWhatsNew();
+  let whatsNew = document.getElementById(
+    "whats-new-volunteering-opportunities"
+  );
+  createWhatsNew(whatsNew);
+  createWhatsNew(whatsNew);
+  createWhatsNew(whatsNew);
 }
 
 function loadRecommendedConnections() {
   let recommendedUsers = document.getElementById("recommended-connections");
+
+  let heading2 = document.createElement("hr");
+  recommendedUsers.appendChild(heading2);
+
   createRecommendedConnection(recommendedUsers);
   createRecommendedConnection(recommendedUsers);
   createRecommendedConnection(recommendedUsers);
+
+  let viewAll = document.createElement("a");
+  viewAll.id = "view-all";
+  viewAll.innerHTML = "View all recommended connections";
+  viewAll.setAttribute("style", "margin-top: 20px");
+  // viewAll.setAttribute("href", ""); // YOU NEED SOMETHING IN HERE OR IT BREAKS THE CODE
+
+  recommendedUsers.appendChild(viewAll);
 }
 
 // CREATE INDIVIDUAL UI ELEMENTS
@@ -126,25 +143,26 @@ function createPost(post) {
   post.appendChild(comments);
 }
 
-
 function createRecommendedConnection(recommended) {
+  // let heading = document.createElement("hr");
+  // heading.setAttribute("class", "headers");
 
-  let heading = document.createElement("hr");
-  heading.setAttribute("class", "headers");
-
-  recommended.appendChild(heading);
+  // recommended.appendChild(heading);
 
   let recommendedUserDiv = document.createElement("div");
   recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
 
   let storyImgDiv = document.createElement("div");
-  storyImgDiv.setAttribute("class", "profilepic");
-  storyImgDiv.setAttribute("style", "padding-bottom: 10px");
-
+  storyImgDiv.setAttribute("class", "profilepic storyImgDiv");
+  storyImgDiv.setAttribute("style", "padding-bottom: 10px; width: 20%");
   storyImgDiv.setAttribute(
     "style",
     "background-image: url('./images/placeholder.jpg')"
   );
+
+  let nameAndUserName = document.createElement("div");
+  nameAndUserName.setAttribute("class", "name-and-userName");
+  nameAndUserName.setAttribute("style", "width: 50%;");
 
   let userName = document.createElement("p");
   userName.setAttribute("class", "userNames");
@@ -154,25 +172,34 @@ function createRecommendedConnection(recommended) {
   userNameAt.setAttribute("class", "userAt");
   userNameAt.innerHTML = "@Username";
 
-
   recommendedUserDiv.appendChild(storyImgDiv);
-  recommendedUserDiv.appendChild(userName);
-  recommendedUserDiv.appendChild(userNameAt);
+  nameAndUserName.appendChild(userName);
+  nameAndUserName.appendChild(userNameAt);
 
-  recommended.appendChild(recommendedUserDiv);
-
+  recommendedUserDiv.appendChild(nameAndUserName);
 
   let followUser = document.createElement("div");
-  followUser.innerHTML = "FOLLOW";
-  followUser.setAttribute("class", "followUser");
+  let followUserButton = document.createElement("button");
 
-  recommended.appendChild(followUser);
+  followUserButton.innerHTML = "FOLLOW";
+  followUserButton.setAttribute("class", "followUserButton");
+  followUser.setAttribute("class", "followUser");
+  followUser.setAttribute("style", "width: 40%");
+  followUserButton.setAttribute("style", "width: 70%; min-width: 100px;");
+
+  followUser.appendChild(followUserButton);
+
+  recommendedUserDiv.appendChild(followUser);
 
   let heading2 = document.createElement("hr");
-  heading2.setAttribute("class", "headers");
+  heading2.setAttribute("style", "margin-top: 20px; margin-bottom: 20px;");
 
+  recommended.appendChild(recommendedUserDiv);
+  recommendedUserDiv.setAttribute(
+    "style",
+    "margin-top: 10px; margin-bottom: 10px;"
+  );
   recommended.appendChild(heading2);
-
 
   // let recommendedConnections = document.createElement("p");
   // recommendedConnections.setAttribute("class", "recommendedConnections");
@@ -181,5 +208,101 @@ function createRecommendedConnection(recommended) {
   // recommended.appendChild(recommendedConnections);
 }
 
-function createWhatsNew() {}
+function createWhatsNew(newPost) {
+  let opportunityRole = document.createElement("p");
+  opportunityRole.innerHTML = "opportunityRole Role Role";
+  opportunityRole.setAttribute("class", "heading3");
+  opportunityRole.setAttribute("style", "font-weight: 700 !important;");
 
+  let opportunityImgDiv = document.createElement("div");
+  opportunityImgDiv.setAttribute("class", "bulletinboardpicture");
+  opportunityImgDiv.setAttribute("style", "padding-bottom: 10px");
+
+  let opportunityImg = document.createElement("img");
+  opportunityImg.src = "./images/placeholder.jpg";
+  opportunityImgDiv.appendChild(opportunityImg);
+
+  let opportunityLocation = document.createElement("p");
+  opportunityLocation.innerHTML = "opportunityLocation";
+  opportunityLocation.setAttribute("class", "bodytext");
+
+  let opportunityDiv = document.createElement("div");
+  opportunityDiv.setAttribute("class", "opportunity");
+  opportunityDiv.setAttribute("style", "margin-bottom: 10px;");
+  opportunityDiv.appendChild(opportunityImgDiv);
+  opportunityDiv.appendChild(opportunityRole);
+  opportunityDiv.appendChild(opportunityLocation);
+
+  newPost.appendChild(opportunityDiv);
+
+  // let mainDiv = document.createElement("div");
+  // mainDiv.setAttribute("class", "mainDiv");
+
+  // let firstDiv = document.createElement("div");
+  // firstDiv.setAttribute("class", "postDiv");
+
+  // let firstDivPicture = document.createElement("div");
+  // firstDivPicture.setAttribute("class", "postpicture firstDivPicture");
+  // firstDivImg = document.createElement("img");
+  // firstDivImg.src = "./images/placeholder.jpg";
+  // firstDivPicture.appendChild(firstDivImg);
+  // newPost.appendChild(firstDivPicture);
+
+  // let firstDivLocation = document.createElement("p");
+  // firstDivLocation.setAttribute("class", "divLocation");
+  // firstDivLocation.innerHTML = "Burnaby Library";
+  // firstDiv.appendChild(firstDivLocation);
+
+  // let firstDivPosition = document.createElement("p");
+  // firstDivPosition.setAttribute("class", "divPosition");
+  // firstDivPosition.innerHTML = "Languages Tutor";
+  // firstDiv.appendChild(firstDivPosition);
+
+  // let secondDiv = document.createElement("div");
+  // secondDiv.setAttribute("class", "postDiv");
+
+  // let secondDivPicture = document.createElement("div");
+  // secondDivPicture.setAttribute("class", "postpicture");
+  // secondDivPicture.setAttribute(
+  //   "style",
+  //   "background-image: url('./images/placeholder.jpg')"
+  // );
+  // newPost.appendChild(secondDivPicture);
+
+  // let secondDivLocation = document.createElement("p");
+  // secondDivLocation.setAttribute("class", "divLocation");
+  // secondDivLocation.innerHTML = "Burnaby Library";
+  // firstDiv.appendChild(secondDivLocation);
+
+  // let secondDivPosition = document.createElement("p");
+  // secondDivPosition.setAttribute("class", "divPosition");
+  // secondDivPosition.innerHTML = "Languages Tutor";
+  // secondDiv.appendChild(secondDivPosition);
+
+  // let thirdDiv = document.createElement("div");
+  // thirdDiv.setAttribute("class", "postDiv");
+
+  // let thirdDivPicture = document.createElement("div");
+  // thirdDivPicture.setAttribute("class", "postpicture");
+  // thirdDivPicture.setAttribute(
+  //   "style",
+  //   "background-image: url('./images/placeholder.jpg')"
+  // );
+  // newPost.appendChild(thirdDivPicture);
+
+  // let thirdDivLocation = document.createElement("p");
+  // thirdDivLocation.setAttribute("class", "divLocation");
+  // thirdDivLocation.innerHTML = "Burnaby Library";
+  // thirdDiv.appendChild(thirdDivLocation);
+
+  // let thirdDivPosition = document.createElement("p");
+  // thirdDivPosition.setAttribute("class", "divPosition");
+  // thirdDivPosition.innerHTML = "Languages Tutor";
+  // thirdDiv.appendChild(thirdDivPosition);
+
+  // mainDiv.appendChild(firstDiv);
+  // mainDiv.appendChild(secondDiv);
+  // mainDiv.appendChild(thirdDiv);
+
+  // newPost.appendChild(mainDiv);
+}

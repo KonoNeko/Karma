@@ -14,6 +14,12 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    border-radius: 10px;
+}
+.box{
+    border-radius: 10px;
+    padding: 10px;
+
 }
 
 .flex-main > .column {
@@ -22,6 +28,18 @@
     margin-right: 24px;
     display: flex;
     flex-direction: column;
+}
+
+.bugbutton {
+    background-color: #0367a6;
+    padding: 12px 20px;
+    border: none;
+    color: #eff0f3;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 10px;
+    outline: none;
 }
 
 .creatopportunity {
@@ -40,7 +58,9 @@
 
     margin-right: 120px;
 }
-
+.opportunity_post{
+    border-radius: 10px;
+}
 #mainmain > #opportunity_post{
     background-color: #EFF0F3; /* temp */
     margin-top: 24px;

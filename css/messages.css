@@ -123,5 +123,106 @@ hr {
   background-color: #51b09f;
 }
 
-@media screen and (max-width: 550px) {
+.return-to-messages {
+  font-weight: bolder;
+  display: none;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 900px) {
+  .messagesSentTextDiv {
+    padding-left: 20px;
+    padding-right: 0px;
+  }
+
+  .messagesSentByYouTextDiv {
+    padding-left: 0px;
+    padding-right: 20px;
+  }
+}
+
+/* I KNOW THE !IMPORTANTS ARE TERRIBLE PRACTICE */
+/* SUE ME */
+@media screen and (max-width: 600px) {
+  .return-to-messages {
+    display: unset;
+    font-weight: bolder;
+    margin-bottom: 10px;
+  }
+
+  .messagesSentTextDiv {
+    padding-left: 20px;
+    padding-right: 5rem;
+  }
+
+  .messagesSentByYouTextDiv {
+    padding-left: 5rem;
+    padding-right: 20px;
+  }
+
+  #sidemain {
+    display: none;
+  }
+
+  .flex-main {
+    margin-left: 0px;
+    margin-bottom: 100px;
+  }
+
+  #messages {
+    margin-bottom: 100px;
+  }
+
+  /* SCROLLBAR */
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey !important;
+    border-radius: 10px !important;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #51b09f !important;
+    border-radius: 10px !important;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #51b09f !important;
+  }
+
+  .nav__list {
+    flex-direction: row !important;
+    width: 100vw !important;
+    height: 5rem !important;
+    bottom: 0 !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    padding: 0 1rem !important;
+  }
+
+  .mobile-menu {
+    display: block !important;
+    margin-top: 24px !important;
+    margin-left: 24px !important;
+  }
+
+  .hide-in-mobile {
+    display: none !important;
+  }
+
+  html {
+    overflow: scroll !important;
+    overflow-x: hidden !important;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px !important;
+  }
 }
