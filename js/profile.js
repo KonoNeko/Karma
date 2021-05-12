@@ -95,8 +95,9 @@ function loadAboutMe() {
 }
 
 function loadPosts() {
-  let post = document.getElementById("posts");
-  createPost(post);
+  let posts = document.getElementById("posts");
+  createPost(posts);
+  createPost(posts);
 }
 
 function loadSkills() {
@@ -219,21 +220,40 @@ function createAboutMe(aboutme) {
 
   let about = document.createElement("p");
   about.setAttribute("class", "about");
-  about.innerHTML = "Im Jason and ....";
+  about.innerHTML = "I am a senior at Burnaby Mountain who is passionate about languages and fine arts. I like tutoring at my high school and working closely with youth. After graduation, I’d like to go to Simon Fraser University for a bachelor’s degree to major in Linguistics and possibly a minor in Interactive Arts and Technology!";
 
   aboutdiv.appendChild(about);
   aboutme.appendChild(aboutdiv);
 
 }
 
-function createProfilePic(){
-
+function createProfilePic(profile){
+  // let picture = document.createElement("img");
+  // picture.setAttribute("class", "postpicture");
+  // picture.setAttribute(
+  //   "style",
+  //   "background-image: url('./images/placeholder.jpg')"
+  // );
+  // profile.appendChild(picture);
 }
 function createSkills(){
 
 
 }
-function createPost(){
+function createPost(posts){
+  let postdiv = document.createElement("div");
+  postdiv.setAttribute("class", "postdiv");
+
+  let picture = document.createElement("img");
+  picture.setAttribute("class", "postpic");
+  picture.src = "./images/placeholder.jpg"
+
+  postdiv.appendChild(picture)
+  // picture.setAttribute(
+  //   "style",
+  //   "background-image: url('./images/placeholder.jpg')"
+  // );
+  posts.appendChild(postdiv);
 
 }
 function createEducation(education){
