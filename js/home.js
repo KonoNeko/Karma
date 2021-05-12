@@ -38,13 +38,27 @@ function loadWhatsNew() {
     "whats-new-volunteering-opportunities"
   );
   createWhatsNew(whatsNew);
+  createWhatsNew(whatsNew);
+  createWhatsNew(whatsNew);
 }
 
 function loadRecommendedConnections() {
   let recommendedUsers = document.getElementById("recommended-connections");
+  
+  let heading2 = document.createElement("hr");
+  heading2.setAttribute("class", "headers");
+  recommendedUsers.appendChild(heading2);
+
   createRecommendedConnection(recommendedUsers);
   createRecommendedConnection(recommendedUsers);
   createRecommendedConnection(recommendedUsers);
+
+  let viewAll = document.createElement("a");
+  viewAll.id = "view-all";
+  viewAll.href = "";
+  viewAll.innerHTML = "View all recommended connections";
+
+  recommendedUsers.appendChild(viewAll);
 }
 
 // CREATE INDIVIDUAL UI ELEMENTS
@@ -130,10 +144,10 @@ function createPost(post) {
 }
 
 function createRecommendedConnection(recommended) {
-  let heading = document.createElement("hr");
-  heading.setAttribute("class", "headers");
+  // let heading = document.createElement("hr");
+  // heading.setAttribute("class", "headers");
 
-  recommended.appendChild(heading);
+  // recommended.appendChild(heading);
 
   let recommendedUserDiv = document.createElement("div");
   recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
@@ -147,6 +161,9 @@ function createRecommendedConnection(recommended) {
     "background-image: url('./images/placeholder.jpg')"
   );
 
+  let nameAndUserName = document.createElement("div");
+  nameAndUserName.setAttribute("class", "name-and-userName");
+
   let userName = document.createElement("p");
   userName.setAttribute("class", "userNames");
   userName.innerHTML = "User name";
@@ -156,21 +173,23 @@ function createRecommendedConnection(recommended) {
   userNameAt.innerHTML = "@Username";
 
   recommendedUserDiv.appendChild(storyImgDiv);
-  recommendedUserDiv.appendChild(userName);
-  recommendedUserDiv.appendChild(userNameAt);
+  nameAndUserName.appendChild(userName);
+  nameAndUserName.appendChild(userNameAt);
 
-  recommended.appendChild(recommendedUserDiv);
+  recommendedUserDiv.appendChild(nameAndUserName);
 
   let followUser = document.createElement("div");
   followUser.innerHTML = "FOLLOW";
   followUser.setAttribute("class", "followUser");
 
-  recommended.appendChild(followUser);
+  recommendedUserDiv.appendChild(followUser);
 
   let heading2 = document.createElement("hr");
   heading2.setAttribute("class", "headers");
 
+  recommended.appendChild(recommendedUserDiv);
   recommended.appendChild(heading2);
+  
 
   // let recommendedConnections = document.createElement("p");
   // recommendedConnections.setAttribute("class", "recommendedConnections");

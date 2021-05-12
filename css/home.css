@@ -36,7 +36,7 @@
 }
 
 .flex-main > .column {
-  width: 50%;
+  width: 45%;
   margin-left: 24px;
   margin-right: 24px;
   display: flex;
@@ -201,6 +201,10 @@ height: 19px; */
   display: none;
 }
 
+#whats-new-volunteering-opportunities::-webkit-scrollbar {
+  display: none;
+}
+
 #posts::-webkit-scrollbar {
   display: none;
 }
@@ -289,11 +293,26 @@ height: 19px; */
   text-align: center;
 }
 
+.recommendedUserDiv {
+  display: flex;
+  
+}
+
+
+.name-and-userName {
+  justify-content: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+
 .headers {
   width: 582px;
-  height: 0px;
+  /* height: 1px; */
+  border-top: 0.5px solid #51b09f;
 
-  border: 0.5px solid #51b09f;
 }
 
 #whats-new-title {
@@ -379,14 +398,10 @@ height: 19px; */
 
 
 
-
-
-
-
-
-
-
-
+#whats-new-volunteering-opportunities {
+  display: flex; 
+  overflow: auto;
+}
 
 
 
