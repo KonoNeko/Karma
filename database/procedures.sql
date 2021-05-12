@@ -7,6 +7,7 @@ DONEc) Edit a profile/add information - new___entry or edit____entry
 DONEd) Request to follow a user - request_to_follow_user
 DONEe) Accept a follow request - accept_a_follow_request
 DONEf) Unfollow a user - unfollow_user
+    g) Reject a follow request
 
 -Messaging
 DONEa) View all messages for a conversation
@@ -40,8 +41,8 @@ DONEg) Comment on a post - comment_on_post
 -Notifications
 DONEa) View all notifications - view_notifications
 DONEb) Trigger for like notification - like_notification
-DONEc) Trigger for follow request notification
-DONEd) Trigger for follow
+DONEc) Trigger for follow request notification - follow_request_notification
+DONEd) Trigger for follow - follow_notification
     e) Trigger for new message
     f) Trigger for comment
     g) Trigger for comment reply
