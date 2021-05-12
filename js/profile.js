@@ -213,17 +213,63 @@ function addExperience() {
 
 
 
+function createAboutMe(aboutme) {
+  let aboutdiv = document.createElement("div");
+  aboutdiv.setAttribute("class", "aboutdiv");
+
+  let about = document.createElement("p");
+  about.setAttribute("class", "about");
+  about.innerHTML = "Im Jason and ....";
+
+  aboutdiv.appendChild(about);
+  aboutme.appendChild(aboutdiv);
+
+}
+
+function createProfilePic(){
+
+}
+function createSkills(){
+
+
+}
+function createPost(){
+
+}
+function createEducation(education){
+  
+
+}
+function createExperience(){
+
+
+}
+
+
+function createAwards(awards){
+
+}
 
 function createFollowers(follower) {
 
   
   let follow= document.createElement("p");
   follow.setAttribute("class", "followers");
-  follow.innerHTML = "Followers";
+  follow.innerHTML = "150";
 
 
 
   follower.appendChild(follow);
+}
+function createFollowing(following){
+  let follows= document.createElement("p");
+  follows.setAttribute("class", "following");
+  follows.innerHTML = "135";
+
+
+
+  following.appendChild(follows);
+
 }
 
 
