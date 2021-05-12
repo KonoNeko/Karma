@@ -34,7 +34,9 @@ function loadPosts() {
 }
 
 function loadWhatsNew() {
-  let whatsNew = document.getElementById("whats-new-volunteering-opportunities");
+  let whatsNew = document.getElementById(
+    "whats-new-volunteering-opportunities"
+  );
   createWhatsNew(whatsNew);
 }
 
@@ -127,9 +129,7 @@ function createPost(post) {
   post.appendChild(comments);
 }
 
-
 function createRecommendedConnection(recommended) {
-
   let heading = document.createElement("hr");
   heading.setAttribute("class", "headers");
 
@@ -155,13 +155,11 @@ function createRecommendedConnection(recommended) {
   userNameAt.setAttribute("class", "userAt");
   userNameAt.innerHTML = "@Username";
 
-
   recommendedUserDiv.appendChild(storyImgDiv);
   recommendedUserDiv.appendChild(userName);
   recommendedUserDiv.appendChild(userNameAt);
 
   recommended.appendChild(recommendedUserDiv);
-
 
   let followUser = document.createElement("div");
   followUser.innerHTML = "FOLLOW";
@@ -174,7 +172,6 @@ function createRecommendedConnection(recommended) {
 
   recommended.appendChild(heading2);
 
-
   // let recommendedConnections = document.createElement("p");
   // recommendedConnections.setAttribute("class", "recommendedConnections");
   // recommendedConnections.innerHTML = "View all recommended connections";
@@ -183,7 +180,6 @@ function createRecommendedConnection(recommended) {
 }
 
 function createWhatsNew(newPost) {
-
   let mainDiv = document.createElement("div");
   mainDiv.setAttribute("class", "mainDiv");
 
@@ -191,11 +187,10 @@ function createWhatsNew(newPost) {
   firstDiv.setAttribute("class", "postDiv");
 
   let firstDivPicture = document.createElement("div");
-  firstDivPicture.setAttribute("class", "postpicture");
-  firstDivPicture.setAttribute(
-    "style",
-    "background-image: url('./images/placeholder.jpg')"
-  );
+  firstDivPicture.setAttribute("class", "postpicture firstDivPicture");
+  firstDivImg = document.createElement("img");
+  firstDivImg.src = "./images/placeholder.jpg";
+  firstDivPicture.appendChild(firstDivImg);
   newPost.appendChild(firstDivPicture);
 
   let firstDivLocation = document.createElement("p");
@@ -250,18 +245,9 @@ function createWhatsNew(newPost) {
   thirdDivPosition.innerHTML = "Languages Tutor";
   thirdDiv.appendChild(thirdDivPosition);
 
-
   mainDiv.appendChild(firstDiv);
   mainDiv.appendChild(secondDiv);
   mainDiv.appendChild(thirdDiv);
 
-
   newPost.appendChild(mainDiv);
-
-
-
-
-
-
 }
-

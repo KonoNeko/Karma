@@ -213,168 +213,160 @@ height: 19px; */
 }
 
 .userNames {
-width: 139px;
-height: 22px;
+  width: 139px;
+  height: 22px;
 
-/* Heading 3 */
+  /* Heading 3 */
 
-font-family: "Montserrat";
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-line-height: 22px;
-/* identical to box height */
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
 
-
-color: #000000;
+  color: #000000;
 }
 
+.firstDivPicture {
+  width: 100px;
+  height: 100px;
+}
 
 .userAt {
-width: 64px;
-height: 19px;
+  width: 64px;
+  height: 19px;
 
-/* Body Subheading */
+  /* Body Subheading */
 
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 19px;
-/* identical to box height */
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  /* identical to box height */
 
-
-color: #000000;
-
+  color: #000000;
 }
 
-
 #whoto {
-width: 267px;
-height: 29px;
+  width: 267px;
+  height: 29px;
 
-/* Heading 2 */
+  /* Heading 2 */
 
-font-family: "Montserrat";
-font-style: normal;
-font-weight: bold;
-font-size: 24px;
-line-height: 29px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
 
-color: #0367A6;
+  color: #0367a6;
 }
 
 .followUser {
-width: 102px;
-height: 41px;
+  width: 102px;
+  height: 41px;
 
-/* Accent */
+  /* Accent */
 
-border: 1.5px solid #51B09F;
-box-sizing: border-box;
-border-radius: 40px;
+  border: 1.5px solid #51b09f;
+  box-sizing: border-box;
+  border-radius: 40px;
 
-/* Body Title */
+  /* Body Title */
 
-font-family: "Open Sans";
-font-style: normal;
-font-weight: bold;
-font-size: 14px;
-line-height: 19px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
 
-color: #51B09F;
+  color: #51b09f;
 
-text-align: center;
-
+  text-align: center;
 }
 
-
 .headers {
-width: 582px;
-height: 0px;
+  width: 582px;
+  height: 0px;
 
-border: 0.5px solid #51B09F;
+  border: 0.5px solid #51b09f;
 }
 
 #whats-new-title {
-width: 165px;
-height: 29px;
+  width: 165px;
+  height: 29px;
 
-/* Heading 2 */
+  /* Heading 2 */
 
-font-family: Montserrat;
-font-style: normal;
-font-weight: bold;
-font-size: 24px;
-line-height: 29px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
 
-color: #0367A6;
+  color: #0367a6;
 }
-
 
 #recommended-title {
-width: 531px;
-height: 22px;
+  width: 531px;
+  height: 22px;
 
-/* Heading 3 */
+  /* Heading 3 */
 
-font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-line-height: 22px;
-/* identical to box height */
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
 
-
-color: #000000;
+  color: #000000;
 }
 
-
 .divLocation {
-width: 129.02px;
-height: 48.11px;
+  width: 129.02px;
+  height: 48.11px;
 
-/* Heading 3 */
+  /* Heading 3 */
 
-font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-line-height: 22px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
 
-color: #000000;
+  color: #000000;
 }
 
 .divPosition {
-width: 116.99px;
-height: 20.77px;
+  width: 116.99px;
+  height: 20.77px;
 
-/* Body text */
+  /* Body text */
 
-font-family: Open Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 19px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
 
-color: #000000;
+  color: #000000;
 }
 
-
 #view-all {
-width: 328px;
-height: 22px;
+  width: 328px;
+  height: 22px;
 
-/* Heading 3 */
+  /* Heading 3 */
 
-font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-line-height: 22px;
-/* identical to box height */
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
 
-
-color: #51B09F;
-
+  color: #51b09f;
 }

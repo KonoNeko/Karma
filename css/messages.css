@@ -124,4 +124,12 @@ hr {
 }
 
 @media screen and (max-width: 550px) {
+  .flex-main {
+    margin-left: 0px;
+    margin-bottom: 100px;
+  }
+
+  #messages {
+    margin-bottom: 100px;
+  }
 }

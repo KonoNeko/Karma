@@ -63,14 +63,14 @@ body {
   background-color: #49a1b9;
   border: none;
   outline: none;
-  max-width: 100px;
+  max-width: 110px;
   border-radius: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 22px;
-  padding-right: 22px;
+  padding-left: 24px;
+  padding-right: 24px;
   font-family: Montserrat;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -133,7 +133,8 @@ body {
 }
 
 .bottom-signup-button {
-  margin: 80px;
+  margin-top: 120px;
+  margin-bottom: 120px;
 }
 
 .bottom-signup-button > #bottom-signup-button {
