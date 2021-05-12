@@ -592,6 +592,14 @@ DELIMITER //
 CREATE PROCEDURE unfollow_user(IN user_following CHAR(50), 
 IN user_being_followed CHAR(50))
 BEGIN
+    DELETE FROM notifications 
+    WHERE profile_id = get_user_id(user_being_followed)
+    AND (type_of_event = "profile_follows request" OR type_of_event = "profile_follows accepted")
+    AND id_of_event = (
+        SELECT follow_id FROM profile_follows
+        WHERE profile_id = get_user_id(user_being_followed)
+        AND follower_id = get_user_id(user_following)
+    );
     DELETE FROM profile_follows
     WHERE profile_id = get_user_id(user_being_followed)
     AND follower_id = get_user_id(user_following);
@@ -604,11 +612,15 @@ Increments the number of posts that a profile has.
 */
 DROP PROCEDURE IF EXISTS increment_followers;
 DELIMITER //
-CREATE PROCEDURE increment_followers (IN current_username INTEGER)
+CREATE PROCEDURE increment_followers (IN user_being_followed INTEGER, 
+IN user_following INTEGER)
 BEGIN
     UPDATE profiles
     SET followers = followers + 1
-    WHERE profile_id = current_username;
+    WHERE profile_id = user_being_followed;
+    UPDATE profiles
+    SET `following` = `following` + 1
+    WHERE profile_id = user_following;
 END//
 DELIMITER ;
 
@@ -618,11 +630,15 @@ Increments the number of posts that a profile has.
 */
 DROP PROCEDURE IF EXISTS decrement_followers;
 DELIMITER //
-CREATE PROCEDURE decrement_followers (IN current_username INTEGER)
+CREATE PROCEDURE decrement_followers (IN user_being_followed INTEGER, 
+IN user_following INTEGER)
 BEGIN
     UPDATE profiles
     SET followers = followers - 1
-    WHERE profile_id = current_username;
+    WHERE profile_id = user_being_followed;
+    UPDATE profiles
+    SET `following` = `following` - 1
+    WHERE profile_id = user_following;
 END//
 DELIMITER ;
 
@@ -637,7 +653,7 @@ CREATE trigger update_follower_number
     FOR EACH ROW
     BEGIN
         IF OLD.request_accepted <> new.request_accepted THEN
-            CALL increment_followers(NEW.profile_id);
+            CALL increment_followers(NEW.profile_id, NEW.follower_id);
         END IF;
     END//
 DELIMITER ;
@@ -646,10 +662,17 @@ DELIMITER ;
 /*
 Automatically updates the value of followers a user has.
 */
+DROP TRIGGER IF EXISTS update_follower_number_unfollow;
+DELIMITER //
 CREATE trigger update_follower_number_unfollow
     AFTER DELETE ON profile_follows
     FOR EACH ROW
-    CALL decrement_followers(OLD.profile_id);
+    BEGIN
+        IF OLD.request_accepted <> 0 THEN
+            CALL decrement_followers(OLD.profile_id, OLD.follower_id);
+        END IF;
+    END//
+DELIMITER ;
 
 
 /*
