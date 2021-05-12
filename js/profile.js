@@ -188,6 +188,27 @@ function addExperience() {
 
 
 
+
+function createFollowers(follower) {
+
+  
+  let follow= document.createElement("p");
+  follow.setAttribute("class", "followers");
+  follow.innerHTML = "Followers";
+
+
+
+  follower.appendChild(follow);
+}
+
+
+
+
+
+
+
+
+
 function createRecommendedConnection(recommended) {
   let heading = document.createElement("hr");
   heading.setAttribute("class", "headers");
