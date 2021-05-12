@@ -17,6 +17,7 @@ CREATE TABLE profile_follows (
     `profile_id` INTEGER NOT NULL,
     `follower_id` INTEGER NOT NULL,
     `request_accepted` TINYINT(1) DEFAULT 0,
+    `timestamp` timestamp NOT NULL DEFAULT NOW(),
     FOREIGN KEY (`profile_id`) REFERENCES profiles (`profile_id`),
     FOREIGN KEY (`follower_id`) REFERENCES profiles (`profile_id`)
 );

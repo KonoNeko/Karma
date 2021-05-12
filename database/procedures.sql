@@ -40,12 +40,13 @@ DONEg) Comment on a post - comment_on_post
 -Notifications
 DONEa) View all notifications - view_notifications
 DONEb) Trigger for like notification - like_notification
-    c) Trigger for follow request notification
-    d) Trigger for application acceptance
+DONEc) Trigger for follow request notification
+DONEd) Trigger for follow
     e) Trigger for new message
     f) Trigger for comment
     g) Trigger for comment reply
 DONEh) Create a notification - create_notification
+    i) Trigger for application acceptance
 */
 
 
@@ -564,9 +565,20 @@ CREATE PROCEDURE accept_a_follow_request(IN user_following CHAR(50),
 IN user_being_followed CHAR(50))
 BEGIN
     UPDATE profile_follows
-    SET request_accepted = 1
+    SET 
+        request_accepted = 1,
+        `timestamp` = NOW()
     WHERE profile_id = get_user_id(user_being_followed)
     AND follower_id = get_user_id(user_following);
+
+    DELETE FROM notifications 
+    WHERE type_of_event = "profile_follows request"
+    AND profile_id = get_user_id(user_being_followed)
+    AND id_of_event = (
+        SELECT follow_id FROM profile_follows
+        WHERE profile_id = get_user_id(user_being_followed)
+        AND follower_id = get_user_id(user_following)
+    );
 END//
 DELIMITER ;
 
@@ -1047,5 +1059,41 @@ CREATE trigger like_notification
         NEW.like_date, 
         get_profile_pic(NEW.user_id),  
         (SELECT image_url FROM social_posts WHERE post_id = NEW.post_id)
+    );
+
+
+/*
+Automatically creates a new notification when a user requests to follow another.
+*/
+DROP TRIGGER IF EXISTS follow_request_notification;
+CREATE trigger follow_request_notification
+    AFTER INSERT ON profile_follows
+    FOR EACH ROW
+    CALL create_notification(
+        NEW.profile_id,
+        CONCAT(get_user_name(NEW.follower_id), " has requested to follow you."),
+        "profile_follows request", 
+        NEW.follow_id, 
+        NEW.timestamp, 
+        get_profile_pic(NEW.follower_id),  
+        NULL
+    );
+
+
+/*
+Automatically creates a new notification when a user accepts a follow request.
+*/
+DROP TRIGGER IF EXISTS follow_notification;
+CREATE trigger follow_notification
+    AFTER UPDATE ON profile_follows
+    FOR EACH ROW
+    CALL create_notification(
+        NEW.profile_id,
+        CONCAT(get_user_name(NEW.follower_id), " is now following you."),
+        "profile_follows accepted", 
+        NEW.follow_id, 
+        NEW.timestamp, 
+        get_profile_pic(NEW.follower_id),  
+        NULL
     );
 
