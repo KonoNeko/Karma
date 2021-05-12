@@ -453,7 +453,7 @@ ORDER BY s.post_date
 Gathers all the posts on the bulletin board.
 */
 CREATE VIEW bulletin_board as
-SELECT *
+SELECT *, get_user_name(poster_id) as posted_by
 FROM opportunites
 ORDER BY post_date
 
@@ -758,6 +758,26 @@ END //
 DELIMITER ;
 
 
+/*
+Gets the id of the owner of a social post.
+*/
+DROP FUNCTION IF EXISTS get_opportunity_owner_id;
+DELIMITER //
+CREATE FUNCTION get_opportunity_owner_id(current_post INTEGER) 
+RETURNS CHAR(50) READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT poster_id
+      FROM opportunites
+      WHERE opportunity_id = current_post
+    );
+END //
+DELIMITER ;
+
+
+/*
+Gets the profile pic for a user given the user id.
+*/
 DROP FUNCTION IF EXISTS get_profile_pic;
 DELIMITER //
 CREATE FUNCTION get_profile_pic(current_user_id INTEGER) 
@@ -1121,3 +1141,26 @@ CREATE trigger follow_notification
         NULL
     );
 
+
+/*
+Automatically creates a new notification when a user's application is accepted.
+*/
+DROP TRIGGER IF EXISTS application_notification;
+DELIMITER //
+CREATE trigger application_notification
+    AFTER UPDATE ON opportunites_applicants
+    FOR EACH ROW
+    BEGIN
+        IF NEW.accepted <> 0 THEN
+            CALL create_notification(
+                get_user_id(NEW.applicant_username),
+                CONCAT(get_user_name(get_opportunity_owner_id(NEW.opportunity_id)), " accepted your application."),
+                "opportunites", 
+                NEW.application_id, 
+                NEW.timestamp, 
+                get_profile_pic(get_user_id(NEW.applicant_username)),  
+                (SELECT image_url FROM opportunites WHERE opportunity_id = NEW.opportunity_id)
+            );
+        END IF;
+    END//   
+DELIMITER ;
