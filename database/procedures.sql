@@ -20,6 +20,8 @@ DONEc) Post a new opportunity - new_opportunity
 DONEd) View applicants for the posted opportunites - view_applicants
 DONEe) Accept/hire applicants for an opportunity - accept_application
 DONEf) View opportunities a user applied for - view_user_applications
+    g) View recommended for you
+    h) Set recommended for you  
 
 -Social Posts
 DONEa) View all posts (social feed) - posts_feed
@@ -40,6 +42,10 @@ DONEg) Comment on a post - comment_on_post
     b) Trigger for like notification
     c) Trigger for follow request notification
     d) Trigger for application acceptance
+    e) Trigger for new message
+    f) Trigger for comment
+    g) Trigger for comment reply
+DONEh) Create a notification - create_notification
 */
 
 
@@ -700,6 +706,37 @@ DELIMITER ;
 
 
 /*
+Gets the id of the owner of a social post.
+*/
+DROP FUNCTION IF EXISTS get_post_owner_id;
+DELIMITER //
+CREATE FUNCTION get_post_owner_id(current_post INTEGER) 
+RETURNS CHAR(50) READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT user_id
+      FROM social_posts
+      WHERE post_id = current_post
+    );
+END //
+DELIMITER ;
+
+
+DROP FUNCTION IF EXISTS get_profile_pic;
+DELIMITER //
+CREATE FUNCTION get_profile_pic(current_user_id INTEGER) 
+RETURNS TEXT READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT profile_pic_url
+      FROM profiles
+      WHERE profile_id = current_user_id
+    );
+END //
+DELIMITER ;
+
+
+/*
 Gets all the user profile information (following stats, skills, education, experiences, awards, posts).
 */
 DROP PROCEDURE IF EXISTS create_post;
@@ -918,13 +955,18 @@ Unlikes a social post.
 */
 DROP PROCEDURE IF EXISTS unlike_post;
 DELIMITER //
-CREATE PROCEDURE unlike_post(IN current_post INTEGER, IN liker_id INTEGER)
+CREATE PROCEDURE unlike_post(IN current_post INTEGER, IN liker_id CHAR(50))
 BEGIN
+    DELETE FROM notifications
+    WHERE profile_id = get_post_owner_id(current_post)
+    AND `timestamp` = (
+        SELECT like_date FROM post_likes WHERE post_id = current_post 
+        AND user_id = get_user_id(liker_id));
     DELETE FROM post_likes
-    WHERE post_id = current_post AND user_id = liker_id;
+    WHERE post_id = current_post AND user_id = get_user_id(liker_id);
 END//
 DELIMITER ;
-
+2021-05-11 22:44:28
 
 /*
 Decrements the number of likes a post has.
@@ -956,3 +998,37 @@ CREATE trigger update_post_like_unlikes
     AFTER DELETE ON post_likes
     FOR EACH ROW
     CALL decrement_post_likes(OLD.post_id);
+
+
+/*
+Creates a new notification.
+*/
+DROP PROCEDURE IF EXISTS create_notification;
+DELIMITER //
+CREATE PROCEDURE create_notification (IN current_user_id INTEGER, 
+IN new_msg TEXT, IN event_type CHAR(50), IN id_of_entry INTEGER,
+IN new_time TIMESTAMP, IN profile_pic TEXT, IN post_pic TEXT)
+BEGIN
+    INSERT INTO notifications (
+        `profile_id`, `message`, `type_of_event`, `id_of_event`, 
+        `timestamp`, `profile_pic_url`, `post_pic_url`)
+    VALUES (current_user_id, new_msg, event_type, id_of_entry, new_time,
+    profile_pic, post_pic);
+END//
+DELIMITER ;
+
+
+DROP TRIGGER IF EXISTS like_notification;
+CREATE trigger like_notification
+    AFTER INSERT ON post_likes
+    FOR EACH ROW
+    CALL create_notification(
+        get_post_owner_id(NEW.post_id),
+        CONCAT(get_user_name(NEW.user_id), " has liked your post."),
+        "social_posts", 
+        NEW.post_id, 
+        NEW.like_date, 
+        get_profile_pic(NEW.user_id),  
+        (SELECT image_url FROM social_posts WHERE post_id = NEW.post_id)
+    );
+

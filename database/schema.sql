@@ -171,10 +171,13 @@ CREATE TABLE volunteer_categories (
 CREATE TABLE notifications (
     `notifiation_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `profile_id` INTEGER NOT NULL,
+    `profile_pic_url` TEXT NOT NULL,
+    `post_pic_url` TEXT, 
     `message` TEXT NOT NULL,
-    `link_to_event` TEXT NOT NULL
+    `type_of_event` CHAR(50) NOT NULL,
+    `id_of_event` INTEGER NOT NULL,
     `timestamp` TIMESTAMP DEFAULT NOW(),
-    FOREIGN KEY (`profile_id`) REFERENCES profiles (`profile_id`);
+    FOREIGN KEY (`profile_id`) REFERENCES profiles (`profile_id`)
 );
 
 --TODO
@@ -195,6 +198,12 @@ CREATE TABLE conversations (
 );
 
 CREATE TABLE volunteer_categories (
-    `category_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `category` CHAR(50) NOT NULL
+    `category` CHAR(50) NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE preferred_categories (
+    `profile_id` INTEGER NOT NULL,
+    `category` CHAR(50) NOT NULL,
+    FOREIGN KEY (`profile_id`) REFERENCES profiles (`profile_id`),
+    FOREIGN KEY (`category`) REFERENCES volunteer_categories (`category`)
 );
