@@ -34,7 +34,8 @@ function loadPosts() {
 }
 
 function loadWhatsNew() {
-  createWhatsNew();
+  let whatsNew = document.getElementById("whats-new-volunteering-opportunities");
+  createWhatsNew(whatsNew);
 }
 
 function loadRecommendedConnections() {
@@ -181,5 +182,86 @@ function createRecommendedConnection(recommended) {
   // recommended.appendChild(recommendedConnections);
 }
 
-function createWhatsNew() {}
+function createWhatsNew(newPost) {
+
+  let mainDiv = document.createElement("div");
+  mainDiv.setAttribute("class", "mainDiv");
+
+  let firstDiv = document.createElement("div");
+  firstDiv.setAttribute("class", "postDiv");
+
+  let firstDivPicture = document.createElement("div");
+  firstDivPicture.setAttribute("class", "postpicture");
+  firstDivPicture.setAttribute(
+    "style",
+    "background-image: url('./images/placeholder.jpg')"
+  );
+  newPost.appendChild(firstDivPicture);
+
+  let firstDivLocation = document.createElement("p");
+  firstDivLocation.setAttribute("class", "divLocation");
+  firstDivLocation.innerHTML = "Burnaby Library";
+  firstDiv.appendChild(firstDivLocation);
+
+  let firstDivPosition = document.createElement("p");
+  firstDivPosition.setAttribute("class", "divPosition");
+  firstDivPosition.innerHTML = "Languages Tutor";
+  firstDiv.appendChild(firstDivPosition);
+
+  let secondDiv = document.createElement("div");
+  secondDiv.setAttribute("class", "postDiv");
+
+  let secondDivPicture = document.createElement("div");
+  secondDivPicture.setAttribute("class", "postpicture");
+  secondDivPicture.setAttribute(
+    "style",
+    "background-image: url('./images/placeholder.jpg')"
+  );
+  newPost.appendChild(secondDivPicture);
+
+  let secondDivLocation = document.createElement("p");
+  secondDivLocation.setAttribute("class", "divLocation");
+  secondDivLocation.innerHTML = "Burnaby Library";
+  firstDiv.appendChild(secondDivLocation);
+
+  let secondDivPosition = document.createElement("p");
+  secondDivPosition.setAttribute("class", "divPosition");
+  secondDivPosition.innerHTML = "Languages Tutor";
+  secondDiv.appendChild(secondDivPosition);
+
+  let thirdDiv = document.createElement("div");
+  thirdDiv.setAttribute("class", "postDiv");
+
+  let thirdDivPicture = document.createElement("div");
+  thirdDivPicture.setAttribute("class", "postpicture");
+  thirdDivPicture.setAttribute(
+    "style",
+    "background-image: url('./images/placeholder.jpg')"
+  );
+  newPost.appendChild(thirdDivPicture);
+
+  let thirdDivLocation = document.createElement("p");
+  thirdDivLocation.setAttribute("class", "divLocation");
+  thirdDivLocation.innerHTML = "Burnaby Library";
+  thirdDiv.appendChild(thirdDivLocation);
+
+  let thirdDivPosition = document.createElement("p");
+  thirdDivPosition.setAttribute("class", "divPosition");
+  thirdDivPosition.innerHTML = "Languages Tutor";
+  thirdDiv.appendChild(thirdDivPosition);
+
+
+  mainDiv.appendChild(firstDiv);
+  mainDiv.appendChild(secondDiv);
+  mainDiv.appendChild(thirdDiv);
+
+
+  newPost.appendChild(mainDiv);
+
+
+
+
+
+
+}
 
