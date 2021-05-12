@@ -237,7 +237,7 @@ function createPost(){
 
 }
 function createEducation(education){
-  
+
 
 }
 function createExperience(){
@@ -252,7 +252,6 @@ function createAwards(awards){
 
 function createFollowers(follower) {
 
-  
   let follow= document.createElement("p");
   follow.setAttribute("class", "followers");
   follow.innerHTML = "150";
