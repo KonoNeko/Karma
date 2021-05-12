@@ -22,7 +22,8 @@ DONEd) View applicants for the posted opportunites - view_applicants
 DONEe) Accept/hire applicants for an opportunity - accept_application
 DONEf) View opportunities a user applied for - view_user_applications
     g) View recommended for you
-    h) Set recommended for you  
+    h) Set recommended for you
+    i) Reject an applicant  
 
 -Social Posts
 DONEa) View all posts (social feed) - posts_feed
@@ -47,7 +48,7 @@ DONEd) Trigger for follow - follow_notification
     f) Trigger for comment
     g) Trigger for comment reply
 DONEh) Create a notification - create_notification
-    i) Trigger for application acceptance
+DONEi) Trigger for application acceptance - application_notification
 */
 
 
@@ -519,6 +520,22 @@ IN applicant_name CHAR(50))
 BEGIN
     UPDATE opportunites_applicants
     SET accepted = 1
+    WHERE opportunity_id = current_opportunity_id
+    AND applicant_username = applicant_name;
+END//
+DELIMITER ;
+
+
+/*
+Marks an application as 'accepted'.
+*/
+DROP PROCEDURE IF EXISTS reject_application;
+DELIMITER //
+CREATE PROCEDURE reject_application(IN current_opportunity_id INTEGER, 
+IN applicant_name CHAR(50))
+BEGIN
+    UPDATE opportunites_applicants
+    SET accepted = 0
     WHERE opportunity_id = current_opportunity_id
     AND applicant_username = applicant_name;
 END//
@@ -1143,11 +1160,28 @@ CREATE trigger follow_notification
 
 
 /*
-Automatically creates a new notification when a user's application is accepted.
+Automatically creates a new notification when a user's application is reviewed.
 */
 DROP TRIGGER IF EXISTS application_notification;
-DELIMITER //
 CREATE trigger application_notification
+    AFTER UPDATE ON opportunites_applicants
+    FOR EACH ROW
+    CALL create_notification(
+        get_user_id(NEW.applicant_username),
+        CONCAT(get_full_name_with_id(get_opportunity_owner_id(NEW.opportunity_id)), " has reviewed your application. Click here to see results"),
+        "opportunites", 
+        NEW.application_id, 
+        NEW.timestamp, 
+        get_profile_pic(get_user_id(NEW.applicant_username)),  
+        (SELECT image_url FROM opportunites WHERE opportunity_id = NEW.opportunity_id)
+    );
+
+/*
+Automatically creates a new notification when a user's application is accepted.
+*/
+DROP TRIGGER IF EXISTS message_notification;
+DELIMITER //
+CREATE trigger message_notification
     AFTER UPDATE ON opportunites_applicants
     FOR EACH ROW
     BEGIN
