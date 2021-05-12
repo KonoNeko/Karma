@@ -123,11 +123,17 @@ function loadFollowers() {
 }
 
 function loadWhatsNew() {
-  createWhatsNew();
+  let whatsNew = document.getElementById(
+    "whats-new-volunteering-opportunities"
+  );
+  createWhatsNew(whatsNew);
 }
 
 function loadRecommendedConnections() {
-  createRecommendedConnection();
+  let recommendedUsers = document.getElementById("recommended-connections");
+  createRecommendedConnection(recommendedUsers);
+  createRecommendedConnection(recommendedUsers);
+  createRecommendedConnection(recommendedUsers);
 }
 
 function addSkills() {
@@ -176,4 +182,100 @@ function addExperience() {
 
   document.getElementById("button-content").appendChild(addExperienceHeading);
   document.getElementById("button-content").appendChild(addExperienceInput);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function createRecommendedConnection(recommended) {
+  let heading = document.createElement("hr");
+  heading.setAttribute("class", "headers");
+
+  recommended.appendChild(heading);
+
+  let recommendedUserDiv = document.createElement("div");
+  recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
+
+  let storyImgDiv = document.createElement("div");
+  storyImgDiv.setAttribute("class", "profilepic");
+  storyImgDiv.setAttribute("style", "padding-bottom: 10px");
+
+  storyImgDiv.setAttribute(
+    "style",
+    "background-image: url('./images/placeholder.jpg')"
+  );
+
+  let userName = document.createElement("p");
+  userName.setAttribute("class", "userNames");
+  userName.innerHTML = "User name";
+
+  let userNameAt = document.createElement("p");
+  userNameAt.setAttribute("class", "userAt");
+  userNameAt.innerHTML = "@Username";
+
+  recommendedUserDiv.appendChild(storyImgDiv);
+  recommendedUserDiv.appendChild(userName);
+  recommendedUserDiv.appendChild(userNameAt);
+
+  recommended.appendChild(recommendedUserDiv);
+
+  let followUser = document.createElement("div");
+  followUser.innerHTML = "FOLLOW";
+  followUser.setAttribute("class", "followUser");
+
+  recommended.appendChild(followUser);
+
+  let heading2 = document.createElement("hr");
+  heading2.setAttribute("class", "headers");
+
+  recommended.appendChild(heading2);
+
+  // let recommendedConnections = document.createElement("p");
+  // recommendedConnections.setAttribute("class", "recommendedConnections");
+  // recommendedConnections.innerHTML = "View all recommended connections";
+
+  // recommended.appendChild(recommendedConnections);
+}
+
+function createWhatsNew(newPost) {
+
+  let opportunityRole = document.createElement("p");
+  opportunityRole.innerHTML = "opportunityRole Role Role";
+  opportunityRole.setAttribute("class", "heading3");
+  opportunityRole.setAttribute("style", "font-weight: 700 !important;");
+
+  let opportunityImgDiv = document.createElement("div");
+  opportunityImgDiv.setAttribute("class", "bulletinboardpicture");
+  opportunityImgDiv.setAttribute("style", "padding-bottom: 10px");
+
+  let opportunityImg = document.createElement("img");
+  opportunityImg.src = "./images/placeholder.jpg";
+  opportunityImgDiv.appendChild(opportunityImg);
+
+  let opportunityLocation = document.createElement("p");
+  opportunityLocation.innerHTML = "opportunityLocation";
+  opportunityLocation.setAttribute("class", "bodytext");
+
+  let opportunityDiv = document.createElement("div");
+  opportunityDiv.setAttribute("class", "opportunity");
+  opportunityDiv.setAttribute("style", "margin-bottom: 10px;");
+  opportunityDiv.appendChild(opportunityImgDiv);
+  opportunityDiv.appendChild(opportunityRole);
+  opportunityDiv.appendChild(opportunityLocation);
+
+  newPost.appendChild(opportunityDiv);
+
 }
