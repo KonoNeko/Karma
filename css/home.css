@@ -53,7 +53,6 @@
 #mainmain > #posts {
   background-color: #eff0f3; /* temp */
   margin-top: 24px;
-  height: 510x; /* temp */
   width: 100%;
   margin-bottom: 24px;
   border-radius: 12px;
@@ -63,7 +62,6 @@
   background-color: #eff0f3;
   margin-top: 24px;
   padding-left: 24px;
-  height: 400px; /* temp */
   padding: 24px;
   width: 100%;
   border-radius: 12px;
@@ -75,20 +73,15 @@
   margin-top: 24px;
   padding: 24px;
   width: 100%;
-  height: 530px; /* temp */
-  border-radius: 12px;
   box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
   margin-bottom: 24px;
 }
 
 .heading-title {
   padding-top: 24px;
-  padding-left: 24px;
 }
 
 @media screen and (max-width: 550px) {
-
-
   .above {
     margin-left: 0;
   }
@@ -174,8 +167,6 @@
 
 .userName {
   /* Body text */
-  /* width: 59px;
-height: 19px; */
   font-family: "Open Sans";
   font-style: normal;
   font-weight: normal;
@@ -219,9 +210,6 @@ height: 19px; */
 }
 
 .userNames {
-  width: 139px;
-  height: 22px;
-
   /* Heading 3 */
 
   font-family: "Montserrat";
@@ -256,9 +244,6 @@ height: 19px; */
 }
 
 #whoto {
-  width: 267px;
-  height: 29px;
-
   /* Heading 2 */
 
   font-family: "Montserrat";
@@ -266,53 +251,62 @@ height: 19px; */
   font-weight: bold;
   font-size: 24px;
   line-height: 29px;
+  margin-bottom: 20px;
 
   color: #0367a6;
 }
 
-.followUser {
-  width: 102px;
-  height: 41px;
+.storyImgDiv {
+  min-width: 80px;
+  min-height: 80px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
 
+.followUserButton {
   /* Accent */
-
   border: 1.5px solid #51b09f;
   box-sizing: border-box;
+  width: 100%;
   border-radius: 40px;
-
   /* Body Title */
-
   font-family: "Open Sans";
   font-style: normal;
   font-weight: bold;
-  font-size: 14px;
-  line-height: 19px;
-
+  font-size: 16px;
+  padding: 10px;
   color: #51b09f;
-
   text-align: center;
 }
 
 .recommendedUserDiv {
   display: flex;
-  
+  align-items: stretch;
 }
-
 
 .name-and-userName {
   justify-content: center;
-
+  margin-left: 20px;
   display: flex;
   flex-direction: column;
   align-items: left;
 }
 
+.followUser {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+}
+
+hr {
+  border: 0.5px solid #51b09f;
+  background-color: #51b09f;
+}
 
 .headers {
-  width: 582px;
   /* height: 1px; */
   border-top: 0.5px solid #51b09f;
-
 }
 
 #whats-new-title {
@@ -331,18 +325,13 @@ height: 19px; */
 }
 
 #recommended-title {
-  width: 531px;
-  height: 22px;
-
+  width: 100%;
   /* Heading 3 */
-
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
-  line-height: 22px;
   /* identical to box height */
-
   color: #000000;
 }
 
@@ -393,19 +382,10 @@ height: 19px; */
   color: #51b09f;
 }
 
-
-
-
 #whats-new-volunteering-opportunities {
-  display: flex; 
+  display: flex;
   overflow: auto;
 }
-
-
-
-
-
-
 
 .content {
   margin-left: 5rem;
@@ -542,6 +522,45 @@ height: 19px; */
 
 .heading2 {
   padding-bottom: 10px;
+}
+
+@media screen and (max-width: 900px) {
+  .name-and-userName {
+    margin-left: 10px;
+  }
+
+  .name-and-userName > .userNames {
+    font-size: 14px;
+  }
+
+  .name-and-userName > .userAt {
+    font-size: 10px;
+  }
+
+  .storyImgDiv {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+  }
+
+  .followUserButton {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .followUserButton {
+    max-width: 30px;
+  }
+
+  .name-and-userName > .userNames {
+    font-size: 12px;
+  }
+
+  .name-and-userName > .userAt {
+    font-size: 8px;
+  }
 }
 
 @media screen and (max-width: 550px) {
