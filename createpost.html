@@ -62,22 +62,38 @@ Write a caption here...
           <input type="file" id="file" style="display: none;">
         </div>
         <div class="button">
-          <button class="secondarybutton">Post</button>
+          <button id="postBtn" class="secondarybutton">Post</button>
         </div>
       </div>
     </div>
 
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<div id="locationModal" class="modal">
 
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
+    <textarea id="location" rows="4" cols="50">
+      Add a location here...
+    </textarea>
   </div>
 
 </div>
+
+
+<!-- The Modal -->
+<div id="tagPeopleModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <textarea id="tags" rows="4" cols="50">
+       Tag people here...
+      </textarea>
+    </div>
+  
+  </div>
   
 
 
@@ -87,7 +103,7 @@ Write a caption here...
     
     
     // Get the modal
-var modal = document.getElementById("myModal");
+var modal = document.getElementById("locationModal");
 
 // Get the button that opens the modal
 var btn = document.getElementById("marker");
@@ -120,7 +136,7 @@ window.onclick = function(event) {
     
     
     // Get the modal
-var modal = document.getElementById("myModal");
+var modal = document.getElementById("tagPeopleModal");
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
