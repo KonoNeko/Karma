@@ -48,7 +48,7 @@ function generatePostNotification() {
   let notificationAction = document.createElement("span");
   let notificationTime = document.createElement("p");
 
-  notificationText.setAttribute("style", "padding-left: 20px; width: 80%;");
+  notificationText.setAttribute("style", "padding-left: 20px; width: 100%;");
   notificationAuthor.setAttribute("class", "bodytitle");
   notificationAction.setAttribute("class", "bodytext");
   notificationTime.setAttribute("class", "smalltext");
@@ -102,7 +102,7 @@ function generatePostNotificationOtherUser() {
   let notificationAction2 = document.createElement("span");
   let notificationTime = document.createElement("p");
 
-  notificationText.setAttribute("style", "padding-left: 20px; width: 80%;");
+  notificationText.setAttribute("style", "padding-left: 20px; width: 100%;");
   notificationAuthor.setAttribute("class", "bodytitle");
   notificationPoster.setAttribute("class", "bodytitle");
   notificationAction.setAttribute("class", "bodytext");
@@ -162,7 +162,7 @@ function generatePostNotificationFollowedYou() {
   let notificationAction = document.createElement("span");
   let notificationTime = document.createElement("p");
 
-  notificationText.setAttribute("style", "padding-left: 20px; width: 80%;");
+  notificationText.setAttribute("style", "padding-left: 20px; width: 100%;");
   notificationAuthor.setAttribute("class", "bodytitle");
   notificationAction.setAttribute("class", "bodytext");
   notificationTime.setAttribute("class", "smalltext");
@@ -205,7 +205,6 @@ function generatePostNotificationFollowedYouRequest() {
 
   let notificationText = document.createElement("div");
   notificationText.setAttribute("class", "notificationText");
-
   let notificationActionAuthor = document.createElement("p");
   let notificationAuthor = document.createElement("span");
   let notificationAction = document.createElement("span");
@@ -213,7 +212,7 @@ function generatePostNotificationFollowedYouRequest() {
 
   notificationText.setAttribute(
     "style",
-    "padding-left: 20px; width: 80%; margin-right: 20px;"
+    "padding-left: 20px; width: 100%; margin-right: 20px;"
   );
   notificationAuthor.setAttribute("class", "bodytitle");
   notificationAction.setAttribute("class", "bodytext");
