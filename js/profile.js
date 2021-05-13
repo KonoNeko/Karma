@@ -113,15 +113,18 @@ function loadSkills() {
 function loadEducation() {
   let education = document.getElementById("education");
   createEducation(education);
+  createEducation(education);
 }
 
 function loadExperience() {
   let experience = document.getElementById("experience");
   createExperience(experience);
+  createExperience(experience);
 }
 
 function loadAwards() {
   let awards = document.getElementById("awards");
+  createAwards(awards);
   createAwards(awards);
 }
 
