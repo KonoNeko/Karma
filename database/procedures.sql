@@ -44,7 +44,7 @@ DONEa) View all notifications - view_notifications
 DONEb) Trigger for like notification - like_notification
 DONEc) Trigger for follow request notification - follow_request_notification
 DONEd) Trigger for follow - follow_notification
-    e) Trigger for new message
+DONEe) Trigger for new message
     f) Trigger for comment
     g) Trigger for comment reply
 DONEh) Create a notification - create_notification
@@ -988,9 +988,35 @@ DROP PROCEDURE IF EXISTS delete_comment;
 DELIMITER //
 CREATE PROCEDURE delete_comment(IN del_comment_id INTEGER)
 BEGIN
+    DELETE FROM notifications
+    WHERE profile_id = (SELECT get_post_owner_id(post_id) FROM post_comments WHERE comment_id = del_comment_id)
+    AND `timestamp` = (
+        SELECT post_date FROM post_comments WHERE comment_id = del_comment_id 
+        AND user_id = (SELECT pc.user_id FROM post_comments pc WHERE comment_id = del_comment_id)
+    );
     DELETE FROM post_comments
     WHERE comment_id = del_comment_id;
 END//
+DELIMITER ;
+
+
+/*
+Gets the comment for a given comment id.
+*/
+DROP FUNCTION IF EXISTS get_comment;
+DELIMITER //
+CREATE FUNCTION get_comment(current_comment INTEGER) 
+RETURNS CHAR(18) READS SQL DATA
+BEGIN
+    RETURN(
+        SELECT 
+        CASE
+            WHEN CHAR_LENGTH(comment) > 15 THEN CONCAT(LEFT(comment, 15), "...")
+            ELSE comment
+            END
+        FROM post_comments WHERE comment_id = current_comment
+    );
+END //
 DELIMITER ;
 
 
@@ -1083,7 +1109,7 @@ BEGIN
     WHERE post_id = current_post AND user_id = get_user_id(liker_id);
 END//
 DELIMITER ;
-2021-05-11 22:44:28
+
 
 /*
 Decrements the number of likes a post has.
@@ -1137,13 +1163,14 @@ Creates a new notification.
 DROP PROCEDURE IF EXISTS create_notification;
 DELIMITER //
 CREATE PROCEDURE create_notification (IN current_user_id INTEGER, 
-IN new_msg TEXT, IN event_type CHAR(50), IN id_of_entry INTEGER,
-IN new_time TIMESTAMP, IN profile_pic TEXT, IN post_pic TEXT)
+IN new_user CHAR(50), IN new_msg TEXT, IN event_type CHAR(50), 
+IN id_of_entry INTEGER, IN new_time TIMESTAMP, IN profile_pic TEXT, 
+IN post_pic TEXT)
 BEGIN
     INSERT INTO notifications (
-        `profile_id`, `message`, `type_of_event`, `id_of_event`, 
+        `profile_id`, `username_of_notification`, `message`, `type_of_event`, `id_of_event`, 
         `timestamp`, `profile_pic_url`, `post_pic_url`)
-    VALUES (current_user_id, new_msg, event_type, id_of_entry, new_time,
+    VALUES (current_user_id, new_user, new_msg, event_type, id_of_entry, new_time,
     profile_pic, post_pic);
 END//
 DELIMITER ;
@@ -1158,7 +1185,8 @@ CREATE trigger like_notification
     FOR EACH ROW
     CALL create_notification(
         get_post_owner_id(NEW.post_id),
-        CONCAT(get_user_name(NEW.user_id), " has liked your post."),
+        get_user_name(NEW.user_id),
+        " has liked your post.",
         "social_posts", 
         NEW.post_id, 
         NEW.like_date, 
@@ -1176,7 +1204,8 @@ CREATE trigger follow_request_notification
     FOR EACH ROW
     CALL create_notification(
         NEW.profile_id,
-        CONCAT(get_user_name(NEW.follower_id), " has requested to follow you."),
+        get_user_name(NEW.follower_id),
+        " has requested to follow you.",
         "profile_follows request", 
         NEW.follow_id, 
         NEW.timestamp, 
@@ -1194,7 +1223,8 @@ CREATE trigger follow_notification
     FOR EACH ROW
     CALL create_notification(
         NEW.profile_id,
-        CONCAT(get_user_name(NEW.follower_id), " is now following you."),
+        get_user_name(NEW.follower_id),
+        " is now following you.",
         "profile_follows accepted", 
         NEW.follow_id, 
         NEW.timestamp, 
@@ -1212,7 +1242,8 @@ CREATE trigger application_notification
     FOR EACH ROW
     CALL create_notification(
         get_user_id(NEW.applicant_username),
-        CONCAT(get_full_name_with_id(get_opportunity_owner_id(NEW.opportunity_id)), " has reviewed your application. Click here to see results"),
+        get_full_name_with_id(get_opportunity_owner_id(NEW.opportunity_id)),
+        " has reviewed your application. Click here to see results",
         "opportunites", 
         NEW.application_id, 
         NEW.timestamp, 
@@ -1220,25 +1251,20 @@ CREATE trigger application_notification
         (SELECT image_url FROM opportunites WHERE opportunity_id = NEW.opportunity_id)
     );
 
--- /*
--- Automatically creates a new notification when a user's application is accepted.
--- */
--- DROP TRIGGER IF EXISTS message_notification;
--- DELIMITER //
--- CREATE trigger message_notification
---     AFTER UPDATE ON opportunites_applicants
---     FOR EACH ROW
---     BEGIN
---         IF NEW.accepted <> 0 THEN
---             CALL create_notification(
---                 get_user_id(NEW.applicant_username),
---                 CONCAT(get_user_name(get_opportunity_owner_id(NEW.opportunity_id)), " accepted your application."),
---                 "opportunites", 
---                 NEW.application_id, 
---                 NEW.timestamp, 
---                 get_profile_pic(get_user_id(NEW.applicant_username)),  
---                 (SELECT image_url FROM opportunites WHERE opportunity_id = NEW.opportunity_id)
---             );
---         END IF;
---     END//   
--- DELIMITER ;
+/*
+Automatically creates a new notification when a user likes a social post.
+*/
+DROP TRIGGER IF EXISTS comment_notification;
+CREATE trigger comment_notification
+    AFTER INSERT ON post_comments
+    FOR EACH ROW
+    CALL create_notification(
+        get_post_owner_id(NEW.post_id),
+        get_user_name(NEW.user_id),
+        SELECT GROUP_CONCAT(" has commented on your post: '", get_comment(NEW.comment_id), "'"),
+        "social_posts", 
+        NEW.post_id, 
+        NEW.post_date, 
+        get_profile_pic(NEW.user_id),  
+        (SELECT image_url FROM social_posts WHERE post_id = NEW.post_id)
+    );

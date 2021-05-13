@@ -112,7 +112,19 @@ CREATE TABLE post_comments (
     `is_a_reply` TINYINT(1) DEFAULT 0,
     `id_of_comment_receiving_reply` INTEGER, 
     `post_date` TIMESTAMP DEFAULT NOW(), 
+    `likes` INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (`post_id`) REFERENCES social_posts (`post_id`),
+    FOREIGN KEY (`user_id`) REFERENCES profiles (`profile_id`)
+);
+
+CREATE TABLE comment_likes (
+    `like_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `post_id` INTEGER NOT NULL,
+    `comment_id` INTEGER NOT NULL,
+    `user_id` INTEGER NOT NULL,
+    `like_date` TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (`post_id`) REFERENCES social_posts (`post_id`),
+    FOREIGN KEY (`comment_id`) REFERENCES post_comments (`comment_id`),
     FOREIGN KEY (`user_id`) REFERENCES profiles (`profile_id`)
 );
 
@@ -174,6 +186,7 @@ CREATE TABLE volunteer_categories (
 CREATE TABLE notifications (
     `notifiation_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `profile_id` INTEGER NOT NULL,
+    `username_of_notification` CHAR(50) NOT NULL,
     `profile_pic_url` TEXT NOT NULL,
     `post_pic_url` TEXT, 
     `message` TEXT NOT NULL,
