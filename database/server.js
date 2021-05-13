@@ -32,6 +32,19 @@ app.get(ENDPOINT + '/posts', (req, res) => {
     });
 });
 
+/**
+ * Gets all posts for a user's social feed in order of date posted.
+ */
+app.get(ENDPOINT + '/posts/:userID', (req, res) => {
+    const id = req.params.userID;
+    const sql = `CALL user_posts_feed('${id}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        let resultText = JSON.stringify(result);
+        res.end(resultText);
+    });
+});
+
 
 /**
  * Gets the profile information for a given user.
@@ -278,7 +291,7 @@ app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
  * Example URL of the request (replace 'value' with an actual value):
  * https://marlonfajardo.ca/karma/v1/profiles/bio?id=value&bio=value
  */
- app.put(ENDPOINT + '/profiles/bio', (req, res) => {
+app.put(ENDPOINT + '/profiles/bio', (req, res) => {
     const userID = req.query.id;
     const newBio = req.query.bio;
     const sql = `CALL change_bio("${userID}", "${newBio}");`;
@@ -299,7 +312,7 @@ app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
  * Example URL of the request (replace 'value' with an actual value):
  * https://marlonfajardo.ca/karma/v1/profiles/picture?id=value&picUrl=value
  */
- app.put(ENDPOINT + '/profiles/picture', (req, res) => {
+app.put(ENDPOINT + '/profiles/picture', (req, res) => {
     const userID = req.query.id;
     const newPic = req.query.picUrl;
     const sql = `CALL change_profile_pic("${userID}", "${newPic}");`;
@@ -317,50 +330,171 @@ app.put(ENDPOINT + '/profiles/awardsAndCertification', (req, res) => {
 /**
  * Gets all categories of volunteer work.
  */
- app.get(ENDPOINT + '/categories', (req, res) => {
+app.get(ENDPOINT + '/categories', (req, res) => {
     const sql = "SELECT * FROM volunteer_categories;";
     db.query(sql, (err, result) => {
         if (err) throw err;
-        let resultText = JSON.stringify(result);
-        res.end(resultText);
+        let filteredResults = [];
+        for (let i=0; i<result.length; i++) {
+            filteredResults[i] = result[i].category;
+        }
+        res.end(JSON.stringify(filteredResults));
     });
 });
+
+
+/**
+ * Gets a single social post.
+ */
+app.get(ENDPOINT + '/post', (req, res) => {
+    const userID = req.query.id;
+    const postID = req.query.post;
+    const sql = `CALL view_post(${postID}, "${userID}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result));
+    });
+});
+
+
+/**
+ * Likes a post with a given userid and post id
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/post/like?id=value&post=value
+ */
+app.post(ENDPOINT + '/post/like', (req, res) => {
+    const userID = req.query.id;
+    const postID = req.query.post;
+    const sql = `CALL like_post(${postID}, "${userID}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success liking post");
+        } else {
+            res.send("Error liking post");
+        }
+    });
+});
+
+
+/**
+ * Unlikes a post with a given userid and post id
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/post/like?id=value&post=value
+ */
+app.delete(ENDPOINT + '/post/like', (req, res) => {
+    const userID = req.query.id;
+    const postID = req.query.post;
+    const sql = `CALL unlike_post(${postID}, "${userID}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success unliking post");
+        } else {
+            res.send("Error unliking post");
+        }
+    });
+});
+
+
+/**
+ * Comments a post with a given userid, post id and message.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/post/like?id=value&post=value&msg=value
+ */
+app.post(ENDPOINT + '/post/comment', (req, res) => {
+    const userID = req.query.id;
+    const postID = req.query.post;
+    const message = req.query.msg;
+    const sql = `CALL comment_on_post(${postID}, "${userID}", "${message}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success commenting on post");
+        } else {
+            res.send("Error commenting post");
+        }
+    });
+});
+
+
+/**
+ * Deletes a comment on a post with a given comment id.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/post/like?id=value
+ */
+ app.delete(ENDPOINT + '/post/comment', (req, res) => {
+    const commentID = req.query.id;
+    const sql = `CALL delete_comment(${commentID});`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success deleting comment on post");
+        } else {
+            res.send("Error deleting comment post");
+        }
+    });
+});
+
+
+/**
+ * Gets a single social post's comment.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/post/like?post=value
+ */
+ app.get(ENDPOINT + '/post/comments', (req, res) => {
+    const postID = req.query.post;
+    const sql = `CALL view_comments(${postID});`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        let comments = filter.comments(result[0]);
+        res.end(JSON.stringify(comments));
+    });
+});
+
 
 
 /*
 TODO:
 -Profile
-DONEa) Add skills (PUT - new_skill_entry) TESTED
-DONEb) Remove skills (DELETE - remove_skill_entry) TESTED
-DONEc) Add education (POST - new_education_entry) TESTED
-DONEd) Edit education (PUT - edit_education_entry) TESTED
-DONEe) Add experience (POST - new_experience_entry) TESTED
-DONEf) Edit experience (PUT - edit_experience_entry) TESTED
-DONEg) Add award/certification (POST - new_award_entry) TESTED
-DONEh) Edit award/certification (PUT - edit_award_entry) TESTED
-DONEi) Edit profile pic (PUT - change_profile_pic) TESTED
-DONEj) Edit bio (PUT - change_bio) TESTED
+DONEa) Add skills (PUT - new_skill_entry)                           TESTED
+DONEb) Remove skills (DELETE - remove_skill_entry)                  TESTED
+DONEc) Add education (POST - new_education_entry)                   TESTED
+DONEd) Edit education (PUT - edit_education_entry)                  TESTED
+DONEe) Add experience (POST - new_experience_entry)                 TESTED
+DONEf) Edit experience (PUT - edit_experience_entry)                TESTED
+DONEg) Add award/certification (POST - new_award_entry)             TESTED
+DONEh) Edit award/certification (PUT - edit_award_entry)            TESTED
+DONEi) Edit profile pic (PUT - change_profile_pic)                  TESTED
+DONEj) Edit bio (PUT - change_bio)                                  TESTED
     k) Request to follow a user
     l) Accept a follow request
     m) Unfollow a user
 
 -Bulletin Board
-    a) View all opportunities (GET - _______)
-    b) Post new opportunity (POST - _______)
-    c) Apply to opportunity (PUT - _______)
-    d) View applicants (GET - _______)
-    e) View opportunites applied for (GET - _____)
-    f) View all categories (GET - SELECT...)
+    a) View all opportunities (GET - bulletin_board)
+    b) Post new opportunity (POST - new_opportunity)
+    c) Apply to opportunity (PUT - apply_for_opportunity)
+    d) View applicants (GET - view_applicants)
+    e) View opportunites applied for (GET - view_user_applications)
+DONEf) View all categories (GET - SELECT...)                        TESTED
     g) View recommended opportunitues (GET - ____)
 
 -Social Posts
-DONEa) View social feed (GET - posts_feed) TESTED
-    b) View single social post (GET - _____)
-    c) Like post (PUT - like_post)
-    d) Unlike post (DELETE - unlike_post)
-    e) Comment on a post (POST - _____)
-    f) View all comments (GET - _____)
-    g) View stories
+DONEa) View site-wide social feed (GET - posts_feed)                TESTED
+DONEb) View single social post (GET - view_post)                    TESTED
+DONEc) Like post (PUT - like_post)                                  TESTED
+DONEd) Unlike post (DELETE - unlike_post)                           TESTED
+DONEe) Comment on a post (POST - comment_on_post)                   TESTED
+DONEf) View all comments (GET - view_comments)                      TESTED
+    g) View stories - TODO
+DONEh) View social feed for a user (GET - user_posts_feed)          TESTED
+DONEi) Delete comment - (DELETE - delete_comment)                   TESTED
 
 -Messages
     a) View all messages for a conversation (GET - _____)

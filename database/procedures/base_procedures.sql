@@ -546,7 +546,7 @@ DROP PROCEDURE IF EXISTS view_post;
 DELIMITER //
 CREATE PROCEDURE view_post(IN current_post INTEGER, IN current_username CHAR(50))
 BEGIN
-    SELECT pf.*, is_liked_by_user(pf.post_id, current_username) AS is_liked 
+    SELECT pf.*, is_liked_by_user(current_username, pf.post_id) AS is_liked 
     FROM posts_feed pf
     WHERE pf.post_id = current_post;
 END//

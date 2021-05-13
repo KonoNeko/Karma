@@ -73,8 +73,32 @@ function fillCertifications(object) {
     return awardsAndCertifications;
 }
 
+
+function fillComments(object) {
+    let comments = {};
+    for (let i=0; i<object.length; i++) {
+        let currentID = object[i]['comment_id'];
+        if (object[i]['is_a_reply']) {
+            let comment_being_replied_to = object[i]['id_of_comment_receiving_reply'];
+            
+            // If a replies object doesn't exist yet
+            if(!comments[comment_being_replied_to]['replies']) {
+                comments[comment_being_replied_to]['replies'] = {};
+            }
+            comments[comment_being_replied_to]['replies'][currentID] = object[i];
+            
+        } else if (!comments[currentID]) {
+        // If current comment isn't parsed
+            comments[currentID] = object[i];
+        }
+    }
+    return comments;
+}
+
+
 module.exports.profile = fillProfile;
 module.exports.education = fillEducation;
 module.exports.experience = fillExperience;
 module.exports.skills = fillSkills;
 module.exports.certifications = fillCertifications;
+module.exports.comments = fillComments;
