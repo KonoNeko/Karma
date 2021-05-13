@@ -458,6 +458,62 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
 });
 
 
+/**
+ * Gets all opportunites posted sorted by category.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/post/like
+ */
+ app.get(ENDPOINT + '/opportunities', (req, res) => {
+    const sql = `SELECT * FROM bulletin_board;`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result));
+    });
+});
+
+/**
+ * Creates a new volunteer opportunity.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/opportunities?id=value&category=value&date=value&title=value&desc=value&requires=value&img=value
+ */
+ app.post(ENDPOINT + '/opportunities', (req, res) => {
+    const userID = req.query.id;
+    const category = req.query.category;
+    const date = req.query.date;
+    const title = req.query.title;
+    const desc = req.query.desc;
+    const requires = req.query.requires;
+    const img = req.query.img;
+    const sql = `CALL new_opportunity("${userID}", "${category}", "${date}", 
+    "${title}", "${desc}", "${requires}", "${img}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success creating new opportunity");
+        } else {
+            res.send("Error creating new opportunity");
+        }
+    });
+});
+
+
+/**
+ * Gets all applicants for an opportunity.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1//opportunities/applicants
+ */
+ app.get(ENDPOINT + '/opportunities/applicants', (req, res) => {
+    const opportunityID = req.query.id;
+    const sql = `CALL view_applicants(${opportunityID})`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result));
+    });
+});
+
 
 /*
 TODO:
@@ -477,8 +533,8 @@ DONEj) Edit bio (PUT - change_bio)                                  TESTED
     m) Unfollow a user
 
 -Bulletin Board
-    a) View all opportunities (GET - bulletin_board)
-    b) Post new opportunity (POST - new_opportunity)
+DONEa) View all opportunities (GET - bulletin_board)                TESTED
+DONEb) Post new opportunity (POST - new_opportunity)                TESTED
     c) Apply to opportunity (PUT - apply_for_opportunity)
     d) View applicants (GET - view_applicants)
     e) View opportunites applied for (GET - view_user_applications)
