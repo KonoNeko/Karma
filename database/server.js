@@ -537,7 +537,7 @@ DONEj) Edit bio (PUT - change_bio)                                  TESTED
 DONEa) View all opportunities (GET - bulletin_board)                TESTED
 DONEb) Post new opportunity (POST - new_opportunity)                TESTED
     c) Apply to opportunity (PUT - apply_for_opportunity)
-    d) View applicants (GET - view_applicants)
+DONEd) View applicants (GET - view_applicants)                      TESTED
     e) View opportunites applied for (GET - view_user_applications)
 DONEf) View all categories (GET - SELECT...)                        TESTED
     g) View recommended opportunitues (GET - ____)
