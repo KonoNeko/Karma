@@ -189,3 +189,6 @@ body {
   color: #51b09f;
   font-weight: bold;
 }
+
+@media screen and (max-width: 550px) {
+}

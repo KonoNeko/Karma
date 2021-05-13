@@ -103,20 +103,28 @@ function loadPosts() {
 function loadSkills() {
   let skills = document.getElementById("skills");
   createSkills(skills);
+  createSkills(skills);
+  createSkills(skills);
+  createSkills(skills);
+  createSkills(skills);
+  createSkills(skills);
 }
 
 function loadEducation() {
   let education = document.getElementById("education");
+  createEducation(education);
   createEducation(education);
 }
 
 function loadExperience() {
   let experience = document.getElementById("experience");
   createExperience(experience);
+  createExperience(experience);
 }
 
 function loadAwards() {
   let awards = document.getElementById("awards");
+  createAwards(awards);
   createAwards(awards);
 }
 
@@ -236,7 +244,13 @@ function createProfilePic(profile){
   // );
   // profile.appendChild(picture);
 }
-function createSkills(){
+function createSkills(skills){
+  let skillbtn = document.createElement("button");
+  skillbtn.setAttribute("class", "skillsbtn");
+  skillbtn.innerHTML = "Leadership"
+
+  skills.appendChild(skillbtn)
+
 
 
 }
@@ -257,16 +271,75 @@ function createPost(posts){
 
 }
 function createEducation(education){
+  let heading1 = document.createElement("h3")
+  heading1.setAttribute("class", "schoolheading");
+  heading1.innerHTML = "Burnaby Mountain Secondary School";
 
+
+  let postdiv = document.createElement("div");
+  postdiv.setAttribute("class", "postdiv");
+
+  let picture = document.createElement("img");
+  picture.setAttribute("class", "educationpic");
+  picture.src = "./images/education.jpeg"
+
+  let para= document.createElement("p");
+  para.setAttribute("class", "schoolpara");
+  para.innerHTML = "September 2016 to June 2021";
+
+  postdiv.appendChild(picture);
+  education.appendChild(heading1);
+  education.appendChild(para);
+  education.appendChild(postdiv);
+  
 
 }
-function createExperience(){
+function createExperience(experience){
+  let heading1 = document.createElement("h3")
+  heading1.setAttribute("class", "expheading");
+  heading1.innerHTML = "Library assistant";
 
+
+  let postdiv = document.createElement("div");
+  postdiv.setAttribute("class", "postdiv");
+
+  let picture = document.createElement("img");
+  picture.setAttribute("class", "experiencepic");
+  picture.src = "./images/experience.jpeg"
+
+  let para= document.createElement("p");
+  para.setAttribute("class", "exppara");
+  para.innerHTML = "Archimedes Library, Newton";
+
+  postdiv.appendChild(picture);
+  experience.appendChild(heading1);
+  experience.appendChild(para);
+  experience.appendChild(postdiv);
 
 }
 
 
 function createAwards(awards){
+  let heading1 = document.createElement("h3")
+  heading1.setAttribute("class", "awardsheading");
+  heading1.innerHTML = "District Authority Award in English Literature";
+
+
+  let postdiv = document.createElement("div");
+  postdiv.setAttribute("class", "postdiv");
+
+  let picture = document.createElement("img");
+  picture.setAttribute("class", "awardspic");
+  picture.src = "./images/awards.jpg"
+
+  let para= document.createElement("p");
+  para.setAttribute("class", "awardspara");
+  para.innerHTML = "Received July 2021";
+
+  postdiv.appendChild(picture);
+  awards.appendChild(heading1);
+  awards.appendChild(para);
+  awards.appendChild(postdiv);
 
 }
 
