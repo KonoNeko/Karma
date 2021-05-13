@@ -8,6 +8,9 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #flex-nav {
@@ -45,7 +48,7 @@ body {
 
 #introduction {
   margin: 40px;
-  width: 40%;
+  width: 30%;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -82,12 +85,23 @@ body {
   margin: 80px;
 }
 
+#flex-about > .heading1,
+#flex-features-div > .heading1 {
+  margin-bottom: 40px;
+}
+
 .featureimg {
   border-radius: 10px;
   margin-right: 20px;
   width: 10%;
+  background-color: #214049;
   min-width: 100px;
   height: auto;
+  padding: 10px;
+}
+
+.flex-features-column > .featureimg {
+  margin-bottom: 20px;
 }
 
 .flex-column {
@@ -132,18 +146,12 @@ body {
   margin-bottom: 10px;
 }
 
-.bottom-signup-button {
-  margin-top: 120px;
-  margin-bottom: 120px;
-}
-
-.bottom-signup-button > #bottom-signup-button {
+#bottom-signup-button {
   width: 40%;
   max-width: 250px;
 }
 
-#create-account-button,
-#bottom-signup-button {
+#create-account-button {
   background-image: linear-gradient(
     to right,
     #49a1b9 0%,
@@ -151,8 +159,7 @@ body {
     #4d95bd 100%
   );
 }
-#create-account-button,
-#bottom-signup-button {
+#create-account-button {
   margin-top: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -170,8 +177,34 @@ body {
   cursor: pointer;
 }
 
-#create-account-button,
 #bottom-signup-button {
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 50%;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  outline: none;
+  border: none;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: #49a1b9;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#blue-blob-div {
+  height: 250px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+#create-account-button {
   background-position: right center; /* change the direction of the change here */
   color: #eff0f3;
   text-decoration: none;
