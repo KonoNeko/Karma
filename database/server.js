@@ -468,7 +468,8 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
     const sql = `SELECT * FROM bulletin_board;`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        res.end(JSON.stringify(result));
+        let sortedOpportunities = filter.opportunities(result[0]);
+        res.end(JSON.stringify(sortedOpportunities));
     });
 });
 
