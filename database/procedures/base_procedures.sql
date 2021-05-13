@@ -487,14 +487,84 @@ DELIMITER ;
 
 
 /*
+Determines if a given post has been liked the provided user.
+*/
+DROP FUNCTION IF EXISTS is_liked_by_user;
+DELIMITER //
+CREATE FUNCTION is_liked_by_user(current_username CHAR(50), current_post INTEGER) 
+RETURNS INTEGER READS SQL DATA
+BEGIN
+    RETURN (
+        SELECT
+            CASE
+            WHEN COUNT(like_id) <> 0 THEN 1
+            ELSE 0
+            END
+            FROM post_likes
+            WHERE post_id = current_post AND user_id = get_user_id(current_username)
+    );
+END //
+DELIMITER ;
+
+
+/*
+Determines if a user is following another given user.
+*/
+DROP FUNCTION IF EXISTS is_following;
+DELIMITER //
+CREATE FUNCTION is_following(current_username CHAR(50), other_username INTEGER) 
+RETURNS INTEGER READS SQL DATA
+BEGIN
+    RETURN (
+        SELECT
+            CASE
+            WHEN COUNT(follow_id) <> 0 THEN 1
+            ELSE 0
+            END
+            FROM profile_follows
+            WHERE profile_id = other_username AND follower_id = get_user_id(current_username)
+    );
+END //
+DELIMITER ;
+
+
+/*
 Gathers all the posts to fill a social feed
 */
 CREATE VIEW posts_feed as
 SELECT s.image_url, s.caption, s.location, s.post_date, 
-s.likes, p.username, p.profile_pic_url, s.user_id, s.post_id
+s.likes, p.username, p.profile_pic_url, s.user_id, s.post_id, s.comments
 FROM social_posts s JOIN profiles p
 ON s.user_id = p.profile_id
 ORDER BY s.post_date
+
+
+/*
+Views a single post with a given post id and username.
+*/
+DROP PROCEDURE IF EXISTS view_post;
+DELIMITER //
+CREATE PROCEDURE view_post(IN current_post INTEGER, IN current_username CHAR(50))
+BEGIN
+    SELECT pf.*, is_liked_by_user(pf.post_id, current_username) AS is_liked 
+    FROM posts_feed pf
+    WHERE pf.post_id = current_post;
+END//
+DELIMITER ;
+
+
+/*
+Gets a user's post feed determined by the people they follow.
+*/
+DROP PROCEDURE IF EXISTS user_posts_feed;
+DELIMITER //
+CREATE PROCEDURE user_posts_feed(IN current_username CHAR(50))
+BEGIN
+    SELECT pf.*, is_liked_by_user(current_username, pf.post_id) AS is_liked 
+    FROM posts_feed pf
+    WHERE is_following(current_username, pf.user_id);
+END//
+DELIMITER ;
 
 
 /*
