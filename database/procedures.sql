@@ -10,9 +10,9 @@ DONEf) Unfollow a user - unfollow_user
     g) Reject a follow request
 
 -Messaging
-DONEa) View all messages for a conversation
-DONEb) Send a message to a user - 
-DONEc) View all conversations of a user
+DONEa) View all messages for a conversation - view_a_conversation
+DONEb) Send a message to a user - send_message
+DONEc) View all conversations of a user - view_conversations
 
 -Bulletin Board
 DONEa) See all opportunities (by category) - bulletin_board
@@ -23,7 +23,7 @@ DONEe) Accept/hire applicants for an opportunity - accept_application
 DONEf) View opportunities a user applied for - view_user_applications
     g) View recommended for you
     h) Set recommended for you
-    i) Reject an applicant  
+DONEi) Reject an applicant  
 
 -Social Posts
 DONEa) View all posts (social feed) - posts_feed
@@ -48,7 +48,7 @@ DONEd) Trigger for follow - follow_notification
     f) Trigger for comment
     g) Trigger for comment reply
 DONEh) Create a notification - create_notification
-DONEi) Trigger for application acceptance - application_notification
+DONEi) Trigger for application review - application_notification
 */
 
 
@@ -310,7 +310,7 @@ DELIMITER ;
 
 
 /*
-Gets all the conversations from 
+Gets all the conversations for a given user.
 */
 DROP PROCEDURE IF EXISTS view_conversations;
 DELIMITER //
@@ -319,7 +319,8 @@ BEGIN
     SELECT DISTINCT con.conversation_id, 
     get_other_user(con.conversation_id, current_username) as other_user,
     get_latest_message(con.conversation_id) as latest_message,
-    get_latest_message_timestamp(con.conversation_id) as latest_message_timestamp
+    get_latest_message_timestamp(con.conversation_id) as latest_message_timestamp,
+    (SELECT (get_unread_messages(con.conversation_id, current_username) > 0)) as has_unread_messages
     FROM conversations con JOIN messages m
     WHERE con.user_id_1 = get_user_id(current_username)
     OR con.user_id_2 = get_user_id(current_username);
@@ -328,7 +329,7 @@ DELIMITER ;
 
 
 /*
-Gets all the messages in a conversation.
+Gets all the messages in a conversation, it also marks all sent to the current user as 'read'.
 */
 DROP PROCEDURE IF EXISTS view_a_conversation;
 DELIMITER //
@@ -339,6 +340,10 @@ BEGIN
     FROM messages
     WHERE conversation_id = current_conversation
     ORDER BY message_id;
+
+    UPDATE messages
+    SET message_read = 1
+    WHERE conversation_id = current_conversation AND receiver_id = get_user_id(current_username);
 END//
 DELIMITER ;
 
@@ -419,6 +424,45 @@ BEGIN
     get_conversation_id(sender_id, receiver_id), new_msg);
 END//
 DELIMITER ;
+
+
+/*
+Determines if a conversations has unread messages (returns the number of unread messages).
+*/
+DROP FUNCTION IF EXISTS get_unread_messages;
+DELIMITER //
+CREATE FUNCTION get_unread_messages(convo INTEGER, current_username CHAR(50)) 
+RETURNS INTEGER READS SQL DATA
+BEGIN
+    RETURN (
+        SELECT COUNT(message_id) 
+        FROM messages 
+        WHERE conversation_id = convo 
+        AND receiver_id = get_user_id(current_username) 
+        AND message_read = 0
+    );
+END //
+DELIMITER ;
+
+
+/*
+Determines if a conversations has unread messages (returns the number of unread messages).
+*/
+DROP FUNCTION IF EXISTS get_unread_messages;
+DELIMITER //
+CREATE FUNCTION get_unread_messages(convo INTEGER, current_username CHAR(50)) 
+RETURNS INTEGER READS SQL DATA
+BEGIN
+    RETURN (
+        SELECT COUNT(message_id) 
+        FROM messages 
+        WHERE conversation_id = convo 
+        AND receiver_id = get_user_id(current_username) 
+        AND message_read = 0
+    );
+END //
+DELIMITER ;
+
 
 
 /*
@@ -1176,25 +1220,25 @@ CREATE trigger application_notification
         (SELECT image_url FROM opportunites WHERE opportunity_id = NEW.opportunity_id)
     );
 
-/*
-Automatically creates a new notification when a user's application is accepted.
-*/
-DROP TRIGGER IF EXISTS message_notification;
-DELIMITER //
-CREATE trigger message_notification
-    AFTER UPDATE ON opportunites_applicants
-    FOR EACH ROW
-    BEGIN
-        IF NEW.accepted <> 0 THEN
-            CALL create_notification(
-                get_user_id(NEW.applicant_username),
-                CONCAT(get_user_name(get_opportunity_owner_id(NEW.opportunity_id)), " accepted your application."),
-                "opportunites", 
-                NEW.application_id, 
-                NEW.timestamp, 
-                get_profile_pic(get_user_id(NEW.applicant_username)),  
-                (SELECT image_url FROM opportunites WHERE opportunity_id = NEW.opportunity_id)
-            );
-        END IF;
-    END//   
-DELIMITER ;
+-- /*
+-- Automatically creates a new notification when a user's application is accepted.
+-- */
+-- DROP TRIGGER IF EXISTS message_notification;
+-- DELIMITER //
+-- CREATE trigger message_notification
+--     AFTER UPDATE ON opportunites_applicants
+--     FOR EACH ROW
+--     BEGIN
+--         IF NEW.accepted <> 0 THEN
+--             CALL create_notification(
+--                 get_user_id(NEW.applicant_username),
+--                 CONCAT(get_user_name(get_opportunity_owner_id(NEW.opportunity_id)), " accepted your application."),
+--                 "opportunites", 
+--                 NEW.application_id, 
+--                 NEW.timestamp, 
+--                 get_profile_pic(get_user_id(NEW.applicant_username)),  
+--                 (SELECT image_url FROM opportunites WHERE opportunity_id = NEW.opportunity_id)
+--             );
+--         END IF;
+--     END//   
+-- DELIMITER ;
