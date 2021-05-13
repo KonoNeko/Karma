@@ -257,11 +257,50 @@ function createPost(posts){
 
 }
 function createEducation(education){
+  let heading1 = document.createElement("h3")
+  heading1.setAttribute("class", "schoolheading");
+  heading1.innerHTML = "Burnaby Mountain Secondary School";
 
+
+  let postdiv = document.createElement("div");
+  postdiv.setAttribute("class", "postdiv");
+
+  let picture = document.createElement("img");
+  picture.setAttribute("class", "educationpic");
+  picture.src = "./images/education.jpeg"
+
+  let para= document.createElement("p");
+  para.setAttribute("class", "schoolpara");
+  para.innerHTML = "September 2016 to June 2021";
+
+  postdiv.appendChild(picture);
+  education.appendChild(heading1);
+  education.appendChild(para);
+  education.appendChild(postdiv);
+  
 
 }
-function createExperience(){
+function createExperience(experience){
+  let heading1 = document.createElement("h3")
+  heading1.setAttribute("class", "expheading");
+  heading1.innerHTML = "Library assistant";
 
+
+  let postdiv = document.createElement("div");
+  postdiv.setAttribute("class", "postdiv");
+
+  let picture = document.createElement("img");
+  picture.setAttribute("class", "experiencepic");
+  picture.src = "./images/experience.jpeg"
+
+  let para= document.createElement("p");
+  para.setAttribute("class", "exppara");
+  para.innerHTML = "Archimedes Library, Newton";
+
+  postdiv.appendChild(picture);
+  experience.appendChild(heading1);
+  experience.appendChild(para);
+  experience.appendChild(postdiv);
 
 }
 

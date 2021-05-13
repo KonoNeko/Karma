@@ -344,6 +344,43 @@ h3 {
 
 }
 
+.educationpic {
+  width: 150px;
+  margin-left: 30px;
+  margin-top: -40px;
+}
+.schoolheading{
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 18px;
+  color: #0367a6;
+  margin-left: 190px;
+  margin-top: -px;
+
+}
+
+.schoolpara{
+  margin-right:290px;
+}
+
+.expheading {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 18px;
+  color: #0367a6;
+  margin-left: 190px;
+  margin-top: -px;
+  
+}
+.experiencepic {
+  width: 150px;
+  margin-left: 30px;
+  margin-top: -40px;
+}
+.exppara {
+  margin-right:290px;
+}
+
 @media screen and (max-width: 550px) {
   #move {
     margin-left: 0rem;
