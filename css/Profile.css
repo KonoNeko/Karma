@@ -121,6 +121,9 @@
   font-size: 14pt;
   font-family: "Open Sans";
 }
+#profileDiv{
+  width: 1000px;
+}
 #posts {
   margin-left: 400px;
   margin-top: 0px;
@@ -152,11 +155,13 @@ h2 {
   font-weight: 700; /* bold */
   width: 302px;
   color: #0367a6;
+  width: 600px;
 }
 
 #profile {
   margin-left: 20px;
   margin-top: -150px;
+  
 }
 
 #move {
@@ -344,15 +349,86 @@ h3 {
 
 }
 
+.educationpic {
+  width: 150px;
+  margin-left: 30px;
+  margin-top: -40px;
+}
+.schoolheading{
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 18px;
+  color: #0367a6;
+  margin-left: 190px;
+  margin-top: -px;
+
+}
+
+.schoolpara{
+  margin-right:290px;
+}
+
+.expheading {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 18px;
+  color: #0367a6;
+  margin-left: 190px;
+  margin-top: -px;
+  
+}
+.experiencepic {
+  width: 150px;
+  margin-left: 30px;
+  margin-top: -40px;
+}
+.exppara {
+  margin-right:295px;
+}
+
+.awardsheading {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 18px;
+  color: #0367a6;
+  margin-left: 190px;
+  margin-top: -px;
+  
+}
+.awardspic {
+  width: 150px;
+  margin-left: 30px;
+  margin-top: -40px;
+}
+.awardspara {
+  margin-right:370px;
+}
+
+.skillsbtn{
+  background-color: #0367a6;
+  padding: 12px 20px;
+  border: none;
+  color: #eff0f3;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 40px;
+  outline: none;
+  margin-left: 30px;
+  cursor: none;
+  margin-top: 5px;
+
+}
+
 @media screen and (max-width: 550px) {
   #move {
     margin-left: 0rem;
     margin-bottom: 100px;
   }
   #editbtn {
-    margin-left: 40px;
-    width: 130px;
-    height: 30px;
+    margin-left: 100px;
+    width: 150px;
+    height: 40px;
     background-color: #49a1b9;
     color: white;
     border-radius: 8px;
@@ -366,13 +442,27 @@ h3 {
 
     color: #eff0f3;
   }
+  #name{
+  margin-top: 0px;
+  margin-left: 230px;
+  font-size: 29px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700; /* bold */
+  width: 602px;
+  color: #0367a6;
+  
+
+  }
+  #profileDiv {
+    width: 600px;
+  }
   #msgbtn {
-    width: 130px;
-    height: 30px;
+    width: 150px;
+    height: 40px;
     background-color: #49a1b9;
     color: white;
     border-radius: 8px;
-    margin-top: 70px;
+    margin-top: 50px;
 
     font-family: Montserrat;
     font-style: normal;
@@ -388,19 +478,145 @@ h3 {
     display: none;
   }
   #following {
-    margin-left: 50px;
+    margin-left: 200px;
     text-align: justify;
-    margin-top: 50px;
+    margin-top: 110px;
     font-size: 14pt;
   }
+  /* followers */
   #posts {
-    margin-left: 130px;
-    margin-top: -25px;
+    margin-left: 270px;
+    margin-top: px;
     font-size: 14pt;
   }
   #followers {
-    margin-left: 245px;
-    margin-top: -25px;
+    margin-left: 380px;
+    margin-top: px;
     font-size: 14pt;
   }
+  #profile{
+    width: 100px;
+    height: 100px;
+  }
+
+
+
+
+  .about {
+    text-align: left;
+    margin-left: 30px;
+    width: 450px;
+  }
+  .postpic {
+    width:100px;
+    margin-bottom: -450px;
+    margin-left: -240px;
+  
+  }
+  
+  .educationpic {
+    width: 150px;
+    margin-left: 30px;
+    margin-top: -40px;
+  }
+  .schoolheading{
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 18px;
+    color: #0367a6;
+    margin-left: 190px;
+    margin-top: -px;
+  
+  }
+  
+  .schoolpara{
+    margin-right:290px;
+  }
+  
+  .expheading {
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 18px;
+    color: #0367a6;
+    margin-left: 190px;
+    margin-top: -px;
+    
+  }
+  .experiencepic {
+    width: 150px;
+    margin-left: 30px;
+    margin-top: -40px;
+  }
+  .exppara {
+    margin-right:295px;
+  }
+  
+  .awardsheading {
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 18px;
+    color: #0367a6;
+    margin-left: 190px;
+    margin-top: -px;
+    
+  }
+  #posts {
+    width: 500px;
+  }
+  .awardspic {
+    width: 150px;
+    margin-left: 30px;
+    margin-top: -40px;
+  }
+  .awardspara {
+    margin-right:370px;
+  }
+  #skills{
+    width:500px;
+  }
+  
+  .skillsbtn{
+    background-color: #0367a6;
+    padding: 12px 20px;
+    border: none;
+    color: #eff0f3;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 40px;
+    outline: none;
+    margin-left: 30px;
+    cursor: none;
+    margin-top: 5px;
+  
+  }
+
+  .followers {
+    margin-left: -83px;
+    text-align: justify;
+    margin-top: -50px;
+    font-size: 14pt;
+    font-family: "Open Sans";
+  }
+  
+  .following {
+    margin-left: 205px;
+    text-align: justify;
+    margin-top: -50px;
+    font-size: 14pt;
+    font-family: "Open Sans";
+  }
+
+  #greyback {
+    background-color: #eff0f3;
+    width: 490px;
+    height: 300px;
+    margin-top: -180px;
+  }
+
+
+
+
+
+
 }

@@ -88,6 +88,10 @@
   }
 
   .creators {
+    w3c about us
+
+    All
+    Images
     margin-bottom: 100px;
   }
 }
@@ -102,6 +106,7 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
   width: 100%
+
 }
 .heading{
   font-family: "Montserrat";
@@ -121,7 +126,8 @@ html {
 .column {
   border-radius:10px;
   float: left;
-  width: 250px;
+  width: 300px;
+
   margin-bottom: 16px;
   padding: 0 8px;
 }
@@ -132,6 +138,7 @@ img {
   border-radius:10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 8px;
+  height: 550px;
 }
 
 .about-section {
@@ -173,7 +180,7 @@ img {
 
 @media screen and (max-width: 650px) {
   .column {
-    width: 100%;
+    /*width: 100%;*/
     display: block;
   }
 }

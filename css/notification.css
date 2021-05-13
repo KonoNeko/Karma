@@ -59,6 +59,7 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
+  justify-content: flex-end
 }
 
 .notificationText {
@@ -96,6 +97,7 @@ hr {
   font-family: "Open Sans";
   font-weight: 500;
   font-size: 14px;
+
 }
 
 .delete-btn > button {

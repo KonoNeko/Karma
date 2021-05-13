@@ -130,6 +130,7 @@ CREATE TABLE messages (
     `sender_id` INTEGER NOT NULL,
     `receiver_id` INTEGER NOT NULL,
     `conversation_id` INTEGER NOT NULL,
+    `message_read` TINYINT(1),
     `message` CHAR(255) NOT NULL,
     `timestamp` TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (`sender_id`) REFERENCES profiles (`profile_id`),
@@ -154,13 +155,14 @@ CREATE TABLE opportunites (
 
 CREATE TABLE opportunites_applicants (
     `application_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `applicant_username` INTEGER NOT NULL,
+    `applicant_username` CHAR(50) NOT NULL,
     `email` CHAR(100) NOT NULL,
     `phone_num` CHAR(10) NOT NULL,
     `city` CHAR(100) NOT NULL,
     `opportunity_id` INTEGER NOT NULL,
     `message` TEXT NOT NULL,
-    `accepted` TINYINT(1) DEFAULT 0,
+    `accepted` TINYINT(1) DEFAULT -1,
+    `timestamp` TIMESTAMP NOT NULL DEFAULT NOW(),
     FOREIGN KEY (`opportunity_id`) REFERENCES opportunites (`opportunity_id`),
     FOREIGN KEY (`applicant_id`) REFERENCES profiles (`profile_id`)
 );
