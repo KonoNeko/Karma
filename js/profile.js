@@ -103,6 +103,11 @@ function loadPosts() {
 function loadSkills() {
   let skills = document.getElementById("skills");
   createSkills(skills);
+  createSkills(skills);
+  createSkills(skills);
+  createSkills(skills);
+  createSkills(skills);
+  createSkills(skills);
 }
 
 function loadEducation() {
@@ -236,7 +241,13 @@ function createProfilePic(profile){
   // );
   // profile.appendChild(picture);
 }
-function createSkills(){
+function createSkills(skills){
+  let skillbtn = document.createElement("button");
+  skillbtn.setAttribute("class", "skillsbtn");
+  skillbtn.innerHTML = "Leadership"
+
+  skills.appendChild(skillbtn)
+
 
 
 }
@@ -306,6 +317,26 @@ function createExperience(experience){
 
 
 function createAwards(awards){
+  let heading1 = document.createElement("h3")
+  heading1.setAttribute("class", "awardsheading");
+  heading1.innerHTML = "District Authority Award in English Literature";
+
+
+  let postdiv = document.createElement("div");
+  postdiv.setAttribute("class", "postdiv");
+
+  let picture = document.createElement("img");
+  picture.setAttribute("class", "awardspic");
+  picture.src = "./images/awards.jpg"
+
+  let para= document.createElement("p");
+  para.setAttribute("class", "awardspara");
+  para.innerHTML = "Received July 2021";
+
+  postdiv.appendChild(picture);
+  awards.appendChild(heading1);
+  awards.appendChild(para);
+  awards.appendChild(postdiv);
 
 }
 

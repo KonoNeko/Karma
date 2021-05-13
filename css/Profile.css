@@ -378,7 +378,41 @@ h3 {
   margin-top: -40px;
 }
 .exppara {
-  margin-right:290px;
+  margin-right:295px;
+}
+
+.awardsheading {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 18px;
+  color: #0367a6;
+  margin-left: 190px;
+  margin-top: -px;
+  
+}
+.awardspic {
+  width: 150px;
+  margin-left: 30px;
+  margin-top: -40px;
+}
+.awardspara {
+  margin-right:370px;
+}
+
+.skillsbtn{
+  background-color: #0367a6;
+  padding: 12px 20px;
+  border: none;
+  color: #eff0f3;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 40px;
+  outline: none;
+  margin-left: 30px;
+  cursor: none;
+  margin-top: 5px;
+
 }
 
 @media screen and (max-width: 550px) {
