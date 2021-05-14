@@ -75,15 +75,7 @@ app.get(ENDPOINT + '/profiles/:userID', (req, res) => {
     const sql = `SELECT profile_id, full_name, username, profile_pic_url FROM profiles;`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        let response = result[0];
-        let profile = {
-            info: filter.profile(response[0]),
-            education: filter.education(response),
-            skills: filter.skills(response),
-            experience: filter.experience(response),
-            certifications: filter.certifications(response)
-        };
-        res.end(JSON.stringify(profile));
+        res.end(JSON.stringify(result));
     });
 });
 
@@ -412,6 +404,38 @@ app.put(ENDPOINT + '/profiles/picture', (req, res) => {
 
 
 /**
+ * Gets all followers for a user.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value
+ */
+ app.get(ENDPOINT + '/profiles/followers/:id', (req, res) => {
+    const userID = req.params.id;
+    const sql = `CALL get_followers('${userID}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result[0]));
+    });
+});
+
+
+/**
+ * Gets all the profiles that a user is following.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profile/following?id=value
+ */
+ app.get(ENDPOINT + '/profiles/following', (req, res) => {
+    const userID = req.query.id;
+    const sql = `CALL get_following('${userID}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result[0]));
+    });
+});
+
+
+/**
  * Gets all categories of volunteer work.
  */
 app.get(ENDPOINT + '/categories', (req, res) => {
@@ -642,14 +666,14 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
 
 
 /**
- * Gets all followers for a user.
+ * Gets all conversations for a user
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value
+ * https://marlonfajardo.ca/karma/v1/profile/following?id=value
  */
- app.get(ENDPOINT + '/profiles/followers/:id', (req, res) => {
+ app.get(ENDPOINT + '/messages', (req, res) => {
     const userID = req.params.id;
-    const sql = `CALL get_followers('${userID}');`;
+    const sql = `CALL view_conversations('${userID}');`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         res.end(JSON.stringify(result[0]));
@@ -658,14 +682,15 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
 
 
 /**
- * Gets all the profiles that a user is following.
+ * Gets all conversations for a user
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profile/following?id=value
+ * https://marlonfajardo.ca/karma/v1/profile/following
  */
- app.get(ENDPOINT + '/profiles/following/:id', (req, res) => {
+ app.get(ENDPOINT + '/messages/:id/:conversation', (req, res) => {
     const userID = req.params.id;
-    const sql = `CALL get_following('${userID}');`;
+    const conversation = req.params.conversation;
+    const sql = `CALL view_a_conversation(${conversation}, '${userID}');`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         res.end(JSON.stringify(result[0]));
@@ -691,6 +716,7 @@ DONEl) Accept a follow request (PUT - accept_a_follow_request)      TESTED
 DONEm) Unfollow a user (DELETE - unfollow_user)                     TESTED
 DONEn) Get followers (GET - get_followers)                          TESTED
 DONEo) Get following (GET - get_following)                          TESTED
+DONEp) Get all profiles (GET - SELECT...)                           TESTED
 
 -Bulletin Board
 DONEa) View all opportunities (GET - bulletin_board)                TESTED
@@ -713,9 +739,9 @@ DONEh) View social feed for a user (GET - user_posts_feed)          TESTED
 DONEi) Delete comment - (DELETE - delete_comment)                   TESTED
 
 -Messages
-    a) View all messages for a conversation (GET - _____)
-    b) Send message to another user (POST - _____)
-    c) View all conversations for a user (GET - _____)
+    a) View all messages for a conversation (GET - view_a_conversations)
+    b) Send message to another user (POST - send_message)
+    c) View all conversations for a user (GET - view_conversations)
 
 -Notifications
     a) View all notifications
