@@ -1,0 +1,353 @@
+/* all html pages have this css file linked */
+/* DOES NOT INCLUDE PADDING AND MARGIN */
+/* DOES NOT INCLUDE SPECIFIC SIZES */
+/* DOES NOT INCLUDE SPECIFIC COLORS */
+/* REFER TO THE STYLE GUIDE FOR MORE DETAILS */
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+
+/* NAVBAR */
+/* color variables */
+:root {
+  --clr-primary: #6aeeb5;
+  --clr-primary-hover: #29e6a7;
+  --clr-primary-dark: #039d69;
+  --clr-gray100: #f0f7f8;
+  --clr-gray200: #cfd8dc;
+  --clr-gray300: #a7b7be;
+  --clr-gray400: #6b7e86;
+  --clr-gray500: #425a65;
+  /* border radius */
+  --radius: 0.2rem;
+}
+/* position of the dropdown button*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  bottom: 50px;
+  border-radius: 12px;
+  padding-bottom: 16px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 8px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background: var(--clr-gray100);
+}
+
+.nav__item {
+  list-style: none;
+  font-size: 0.7rem;
+  text-align: center;
+  transition: all 200ms ease-in;
+}
+
+.nav__item svg,
+svg {
+  fill: var(--clr-gray400);
+  width: 2rem;
+  transition: all 200ms ease-in;
+}
+
+.nav__item svg:hover {
+  fill: var(--clr-gray500);
+}
+
+.nav__item a {
+  color: var(--clr-gray400);
+  text-decoration: none;
+}
+
+.nav__item a:hover {
+  color: var(--clr-gray500);
+}
+
+.nav__list {
+  background: white;
+  box-shadow: 0px 0px 10px var(--clr-gray200);
+  padding: 1rem 0;
+  width: 5rem;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+/* SEARCH */
+.search {
+  margin-top: 24px;
+  border: 2px solid #51b09f;
+  overflow: auto;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.search input[type="text"] {
+  font-family: "Montserrat";
+  border: 0px;
+  width: 80%;
+  margin: 0px;
+  padding: 10px 10px;
+}
+
+.search input[type="text"]:focus {
+  outline: 0;
+}
+
+.search button {
+  font-family: Montserrat;
+  border: 0px;
+  background: none;
+  background-color: #51b09f;
+  color: #eff0f3;
+  float: right;
+  width: 20%;
+  height: 100%;
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+/***************************************** FONT WEIGHT KEY *********************************************/
+/* 400 - normal */
+/* 500 - semibold */
+/* 700 - bold */
+
+.title {
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 48px;
+  color: #0367a6;
+}
+
+.heading1 {
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 36px;
+  color: #0367a6;
+}
+
+.heading2 {
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 24px;
+  color: #0367a6;
+}
+
+.heading3 {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 18px;
+  color: #0367a6;
+}
+
+.bodytitle {
+  font-family: "Open Sans";
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.bodysubheading {
+  font-family: "Open Sans";
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.bodytext {
+  font-family: "Open Sans";
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.smalltext {
+  font-family: "Open Sans";
+  font-weight: 500;
+  font-size: 10px;
+}
+
+.smallbutton {
+  font-family: "Open Sans";
+  font-weight: 700;
+  font-size: 14px;
+  color: #51b09f;
+}
+
+.primarybutton {
+  border: none;
+  color: #eff0f3;
+  background-color: #0367a6;
+  padding: 20px 40px;
+  font-family: "Montserrat";
+  font-weight: 50 0;
+  font-size: 18px;
+  border-radius: 12px;
+}
+
+.secondarybutton {
+  background-color: #0367a6;
+  padding: 12px 20px;
+  border: none;
+  color: #eff0f3;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 10px;
+  outline: none;
+}
+
+.primarybutton:hover,
+.secondarybutton:hover {
+  box-shadow: 0 5px 15px rgba(3, 103, 166, 0.4);
+}
+
+.profilepicture > img {
+  border-radius: 50%;
+  width: auto;
+}
+
+.bulletinboardpicture > img,
+.postpreviewpicture > img,
+.socialpostpicture > img,
+.largebulletinboardpicture > img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 550px) {
+  .nav__list {
+    flex-direction: row;
+    width: 100vw;
+    height: 5rem;
+    bottom: 0;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  .mobile-menu {
+    display: block;
+    margin-top: 24px;
+    margin-left: 24px;
+  }
+
+  .hide-in-mobile {
+    display: none;
+  }
+}
+
+  .moveRight{
+    margin-right: 50px;
+  }
+
+@media screen and (min-width: 550px) {
+  /* SCROLLBAR */
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #51b09f;
+    border-radius: 10px;
+
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #51b09f;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  html {
+    /*overflow: scroll;*/
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+}

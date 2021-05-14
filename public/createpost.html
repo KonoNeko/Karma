@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
+    />
+    <title></title>
+
+
+      <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/createpost.css" />
+    <link rel="stylesheet" href="css/base.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <script src="js/createpost.js"></script>
+  </head>
+
+  <body>
+    <!-- <svg id="rectangle">
+      <rect />
+    </svg>
+
+    <div class="form-group shadow-textarea sizing">
+      <textarea
+        class="form-control z-depth-1"
+        id="exampleFormControlTextarea6"
+        rows="3"
+        placeholder="Caption..."
+      ></textarea>
+    </div>
+
+     <img id="icon-1" src="images/upload.png"> -->
+
+    <div class="create-post-container">
+      <div class="image-poster profilepicture">
+        <img src="images/placeholder2.png" />
+      </div>
+      <div class="caption">
+        <div>
+          <textarea rows="4" cols="50">
+Write a caption here...
+          </textarea>
+        </div>
+        <div style="font-size: 2.5rem" class="icons">
+          <i id="photo" class="fa fa-image"></i><i id="marker" class="fas fa-map-marker-alt"></i
+          ><i id="myBtn" class="fas fa-users"></i>
+          <input type="file" id="file" style="display: none;">
+        </div>
+        <div class="button">
+          <button id="postBtn" class="secondarybutton">Post</button>
+        </div>
+      </div>
+    </div>
+
+
+<!-- The Modal -->
+<div id="locationModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <textarea id="location" rows="4" cols="50">
+      Add a location here...
+    </textarea>
+  </div>
+
+</div>
+
+
+<!-- The Modal -->
+<div id="tagPeopleModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <textarea id="tags" rows="4" cols="50">
+       Tag people here...
+      </textarea>
+    </div>
+  
+  </div>
+  
+
+
+  </body>
+
+    <script>
+    
+    
+    // Get the modal
+var modal = document.getElementById("locationModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("marker");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+    
+</script>
+
+
+
+<script>
+    
+    
+    // Get the modal
+var modal = document.getElementById("tagPeopleModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+    
+</script>
+
+  <script
+    src="https://kit.fontawesome.com/2ec3384389.js"
+    crossorigin="anonymous">
+  </script>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous">
+</script>  
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-auth.js"></script>
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
+      authDomain: "karma-535f3.firebaseapp.com",
+      projectId: "karma-535f3",
+      storageBucket: "karma-535f3.appspot.com",
+      messagingSenderId: "1023587584355",
+      appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
+      measurementId: "G-VTZ4TEWFBW"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.firestore();
+  </script>
+
+<script>
+        
+        $(function () {
+            $('#photo').click(function () {
+                $('#file').click();
+            });
+            $('#file').on('change', function () {
+                if (event.target.files.length == 0) {
+                    return;
+                }
+                $('#photo').attr('src', URL.createObjectURL(event.target.files[0]));
+            });
+            $('button').click(function () {
+                input_fields = ['pic_id'
+                ];
+                
+                
+                var storageRef = firebase.storage().ref();
+                file = $('#file')[0].files[0];
+                var user = firebase.auth().currentUser
+                // Create a reference to the '.jpg'
+                var photoRef = storageRef.child( '/images/' + user + '/profilePicture' + file.name);
+                photoRef.put(file).then(function (snapshot) {
+                    var usersRef = db.collection("images");
+                    usersRef.doc(uid).set({
+                            pic_id: uid,
+                            
+                           
+                        }).then(function () {
+                            console.log("Document successfully written!");
+                            alert("Document successfully written!")
+                           // location.href = 'profile.html';
+                        })
+                        .catch(function (error) {
+                            console.error("Error writing document: ", error);
+                        });
+                }).catch(function (error) {
+                    console.error("Error writing document: ", error);
+                });
+
+            });
+           
+        
+
+            // Points to the root reference
+            // var storageRef = firebase.storage().ref();
+
+            // // Points to 'images'
+            // var imagesRef = storageRef.child('images');
+
+            // // Points to 'images/space.jpg'
+            // // Note that you can use variables to create child values
+            // var fileName = 'space.jpg';
+            // var spaceRef = imagesRef.child(fileName);
+
+            // // File path is 'images/space.jpg'
+            // var path = spaceRef.fullPath
+
+            // // File name is 'space.jpg'
+            // var name = spaceRef.name
+
+            // // Points to 'images'
+            // var imagesRef = spaceRef.parent;
+        });
+        var uid;
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                console.log('signed in');
+                if (user != null) {
+                    name = user.displayName;
+                    email = user.email;
+                    //photoUrl = user.photoURL;
+                    uid = user.uid;
+                    $('#name').val(name);
+                    $('#email').val(email);
+                    db.collection("images").where("pic_id", "==", uid)
+                        .get()
+                        //data is retrieved from the collection "users" and
+                        //sent to the main.html. This would include the user type
+                        // (barber or customer), their name, exp, age, gender, etc
+                        .then(function (querySnapshot) {
+                            if (querySnapshot.size > 0) {
+                                //location.href = 'profile.html';
+                            }
+                            // querySnapshot.forEach(function (doc) {
+                            //     // doc.data() is never undefined for query doc snapshots
+                            //     console.log(doc.id, " => ", doc.data());
+                            // });
+                        })
+                        .catch(function (error) {
+                            console.log("Error getting documents: ", error);
+                        });
+                }
+            } else {
+                console.log('not signed');
+                location.href = 'sign-up.html';
+                // No user is signed in.
+            }
+        });     
+    </script>   
+<script src="js/createpost.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
+<script src="js/signup.js"> </script> 
+<script src="js/profile.js"></script>
+<script>
+      showProfile();
+      
+
+    </script>
+
+</html>

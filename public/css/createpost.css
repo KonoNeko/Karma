@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+
+@media screen and (max-width: 550px) {
+  body {
+      margin: 0;
+  } 
+
+.create-post-container {
+  display: flex;
+}
+
+.profilepicture > img {
+  width: 70px !important;
+  height: 70px !important;
+}
+
+.caption {
+  width: 100%;
+  background-color: #eff0f3;
+  border-radius: 12px;
+  margin-left: 20px;
+  padding: 20px;
+}
+
+textarea {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #51b09f;
+  outline: none;
+}
+
+.icons {
+  display: flex;
+  justify-content: flex-end;
+  color: #49a1b9;
+}
+
+.icons > i {
+  margin: 10px;
+}
+
+.button > .secondarybutton {
+  background-color: #49a1b9;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+}
+
+
+
+
+
+
+.create-post-container {
+  display: flex;
+}
+
+.profilepicture > img {
+  width: 70px !important;
+  height: 70px !important;
+}
+
+.caption {
+  width: 100%;
+  background-color: #eff0f3;
+  border-radius: 12px;
+  margin-left: 20px;
+  padding: 20px;
+}
+
+textarea {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #51b09f;
+  outline: none;
+}
+
+.icons {
+  display: flex;
+  justify-content: flex-end;
+  color: #49a1b9;
+}
+
+.icons > i {
+  margin: 10px;
+}
+
+.button > .secondarybutton {
+  background-color: #49a1b9;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
