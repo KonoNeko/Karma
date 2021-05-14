@@ -113,7 +113,7 @@ function createPost(post) {
 
   topPartDiv.appendChild(postImgDiv);
   topPartDiv.appendChild(nameAndTimeDiv);
-
+ 
   post.appendChild(topPartDiv);
 
   let picture = document.createElement("div");
