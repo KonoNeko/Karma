@@ -504,14 +504,30 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
  * Gets all applicants for an opportunity.
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1//opportunities/applicants
+ * https://marlonfajardo.ca/karma/v1//opportunities/applicants?id=value
  */
  app.get(ENDPOINT + '/opportunities/applicants', (req, res) => {
     const opportunityID = req.query.id;
-    const sql = `CALL view_applicants(${opportunityID})`;
+    const sql = `CALL view_applicants(${opportunityID});`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        res.end(JSON.stringify(result));
+        res.end(JSON.stringify(result[0]));
+    });
+});
+
+
+/**
+ * Gets all applicants for an opportunity.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1//opportunities/applications?id=value
+ */
+ app.get(ENDPOINT + '/opportunities/applications', (req, res) => {
+    const userID = req.query.id;
+    const sql = `CALL view_user_applications('${userID}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result[0]));
     });
 });
 
@@ -538,7 +554,7 @@ DONEa) View all opportunities (GET - bulletin_board)                TESTED
 DONEb) Post new opportunity (POST - new_opportunity)                TESTED
     c) Apply to opportunity (PUT - apply_for_opportunity)
 DONEd) View applicants (GET - view_applicants)                      TESTED
-    e) View opportunites applied for (GET - view_user_applications)
+DONEe) View opportunites applied for (GET - view_user_applications) TESTED
 DONEf) View all categories (GET - SELECT...)                        TESTED
     g) View recommended opportunitues (GET - ____)
 
