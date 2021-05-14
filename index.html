@@ -38,74 +38,107 @@
     </div>
 
     <div id="flex-about">
-      <p class="heading1" style="color: #49a1b9">
-        Make an impact on the<br />
-        world around you today.
-      </p>
-      <div class="flex-column">
-        <lord-icon
-          class="featureimg"
-          src="https://cdn.lordicon.com//zzcjjxew.json"
-          trigger="hover"
-          colors="primary:#eff0f3,secondary:#49a1b9"
-        >
-        </lord-icon>
-        <div class="flex-column-information">
-          <p
-            class="heading3"
-            style="color: #214049; font-weight: bold; margin-bottom: 10px"
+      <div class="flex-about-column flex-about-column-left">
+        <p class="heading1" style="color: #49a1b9">
+          Make an impact on the<br />
+          world around you today.
+        </p>
+        <div class="flex-column">
+          <lord-icon
+            class="featureimg"
+            src="https://cdn.lordicon.com//zzcjjxew.json"
+            trigger="hover"
+            colors="primary:#eff0f3,secondary:#49a1b9"
           >
-            Find volunteering opportunities around you.
-          </p>
-          <p class="bodytext" style="color: #214049">
-            Looking for your next volunteering experience? Karma’s bulletin
-            board provides categorized opportunities that you might enjoy.
-          </p>
+          </lord-icon>
+          <div class="flex-column-information">
+            <p
+              class="heading3"
+              style="color: #214049; font-weight: bold; margin-bottom: 10px"
+            >
+              Find volunteering opportunities around you.
+            </p>
+            <p class="bodytext" style="color: #214049">
+              Looking for your next volunteering experience? Karma’s bulletin
+              board provides categorized opportunities that you might enjoy.
+            </p>
+          </div>
+        </div>
+        <div class="flex-column">
+          <lord-icon
+            class="featureimg"
+            src="https://cdn.lordicon.com//rjzlnunf.json"
+            trigger="hover"
+            colors="primary:#eff0f3,secondary:#49a1b9"
+          >
+          </lord-icon>
+          <div class="flex-column-information">
+            <p
+              class="heading3"
+              style="color: #214049; margin-bottom: 10px; font-weight: bold"
+            >
+              Meet the most passionate volunteers.
+            </p>
+            <p class="bodytext" style="color: #214049">
+              Looking to volunteer with friends? Karma is a community of people
+              who care about their community as much as you do.
+            </p>
+          </div>
+        </div>
+        <div class="flex-column">
+          <lord-icon
+            class="featureimg"
+            src="https://cdn.lordicon.com//zpxybbhl.json"
+            trigger="hover"
+            colors="primary:#eff0f3,secondary:#49a1b9"
+          >
+          </lord-icon>
+          <div class="flex-column-information">
+            <p
+              class="heading3"
+              style="color: #214049; margin-bottom: 10px; font-weight: bold"
+            >
+              Connect with inspiring individuals.
+            </p>
+            <p class="bodytext" style="color: #214049">
+              Looking for a reason to volunteer? Karma’s social feed provides
+              you content from other volunteers and organizations that allows
+              you insights to the importance of the work they do.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="flex-column">
-        <lord-icon
-          class="featureimg"
-          src="https://cdn.lordicon.com//rjzlnunf.json"
-          trigger="hover"
-          colors="primary:#eff0f3,secondary:#49a1b9"
-        >
-        </lord-icon>
-        <div class="flex-column-information">
-          <p
-            class="heading3"
-            style="color: #214049; margin-bottom: 10px; font-weight: bold"
-          >
-            Meet the most passionate volunteers.
-          </p>
-          <p class="bodytext" style="color: #214049">
-            Looking to volunteer with friends? Karma is a community of people
-            who care about their community as much as you do.
-          </p>
-        </div>
+      <div
+        class="flex-about-column"
+        id="flex-about-column-img"
+        style="margin: 0px !important"
+      >
+        <img src="./res/mobile1.png" />
       </div>
-      <div class="flex-column">
-        <lord-icon
-          class="featureimg"
-          src="https://cdn.lordicon.com//zpxybbhl.json"
-          trigger="hover"
-          colors="primary:#eff0f3,secondary:#49a1b9"
-        >
-        </lord-icon>
-        <div class="flex-column-information">
-          <p
-            class="heading3"
-            style="color: #214049; margin-bottom: 10px; font-weight: bold"
-          >
-            Connect with inspiring individuals.
-          </p>
-          <p class="bodytext" style="color: #214049">
-            Looking for a reason to volunteer? Karma’s social feed provides you
-            content from other volunteers and organizations that allows you
-            insights to the importance of the work they do.
-          </p>
-        </div>
+    </div>
+
+    <div class="slideshow-container">
+      <div class="mySlides fade">
+        <img src="res/features1.png" style="width: 100%" />
       </div>
+
+      <div class="mySlides fade">
+        <img src="res/features2.png" style="width: 100%" />
+      </div>
+
+      <div class="mySlides fade">
+        <img src="res/features3.png" style="width: 100%" />
+      </div>
+
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <br />
+
+    <div style="text-align: center">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
     </div>
 
     <div id="flex-features-div">
@@ -198,4 +231,37 @@
       <button id="bottom-signup-button">Create an account</button>
     </div>
   </body>
+
+  <script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides((slideIndex += n));
+    }
+
+    function currentSlide(n) {
+      showSlides((slideIndex = n));
+    }
+
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {
+        slideIndex = 1;
+      }
+      if (n < 1) {
+        slideIndex = slides.length;
+      }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+    }
+  </script>
 </html>
