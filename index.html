@@ -43,6 +43,10 @@
         </div>
       </div>
 
+      <div id="flex-background-img">
+        <img src="res/index-background.png" />
+      </div>
+
       <div id="introduction">
         <p class="uk-animation-slide-left title">Welcome to Karma.</p>
         <p class="uk-animation-slide-left heading3">
@@ -57,12 +61,12 @@
       </div>
     </div>
 
-    <div
-      uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 500"
-      id="flex-about"
-    >
-      <div class="flex-about-column flex-about-column-left">
-        <p class="heading1" style="color: #49a1b9">
+    <div id="flex-about">
+      <div
+        uk-scrollspy="target: > p, div; cls: uk-animation-fade; delay: 500"
+        class="flex-about-column flex-about-column-left"
+      >
+        <p class="heading2" style="color: #49a1b9">
           Make an impact on the<br />
           world around you today.
         </p>
@@ -168,7 +172,7 @@
       uk-scrollspy="target: > p, div; cls: uk-animation-fade; delay: 500"
       id="flex-features-div"
     >
-      <p class="heading1" style="color: #49a1b9">
+      <p class="heading2" style="color: #49a1b9">
         All the features you need<br />
         to help you succeed.
       </p>
@@ -244,14 +248,10 @@
       style="
         text-align: center;
         background-color: #49a1b9;
-        padding: 40px;
         padding-bottom: 100px;
       "
     >
-      <p
-        class="heading1"
-        style="color: #eff0f3; margin-left: 20%; margin-right: 20%"
-      >
+      <p class="heading2" style="color: #eff0f3">
         Join our community of volunteers and volunteer organizations today.
       </p>
       <button id="bottom-signup-button">Create an account</button>
