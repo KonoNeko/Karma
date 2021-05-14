@@ -532,6 +532,126 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
 });
 
 
+/**
+ * Creates a new volunteer opportunity application.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/opportunities/applications?id=value&post=value&msg=value&email=value&phone=value&city=value
+ */
+ app.post(ENDPOINT + '/opportunities/applications', (req, res) => {
+    const userID = req.query.id;
+    const postingID = req.query.post;
+    const msg = req.query.msg;
+    const email = req.query.email;
+    const phone = req.query.phone;
+    const city = req.query.city;
+    const sql = `CALL apply_for_opportunity("${userID}", ${postingID}, "${msg}", "${email}", "${phone}", "${city}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success creating new application");
+        } else {
+            res.send("Error creating new application");
+        }
+    });
+});
+
+
+/**
+ * Creates a new follow request.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
+ */
+ app.post(ENDPOINT + '/profiles/followers', (req, res) => {
+    const userFollowing = req.query.follower;
+    const userBeingFollowed = req.query.id;
+    const sql = `CALL request_to_follow_user("${userFollowing}", "${userBeingFollowed}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success requesting to follow user");
+        } else {
+            res.send("Error requesting to follow user");
+        }
+    });
+});
+
+
+/**
+ * Accepts an existing follow request.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
+ */
+ app.put(ENDPOINT + '/profiles/followers', (req, res) => {
+    const userFollowing = req.query.follower;
+    const userBeingFollowed = req.query.id;
+    const sql = `CALL accept_a_follow_request("${userFollowing}", "${userBeingFollowed}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success accepting follow request");
+        } else {
+            res.send("Error accepting follow request");
+        }
+    });
+});
+
+
+/**
+ * Deletes a follow entry.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
+ */
+ app.delete(ENDPOINT + '/profiles/followers', (req, res) => {
+    const userFollowing = req.query.follower;
+    const userBeingFollowed = req.query.id;
+    const sql = `CALL unfollow_user("${userFollowing}", "${userBeingFollowed}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success unfollowing user");
+        } else {
+            res.send("Error unfollowing user");
+        }
+    });
+});
+
+
+/**
+ * Gets all followers for a user.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value
+ */
+ app.get(ENDPOINT + '/profiles/followers/:id', (req, res) => {
+    const userID = req.params.id;
+    const sql = `CALL get_followers('${userID}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result[0]));
+    });
+});
+
+
+/**
+ * Gets all the profiles that a user is following.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profile/following?id=value
+ */
+ app.get(ENDPOINT + '/profiles/following/:id', (req, res) => {
+    const userID = req.params.id;
+    const sql = `CALL get_following('${userID}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result[0]));
+    });
+});
+
+
 /*
 TODO:
 -Profile
@@ -545,14 +665,16 @@ DONEg) Add award/certification (POST - new_award_entry)             TESTED
 DONEh) Edit award/certification (PUT - edit_award_entry)            TESTED
 DONEi) Edit profile pic (PUT - change_profile_pic)                  TESTED
 DONEj) Edit bio (PUT - change_bio)                                  TESTED
-    k) Request to follow a user
-    l) Accept a follow request
-    m) Unfollow a user
+DONEk) Request to follow a user (POST - request_to_follow_user)     TESTED
+DONEl) Accept a follow request (PUT - accept_a_follow_request)      TESTED
+DONEm) Unfollow a user (DELETE - unfollow_user)                     TESTED
+DONEn) Get followers (GET - get_followers)                          TESTED
+DONEo) Get following (GET - get_following)                          TESTED
 
 -Bulletin Board
 DONEa) View all opportunities (GET - bulletin_board)                TESTED
 DONEb) Post new opportunity (POST - new_opportunity)                TESTED
-    c) Apply to opportunity (PUT - apply_for_opportunity)
+DONEc) Apply to opportunity (POST - apply_for_opportunity)          TESTED
 DONEd) View applicants (GET - view_applicants)                      TESTED
 DONEe) View opportunites applied for (GET - view_user_applications) TESTED
 DONEf) View all categories (GET - SELECT...)                        TESTED
@@ -565,7 +687,7 @@ DONEc) Like post (PUT - like_post)                                  TESTED
 DONEd) Unlike post (DELETE - unlike_post)                           TESTED
 DONEe) Comment on a post (POST - comment_on_post)                   TESTED
 DONEf) View all comments (GET - view_comments)                      TESTED
-    g) View stories - TODO
+    g) View stories -  **TODO**
 DONEh) View social feed for a user (GET - user_posts_feed)          TESTED
 DONEi) Delete comment - (DELETE - delete_comment)                   TESTED
 

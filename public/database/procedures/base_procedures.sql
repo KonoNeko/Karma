@@ -8,6 +8,9 @@ DONEd) Request to follow a user - request_to_follow_user
 DONEe) Accept a follow request - accept_a_follow_request
 DONEf) Unfollow a user - unfollow_user
     g) Reject a follow request
+    h) Get followers - get_followers
+    i) Get following - get_following
+    h) Get list of users with mutual friends
 
 -Messaging
 DONEa) View all messages for a conversation - view_a_conversation
@@ -737,6 +740,36 @@ BEGIN
     DELETE FROM profile_follows
     WHERE profile_id = get_user_id(user_being_followed)
     AND follower_id = get_user_id(user_following);
+END//
+DELIMITER ;
+
+
+/*
+Gets a list of followers of a given user.
+*/
+DROP PROCEDURE IF EXISTS get_followers;
+DELIMITER //
+CREATE PROCEDURE get_followers(IN current_username CHAR(50))
+BEGIN
+    SELECT get_user_name(follower_id) as follower, get_full_name_with_id(follower_id) as full_name
+    FROM profile_follows
+    WHERE profile_id = get_user_id(current_username)
+    AND request_accepted = 1;
+END//
+DELIMITER ;
+
+
+/*
+Gets a list of the people a given user is following.
+*/
+DROP PROCEDURE IF EXISTS get_following;
+DELIMITER //
+CREATE PROCEDURE get_following(IN current_username CHAR(50))
+BEGIN
+    SELECT get_user_name(profile_id) as follower, get_full_name_with_id(profile_id) as full_name
+    FROM profile_follows
+    WHERE follower_id = get_user_id(current_username)
+    AND request_accepted = 1;
 END//
 DELIMITER ;
 
