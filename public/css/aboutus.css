@@ -2,16 +2,18 @@
   padding-top: 10px;
   padding-left: 20px;
   padding-right: 20px;
-  width: 50%;
+  width: 100%;
   text-align: justify;
 }
 
 .creators {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  margin-left: 20px;
+  margin-left: 90px;
   margin-right: 20px;
   margin-bottom: 20px;
+  justify-content:center;
 }
 
 .creator-name {
@@ -37,9 +39,8 @@
 }
 
 .creator {
-  flex: 1 0 10%; /* The important bit. This percentage decides your columns. 
-     The percent can be px. It just represents your minimum starting width.
-      */
+  width: 250px;
+  height: 350px;
   margin-left: 8px;
   margin-right: 8px;
   margin-top: 8px;
@@ -47,11 +48,12 @@
   background: #eff0f3;
   color: #214049;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 12px;
   box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+
 }
 
 #main {
@@ -75,24 +77,28 @@
   }
 
   .creator {
-    flex: 1 0 30%; /* The important bit. This percentage decides your columns. 
+    flex: 1 0 100%; /* The important bit. This percentage decides your columns.
      The percent can be px. It just represents your minimum starting width.
       */
-    margin: 10px;
     background: #eff0f3;
     color: #214049;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin-left:auto;
+    margin-right:auto;
     justify-content: center;
   }
 
   .creators {
-    w3c about us
-
-    All
-    Images
+    flex-direction: row;
+    width: 250px;
+    height: 350px;
+    /*height: 350px;*/
+    /*width: 90%;*/
     margin-bottom: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
   }
 }
 

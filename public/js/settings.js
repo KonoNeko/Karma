@@ -46,7 +46,6 @@ function changePassword() {
   if (changePasswordClick) {
     document.getElementById("change-password-heading").style.paddingBottom =
       "12px";
-
     changePasswordSetting.appendChild(currentPasswordLabel);
     changePasswordSetting.appendChild(currentPasswordInput);
     changePasswordSetting.appendChild(newPasswordLabel);
