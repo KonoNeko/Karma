@@ -739,9 +739,9 @@ DONEh) View social feed for a user (GET - user_posts_feed)          TESTED
 DONEi) Delete comment - (DELETE - delete_comment)                   TESTED
 
 -Messages
-    a) View all messages for a conversation (GET - view_a_conversations)
+DONEa) View messages in conversation (GET - view_a_conversations)   TESTED
     b) Send message to another user (POST - send_message)
-    c) View all conversations for a user (GET - view_conversations)
+DONEc) View all conversations for a user (GET - view_conversations) TESTED
 
 -Notifications
     a) View all notifications
