@@ -51,9 +51,6 @@ function createComments(comments) {
     comments.appendChild(leftDiv);
 
 
-
-
-
     rightDiv = document.createElement("div");
     rightDiv.setAttribute("class", "rightDivComments");
 
@@ -101,5 +98,27 @@ function createComments(comments) {
     rightDiv.appendChild(caption);
 
 
+    let commentImgDiv = document.createElement("div");
+    commentImgDiv.setAttribute("class", "profilepic");
+    commentImgDiv.setAttribute("style", "padding-bottom: 10px");
+
+    let commentUserName = document.createElement("p");
+    commentUserName.setAttribute("class", "commentUserName");
+
+    let actualComment = document.createElement("p");
+    actualComment.setAttribute("class", "actualComment");
+
+    let commentTime = document.createElement("p");
+    commentTime.setAttribute("class", "actualComment");
+
+    let replyButton = document.createElement("p");
+    replyButton.setAttribute("class", "actualComment");
+
+
+    rightDiv.appendChild(commentImgDiv);
+    rightDiv.appendChild(commentUserName);
+    rightDiv.appendChild(actualComment);
+    rightDiv.appendChild(commentTime);
+    rightDiv.appendChild(replyButton);
 
 }
