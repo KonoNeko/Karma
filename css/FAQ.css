@@ -46,11 +46,10 @@
         
         /* Title */
         
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 48px;
-        line-height: 59px;
+        font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 36px;
+  color: #0367a6;
         /* identical to box height */
         
         
@@ -60,14 +59,14 @@
         }
         
   #para {
-      margin-left: 100px;
-      font-family: Montserrat;
+    margin-left: px;
+    font-family: "Montserrat";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 22px;
 
-    color: #000000;
+    color: #0367A6;
   }
   #block {
       float: left;
@@ -77,7 +76,7 @@
 
 
   .dropdownn {
-    
+
     overflow: hidden;
     margin-bottom: 45px;
     display: block;
@@ -86,9 +85,14 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 22px;
+    background-color: #cfd8dc;
+    width: 900px;
+    border-radius: 20px;
+    margin-left: 100px;
 
   
   }
+  
   
   .dropdownn .dropbtn {
     cursor: pointer;
@@ -101,8 +105,8 @@
     font-family: inherit;
     margin: 0;
     display: block;
-    margin-top: 40px;
-    margin-left: 100px ;
+    margin-top: 20px;
+    margin-left: 20px ;
   }
   
   .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
@@ -116,7 +120,9 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    margin-left: 100px;
+    margin-left: 40px;
+    height: 40px;
+
    
   }
   
@@ -127,6 +133,7 @@
     text-decoration: none;
     display: block;
     text-align: left;
+    
   }
   
   .dropdown-content a:hover {
