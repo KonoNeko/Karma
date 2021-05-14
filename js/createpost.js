@@ -32,7 +32,6 @@ function createPost() {
             tags: document.getElementById('tags')
         }
         posts.push(post);
-        console.log(post);
 
         console.warn('added', {posts});
         let pre = document.querySelector('#msg pre');
@@ -41,4 +40,6 @@ function createPost() {
     document.addEventListener('DOMContentLoaded', ()=>{
         document.getElementById('postBtn').addEventListener('click', addPost);
     })
+
+    console.log(posts);
 }
