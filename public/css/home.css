@@ -5,6 +5,8 @@
   display: none;
 }
 
+
+
 .above {
   margin-left: 5rem;
 }
@@ -13,7 +15,20 @@
   margin-left: 5rem;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap
+}
+
+.post-btn{
+  display: none;
+  text-align: right;
+  margin-right: 35px;
+  margin-top: 60px;
+}
+/*display on mobile view only*/
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px){
+  .post-btn {display: inline;}
 }
 
 .topPartDiv {
