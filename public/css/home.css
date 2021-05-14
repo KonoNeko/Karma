@@ -30,7 +30,9 @@ and (min-device-width : 320px)
 and (max-device-width : 550px){
   .post-btn {
     display: block;
-    position: relative;
+    position:fixed;
+    bottom:85px;
+    right: 10px;
   }
 }
 
