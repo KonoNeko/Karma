@@ -68,6 +68,27 @@ app.get(ENDPOINT + '/profiles/:userID', (req, res) => {
 
 
 /**
+ * Gets the list of profiles
+ */
+ app.get(ENDPOINT + '/profiles', (req, res) => {
+    const id = req.params.userID;
+    const sql = `SELECT profile_id, full_name, username, profile_pic_url FROM profiles;`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        let response = result[0];
+        let profile = {
+            info: filter.profile(response[0]),
+            education: filter.education(response),
+            skills: filter.skills(response),
+            experience: filter.experience(response),
+            certifications: filter.certifications(response)
+        };
+        res.end(JSON.stringify(profile));
+    });
+});
+
+
+/**
  * Creates a new profile with a given username, full name and if the profile was a volunteer.
  * 
  * Example URL of the request (replace 'value' with an actual value):
@@ -301,6 +322,69 @@ app.put(ENDPOINT + '/profiles/bio', (req, res) => {
             res.send("Success editing bio");
         } else {
             res.send("No changes were made to bio");
+        }
+    });
+});
+
+
+/**
+ * Creates a new follow request.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
+ */
+ app.post(ENDPOINT + '/profiles/followers', (req, res) => {
+    const userFollowing = req.query.follower;
+    const userBeingFollowed = req.query.id;
+    const sql = `CALL request_to_follow_user("${userFollowing}", "${userBeingFollowed}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success requesting to follow user");
+        } else {
+            res.send("Error requesting to follow user");
+        }
+    });
+});
+
+
+/**
+ * Accepts an existing follow request.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
+ */
+ app.put(ENDPOINT + '/profiles/followers', (req, res) => {
+    const userFollowing = req.query.follower;
+    const userBeingFollowed = req.query.id;
+    const sql = `CALL accept_a_follow_request("${userFollowing}", "${userBeingFollowed}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success accepting follow request");
+        } else {
+            res.send("Error accepting follow request");
+        }
+    });
+});
+
+
+/**
+ * Deletes a follow entry.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
+ */
+ app.delete(ENDPOINT + '/profiles/followers', (req, res) => {
+    const userFollowing = req.query.follower;
+    const userBeingFollowed = req.query.id;
+    const sql = `CALL unfollow_user("${userFollowing}", "${userBeingFollowed}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success unfollowing user");
+        } else {
+            res.send("Error unfollowing user");
         }
     });
 });
@@ -552,69 +636,6 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
             res.send("Success creating new application");
         } else {
             res.send("Error creating new application");
-        }
-    });
-});
-
-
-/**
- * Creates a new follow request.
- * 
- * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
- */
- app.post(ENDPOINT + '/profiles/followers', (req, res) => {
-    const userFollowing = req.query.follower;
-    const userBeingFollowed = req.query.id;
-    const sql = `CALL request_to_follow_user("${userFollowing}", "${userBeingFollowed}");`;
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        if (result.affectedRows) {
-            res.send("Success requesting to follow user");
-        } else {
-            res.send("Error requesting to follow user");
-        }
-    });
-});
-
-
-/**
- * Accepts an existing follow request.
- * 
- * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
- */
- app.put(ENDPOINT + '/profiles/followers', (req, res) => {
-    const userFollowing = req.query.follower;
-    const userBeingFollowed = req.query.id;
-    const sql = `CALL accept_a_follow_request("${userFollowing}", "${userBeingFollowed}");`;
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        if (result.affectedRows) {
-            res.send("Success accepting follow request");
-        } else {
-            res.send("Error accepting follow request");
-        }
-    });
-});
-
-
-/**
- * Deletes a follow entry.
- * 
- * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
- */
- app.delete(ENDPOINT + '/profiles/followers', (req, res) => {
-    const userFollowing = req.query.follower;
-    const userBeingFollowed = req.query.id;
-    const sql = `CALL unfollow_user("${userFollowing}", "${userBeingFollowed}");`;
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        if (result.affectedRows) {
-            res.send("Success unfollowing user");
-        } else {
-            res.send("Error unfollowing user");
         }
     });
 });
