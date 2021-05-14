@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Bulletin board</title>
-    <link rel="stylesheet" href="./css/bulletin-board.css" />
-    <link rel="stylesheet" href="./css/base.css" />
-    <link rel="stylesheet" href="./css/createvolunteerpost.css" />
+    <title>Messages</title>
+    <link rel="stylesheet" href="css/bulletinboard.css" />
+    <link rel="stylesheet" href="css/home.css" />
+
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -12,30 +12,7 @@
     />
   </head>
 
-  <body onload="loadOpportunities()">
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <div class="modal-column modal-img"></div>
-        <div class="modal-column modal-text">
-          <span class="close">&times;</span>
-          <p id="modalRole" class="heading1">Role opportunity</p>
-          <p id="modalLocation" class="heading2">Location opportunity</p>
-          <p id="modalDescription" class="bodytext">
-            Some text about the opportunity Some text about the opportunity Some
-            text about the opportunity Some text about the opportunity Some text
-            about the opportunity Some text about the opportunity Some text
-            about the opportunity This is supposed to be very long Some text
-            about the opportunity Some text about the opportunitySome text about
-          </p>
-          <button id="modalButton" class="primarybutton">
-            Apply to this opportunity
-          </button>
-        </div>
-      </div>
-    </div>
-
+  <body>
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
         >&times;</a
@@ -159,56 +136,54 @@
     </div>
 
     <div class="content">
-      <p class="heading1">Welcome to the bulletin board.</p>
-        <form action="create_volunteer_post.html">
-          <button class="creatopportunity" type="submit">Create Volunteer Opportunity</button>
-        </form>
-
-      <p class="bodytext" id="description">
-        The bulletin board is the place where you can find all available
-        volunteering opportunities near you. Here are some local organizations
-        that are searching for volunteers. Apply for a position now!
+      <p class="heading-1" id="title">Welcome to the bulletin board.</p>
+      <p class="body-text" id="description">
+        Here are some organizations that are searching for volunteers. Apply for
+        a position now!
       </p>
 
-      <div class="flex-opportunities">
-        <div class="category" id="recommended-category">
-          <p class="heading2">Recommended for you</p>
-          <div id="recommended-opportunities"></div>
+      <div id="board">
+        <p class="heading-2 category-title">Recommended for you</p>
+        <div class="bulletin-scroll" id="recommended">
+          <div class="bulletin-card" id="guildford">
+            <div class="card-image" id="guildfordImg"></div>
+            <p class="heading-3">Guildford Library</p>
+            <p class="body-text">Languages tutor</p>
+          </div>
+
+          <div class="bulletin-card" id="guildford">
+            <div class="card-image" id="guildfordImg"></div>
+            <p class="heading-3">Guildford Library</p>
+            <p class="body-text">Librarian Assistant</p>
+          </div>
+          <div class="bulletin-card" id="guildford">
+            <div class="card-image" id="guildfordImg"></div>
+            <p class="heading-3">Guildford Library</p>
+            <p class="body-text">Supervisor</p>
+          </div>
         </div>
 
-        <div class="category" id="fine-arts-category">
-          <p class="heading2">Fine arts and culture</p>
-          <div id="fine-arts-opportunities"></div>
+        <p class="heading-2 category-title">Fine Arts and Culture</p>
+        <div class="bulletin-scroll" id="finearts">
+          <div class="bulletin-card" id="guildford">
+            <div class="card-image" id="guildfordImg"></div>
+            <p class="heading-3">Guildford Library</p>
+            <p class="body-text">Arts + Crafts Lead</p>
+          </div>
         </div>
 
-        <div class="category" id="sports-category">
-          <p class="heading2">Sports and recreation</p>
-          <div id="sports-opportunities"></div>
-        </div>
-
-        <div class="category" id="literacy-category">
-          <p class="heading2">Literacy, libraries, and learning</p>
-          <div id="literacy-opportunities"></div>
-        </div>
-
-        <div class="category" id="environment-category">
-          <p class="heading2">Environment</p>
-          <div id="environment-opportunities"></div>
-        </div>
-
-        <div class="category" id="health-category">
-          <p class="heading2">Health and wellness</p>
-          <div id="health-opportunities"></div>
-        </div>
-
-        <div class="category" id="computers-category">
-          <p class="heading2">Computers and information technology</p>
-          <div id="computers-opportunities"></div>
+        <p class="heading-2 category-title">Sports and Recreation</p>
+        <div class="bulletin-scroll" id="sportsandrec">
+          <div class="bulletin-card" id="guildford">
+            <div class="card-image" id="guildfordImg"></div>
+            <p class="heading-3">Guildford Library</p>
+            <p class="body-text">Sports Guy</p>
+          </div>
         </div>
       </div>
     </div>
   </body>
-  <script src="js/bulletin-board.js"></script>
+  <script src="js/bulletinboard.js"></script>
   <script>
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
