@@ -192,6 +192,14 @@ function addEducation() {
 
   document.getElementById("button-content").innerHTML = "";
 
+  let addEducationHeading1 = document.createElement("p");
+  addEducationHeading1.setAttribute("class", "heading3");
+  addEducationHeading1.innerHTML = "Please enter the name of your school";
+  addEducationHeading1.setAttribute("style", "text-align: left");
+
+  let addEducationInput1 = document.createElement("textarea");
+  addEducationInput1.setAttribute("style", "height: 50px");
+
   let addEducationHeading = document.createElement("p");
   addEducationHeading.setAttribute("class", "heading3");
   addEducationHeading.innerHTML = "Add education";
@@ -199,6 +207,8 @@ function addEducation() {
 
   let addEducationInput = document.createElement("textarea");
 
+  document.getElementById("button-content").appendChild(addEducationHeading1);
+  document.getElementById("button-content").appendChild(addEducationInput1);
   document.getElementById("button-content").appendChild(addEducationHeading);
   document.getElementById("button-content").appendChild(addEducationInput);
   
@@ -209,6 +219,14 @@ function addExperience() {
 
   document.getElementById("button-content").innerHTML = "";
 
+  let addEducationHeading1 = document.createElement("p");
+  addEducationHeading1.setAttribute("class", "heading3");
+  addEducationHeading1.innerHTML = "Please enter the job title";
+  addEducationHeading1.setAttribute("style", "text-align: left");
+
+  let addEducationInput1 = document.createElement("textarea");
+  addEducationInput1.setAttribute("style", "height: 50px");
+
   let addExperienceHeading = document.createElement("p");
   addExperienceHeading.setAttribute("class", "heading3");
   addExperienceHeading.innerHTML = "Add experience";
@@ -216,6 +234,8 @@ function addExperience() {
 
   let addExperienceInput = document.createElement("textarea");
 
+  document.getElementById("button-content").appendChild(addEducationHeading1);
+  document.getElementById("button-content").appendChild(addEducationInput1);
   document.getElementById("button-content").appendChild(addExperienceHeading);
   document.getElementById("button-content").appendChild(addExperienceInput);
 }
