@@ -2,9 +2,23 @@
 <html>
   <head>
     <title>Karma</title>
+    <link rel="icon" type="image/png" href="res/logo0_colored.png" />
     <meta charset="utf-8" />
+
+    <!-- CSS I WROTE -->
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/base.css" />
+
+    <!-- UI KIT CSS -->
+    <link rel="stylesheet" href="css/uikit/uikit.css" />
+
+    <!-- UI KIT JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.9/dist/js/uikit.min.js%22%3E"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.9/dist/js/uikit-icons.min.js%22%3E"></script>
+    <script src="js/uikit/uikit.min.js"></script>
+    <script src="js/uikit/uikit-icons.min.js"></script>
+
+    <!-- ANIMATED ICONS JS -->
     <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js%22%3E"></script>
   </head>
 
@@ -15,6 +29,10 @@
     >
       <div id="flex-nav">
         <div style="color: #49a1b9" class="heading2 nav-column logo-and-text">
+          <img
+            src="res/light-blue-logo.png"
+            style="max-width: 40px; height: auto"
+          />
           Karma
         </div>
         <div class="nav-column buttons" style="text-align: center">
@@ -26,18 +44,23 @@
       </div>
 
       <div id="introduction">
-        <p class="title">Welcome to Karma.</p>
-        <p class="heading3">
+        <p class="uk-animation-slide-left title">Welcome to Karma.</p>
+        <p class="uk-animation-slide-left heading3">
           Karma is a social media platform that provides aspiring volunteers
           with opportunities to <span class="accent">contribute</span> to their
           communities and <span class="accent">make a change</span> for the
           better.
         </p>
-        <button id="create-account-button">Sign up</button>
+        <button class="uk-animation-slide-left" id="create-account-button">
+          Sign up
+        </button>
       </div>
     </div>
 
-    <div id="flex-about">
+    <div
+      uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 500"
+      id="flex-about"
+    >
       <div class="flex-about-column flex-about-column-left">
         <p class="heading1" style="color: #49a1b9">
           Make an impact on the<br />
@@ -141,7 +164,10 @@
       <span class="dot" onclick="currentSlide(3)"></span>
     </div>
 
-    <div id="flex-features-div">
+    <div
+      uk-scrollspy="target: > p, div; cls: uk-animation-fade; delay: 500"
+      id="flex-features-div"
+    >
       <p class="heading1" style="color: #49a1b9">
         All the features you need<br />
         to help you succeed.
