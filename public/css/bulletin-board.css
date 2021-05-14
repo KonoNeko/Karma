@@ -32,7 +32,7 @@
 #health-opportunities,
 #computers-opportunities {
   display: flex;
-  overflow: auto;
+  /*overflow: auto;*/
   flex-direction: row;
   margin-right: 20px;
 }
