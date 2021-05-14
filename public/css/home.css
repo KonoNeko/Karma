@@ -21,14 +21,14 @@
 .post-btn{
   display: none;
   text-align: right;
-  margin-right: 35px;
-  margin-top: 60px;
+  /*margin-right: 35px;*/
+  /*margin-top: 60px;*/
 }
 /*display on mobile view only*/
 @media only screen
 and (min-device-width : 320px)
-and (max-device-width : 480px){
-  .post-btn {display: inline;}
+and (max-device-width : 550px){
+  .post-btn {display: block;}
 }
 
 .topPartDiv {
