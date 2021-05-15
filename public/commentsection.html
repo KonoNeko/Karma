@@ -15,11 +15,29 @@
 
 <body onload="loadHome()">
 
-<div id="commentsbox" class="flex-main">
-        <div class="column" id="mainmain">
+<div class="flex-main">
+        <div id="postModal">
+                <div class="leftDiv" id="postPicture"></div>
+                <div class="rightDiv" id="rightDiv">
+                        <div id="postOwnerTitle">
+							<div class="profilepic" id="postOwnerProfilePic"></div>
+							<div id="nameAndTimeDiv">
+								<p id="postOwnerUsername"></p>
+								<p id="timePosted"></p>
+							</div>
+						</div>
+						<hr>
+						<div id="commentList"></div>
+						<hr>
+						<div id="interactionDiv">
+							<div id="interactionButtons"></div>
+							<p id="likesLine">
+								<span id="likeUsername">williamblack</span> and <span id="likes">10</span> others like this post
 
-          <div id="stories" class="stories"></div>
-</div>
+							</p>
+						</div>
+                </div>
+        </div>
 </div>
   
       

@@ -23,102 +23,104 @@
 // }
 
 function loadHome() {
-    loadComments();
+    loadPost();
   }
 
 
-function loadComments() {
-    let comments = document.getElementById('commentsbox');
-    createComments(comments);
+function loadPost() {
+    let modal = document.getElementById('postModal');
+    createComments(modal);
 }
-  
 
+function createComment(profilePic, username, comment, timestamp, commentID) {
+    let commentDiv = document.createElement("div");
+    commentDiv.className = "comment";
+    commentDiv.id = commentID;
 
-function createComments(comments) {
-
-    let leftDiv = document.createElement("p");
-    leftDiv.setAttribute("class", "mainDivComments");
-    
-    let picture = document.createElement("div");
-    picture.setAttribute("class", "postpicture");
-    picture.setAttribute(
-    "style",
-    "background-image: url('./images/placeholder.jpg')"
-    );
-
-    leftDiv.appendChild(picture);
-
-    comments.appendChild(leftDiv);
-
-
-    rightDiv = document.createElement("div");
-    rightDiv.setAttribute("class", "rightDivComments");
-
-
-    let storyImgDiv = document.createElement("div");
-    storyImgDiv.setAttribute("class", "profilepic");
-    storyImgDiv.setAttribute("style", "padding-bottom: 10px");
-
-    storyImgDiv.setAttribute(
-    "style",
-    "background-image: url('./images/placeholder.jpg')"
-    );
-
-    let userName = document.createElement("p");
-    userName.setAttribute("class", "userName");
-    userName.innerHTML = "User name";
-
-    let timePosted = document.createElement("p");
-    timePosted.setAttribute("class", "timePosted");
-    timePosted.innerHTML = "30 minutes ago";
-
-    rightDiv.appendChild(storyImgDiv);
-    rightDiv.appendChild(userName);
-    rightDiv.appendChild(timePosted);
-
-
-
-    let captionImgDiv = document.createElement("div");
-    captionImgDiv.setAttribute("class", "profilepic");
-    captionImgDiv.setAttribute("style", "padding-bottom: 10px");
-
-    captionImgDiv.setAttribute(
-    "style",
-    "background-image: url('./images/placeholder.jpg')"
-    );
-
-    let captionUserName = document.createElement("p");
-    captionUserName.setAttribute("class", "captionUserName");
-
-    let caption = document.createElement("p");
-    caption.setAttribute("class", "caption");
-
-    rightDiv.appendChild(captionImgDiv);
-    rightDiv.appendChild(captionUserName);
-    rightDiv.appendChild(caption);
-
-
-    let commentImgDiv = document.createElement("div");
-    commentImgDiv.setAttribute("class", "profilepic");
-    commentImgDiv.setAttribute("style", "padding-bottom: 10px");
+    let profilePicDiv = document.createElement("div");
+    profilePicDiv.setAttribute("class", "profilepic");
+    profilePicDiv.setAttribute("style", `background-image: url('${profilePic}')`);
 
     let commentUserName = document.createElement("p");
     commentUserName.setAttribute("class", "commentUserName");
+    commentUserName.innerHTML = username;
 
-    let actualComment = document.createElement("p");
-    actualComment.setAttribute("class", "actualComment");
+    let commentTxt = document.createElement("p");
+    commentTxt.setAttribute("class", "commentTxt");
+    commentTxt.innerHTML = comment;
 
     let commentTime = document.createElement("p");
-    commentTime.setAttribute("class", "actualComment");
+    commentTime.setAttribute("class", "timestamp");
 
     let replyButton = document.createElement("p");
-    replyButton.setAttribute("class", "actualComment");
+    replyButton.setAttribute("class", "replyBtn");
+    replyButton.innerHTML = "Reply";
+
+    commentDiv.appendChild(profilePicDiv);
+    commentDiv.appendChild(commentUserName);
+    commentDiv.appendChild(commentTxt);
+    commentDiv.appendChild(commentTime);
+    commentDiv.appendChild(replyButton);
+
+    return commentDiv;
+}
 
 
-    rightDiv.appendChild(commentImgDiv);
-    rightDiv.appendChild(commentUserName);
-    rightDiv.appendChild(actualComment);
-    rightDiv.appendChild(commentTime);
-    rightDiv.appendChild(replyButton);
+function createComments(comments) {
+    const placeholderImg = './images/placeholder.jpg';
+    let rightDiv = document.getElementById("rightDiv");
 
+    let postImage = document.getElementById("postPicture");
+    postImage.setAttribute("style", `background-image: url('${placeholderImg}')`);
+
+
+
+    let postOwnerTitle = document.getElementById("postOwnerTitle");
+    let posterProfilePic = document.getElementById("postOwnerProfilePic");
+    posterProfilePic.setAttribute("style", `background-image: url('${placeholderImg}')`);
+
+
+    let nameAndTimeDiv = document.getElementById("nameAndTimeDiv");
+    let userName = document.getElementById("postOwnerUsername");
+    userName.innerHTML = "User name";
+    let timePosted = document.getElementById("timePosted");
+    timePosted.innerHTML = "30 minutes ago";
+    nameAndTimeDiv.appendChild(userName);
+    nameAndTimeDiv.appendChild(timePosted);
+
+    postOwnerTitle.appendChild(posterProfilePic);
+    postOwnerTitle.appendChild(nameAndTimeDiv);
+
+    let commentsDiv = document.getElementById("commentList");
+
+
+    let captionImg = document.createElement("div");
+    captionImg.setAttribute("class", "profilepic");
+    captionImg.setAttribute("style", "padding-bottom: 10px");
+    captionImg.setAttribute("style", `background-image: url('${placeholderImg}')`);
+
+    let captionUserName = document.createElement("p");
+    captionUserName.setAttribute("class", "captionUserName");
+    captionUserName.innerHTML = "captionUserName";
+
+    let caption = document.createElement("p");
+    caption.setAttribute("class", "caption");
+    caption.innerHTML = "caption";
+
+    commentsDiv.appendChild(captionImg);
+    commentsDiv.appendChild(captionUserName);
+    commentsDiv.appendChild(caption);
+
+    let comment1 = createComment(placeholderImg, "username", "This is a comment", "now", 1);
+    let comment2 = createComment(placeholderImg, "username", "This is a comment", "5min", 2);
+    let comment3 = createComment(placeholderImg, "username", "This is a comment", "10min", 3);
+    let comment4 = createComment(placeholderImg, "username", "This is a comment", "15min", 4);
+    let comment5 = createComment(placeholderImg, "username", "This is a comment", "20min", 5);
+
+
+    commentsDiv.appendChild(comment1);
+    commentsDiv.appendChild(comment2);
+    commentsDiv.appendChild(comment3);
+    commentsDiv.appendChild(comment4);
+    commentsDiv.appendChild(comment5);
 }
