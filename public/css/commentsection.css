@@ -102,7 +102,21 @@
   
 }
 
-#postModal1 {
+#modalOverlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 3;
+}
+
+
+.postModal {
   position: absolute;
   background-color: #EFF0F3; /* temp */
   height: 600px; /* temp */
@@ -113,7 +127,6 @@
   left: 50%;
   transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
-  z-index: 3;
 }
   
 #nameAndTimeDiv {
@@ -183,15 +196,15 @@ hr {
 }
   
 .commentTxt {
-    /* Body text */
-    
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 19px;
-    
-    color: #000000;
+  /* Body text */
+  
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  
+  color: #000000;
 }
 
 .profilepic {
@@ -223,14 +236,6 @@ hr {
   margin-right: 24px;
   display: flex;
   flex-direction: column;
-}
-
-#postModal {
-  background-color: #EFF0F3; /* temp */
-  height: 600px; /* temp */
-  width: 1000px; /* temp */
-  border-radius: 25px;
-  display: flex;
 }
 
 #postOwnerTitle {
