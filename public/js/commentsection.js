@@ -8,7 +8,7 @@ function loadPost() {
     createModal(1);
     displayPost(placeholderImg);
     displayPostDetails("Username", "30 minutes ago", placeholderImg);
-    createComments(placeholderImg);
+    displayComments(placeholderImg);
 }
 
 function createModal(postID) {
@@ -28,50 +28,50 @@ function createModal(postID) {
     rightSideDiv.id = "rightDiv";
     rightSideDiv.className = "rightDiv";
 
-        let postDetails = document.createElement("div");
-        postDetails.id = "postOwnerTitle";
+    let postDetails = document.createElement("div");
+    postDetails.id = "postOwnerTitle";
 
-            let profilePic = document.createElement("div");
-            profilePic.id = "postOwnerProfilePic";
-            profilePic.className = "profilepic";
+    let profilePic = document.createElement("div");
+    profilePic.id = "postOwnerProfilePic";
+    profilePic.className = "profilepic";
 
-            let nameAndTime = document.createElement("div");
-            nameAndTime.id = "nameAndTimeDiv";
+    let nameAndTime = document.createElement("div");
+    nameAndTime.id = "nameAndTimeDiv";
 
-                let username = document.createElement("p");
-                username.id = "postOwnerUsername";
+    let username = document.createElement("p");
+    username.id = "postOwnerUsername";
 
-                let time = document.createElement("p");
-                time.id = "timePosted";
-            
-            nameAndTime.appendChild(username);
-            nameAndTime.appendChild(time);
-        
-        postDetails.appendChild(profilePic);
-        postDetails.appendChild(nameAndTime);
-        rightSideDiv.appendChild(postDetails);
+    let time = document.createElement("p");
+    time.id = "timePosted";
+    
+    nameAndTime.appendChild(username);
+    nameAndTime.appendChild(time);
 
- 
-        rightSideDiv.appendChild(createLine());
+    postDetails.appendChild(profilePic);
+    postDetails.appendChild(nameAndTime);
+    rightSideDiv.appendChild(postDetails);
 
-        let commentList = document.createElement("div");
-        commentList.id = "commentList";
 
-        rightSideDiv.appendChild(commentList);
-        rightSideDiv.appendChild(createLine());
+    rightSideDiv.appendChild(createLine());
 
-        let interactionDiv = document.createElement("div");
-        interactionDiv.id = "interactionDiv";
+    let commentList = document.createElement("div");
+    commentList.id = "commentList";
 
-            let interactionButtons = document.createElement("div");
-            interactionButtons.id = "interactionButtons";
+    rightSideDiv.appendChild(commentList);
+    rightSideDiv.appendChild(createLine());
 
-            let likesLine = document.createElement("p");
-            likesLine.innerHTML = `<span id="likeUsername"></span> and <span id="likes"></span> others like this post`;
+    let interactionDiv = document.createElement("div");
+    interactionDiv.id = "interactionDiv";
 
-        interactionDiv.appendChild(interactionButtons);
-        interactionDiv.appendChild(likesLine);
-        rightSideDiv.appendChild(interactionDiv);
+    let interactionButtons = document.createElement("div");
+    interactionButtons.id = "interactionButtons";
+
+    let likesLine = document.createElement("p");
+    likesLine.innerHTML = `<span id="likeUsername"></span> and <span id="likes"></span> others like this post`;
+
+    interactionDiv.appendChild(interactionButtons);
+    interactionDiv.appendChild(likesLine);
+    rightSideDiv.appendChild(interactionDiv);
 
     modal.appendChild(leftSideDiv);
     modal.appendChild(rightSideDiv);
@@ -192,7 +192,7 @@ function loadCaption(profilePic, username, caption) {
 }
 
 
-function createComments(placeholderImg) {
+function displayComments(placeholderImg) {
     let commentsDiv = document.getElementById("commentList");
 
 
