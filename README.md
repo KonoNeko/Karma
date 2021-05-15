@@ -46,3 +46,4 @@ The following is a list of technologies and resources that were used in the impl
 * Adobe Illustrator
 * Lordicon
 * Freepik
+* Font Awesome
