@@ -101,6 +101,20 @@
   }
   
 }
+
+#postModal1 {
+  position: absolute;
+  background-color: #EFF0F3; /* temp */
+  height: 600px; /* temp */
+  width: 1000px; /* temp */
+  border-radius: 25px;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  z-index: 3;
+}
   
 #nameAndTimeDiv {
   justify-content: center;
@@ -128,12 +142,7 @@ hr {
   height: 48px; 
 }
   
-#profilename {
-  margin-top: -50px;
-  margin-left: 55px;
-  width: 72px;
-  height: 19px;
-
+.commentUsername {
   /* Body Title */
 
   font-family: Open Sans;
@@ -148,13 +157,10 @@ hr {
 }
   
   
-#time {
-  margin-left: 55px;
-  width: 97px;
-  height: 14px;
-  
+.timeAndReply {
+  margin-right: 10px;
+
   /* Time Text on Comments */
-  
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
@@ -165,12 +171,18 @@ hr {
   
   color: #000000;
 }
+
+.comment {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.commentBody {
+  display: flex;
+  flex-direction: column;
+}
   
-#postcaption {
-    margin-left: 55px;
-    width: 314px;
-    height: 31px;
-    
+.commentTxt {
     /* Body text */
     
     font-family: Open Sans;
@@ -215,7 +227,6 @@ hr {
 
 #postModal {
   background-color: #EFF0F3; /* temp */
-  margin-top: 70px;
   height: 600px; /* temp */
   width: 1000px; /* temp */
   border-radius: 25px;
