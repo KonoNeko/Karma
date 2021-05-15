@@ -118,15 +118,15 @@
 
 .postModal {
   position: absolute;
+  display: flex;
   background-color: #EFF0F3; /* temp */
   height: 600px; /* temp */
   width: 1000px; /* temp */
   border-radius: 25px;
-  display: flex;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
+  z-index: 4;
 }
   
 #nameAndTimeDiv {
@@ -138,7 +138,7 @@
 }
 
 #commentList {
-  height: 50%;
+  height: 65%;
   overflow: auto;
 }
 

@@ -18,7 +18,8 @@ function createModal(postID) {
 
     let modal = document.createElement("div");
     modal.className = "postModal";
-    modal.id = postID;
+    modal.id = "modal" + postID;
+    modal.style.display = "none";
 
     let leftSideDiv = document.createElement("div");
     leftSideDiv.id = "postPicture";
@@ -69,23 +70,41 @@ function createModal(postID) {
     let likesLine = document.createElement("p");
     likesLine.innerHTML = `<span id="likeUsername"></span> and <span id="likes"></span> others like this post`;
 
+    let commentForm = document.createElement("form");
+    commentForm.className = "commentForm";
+    
+    let commentInput = document.createElement("input");
+    commentInput.type = "text";
+    commentInput.placeholder = "Add a comment...";
+
+    let commentSubmit = document.createElement("button");
+    commentSubmit.type = "submit";
+    commentSubmit.innerText = "Post";
+
+    commentForm.appendChild(commentInput);
+    commentForm.appendChild(commentSubmit);
+
     interactionDiv.appendChild(interactionButtons);
     interactionDiv.appendChild(likesLine);
+    interactionDiv.appendChild(commentForm);
     rightSideDiv.appendChild(interactionDiv);
 
     modal.appendChild(leftSideDiv);
     modal.appendChild(rightSideDiv);
-    overlay.appendChild(modal);
 
+    
     document.body.appendChild(overlay);
+    document.body.appendChild(modal);
 }
 
 function hideModal() {
     document.getElementById("modalOverlay").style.display = "none";
+    document.getElementById("modal1").style.display = "none";
 }
 
 function displayModal() {
     document.getElementById("modalOverlay").style.display = "block";
+    document.getElementById("modal1").style.display = "flex";
 }
 
 
