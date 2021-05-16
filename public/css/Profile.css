@@ -99,6 +99,16 @@
   margin-top: -180px;
 }
 
+#numPosts {
+  margin-left: 420px;
+  margin-bottom: 50px;
+  font-size: 14pt;
+  font-family: "Open Sans";
+  font-weight: bold;
+
+
+}
+
 #following {
   margin-left: 280px;
   text-align: justify;
@@ -463,7 +473,6 @@ h3 {
     color: white;
     border-radius: 8px;
     margin-top: 50px;
-
     font-family: Montserrat;
     font-style: normal;
     font-weight: 600;
@@ -704,12 +713,16 @@ textarea {
   margin-left: 250px;
 }
 
+#numPosts {
+  margin-left: 300px;
+  position: absolute;
+  font-size: 14pt;
+  font-family: "Open Sans";
+  font-weight: bold;
+  margin-top: 135px;
 
 
-
-
-
-
+}
 
 
 }
