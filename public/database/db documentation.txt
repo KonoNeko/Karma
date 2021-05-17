@@ -1,0 +1,26 @@
+Base API Url: "https://marlonfajardo.ca/karma/v1"
+
+
+
+1)  Get social feed (site-wide)
+    For viewing all the posts from every user.
+    
+    ENDPOINT: /posts
+
+    METHOD: GET
+
+    PARAMS:
+        NONE
+
+2)  Get social feed (user-specific)
+    For view all the posts made by people that the current user is following.
+
+    ENDPOINT: /posts/{id}
+    
+    METHOD: GET
+
+    PARAMS:
+        id    string: The current userID
+
+
+
