@@ -77,6 +77,7 @@ function showImages() {
 function loadProfile() {
   loadAboutMe();
   loadPosts();
+  loadNumPosts();
   loadSkills();
   loadEducation();
   loadExperience();
@@ -98,6 +99,11 @@ function loadPosts() {
   let posts = document.getElementById("posts");
   createPost(posts);
   createPost(posts);
+}
+
+function loadNumPosts() {
+  let numPosts = document.getElementById("numPosts");
+  createNumPosts(numPosts)
 }
 
 function loadSkills() {
@@ -240,7 +246,15 @@ function addExperience() {
   document.getElementById("button-content").appendChild(addExperienceInput);
 }
 
+function createNumPosts(numPosts) {
 
+  let post= document.createElement("p");
+  post.setAttribute("class", "followers");
+  post.innerHTML = "1";
+
+  numPosts.appendChild(post);
+
+}
 
 function createAboutMe(aboutme) {
   let aboutdiv = document.createElement("div");
