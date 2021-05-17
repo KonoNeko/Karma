@@ -728,14 +728,14 @@ DONEf) View all categories (GET - SELECT...)                        TESTED
     g) View recommended opportunitues (GET - ____)
 
 -Social Posts
-DONEa) View site-wide social feed (GET - posts_feed)                TESTED
+DONEa) View site-wide social feed (GET - posts_feed)                TESTED      DOCUMENTED(1)
 DONEb) View single social post (GET - view_post)                    TESTED
 DONEc) Like post (PUT - like_post)                                  TESTED
 DONEd) Unlike post (DELETE - unlike_post)                           TESTED
 DONEe) Comment on a post (POST - comment_on_post)                   TESTED
 DONEf) View all comments (GET - view_comments)                      TESTED
     g) View stories -  **TODO**
-DONEh) View social feed for a user (GET - user_posts_feed)          TESTED
+DONEh) View social feed for a user (GET - user_posts_feed)          TESTED      DOCUMENTED(2)
 DONEi) Delete comment - (DELETE - delete_comment)                   TESTED
 
 -Messages
