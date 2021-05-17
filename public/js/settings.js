@@ -37,7 +37,6 @@ function changePassword() {
   let changePasswordButton = document.createElement("button");
   changePasswordButton.innerHTML = "Change Password";
   changePasswordButton.setAttribute("onclick", "savePassword()");
-
   // CHANGE PASSWORD DIV
   let changePasswordSetting = document.getElementById(
     "change-password-setting"
@@ -70,6 +69,7 @@ function changePassword() {
     changePasswordClick = true;
   }
 }
+
 
 function changeUsername() {
   // LABEL
@@ -191,7 +191,35 @@ function editInterfacePreferences() {
   }
 }
 
+// function validatePassword(){
+//   let x = document.getElementById("currentPasswordInput").value;
+//   let y = document.getElementById("newPasswordInput").value;
+//   let z = document.getElementById("confirmPasswordInput").value;
+//   if(x!=y && y==z){
+//     alert("The password is changed ");
+//     return true;
+//   }else if(x=y){
+//     alert("new password can not be same like current one");
+//     return false
+//   }else if(y!=z){
+//     alert("the new password and confirm password are not the same")
+//     return false
+//   }
+// }
 function savePassword() {
+  let x = document.getElementById("currentPasswordInput").value;
+  let y = document.getElementById("newPasswordInput").value;
+  let z = document.getElementById("confirmPasswordInput").value;
+  if(x!==y && y===z){
+    alert("The password is changed ");
+    return true;
+  }else if(x===y){
+    alert("new password can not be same like current one");
+    return false
+  }else if(y!==z){
+    alert("the new password and confirm password are not the same")
+    return false
+  }
   // CHANGE PASSWORD DIV
   let changePasswordSetting = document.getElementById(
     "change-password-setting"
@@ -202,6 +230,8 @@ function savePassword() {
   savePasswordMessage.style.paddingTop = "12px";
   savePasswordMessage.style.fontFamily = "Open Sans";
   savePasswordMessage.style.color = "#51B09F";
+
+
 
   changePasswordSetting.appendChild(savePasswordMessage);
 }
