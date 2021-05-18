@@ -44,7 +44,7 @@ function APIRequest(method, url) {
           console.log("loading post");
           for (let i=0; i<result.length; i++) {
               console.log(result);
-              createPost(result[i]);
+              createPost(result[i]["post_info"]);
           }
           
       }
