@@ -13,6 +13,11 @@
     name="viewport"
     content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
   />
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
 </head>
 
 <body>
@@ -175,12 +180,15 @@
             >Edit Interface Preferences</span
           >
         </div>
+
+        <button id="btn-logout"> Logout</button>
+
       </div>
     </div>
   </div>
   >
 </body>
-
+<script src="js/signup.js"></script>
 <script src="js/settings.js"></script>
 <script>
   function openNav() {
@@ -190,4 +198,14 @@
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
   }
+</script>
+<script>
+$("#btn-logout").click(function logout() {
+  firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+      location.href = 'sign-up.html';
+    }).catch(function(error) {
+      // An error happened.
+    });
+}); 
 </script>
