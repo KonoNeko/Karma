@@ -29,11 +29,11 @@ DONEf) View opportunities a user applied for - view_user_applications
 DONEi) Reject an applicant  
 
 -Social Posts
-DONEa) View all posts (social feed) - posts_feed
+DONEa) View all posts (social feed) - site_wide_posts_feed
 DONEb) View comments - view_comments
-DONEc) Get caption, location and image - posts_feed
-DONEd) View number of likes - posts_feed
-DONEe) View timestamp posted - posts_feed
+DONEc) Get caption, location and image - site_wide_posts_feed
+DONEd) View number of likes - site_wide_posts_feed
+DONEe) View timestamp posted - site_wide_posts_feed
 DONEf) Like a post - like_post
 DONEg) Comment on a post - comment_on_post
     h) View all stories
@@ -549,12 +549,16 @@ DROP PROCEDURE IF EXISTS view_post;
 DELIMITER //
 CREATE PROCEDURE view_post(IN current_post INTEGER, IN current_username CHAR(50))
 BEGIN
-    SELECT pf.*, is_liked_by_user(current_username, pf.post_id) AS is_liked 
-    FROM posts_feed pf
-    WHERE pf.post_id = current_post;
+    SELECT pf.*, is_liked_by_user(current_username, pf.post_id) AS is_liked, 
+    get_user_name(pc.user_id) as comment_poster, pc.comment, pc.is_a_reply,
+    pc.comment_id, get_profile_pic(pc.user_id) as commenter_profile_pic,
+    pc.id_of_comment_receiving_reply, pc.post_date as comment_date
+    FROM posts_feed pf INNER JOIN 
+         post_comments pc ON (pf.post_id = pc.post_id)
+    WHERE pf.post_id = current_post
+    ORDER BY pc.post_date;
 END//
 DELIMITER ;
-
 
 /*
 Gets a user's post feed determined by the people they follow.
@@ -563,9 +567,28 @@ DROP PROCEDURE IF EXISTS user_posts_feed;
 DELIMITER //
 CREATE PROCEDURE user_posts_feed(IN current_username CHAR(50))
 BEGIN
-    SELECT pf.*, is_liked_by_user(current_username, pf.post_id) AS is_liked 
-    FROM posts_feed pf
-    WHERE is_following(current_username, pf.user_id) OR pf.user_id = get_user_id(current_username);
+    SELECT pf.*, is_liked_by_user(current_username, pf.post_id) AS is_liked, 
+    get_user_name(pc.user_id) as comment_poster, pc.comment, pc.is_a_reply,
+    pc.comment_id, get_profile_pic(pc.user_id) as commenter_profile_pic,
+    pc.id_of_comment_receiving_reply, pc.post_date as comment_date
+    FROM posts_feed pf LEFT JOIN post_comments pc ON (pf.post_id = pc.post_id)
+    WHERE is_following(current_username, pf.user_id) OR pf.user_id = get_user_id(current_username)
+    ORDER BY pf.post_date, pc.post_date;
+END//
+DELIMITER ;
+
+/*
+Gets a user's post feed determined by the people they follow.
+*/
+DROP PROCEDURE IF EXISTS site_wide_posts_feed;
+DELIMITER //
+CREATE PROCEDURE site_wide_posts_feed()
+BEGIN
+    SELECT pf.*, get_user_name(pc.user_id) as comment_poster, pc.comment, 
+    pc.is_a_reply, pc.comment_id, get_profile_pic(pc.user_id) as commenter_profile_pic,
+    pc.id_of_comment_receiving_reply, pc.post_date as comment_date
+    FROM posts_feed pf LEFT JOIN post_comments pc ON (pf.post_id = pc.post_id)
+    ORDER BY pf.post_date, pc.post_date;
 END//
 DELIMITER ;
 
@@ -1052,7 +1075,9 @@ DROP PROCEDURE IF EXISTS view_comments;
 DELIMITER //
 CREATE PROCEDURE view_comments(IN current_post INTEGER)
 BEGIN
-    SELECT * FROM post_comments
+    SELECT comment_id, post_id, user_id, comment, 
+    is_a_reply, id_of_comment_receiving_reply, post_date AS comment_date
+    FROM post_comments
     WHERE post_id = current_post
     ORDER BY post_date;
 END//

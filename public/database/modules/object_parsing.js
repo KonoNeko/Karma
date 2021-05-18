@@ -74,26 +74,65 @@ function fillCertifications(object) {
 }
 
 
-function fillComments(object) {
+function fillComments(object, currentPost) {
+    let comment_keys = ['comment_id', 'post_id', 'user_id', 'comment', 
+    'is_a_reply', 'id_of_comment_receiving_reply', 'comment_date'];
     let comments = {};
     for (let i=0; i<object.length; i++) {
-        let currentID = object[i]['comment_id'];
-        if (object[i]['is_a_reply']) {
-            let comment_being_replied_to = object[i]['id_of_comment_receiving_reply'];
-            
-            // If a replies object doesn't exist yet
-            if(!comments[comment_being_replied_to]['replies']) {
-                comments[comment_being_replied_to]['replies'] = {};
+        if (object[i]['post_id'] == currentPost && object[i]['comment_id']) {
+            let currentID = object[i]['comment_id'];
+            if (object[i]['is_a_reply']) {
+                let comment_being_replied_to = object[i]['id_of_comment_receiving_reply'];
+                
+                // If a replies object doesn't exist yet
+                if(!comments[comment_being_replied_to]['replies']) {
+                    comments[comment_being_replied_to]['replies'] = {};
+                }
+                comments[comment_being_replied_to]['replies'][currentID] = filterObject(object[i], comment_keys);
+                
+            } else if (!comments[currentID]) {
+            // If current comment isn't parsed
+                comments[currentID] = filterObject(object[i], comment_keys);
             }
-            comments[comment_being_replied_to]['replies'][currentID] = object[i];
-            
-        } else if (!comments[currentID]) {
-        // If current comment isn't parsed
-            comments[currentID] = object[i];
         }
     }
     return comments;
 }
+
+function fillSocialPost(object, currentPost) {
+    if (!currentPost) {
+        currentPost = 0;
+    } 
+    let post = {};
+    const post_keys = ['post_id', 'image_url', 'caption', 
+    'location', 'post_date', 'likes', 'username', 'profile_pic',];
+
+    post.post_info = filterObject(object[currentPost], post_keys);
+    post.comments = fillComments(object, object[currentPost]['post_id']);
+    return post;
+}
+
+function postExists(posts, id) {
+    for(let i = 0; i < posts.length; i++) {
+        if (posts[i].post_info.post_id == id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function fillSocialPosts(object) {
+    let posts = [];
+    for (let i=0; i<object.length; i++) {
+        let currentID = object[i]['post_id'];
+        if (!postExists(posts, currentID)) {
+            // If current post isn't parsed
+                posts.push(fillSocialPost(object, i));
+        }
+    }
+    return posts;
+}
+
 
 
 function sortOpportunities(object) {
@@ -122,3 +161,5 @@ module.exports.skills = fillSkills;
 module.exports.certifications = fillCertifications;
 module.exports.comments = fillComments;
 module.exports.opportunities = sortOpportunities;
+module.exports.post = fillSocialPost;
+module.exports.posts = fillSocialPosts;

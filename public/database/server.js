@@ -24,11 +24,11 @@ app.use(express.urlencoded( {extended: true} ));
  * Gets all posts in order of date posted.
  */
 app.get(ENDPOINT + '/posts', (req, res) => {
-    const sql = "SELECT * FROM posts_feed";
+    const sql = "CALL site_wide_posts_feed();";
     db.query(sql, (err, result) => {
         if (err) throw err;
-        let resultText = JSON.stringify(result);
-        res.end(resultText);
+        let posts = filter.posts(result);
+        res.end(JSON.stringify(posts));
     });
 });
 
@@ -40,8 +40,8 @@ app.get(ENDPOINT + '/posts/:userID', (req, res) => {
     const sql = `CALL user_posts_feed('${id}');`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        let resultText = JSON.stringify(result);
-        res.end(resultText);
+        let posts = filter.posts(result[0]);
+        res.end(JSON.stringify(posts));
     });
 });
 
@@ -460,7 +460,8 @@ app.get(ENDPOINT + '/post', (req, res) => {
     const sql = `CALL view_post(${postID}, "${userID}");`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        res.end(JSON.stringify(result));
+        let post = filter.post(result[0], null);
+        res.end(JSON.stringify(post));
     });
 });
 
@@ -560,7 +561,7 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
     const sql = `CALL view_comments(${postID});`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        let comments = filter.comments(result[0]);
+        let comments = filter.comments(result[0], result[0]['post_id']);
         res.end(JSON.stringify(comments));
     });
 });
@@ -576,7 +577,7 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
     const sql = `SELECT * FROM bulletin_board;`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        let sortedOpportunities = filter.opportunities(result[0]);
+        let sortedOpportunities = filter.opportunities(result);
         res.end(JSON.stringify(sortedOpportunities));
     });
 });
@@ -697,6 +698,21 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
     });
 });
 
+/**
+ * Gets all conversations for a user
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profile/following
+ */
+ app.get(ENDPOINT + '/notifications/:id', (req, res) => {
+    const userID = req.params.id;
+    const sql = `CALL view_notifications('${userID}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result[0]));
+    });
+});
+
 
 /*
 TODO:
@@ -744,7 +760,7 @@ DONEa) View messages in conversation (GET - view_a_conversations)   TESTED
 DONEc) View all conversations for a user (GET - view_conversations) TESTED
 
 -Notifications
-    a) View all notifications
+DONEa) View all notifications (GET - view_notifications)            TESTED
 */
 
 
