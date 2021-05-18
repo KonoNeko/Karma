@@ -32,7 +32,8 @@
 #health-opportunities,
 #computers-opportunities {
   display: flex;
-  overflow: auto;
+  overflow-x: scroll;
+  /*overflow-x: hidden;*/
   flex-direction: row;
   margin-right: 20px;
 }

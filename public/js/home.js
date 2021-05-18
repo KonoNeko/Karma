@@ -1,9 +1,64 @@
+
+const BASE_URL = "https://marlonfajardo.ca/karma/v1";
+
+function formatTimestamp(timestamp) {
+  let dateObj = new Date(Date.parse(timestamp));
+  return returnHighestTimeDiff(dateObj);
+}
+
+function returnHighestTimeDiff(time) {
+  let ms = {
+    y: 31536000000,
+    w: 604800000,
+    d: 86400000,
+    h: 3600000,
+    m: 60000,
+  }
+  let diff = Date.now() - time;
+  for(let [key, value] of Object.entries(ms)) {
+      if (diff > value) {
+          return `${Math.floor(diff/value)}${key}`;
+      } else if (diff < ms.m) {
+        return "Just now";
+      }
+  }
+}
+
+function view_social_feed(userID) {
+  const method = "GET";
+  const endpoint = "/posts";
+  const params = `/${userID}`;
+  const url = BASE_URL + endpoint + params;
+  let result = APIRequest(method, url);
+  console.log(result);
+}
+
+
+function APIRequest(method, url) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          let result = JSON.parse(this.responseText)[0];
+          console.log("loading post");
+          for (let i=0; i<result.length; i++) {
+              createPost(result[i]);
+          }
+          
+      }
+  }
+}
+
+
 // WINDOW ONLOAD FUNCTION FOR THE HOME PAGE
 function loadHome() {
   loadStories();
   loadWhatsNew();
   loadRecommendedConnections();
-  loadPosts();
+  view_social_feed('karma');
+//   loadPosts();
 }
 
 // READING INFORMATION FROM THE DATABASE
@@ -29,8 +84,25 @@ function loadStories() {
 }
 
 function loadPosts() {
-  let post = document.getElementById("posts");
-  createPost(post);
+  // let id;
+  // firebase.auth().onAuthStateChanged(function (user) {
+  //   db.collection("users")
+  //     .doc(user.uid)
+  //     .get()
+  //     .then(function (doc) {
+  //       let user = doc.data();
+  //       console.log(user.id);
+  //       id = user.id;
+  //     })
+  //     .catch((error) => {
+  //       console.log(`Error getting data: ${error}`);
+  //     });
+  // });
+  let test = view_social_feed('karma');
+  setTimeout(1000, function() {
+    console.log(test)
+    createPost(test);
+  });
 }
 
 function loadWhatsNew() {
@@ -84,7 +156,8 @@ function createStory(stories) {
   stories.appendChild(storyDiv);
 }
 
-function createPost(post) {
+function createPost(postObj) {
+  const post = document.getElementById("posts");
   let topPartDiv = document.createElement("div");
   topPartDiv.setAttribute("class", "topPartDiv");
 
@@ -94,7 +167,8 @@ function createPost(post) {
 
   postImgDiv.setAttribute(
     "style",
-    "background-image: url('./images/placeholder.jpg')"
+    `background-image: url('${postObj["profile_pic_url"]}');
+     background-color: #FFFFFF;`
   );
 
   let nameAndTimeDiv = document.createElement("div");
@@ -102,11 +176,12 @@ function createPost(post) {
 
   let userName = document.createElement("p");
   userName.setAttribute("class", "userName");
-  userName.innerHTML = "User name";
+  userName.innerHTML = postObj["username"];
 
+  let dateObj = formatTimestamp(postObj["post_date"]);
   let timePosted = document.createElement("p");
   timePosted.setAttribute("class", "timePosted");
-  timePosted.innerHTML = "30 minutes ago";
+  timePosted.innerHTML = dateObj;
 
   nameAndTimeDiv.appendChild(userName);
   nameAndTimeDiv.appendChild(timePosted);
@@ -120,7 +195,7 @@ function createPost(post) {
   picture.setAttribute("class", "postpicture");
   picture.setAttribute(
     "style",
-    "background-image: url('./images/placeholder.jpg')"
+    `background-image: url('${postObj["image_url"]}')`
   );
   post.appendChild(picture);
 
@@ -133,10 +208,9 @@ function createPost(post) {
   caption.setAttribute("class", "caption");
   comments.setAttribute("class", "comments");
 
-  likes.innerHTML = "williamblack and 103 others like this post";
-  caption.innerHTML =
-    "john.doe “The best way to find yourself is to lose yourself in the service of others.” - Mahatma Gandhi";
-  comments.innerHTML = "View all 54 comments";
+  likes.innerHTML = `${postObj["likes"]} users like this post`;
+  caption.innerHTML = `${postObj["caption"]}}`;
+  comments.innerHTML = `View all ${postObj["comments"]} comments`;
 
   post.appendChild(likes);
   post.appendChild(caption);
@@ -306,3 +380,5 @@ function createWhatsNew(newPost) {
 
   // newPost.appendChild(mainDiv);
 }
+
+loadHome();
