@@ -105,6 +105,15 @@ function view_social_feed(userID) {
     setTimeout(5000, function() {return result});
 }
 
+function view_notifications(userID) {
+  const method = "GET";
+  const endpoint = "/notifications";
+  const params = `/${userID}`;
+  const url = BASE_URL + endpoint + params;
+  let result = APIRequest(method, url);
+  console.log(result);
+}
+
 function view_opportunities() {
   const method = "GET";
   const endpoint = "/opportunities";

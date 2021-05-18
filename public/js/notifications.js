@@ -1,3 +1,57 @@
+
+const BASE_URL = "https://marlonfajardo.ca/karma/v1";
+
+function formatTimestamp(timestamp) {
+  let dateObj = new Date(Date.parse(timestamp));
+  return returnHighestTimeDiff(dateObj);
+}
+
+function returnHighestTimeDiff(time) {
+  let ms = {
+    y: 31536000000,
+    w: 604800000,
+    d: 86400000,
+    h: 3600000,
+    m: 60000,
+  }
+  let diff = Date.now() - time;
+  for(let [key, value] of Object.entries(ms)) {
+      if (diff > value) {
+          return `${Math.floor(diff/value)}${key}`;
+      } else if (diff < ms.m) {
+        return "Just now";
+      }
+  }
+}
+
+function view_notifications(userID) {
+  const method = "GET";
+  const endpoint = "/notifications";
+  const params = `/${userID}`;
+  const url = BASE_URL + endpoint + params;
+  let result = APIRequest(method, url);
+}
+
+
+function APIRequest(method, url) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          let result = JSON.parse(this.responseText)[0];
+          console.log(result);
+          console.log("loading post");
+          for (let i=0; i<result.length; i++) { // for each notification
+              // createPost(result[i]);
+          }
+          
+      }
+  }
+}
+
+
 function loadAll() {
   // generateNoNotifications();
   generateTime();
