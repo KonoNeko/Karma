@@ -1,6 +1,29 @@
 
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
+function formatTimestamp(timestamp) {
+  let dateObj = new Date(Date.parse(timestamp));
+  return returnHighestTimeDiff(dateObj);
+}
+
+function returnHighestTimeDiff(time) {
+  let ms = {
+    y: 31536000000,
+    w: 604800000,
+    d: 86400000,
+    h: 3600000,
+    m: 60000,
+  }
+  let diff = Date.now() - time;
+  for(let [key, value] of Object.entries(ms)) {
+      if (diff > value) {
+          return `${Math.floor(diff/value)}${key}`;
+      } else if (diff < ms.m) {
+        return "Just now";
+      }
+  }
+}
+
 function view_social_feed(userID) {
   const method = "GET";
   const endpoint = "/posts";
@@ -155,9 +178,10 @@ function createPost(postObj) {
   userName.setAttribute("class", "userName");
   userName.innerHTML = postObj["username"];
 
+  let dateObj = formatTimestamp(postObj["post_date"]);
   let timePosted = document.createElement("p");
   timePosted.setAttribute("class", "timePosted");
-  timePosted.innerHTML = postObj["post_date"];
+  timePosted.innerHTML = dateObj;
 
   nameAndTimeDiv.appendChild(userName);
   nameAndTimeDiv.appendChild(timePosted);

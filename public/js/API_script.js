@@ -167,3 +167,26 @@ function formatParams(params) {
   }
   return string;
 }
+
+function formatTimestamp(timestamp) {
+  let dateObj = new Date(Date.parse(timestamp));
+  return returnHighestTimeDiff(dateObj);
+}
+
+function returnHighestTimeDiff(time) {
+  let ms = {
+    y: 31536000000,
+    w: 604800000,
+    d: 86400000,
+    h: 3600000,
+    m: 60000,
+  }
+  let diff = Date.now() - time;
+  for(let [key, value] of Object.entries(ms)) {
+      if (diff > value) {
+          return `${Math.floor(diff/value)}${key}`;
+      } else if (diff < ms.m) {
+        return "Just now";
+      }
+  }
+}
