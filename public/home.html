@@ -14,9 +14,11 @@
     name="viewport"
     content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
   />
+  <script src="js/API_script.js" type="module"></script>
+  <script src="js/home.js" type="module"></script>
 </head>
 
-<body onload="loadHome()">
+<body>
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
       >&times;</a
@@ -184,7 +186,6 @@
 
 </body>
 
-<script src="js/home.js"></script>
 <script>
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

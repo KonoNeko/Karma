@@ -565,7 +565,7 @@ CREATE PROCEDURE user_posts_feed(IN current_username CHAR(50))
 BEGIN
     SELECT pf.*, is_liked_by_user(current_username, pf.post_id) AS is_liked 
     FROM posts_feed pf
-    WHERE is_following(current_username, pf.user_id);
+    WHERE is_following(current_username, pf.user_id) OR pf.user_id = get_user_id(current_username);
 END//
 DELIMITER ;
 
