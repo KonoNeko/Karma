@@ -26,10 +26,11 @@ function returnHighestTimeDiff(time) {
 
 function view_notifications(userID) {
   const method = "GET";
-  const endpoint = "/notifications";
+  const endpoint = "/notifications/karma";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
   let result = APIRequest(method, url);
+  console.log(result);
 }
 
 
@@ -40,11 +41,19 @@ function APIRequest(method, url) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-          let result = JSON.parse(this.responseText)[0];
+          let result = JSON.parse(this.responseText);
           console.log(result);
           console.log("loading post");
           for (let i=0; i<result.length; i++) { // for each notification
-              // createPost(result[i]);
+              if(result[i].type_of_event == "social_posts") {
+                  generatePostNotification(result[i]);
+              } else if(result[i].type_of_event = "opportunities") {
+                generatePostNotificationOtherUser(result[i]);
+              } else if(result[i].type_of_event = "profile_follows requested") {
+                generatePostNotificationFollowedYou(result[i]);
+              } else if(result[i].type_of_event = "profile_follows accepted") {
+                generatePostNotificationFollowedYou(result[i]);
+              }
           }
           
       }
