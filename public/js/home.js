@@ -29,7 +29,7 @@ function view_social_feed(userID) {
   const endpoint = "/posts";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  let result = APIRequest(method, url); 
+  APIRequest(method, url); 
 }
 
 
@@ -40,11 +40,11 @@ function APIRequest(method, url) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-          let result = JSON.parse(this.responseText)[0];
+          let result = JSON.parse(this.responseText);
           console.log("loading post");
+          console.log(result);
           for (let i=0; i<result.length; i++) {
-              console.log(result);
-              createPost(result[i]["post_info"]);
+              createPost(result[i]);
           }
           
       }
@@ -163,7 +163,7 @@ function createPost(postObj) {
 
   postImgDiv.setAttribute(
     "style",
-    `background-image: url('${postObj["profile_pic_url"]}');
+    `background-image: url('${postObj["post_info"]["profile_pic_url"]}');
      background-color: #FFFFFF;`
   );
 
@@ -172,9 +172,9 @@ function createPost(postObj) {
 
   let userName = document.createElement("p");
   userName.setAttribute("class", "userName");
-  userName.innerHTML = postObj["username"];
+  userName.innerHTML = postObj["post_info"]["username"];
 
-  let dateObj = formatTimestamp(postObj["post_date"]);
+  let dateObj = formatTimestamp(postObj["post_info"]["post_date"]);
   let timePosted = document.createElement("p");
   timePosted.setAttribute("class", "timePosted");
   timePosted.innerHTML = dateObj;
@@ -191,7 +191,7 @@ function createPost(postObj) {
   picture.setAttribute("class", "postpicture");
   picture.setAttribute(
     "style",
-    `background-image: url('${postObj["image_url"]}')`
+    `background-image: url('${postObj["post_info"]["image_url"]}')`
   );
   post.appendChild(picture);
 
@@ -204,9 +204,9 @@ function createPost(postObj) {
   caption.setAttribute("class", "caption");
   comments.setAttribute("class", "comments");
 
-  likes.innerHTML = `${postObj["likes"]} users like this post`;
-  caption.innerHTML = `${postObj["caption"]}}`;
-  comments.innerHTML = `View all ${postObj["comments"]} comments`;
+  likes.innerHTML = `${postObj["post_info"]["likes"]} likes`;
+  caption.innerHTML = `${postObj["post_info"]["caption"]}`;
+  comments.innerHTML = `View all ${postObj.comments.totalComments} comments`;
 
   post.appendChild(likes);
   post.appendChild(caption);
