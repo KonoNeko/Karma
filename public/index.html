@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Karma</title>
+
+    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="res/logo0_colored.png" />
     <meta charset="utf-8" />
 
@@ -39,7 +41,9 @@
           <a href="sign-in.html" class="buttons-column" id="signin-button"
             >Sign in</a
           >
-          <button class="buttons-column" id="signup-button">Sign up</button>
+          <button onclick="signUp()" class="buttons-column" id="signup-button">
+            Sign up
+          </button>
         </div>
       </div>
 
@@ -47,7 +51,7 @@
         <img src="res/index-background.png" />
       </div>
 
-      <div style="background-color: transparent !important;" id="introduction">
+      <div style="background-color: transparent !important" id="introduction">
         <p class="uk-animation-slide-left title">Welcome to Karma.</p>
         <p class="uk-animation-slide-left heading3">
           Karma is a social media platform that provides aspiring volunteers
@@ -55,7 +59,11 @@
           communities and <span class="accent">make a change</span> for the
           better.
         </p>
-        <button class="uk-animation-slide-left" id="create-account-button">
+        <button
+          onclick="signUp()"
+          class="uk-animation-slide-left"
+          id="create-account-button"
+        >
           Sign up
         </button>
       </div>
@@ -254,11 +262,17 @@
       <p class="heading2" style="color: #eff0f3">
         Join our community of volunteers and volunteer organizations today.
       </p>
-      <button id="bottom-signup-button">Create an account</button>
+      <button onclick="signUp()" id="bottom-signup-button">
+        Create an account
+      </button>
     </div>
   </body>
 
   <script>
+    function signUp() {
+      document.location = "https://karmavolunteering.web.app/sign-up.html";
+    }
+
     var slideIndex = 1;
     showSlides(slideIndex);
 
