@@ -78,6 +78,7 @@ function fillComments(object, currentPost) {
     let comment_keys = ['comment_id', 'post_id', 'user_id', 'comment', 
     'is_a_reply', 'id_of_comment_receiving_reply', 'comment_date'];
     let comments = {};
+    let commentNum = 0;
     for (let i=0; i<object.length; i++) {
         if (object[i]['post_id'] == currentPost && object[i]['comment_id']) {
             let currentID = object[i]['comment_id'];
@@ -94,8 +95,10 @@ function fillComments(object, currentPost) {
             // If current comment isn't parsed
                 comments[currentID] = filterObject(object[i], comment_keys);
             }
+            commentNum++;
         }
     }
+    comments.totalComments = commentNum;
     return comments;
 }
 
@@ -105,7 +108,7 @@ function fillSocialPost(object, currentPost) {
     } 
     let post = {};
     const post_keys = ['post_id', 'image_url', 'caption', 
-    'location', 'post_date', 'likes', 'username', 'profile_pic',];
+    'location', 'post_date', 'likes', 'username', 'profile_pic_url'];
 
     post.post_info = filterObject(object[currentPost], post_keys);
     post.comments = fillComments(object, object[currentPost]['post_id']);
