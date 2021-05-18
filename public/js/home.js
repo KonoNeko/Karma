@@ -29,8 +29,7 @@ function view_social_feed(userID) {
   const endpoint = "/posts";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  let result = APIRequest(method, url);
-  console.log(result);
+  let result = APIRequest(method, url); 
 }
 
 
@@ -44,6 +43,7 @@ function APIRequest(method, url) {
           let result = JSON.parse(this.responseText)[0];
           console.log("loading post");
           for (let i=0; i<result.length; i++) {
+              console.log(result);
               createPost(result[i]);
           }
           
@@ -98,11 +98,7 @@ function loadPosts() {
   //       console.log(`Error getting data: ${error}`);
   //     });
   // });
-  let test = view_social_feed('karma');
-  setTimeout(1000, function() {
-    console.log(test)
-    createPost(test);
-  });
+  view_social_feed('karma');
 }
 
 function loadWhatsNew() {
