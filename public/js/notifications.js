@@ -1,4 +1,5 @@
 function loadAll() {
+  // generateNoNotifications();
   generateTime();
   generatePostNotification();
   generateHR();
@@ -7,6 +8,22 @@ function loadAll() {
   generatePostNotificationFollowedYou();
   generateHR();
   generatePostNotificationFollowedYouRequest();
+}
+
+
+function generateNoNotifications() {
+  let noNotificationsDiv = document.getElementById("notifications");
+
+  let notification = document.createElement("p");
+  notification.setAttribute("class", "heading3");
+  notification.setAttribute(
+    "style",
+    "font-weight: 700; margin-bottom: 10px;"
+  );
+  notification.innerHTML = "You have no new notifications. Check back to see if there are any new notifications!";
+
+  noNotificationsDiv.appendChild(notification);
+
 }
 
 function generateTime() {
