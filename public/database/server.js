@@ -685,7 +685,7 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
  * Gets all conversations for a user
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profile/following
+ * https://marlonfajardo.ca/karma/v1/messages/value/value
  */
  app.get(ENDPOINT + '/messages/:id/:conversation', (req, res) => {
     const userID = req.params.id;
@@ -701,7 +701,7 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
  * Gets all conversations for a user
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profile/following
+ * https://marlonfajardo.ca/karma/v1/messages/value
  */
  app.get(ENDPOINT + '/notifications/:id', (req, res) => {
     const userID = req.params.id;
@@ -709,6 +709,44 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
     db.query(sql, (err, result) => {
         if (err) throw err;
         res.end(JSON.stringify(result[0]));
+    });
+});
+
+
+/**
+ * Gets all opportunites recommended for a user.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/opportunities/recommended/value
+ */
+ app.get(ENDPOINT + '/opportunities/recommended/:id', (req, res) => {
+    const userID = req.params.id;
+    const sql = `CALL view_recommended('${userID}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result[0]));
+    });
+});
+
+
+/**
+ * Sends a new message to another user
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/messages?id=value&receiver=value&msg=value
+ */
+ app.post(ENDPOINT + '/messages', (req, res) => {
+    const senderID = req.query.id;
+    const receiverID = req.query.receiver;
+    const newMsg = req.query.msg;
+    const sql = `CALL send_message('${senderID}', '${receiverID}', '${newMsg}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success sending new message");
+        } else {
+            res.send("Error sending new message");
+        }
     });
 });
 
@@ -742,7 +780,7 @@ DONEc) Apply to opportunity (POST - apply_for_opportunity)          TESTED
 DONEd) View applicants (GET - view_applicants)                      TESTED
 DONEe) View opportunites applied for (GET - view_user_applications) TESTED
 DONEf) View all categories (GET - SELECT...)                        TESTED
-    g) View recommended opportunitues (GET - ____)
+DONEg) View recommended opportunitues (GET - view_recommended)      TESTED
 
 -Social Posts
 DONEa) View site-wide social feed (GET - posts_feed)                TESTED      DOCUMENTED(1)
@@ -757,7 +795,7 @@ DONEi) Delete comment - (DELETE - delete_comment)                   TESTED
 
 -Messages
 DONEa) View messages in conversation (GET - view_a_conversations)   TESTED
-    b) Send message to another user (POST - send_message)
+DONEb) Send message to another user (POST - send_message)           TESTED
 DONEc) View all conversations for a user (GET - view_conversations) TESTED
 
 -Notifications

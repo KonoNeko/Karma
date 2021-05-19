@@ -24,7 +24,7 @@ DONEc) Post a new opportunity - new_opportunity
 DONEd) View applicants for the posted opportunites - view_applicants
 DONEe) Accept/hire applicants for an opportunity - accept_application
 DONEf) View opportunities a user applied for - view_user_applications
-    g) View recommended for you
+DONEg) View recommended for you - view_recommended
     h) Set recommended for you
 DONEi) Reject an applicant  
 
@@ -600,6 +600,21 @@ CREATE VIEW bulletin_board as
 SELECT *, get_user_name(poster_id) as posted_by
 FROM opportunites
 ORDER BY post_date
+
+
+/*
+Gets all recommended opportunities
+
+** THIS IS NOT YET DONE, THIS IS A PLACEHOLDER**
+*/
+DROP PROCEDURE IF EXISTS view_recommended;
+DELIMITER //
+CREATE PROCEDURE view_recommended(IN current_username CHAR(50))
+BEGIN
+    SELECT * FROM bulletin_board;
+END//
+DELIMITER ;
+
 
 
 /*
