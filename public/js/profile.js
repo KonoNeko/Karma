@@ -1,3 +1,32 @@
+const BASE_URL = "https://marlonfajardo.ca/karma/v1";
+
+function view_profile(userID) {
+  const method = "GET";
+  const endpoint = "/profile/karma";
+  const params = `/${userID}`;
+  const url = BASE_URL + endpoint + params;
+  let result = APIRequest(method, url);
+  console.log(result);
+}
+
+function APIRequest(method, url) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          let result = JSON.parse(this.responseText);
+          console.log("loading post");
+          console.log(result);
+          for (let i=0; i<result.length; i++) {
+              loadProfile(result[i]);
+          }
+          
+      }
+  }
+}
+
 function showProfile() {
   firebase.auth().onAuthStateChanged(function (user) {
     db.collection("users")
