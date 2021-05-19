@@ -58,6 +58,7 @@ function loadHome() {
   loadWhatsNew();
   loadRecommendedConnections();
   view_social_feed('karma');
+  // createBlankHomePage(); // This will show a blank homepage.
 //   loadPosts();
 }
 
@@ -130,6 +131,25 @@ function loadRecommendedConnections() {
 }
 
 // CREATE INDIVIDUAL UI ELEMENTS
+
+
+function createBlankHomePage() {
+  let blankHome = document.getElementById("posts");
+
+  let noPosts = document.createElement("p");
+  noPosts.setAttribute("class", "heading3");
+  noPosts.setAttribute(
+    "style",
+    "font-weight: 700; margin-bottom: 10px;"
+  );
+  noPosts.innerHTML = "You currently have no posts on your homepage feed. Connect with other users to see posts here!";
+
+  blankHome.appendChild(noPosts);
+
+}
+
+
+
 function createStory(stories) {
   let storyImgDiv = document.createElement("div");
   storyImgDiv.setAttribute("class", "profilepic");
