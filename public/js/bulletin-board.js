@@ -262,7 +262,6 @@ function loadOpportunities() {
   for (const category of Object.keys(categories)) {
     let categoryList = result[category];
     for(const id of Object.keys(categoryList)) {
-      console.log(categoryList);
       loadOpportunity(category, categoryList[id]); 
     }
   }
@@ -274,7 +273,85 @@ function loadOpportunity(category, oppObj) {
   let categoryDiv = document.getElementById(categoryID + "-opportunities");
   let categoryOuterDiv = document.getElementById(categoryID + "-category");
   categoryOuterDiv.style.display = "block";
-  generateOpportunity(oppObj, categoryDiv)
+  loadModal(oppObj);
+  generateOpportunity(oppObj, categoryDiv);
+}
+
+function loadModal(oppObj) {
+  if (document.getElementById("modal" + oppObj.opportunity_id)) {
+    // Break out of function if it already exists
+    return;
+  }
+  let modal = document.getElementById("modalOverlay");
+
+  let content = document.createElement("div");
+  content.id = "modal" + oppObj.opportunity_id;
+  content.className = "modal-content";
+
+  let img = document.createElement("div");
+  img.className = "modal-column modal-img";
+  img.style.backgroundImage = `url('${oppObj.image_url}')`;
+  
+
+  let textDiv = document.createElement("div");
+  textDiv.className = "modal-column modal-text";
+
+  let close = document.createElement("span");
+  let title = document.createElement("p");
+  let location = document.createElement("p");
+  let description = document.createElement("p");
+  let btn = document.createElement("btn");
+
+  close.id = "close" + oppObj.opportunity_id;
+  title.id = "modalRole";
+  location.id = "modalLocation";
+  description.id = "modalDescription";
+  btn.id = "modalButton";
+
+  close.className = "close";
+  title.className = "heading1";
+  location.className = "heading2";
+  description.className = "bodytext";
+  btn.className = "primarybutton";
+  
+  close.innerHTML = "&times;";
+  title.innerText = oppObj.title;
+  location.innerText = "Posted By " + oppObj.employer;
+  description.innerText = oppObj.description + "<br>" + oppObj.requirements;
+  btn.innerText = "Apply to this opportunity";
+
+  close.onclick = function () {
+    hideModal(oppObj.opportunity_id);
+  };
+
+  textDiv.appendChild(close);
+  textDiv.appendChild(title);
+  textDiv.appendChild(location);
+  textDiv.appendChild(description);
+  textDiv.appendChild(btn);
+
+  content.appendChild(img);
+  content.appendChild(textDiv);
+
+  modal.appendChild(content);
+  document.getElementById("myModal").onclick = function () {
+    hideModal(oppObj.opportunity_id);
+  };
+}
+
+function displayModal(id) {
+  var modal = document.getElementById("myModal");
+  var content = document.getElementById("modal" + id);
+  modal.style.display = "block";
+  content.style.display = "flex";
+}
+
+function hideModal(id) {
+  console.log("closing" + id);
+  var modal = document.getElementById("myModal");
+  var content = document.getElementById("modal" + id);
+  modal.style.display = "none";
+  content.style.display = "none";
 }
 
 function generateOpportunity(oppObj, category) {
@@ -304,24 +381,7 @@ function generateOpportunity(oppObj, category) {
 
   category.appendChild(opportunityDiv);
 
-  opportunityDiv.onclick = function (event) {
-    // Get the modal
-    var modal = document.getElementById("myModal");
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    opportunityDiv.onclick = function () {
-      modal.style.display = "block";
-    };
-
-    span.onclick = function () {
-      modal.style.display = "none";
-    };
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    };
+  opportunityDiv.onclick = function () {
+    displayModal(oppObj.opportunity_id);
   };
 }

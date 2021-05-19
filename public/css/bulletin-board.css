@@ -62,14 +62,20 @@
 
 /* Modal Content */
 .modal-content {
+  position: absolute;
   background-color: #fefefe;
   border-radius: 12px;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  display: flex;
+  display: none;
+  height: 50%;
   text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 2;
 }
 
 .modal-column {
@@ -84,7 +90,7 @@
 
 .modal-img {
   width: 60%;
-  background-image: url("../images/placeholder1.png");
+  /* background-image: url("../images/placeholder1.png"); */
   background-size: 100%;
 }
 
