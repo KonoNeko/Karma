@@ -57,6 +57,9 @@ function APIRequest(method, url) {
           for (let i=0; i<result.length; i++) { // for each notification
             let currentEvent = result[i].type_of_event;
             notification_types[currentEvent](result[i]);
+            if(i != result.length - 1) {
+              generateHR();
+            }
           }
       }
   }
@@ -112,16 +115,15 @@ function loadAll() {
       "timestamp": "2021-05-10T17:36:19.000Z"
     },
   ];
-
-  // generateTime();
-  notification_types[test[0].type_of_event](test[0]);
-  generateHR();
-  notification_types[test[1].type_of_event](test[1]);
-  generateHR();
-  notification_types[test[2].type_of_event](test[2]);
-  generateHR();
-  notification_types[test[3].type_of_event](test[3]);
-  view_notifications('karma');
+  
+  for (let i=0; i<test.length; i++) { // for each notification
+    let currentEvent = test[i].type_of_event;
+    notification_types[currentEvent](test[i]);
+    if(i != test.length - 1) {
+      generateHR();
+    }
+  }
+  // view_notifications('karma');
 }
 
 
