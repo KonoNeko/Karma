@@ -1,6 +1,13 @@
 
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
+const notification_types = {
+  "social_posts": generatePostNotification,
+  "opportunities": generateOpportunityNotification,
+  "profile_follows requested": generateNotificationFollowRequest,
+  "profile_follows accepted": generateNotificationFollow
+};
+
 function formatTimestamp(timestamp) {
   let dateObj = new Date(Date.parse(timestamp));
   return returnHighestTimeDiff(dateObj);
@@ -8,17 +15,20 @@ function formatTimestamp(timestamp) {
 
 function returnHighestTimeDiff(time) {
   let ms = {
-    y: 31536000000,
-    w: 604800000,
-    d: 86400000,
-    h: 3600000,
-    m: 60000,
+    year: 31536000000,
+    week: 604800000,
+    day: 86400000,
+    hour: 3600000,
+    minute: 60000,
   }
   let diff = Date.now() - time;
   for(let [key, value] of Object.entries(ms)) {
       if (diff > value) {
-          return `${Math.floor(diff/value)}${key}`;
-      } else if (diff < ms.m) {
+          let time = Math.floor(diff/value);
+          let result = `${time} ${key}`;
+          result += (time > 1) ? "s ago" : " ago";
+          return result     
+      } else if (diff < ms.minute) {
         return "Just now";
       }
   }
@@ -45,17 +55,12 @@ function APIRequest(method, url) {
           console.log(result);
           console.log("loading post");
           for (let i=0; i<result.length; i++) { // for each notification
-              if(result[i].type_of_event == "social_posts") {
-                  generatePostNotification(result[i]);
-              } else if(result[i].type_of_event == "opportunities") {
-                generatePostNotificationOtherUser(result[i]);
-              } else if(result[i].type_of_event == "profile_follows requested") {
-                generatePostNotificationFollowedYou(result[i]);
-              } else if(result[i].type_of_event == "profile_follows accepted") {
-                generatePostNotificationFollowedYou(result[i]);
-              }
+            let currentEvent = result[i].type_of_event;
+            notification_types[currentEvent](result[i]);
+            if(i != result.length - 1) {
+              generateHR();
+            }
           }
-          
       }
   }
 }
@@ -63,15 +68,62 @@ function APIRequest(method, url) {
 
 function loadAll() {
   // generateNoNotifications();
-  generateTime();
-  generatePostNotification();
-  generateHR();
-  generatePostNotificationOtherUser();
-  generateHR();
-  generatePostNotificationFollowedYou();
-  generateHR();
-  generatePostNotificationFollowedYouRequest();
-  view_notifications('karma');
+  test = [
+    {
+      "username_of_notification": "Karma",
+      "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+      "post_pic_url": null,
+      "message": " is now following you.",
+      "type_of_event": "profile_follows accepted",
+      "id_of_event": 12,
+      "timestamp": "2021-05-19T02:30:55.000Z"
+    },
+    {
+      "username_of_notification": "Karma",
+      "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+      "post_pic_url": null,
+      "message": " has requested to follow you.",
+      "type_of_event": "profile_follows requested",
+      "id_of_event": 12,
+      "timestamp": "2021-05-14T17:36:19.000Z"
+    },
+    {
+      "username_of_notification": "Team Karma",
+      "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+      "post_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/library.jpeg",
+      "message": " has reviewed your application. Click here to see results",
+      "type_of_event": "opportunities",
+      "id_of_event": 12,
+      "timestamp": "2021-05-13T17:36:19.000Z"
+    },
+    {
+      "username_of_notification": "Karma",
+      "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+      "post_pic_url": "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
+      "message": " has liked your post.",
+      "type_of_event": "social_posts",
+      "id_of_event": 12,
+      "timestamp": "2021-05-10T17:36:19.000Z"
+    },
+    {
+      "username_of_notification": "Karma",
+      "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+      "post_pic_url": "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
+      "message": " has commented on your post: Congrats...",
+      "type_of_event": "social_posts",
+      "id_of_event": 12,
+      "timestamp": "2021-05-10T17:36:19.000Z"
+    },
+  ];
+  
+  for (let i=0; i<test.length; i++) { // for each notification
+    let currentEvent = test[i].type_of_event;
+    notification_types[currentEvent](test[i]);
+    if(i != test.length - 1) {
+      generateHR();
+    }
+  }
+  // view_notifications('karma');
 }
 
 
@@ -90,19 +142,19 @@ function generateNoNotifications() {
 
 }
 
-function generateTime() {
-  let notificationsDiv = document.getElementById("notifications");
+// function generateTime() {
+//   let notificationsDiv = document.getElementById("notifications");
 
-  let notificationTime = document.createElement("p");
-  notificationTime.setAttribute("class", "heading3");
-  notificationTime.setAttribute(
-    "style",
-    "font-weight: 700; margin-bottom: 10px;"
-  );
-  notificationTime.innerHTML = "Recent";
+//   let notificationTime = document.createElement("p");
+//   notificationTime.setAttribute("class", "heading3");
+//   notificationTime.setAttribute(
+//     "style",
+//     "font-weight: 700; margin-bottom: 10px;"
+//   );
+//   notificationTime.innerHTML = "Recent";
 
-  notificationsDiv.appendChild(notificationTime);
-}
+//   notificationsDiv.appendChild(notificationTime);
+// }
 
 function generateHR() {
   let hr = document.createElement("hr");
@@ -119,14 +171,8 @@ function generatePostNotification(postObj) {
   let notificationImgDiv = document.createElement("div");
   let notificationImg = document.createElement("img");
 
-  // notificationImgDiv.setAttribute("class", "profilepicture notificationImgDiv");
-  // notificationImg.src = "./images/placeholder.jpg";
-
-  notificationImgDiv.setAttribute(
-    "style",
-    `background-image: url('${postObj["post_info"]["profile_pic_url"]}');
-     background-color: #FFFFFF;`
-  );
+  notificationImgDiv.setAttribute("class", "profilepicture notificationImgDiv");
+  notificationImg.src = postObj.profile_pic_url;
 
   let notificationText = document.createElement("div");
   notificationText.setAttribute("class", "notificationText");
@@ -142,9 +188,9 @@ function generatePostNotification(postObj) {
   notificationTime.setAttribute("class", "smalltext");
   notificationTime.setAttribute("style", "padding-top: 5px");
 
-  notificationAuthor.innerHTML = "williamblack" + " ";
-  notificationAction.innerHTML = "has liked your comment";
-  notificationTime.innerHTML = "3 minutes ago";
+  notificationAuthor.innerHTML = postObj.username_of_notification;
+  notificationAction.innerHTML = postObj.message;
+  notificationTime.innerHTML = formatTimestamp(postObj.timestamp);
 
   notificationText.appendChild(notificationActionAuthor);
   notificationText.appendChild(notificationTime);
@@ -158,7 +204,7 @@ function generatePostNotification(postObj) {
     "class",
     "postpreviewpicture notificationPostImgDiv"
   );
-  notificationPostImg.src = "./images/placeholder2.png";
+  notificationPostImg.src = postObj.post_pic_url;
 
   notificationPostImgDiv.appendChild(notificationPostImg);
 
@@ -169,7 +215,7 @@ function generatePostNotification(postObj) {
   notificationsDiv.appendChild(notificationDiv);
 }
 
-function generatePostNotificationOtherUser() {
+function generateOpportunityNotification(postObj) {
   let notificationsDiv = document.getElementById("notifications");
 
   let notificationDiv = document.createElement("div");
@@ -178,7 +224,7 @@ function generatePostNotificationOtherUser() {
   let notificationImgDiv = document.createElement("div");
   let notificationImg = document.createElement("img");
   notificationImgDiv.setAttribute("class", "profilepicture notificationImgDiv");
-  notificationImg.src = "./images/placeholder.jpg";
+  notificationImg.src = postObj.profile_pic_url;
 
   let notificationText = document.createElement("div");
   notificationText.setAttribute("class", "notificationText");
@@ -187,22 +233,18 @@ function generatePostNotificationOtherUser() {
   let notificationAuthor = document.createElement("span");
   let notificationAction = document.createElement("span");
   let notificationPoster = document.createElement("span");
-  let notificationAction2 = document.createElement("span");
   let notificationTime = document.createElement("p");
 
   notificationText.setAttribute("style", "padding-left: 20px; width: 100%;");
   notificationAuthor.setAttribute("class", "bodytitle");
   notificationPoster.setAttribute("class", "bodytitle");
   notificationAction.setAttribute("class", "bodytext");
-  notificationAction2.setAttribute("class", "bodytext");
   notificationTime.setAttribute("class", "smalltext");
   notificationTime.setAttribute("style", "padding-top: 5px");
 
-  notificationAuthor.innerHTML = "williamblack" + " ";
-  notificationAction.innerHTML = "has liked your comment on ";
-  notificationPoster.innerHTML = "astrisfrost";
-  notificationTime.innerHTML = "5 minutes ago";
-  notificationAction2.innerHTML = "'s post";
+  notificationAuthor.innerHTML = postObj.username_of_notification;
+  notificationAction.innerHTML = postObj.message;
+  notificationTime.innerHTML = formatTimestamp(postObj.timestamp);
 
   notificationText.appendChild(notificationActionAuthor);
   notificationText.appendChild(notificationTime);
@@ -210,7 +252,6 @@ function generatePostNotificationOtherUser() {
   notificationActionAuthor.appendChild(notificationAuthor);
   notificationActionAuthor.appendChild(notificationAction);
   notificationActionAuthor.appendChild(notificationPoster);
-  notificationActionAuthor.appendChild(notificationAction2);
 
   notificationImgDiv.appendChild(notificationImg);
 
@@ -220,7 +261,7 @@ function generatePostNotificationOtherUser() {
     "class",
     "postpreviewpicture notificationPostImgDiv"
   );
-  notificationPostImg.src = "./images/placeholder2.png";
+  notificationPostImg.src = postObj.post_pic_url;
 
   notificationPostImgDiv.appendChild(notificationPostImg);
 
@@ -231,7 +272,7 @@ function generatePostNotificationOtherUser() {
   notificationsDiv.appendChild(notificationDiv);
 }
 
-function generatePostNotificationFollowedYou() {
+function generateNotificationFollow(postObj) {
   let notificationsDiv = document.getElementById("notifications");
 
   let notificationDiv = document.createElement("div");
@@ -240,7 +281,7 @@ function generatePostNotificationFollowedYou() {
   let notificationImgDiv = document.createElement("div");
   let notificationImg = document.createElement("img");
   notificationImgDiv.setAttribute("class", "profilepicture notificationImgDiv");
-  notificationImg.src = "./images/placeholder.jpg";
+  notificationImg.src = postObj.profile_pic_url;
 
   let notificationText = document.createElement("div");
   notificationText.setAttribute("class", "notificationText");
@@ -256,9 +297,9 @@ function generatePostNotificationFollowedYou() {
   notificationTime.setAttribute("class", "smalltext");
   notificationTime.setAttribute("style", "padding-top: 5px");
 
-  notificationAuthor.innerHTML = "williamblack" + " ";
-  notificationAction.innerHTML = "has followed you";
-  notificationTime.innerHTML = "3 minutes ago";
+  notificationAuthor.innerHTML = postObj.username_of_notification;
+  notificationAction.innerHTML = postObj.message;
+  notificationTime.innerHTML = formatTimestamp(postObj.timestamp);
 
   notificationText.appendChild(notificationActionAuthor);
   notificationText.appendChild(notificationTime);
@@ -280,7 +321,7 @@ function generatePostNotificationFollowedYou() {
   notificationsDiv.appendChild(notificationDiv);
 }
 
-function generatePostNotificationFollowedYouRequest() {
+function generateNotificationFollowRequest(postObj) {
   let notificationsDiv = document.getElementById("notifications");
 
   let notificationDiv = document.createElement("div");
@@ -289,7 +330,7 @@ function generatePostNotificationFollowedYouRequest() {
   let notificationImgDiv = document.createElement("div");
   let notificationImg = document.createElement("img");
   notificationImgDiv.setAttribute("class", "profilepicture notificationImgDiv");
-  notificationImg.src = "./images/placeholder.jpg";
+  notificationImg.src = postObj.profile_pic_url;
 
   let notificationText = document.createElement("div");
   notificationText.setAttribute("class", "notificationText");
@@ -307,9 +348,9 @@ function generatePostNotificationFollowedYouRequest() {
   notificationTime.setAttribute("class", "smalltext");
   notificationTime.setAttribute("style", "padding-top: 5px");
 
-  notificationAuthor.innerHTML = "williamblack" + " ";
-  notificationAction.innerHTML = "has requested to follow you";
-  notificationTime.innerHTML = "3 minutes ago";
+  notificationAuthor.innerHTML = postObj.username_of_notification;
+  notificationAction.innerHTML = postObj.message;
+  notificationTime.innerHTML = formatTimestamp(postObj.timestamp);
 
   notificationText.appendChild(notificationActionAuthor);
   notificationText.appendChild(notificationTime);
