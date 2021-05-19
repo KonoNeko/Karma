@@ -20,16 +20,6 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
         >&times;</a
       >
-<<<<<<< HEAD
-      <a href="#">About</a>
-      <a href="#">Settings</a>
-      <a href="#">FAQ</a>
-      <a href="#">Contact us</a>
-      <a href="#">Partner with us</a>
-      <a href="#">Donate</a>
-      <a href="#">Report a bug</a>
-      <a id="btn-logout" href="#">Logout</a>
-=======
       <a href="aboutus.html">About</a>
       <a href="settings.html">Settings</a>
       <a href="FAQ.html">FAQ</a>
@@ -37,7 +27,6 @@
       <a href="partnerwithus.html">Partner with us</a>
       <a href="donate.html">Donate</a>
       <a href="reportbug.html">Report a bug</a>
->>>>>>> 9a8ed7c8ad8c5176afc57359d892eecee1fbfe22
     </div>
 
     <navbar class="nav">
@@ -171,9 +160,29 @@
           </div>
           <div id="numPosts"></div>
           <div><h4 id="following">Posts</h4></div>
-          <h4 id="posts">Followers</h4>
-          <h4 id="followers">Following</h4>
+          <div id="posts">Followers</div>
+          <div id="followers">Following</div>
           <div id="postDiv" class="container"></div>
+
+
+        <!-- The Modal -->
+        <div id="followersModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+        </div>
+
+        </div>
+
+
+
+
+
+
+
+
 
           <button id="editbtn">Edit Profile</button>
           <button id="msgbtn">Message</button>
@@ -297,7 +306,46 @@
 				window.location.href = "sign-up.html";
 			}
 		});
-	</script>
+  </script>
+  
+
+  <script>
+      // Get the modal
+      var modal = document.getElementById("followersModal");
+      
+      // Get the button that opens the modal
+      var btn = document.getElementById("followers");
+      
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+      
+      // When the user clicks the button, open the modal 
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
+      
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+      
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+      </script>
+
+
+
+
+
+
+
+
+
+
 
     <script>
       showProfile();
