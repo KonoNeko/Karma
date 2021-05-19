@@ -1,5 +1,19 @@
 Base API Url: "https://marlonfajardo.ca/karma/v1"
 
+DOCUMENTATION FORMAT
+#)  CATEGORY: Description
+    Additional Details
+    
+    ENDPOINT:   /endpoint
+
+    METHOD:     METHOD
+
+    PARAMS:
+        param_name      datatype: Param description
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1
+
 
 
 1)  SOCIAL POSTS: Get social feed (site-wide)
@@ -27,7 +41,23 @@ Base API Url: "https://marlonfajardo.ca/karma/v1"
         https://marlonfajardo.ca/karma/v1/posts/name
 
 
-2)  PROFILE: Get all profile info for a single user
+3)  PROFILE: Create a new blank profile with a blank education, experience, skill, etc.
+    This is the function that would be used when a user signs up.
+    
+    ENDPOINT:   /profiles
+
+    METHOD:     POST
+
+    PARAMS:
+        id          string: The username from firebase
+        name        string: The full name from firebase
+        isVolunteer boolean: Volunteer = 1, Organization = 0
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles?id=value&name=value&isVolunteer=value
+
+
+4)  PROFILE: Get all profile info for a single user
     Retrieves all profile info linked to a user (education, skills, experience, etc.)
 
     ENDPOINT:   /profiles/{id}
@@ -41,7 +71,7 @@ Base API Url: "https://marlonfajardo.ca/karma/v1"
         https://marlonfajardo.ca/karma/v1/profiles/name    
 
 
-4)  PROFILE: Add skill to user profile
+5)  PROFILE: Add skill to user profile
     For adding an existing or a new skill to a user's profile
 
     ENDPOINT:   /profiles/skills 
@@ -56,7 +86,7 @@ Base API Url: "https://marlonfajardo.ca/karma/v1"
         https://marlonfajardo.ca/karma/v1/profiles/skills?id=value&skill=value
 
 
-5)  PROFILE: Remove skill from user profile
+6)  PROFILE: Remove skill from user profile
     For removing a skill from a user's profile
 
     ENDPOINT:   /profiles/skills
@@ -71,7 +101,7 @@ Base API Url: "https://marlonfajardo.ca/karma/v1"
         https://marlonfajardo.ca/karma/v1/profiles/skills?id=value&skill=value
 
 
-6)  PROFILE: Create a new education entry to a user's profile
+7)  PROFILE: Create a new education entry to a user's profile
     For adding a new education entry for a user's profile
 
     ENDPOINT:   /profiles/education
@@ -91,7 +121,7 @@ Base API Url: "https://marlonfajardo.ca/karma/v1"
         https://marlonfajardo.ca/karma/v1/profiles/education?id=value&start=value&end=value&gpa=value&type=value&img=value&name=value
 
     
-7)  PROFILE: Edit an existing educaiton entry to a user's profile
+8)  PROFILE: Edit an existing educaiton entry to a user's profile
     For editing an education entry that can include old and new information.
 
     ENDPOINT:   /profiles/education
@@ -109,3 +139,193 @@ Base API Url: "https://marlonfajardo.ca/karma/v1"
 
     Example URL of the request (replace 'value' with an actual value):
         https://marlonfajardo.ca/karma/v1/profiles/education?id=value&start=value&end=value&gpa=value&type=value&img=value&name=value
+
+
+9)  PROFILE: Create a new experience entry to a user's profile
+    For adding a new experience entry for a user's profile
+    
+    ENDPOINT:   /profiles/experience
+
+    METHOD:     POST
+
+    PARAMS:
+        id          string: The current username
+        start       string: The experience start date format MM-YYYY
+        end         string: The experience end date format MM-YYYY
+        job         string: The title of the postition (ex. Sales Associate)
+        img         string: The url of the image of work (ex. www.website.ca/image.jpg)
+        employer    string: The name of the workplace/institution
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/experience?id=value&start=value&end=value&job=value&img=value&employer=value
+
+
+
+10) PROFILE: Edit an existing experience entry to a user's profile
+    For editing an education entry that can include old and new information.
+    
+    ENDPOINT:   /profiles/experience
+
+    METHOD:     PUT
+
+    PARAMS:
+        id          integer: The current experience id (in the database)
+        start       string: The experience start date format MM-YYYY
+        end         string: The experience end date format MM-YYYY
+        job         string: The title of the postition (ex. Sales Associate)
+        img         string: The url of the image of work (ex. www.website.ca/image.jpg)
+        employer    string: The name of the workplace/institution
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/experience?id=value&start=value&end=value&job=value&img=value&employer=value
+
+
+11) PROFILE: Create a new award/certificate entry to a user's profile
+    For adding a new award/certificate entry for a user's profile
+    
+    ENDPOINT:   /profiles/awardsAndCertification
+
+    METHOD:     POST
+
+    PARAMS:
+        id          string: The current username
+        title       string: The title of the award/certificate
+        date        string: The date received format MM-YYYY
+        img         string: The url of the image of award (ex. www.website.ca/image.jpg)
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/awardsAndCertification?id=value&title=value&date=value&img=value
+
+
+12) PROFILE: Edit an existing award/certificate entry to a user's profile
+    For editing an award/certificate entry that can include old and new information.
+    
+    ENDPOINT:   /profiles/awardsAndCertification
+
+    METHOD:     PUT
+
+    PARAMS:
+        id          integer: The current award/certificate id (in the database)
+        title       string: The title of the award/certificate
+        date        string: The date received format MM-YYYY
+        img         string: The url of the image of award (ex. www.website.ca/image.jpg)
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/awardsAndCertification?id=value&title=value&date=value&img=value
+
+
+13) PROFILE: Edit a user's profile pic
+    Changes the user's profiel pic url to a url
+    
+    ENDPOINT:   /profiles/picture
+
+    METHOD:     PUT
+
+    PARAMS:
+        id          string: The current username
+        picUrl      string: The new pic url (ex. www.website.ca/image.jpg)
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/bio?id=value&bio=value
+
+
+14) PROFILE: Edit a user's bio
+    Changes the user's bio to a given message
+    
+    ENDPOINT:   /profiles/bio
+
+    METHOD:     PUT
+
+    PARAMS:
+        id          string: The current username
+        bio         string: The new bio (no character limit)
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/bio?id=value&bio=value
+
+
+15) PROFILE: Makes a request to follow a user
+    Creates a new request to follow a user
+    
+    ENDPOINT:   /profiles/followers
+
+    METHOD:     POST
+
+    PARAMS:
+        follower    string: The username of the person requesting to follow
+        id          string: The username of the person being followed
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
+
+
+16) PROFILE: Accepts a request to follow a user
+    Changes follow request of a user to accepted
+    
+    ENDPOINT:   /profiles/followers
+
+    METHOD:     PUT
+
+    PARAMS:
+        follower    string: The username of the person requesting to follow
+        id          string: The username of the person being followed
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
+
+
+17) PROFILE: Unfollows a user
+    Deletes the follow entry of a user
+    
+    ENDPOINT:   /profiles/followers
+
+    METHOD:     DELETE
+
+    PARAMS:
+        follower    string: The username of the person unfollowing
+        id          string: The username of the person being unfollowed
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/followers?id=value&follower=value
+
+
+18) PROFILE: Gets the list of followers of a user
+    Gets all the the users that follow the current user
+    
+    ENDPOINT:   /profiles/followers/{id}
+
+    METHOD:     METHOD
+
+    PARAMS:
+        param_name      datatype: Param description
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/followers/value
+
+
+19) PROFILE: Gets the list of followings of a user
+    Gets all the the users that the current user follows
+    
+    ENDPOINT:   /profiles/following/{id}
+
+    METHOD:     METHOD
+
+    PARAMS:
+        param_name      datatype: Param description
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/followers/value
+
+
+20) PROFILE: Get all users (search for other users)
+    Returns a list of users including their full name, username, profile pic url, and profile id 
+
+    ENDPOINT:   /profiles/{id}
+    
+    METHOD:     GET
+
+    PARAMS:
+        NONE
+
+    Example URL of the request (replace 'name' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles    
