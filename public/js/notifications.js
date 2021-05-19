@@ -47,11 +47,11 @@ function APIRequest(method, url) {
           for (let i=0; i<result.length; i++) { // for each notification
               if(result[i].type_of_event == "social_posts") {
                   generatePostNotification(result[i]);
-              } else if(result[i].type_of_event = "opportunities") {
+              } else if(result[i].type_of_event == "opportunities") {
                 generatePostNotificationOtherUser(result[i]);
-              } else if(result[i].type_of_event = "profile_follows requested") {
+              } else if(result[i].type_of_event == "profile_follows requested") {
                 generatePostNotificationFollowedYou(result[i]);
-              } else if(result[i].type_of_event = "profile_follows accepted") {
+              } else if(result[i].type_of_event == "profile_follows accepted") {
                 generatePostNotificationFollowedYou(result[i]);
               }
           }
@@ -71,6 +71,7 @@ function loadAll() {
   generatePostNotificationFollowedYou();
   generateHR();
   generatePostNotificationFollowedYouRequest();
+  view_notifications('karma');
 }
 
 
@@ -109,7 +110,7 @@ function generateHR() {
   hr.setAttribute("style", "margin-bottom: 10px");
 }
 
-function generatePostNotification() {
+function generatePostNotification(postObj) {
   let notificationsDiv = document.getElementById("notifications");
 
   let notificationDiv = document.createElement("div");
@@ -117,8 +118,15 @@ function generatePostNotification() {
 
   let notificationImgDiv = document.createElement("div");
   let notificationImg = document.createElement("img");
-  notificationImgDiv.setAttribute("class", "profilepicture notificationImgDiv");
-  notificationImg.src = "./images/placeholder.jpg";
+
+  // notificationImgDiv.setAttribute("class", "profilepicture notificationImgDiv");
+  // notificationImg.src = "./images/placeholder.jpg";
+
+  notificationImgDiv.setAttribute(
+    "style",
+    `background-image: url('${postObj["post_info"]["profile_pic_url"]}');
+     background-color: #FFFFFF;`
+  );
 
   let notificationText = document.createElement("div");
   notificationText.setAttribute("class", "notificationText");
