@@ -717,11 +717,11 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
 /*
 TODO:
 -Profile
-DONEa) Add skills (PUT - new_skill_entry)                           TESTED
-DONEb) Remove skills (DELETE - remove_skill_entry)                  TESTED
-DONEc) Add education (POST - new_education_entry)                   TESTED
-DONEd) Edit education (PUT - edit_education_entry)                  TESTED
-DONEe) Add experience (POST - new_experience_entry)                 TESTED
+DONEa) Add skills (PUT - new_skill_entry)                           TESTED      DOCUMENTED(4)    
+DONEb) Remove skills (DELETE - remove_skill_entry)                  TESTED      DOCUMENTED(5)
+DONEc) Add education (POST - new_education_entry)                   TESTED      DOCUMENTED(6)
+DONEd) Edit education (PUT - edit_education_entry)                  TESTED      DOCUMENTED(7)
+DONEe) Add experience (POST - new_experience_entry)                 TESTED      DOCUMENTED(8)
 DONEf) Edit experience (PUT - edit_experience_entry)                TESTED
 DONEg) Add award/certification (POST - new_award_entry)             TESTED
 DONEh) Edit award/certification (PUT - edit_award_entry)            TESTED
@@ -733,6 +733,7 @@ DONEm) Unfollow a user (DELETE - unfollow_user)                     TESTED
 DONEn) Get followers (GET - get_followers)                          TESTED
 DONEo) Get following (GET - get_following)                          TESTED
 DONEp) Get all profiles (GET - SELECT...)                           TESTED
+DONEq) Get profiles info (GET - get_profile_info)                   TESTED      DOCUMENTED(3)
 
 -Bulletin Board
 DONEa) View all opportunities (GET - bulletin_board)                TESTED
@@ -745,7 +746,7 @@ DONEf) View all categories (GET - SELECT...)                        TESTED
 
 -Social Posts
 DONEa) View site-wide social feed (GET - posts_feed)                TESTED      DOCUMENTED(1)
-DONEb) View single social post (GET - view_post)                    TESTED
+DONEb) View single social post (GET - view_post)                    TESTED      
 DONEc) Like post (PUT - like_post)                                  TESTED
 DONEd) Unlike post (DELETE - unlike_post)                           TESTED
 DONEe) Comment on a post (POST - comment_on_post)                   TESTED

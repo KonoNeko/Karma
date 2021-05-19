@@ -2,25 +2,110 @@ Base API Url: "https://marlonfajardo.ca/karma/v1"
 
 
 
-1)  Get social feed (site-wide)
+1)  SOCIAL POSTS: Get social feed (site-wide)
     For viewing all the posts from every user.
     
-    ENDPOINT: /posts
+    ENDPOINT:   /posts
 
-    METHOD: GET
+    METHOD:     GET
 
     PARAMS:
         NONE
 
-2)  Get social feed (user-specific)
-    For view all the posts made by people that the current user is following.
 
-    ENDPOINT: /posts/{id}
+2)  SOCIAL POSTS: Get social feed (user-specific)
+    For viewing all the posts made by people that the current user is following.
+
+    ENDPOINT:   /posts/{id}
     
-    METHOD: GET
+    METHOD:     GET
 
     PARAMS:
-        id    string: The current userID
+        id          string: The current username
+
+    Example URL of the request (replace 'name' with an actual value):
+        https://marlonfajardo.ca/karma/v1/posts/name
 
 
+2)  PROFILE: Get all profile info for a single user
+    Retrieves all profile info linked to a user (education, skills, experience, etc.)
 
+    ENDPOINT:   /profiles/{id}
+    
+    METHOD:     GET
+
+    PARAMS:
+        id          string: The current username
+
+    Example URL of the request (replace 'name' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/name    
+
+
+4)  PROFILE: Add skill to user profile
+    For adding an existing or a new skill to a user's profile
+
+    ENDPOINT:   /profiles/skills 
+
+    METHOD:     PUT
+
+    PARAMS:
+        id          string: The current username
+        skill       string: The new/existing skill to add to profile
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/skills?id=value&skill=value
+
+
+5)  PROFILE: Remove skill from user profile
+    For removing a skill from a user's profile
+
+    ENDPOINT:   /profiles/skills
+
+    METHOD:     DELETE
+
+    PARAMS:
+        id          string: The current username
+        skill       string: The skill to remove from the profile
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/skills?id=value&skill=value
+
+
+6)  PROFILE: Create a new education entry to a user's profile
+    For adding a new education entry for a user's profile
+
+    ENDPOINT:   /profiles/education
+
+    METHOD:     POST
+
+    PARAMS:
+        id          string: The current username
+        start       string: The education start date format MM-YYYY
+        end         string: The education end date format MM-YYYY
+        gpa         decimal: The gpa received (If none, just input 0.0)
+        type        string: The type of certification earned (ex. Diploma, Degree, etc.)
+        img         string: The url of the image of school (ex. www.website.ca/image.jpg)
+        name        string: The name of the school/institution
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/education?id=value&start=value&end=value&gpa=value&type=value&img=value&name=value
+
+    
+7)  PROFILE: Edit an existing educaiton entry to a user's profile
+    For editing an education entry that can include old and new information.
+
+    ENDPOINT:   /profiles/education
+
+    METHOD:     PUT
+
+    PARAMS:
+        id          integer: The current education id (in the database)
+        start       string: The education start date format MM-YYYY
+        end         string: The education end date format MM-YYYY
+        gpa         decimal: The gpa received (If none, just input 0.0)
+        type        string: The type of certification earned (ex. Diploma, Degree, etc.)
+        img         string: The url of the image of school (ex. www.website.ca/image.jpg)
+        name        string: The name of the school/institution
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/profiles/education?id=value&start=value&end=value&gpa=value&type=value&img=value&name=value
