@@ -21,7 +21,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
-
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
     
 
 </head>
@@ -39,23 +39,28 @@
                 <h3>Sign up</h3>
                 <div class="form-wrapper">
                     <input id="email" type="email" placeholder="Email address" class="form-control">
-                    <i class="zmdi zmdi zmdi-email"></i>
+                    
+                
+                </div>
+                <div class="form-wrapper">
+                    <input id="name" placeholder="Full Name" class="form-control">
+                    
                 
                 </div>
                 <div class="form-wrapper">
                     <input id="password" type="password" placeholder="Password" class="form-control">
-                    <i class="zmdi zmdi zmdi-lock"></i>
+                    
                     
                 </div>
                 <div class="form-wrapper">
                     <input id="confirmPassword" type="password" placeholder="Confirm Password" class="form-control">
-                    <i class="zmdi zmdi zmdi-lock"></i>
+                    
                     
                 </div>
                 <div class="form-group container-login100-form-btn">
                     <button id="btn-signup" type="button">
                         Sign up
-                        <i class="zmdi zmdi-arrow-right"></i>
+                        
                     </button>
                 
                 </div>
@@ -69,10 +74,7 @@
                 </form>
         </div>
     </div>
-
-
 	<script src="js/signup.js"></script>
-    
 	<script>
 		firebase.auth().onAuthStateChanged(function(user){
 

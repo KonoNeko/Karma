@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="css/home.css" />
   <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/createpost.css" />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -59,7 +60,7 @@
       </li>
 
       <li class="nav__item">
-        <a href="messages.html"">
+        <a href="messages.html">
           <svg viewBox="0 0 24 24" width="100" title="messages">
             <path
               d="M9.46 4.332C10.74 2.913 12.746 2 15 2c3.866 0 7 2.686 7 6c0 1.989-1.13 3.752-2.868 4.844a2.826 2.826 0 0 1-.132.076v4.05a1 1 0 0 1-1.718.696l-1.14-1.174c1.069-1.264 1.698-2.816 1.698-4.493c0-4.067-3.698-7.395-8.38-7.667z"
@@ -95,7 +96,7 @@
       </li>
 
       <li class="nav__item hide-in-mobile">
-        <a href="createpost.html">
+        <a id="create-btn">
           <svg viewBox="0 0 32 32" width="100" title="create">
             <path
               d="M16 2A14.172 14.172 0 0 0 2 16a14.172 14.172 0 0 0 14 14a14.172 14.172 0 0 0 14-14A14.172 14.172 0 0 0 16 2zm8 15h-7v7h-2v-7H8v-2h7V8h2v7h7z"
@@ -151,9 +152,61 @@
       </div>
     </div>
 
-    <div class="post-btn">
+    <div id="post-btn" class="post-btn">
       <img width="60px" height="60px" src="images/mobilepost.png">
     </div>
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <div class="create-post-container modal-content">
+        <div class="image-poster profilepicture">
+          <img src="images/placeholder2.png" />
+        </div>
+        <div class="caption">
+          <div>
+            <textarea rows="4" cols="50">
+  Write a caption here...
+            </textarea>
+          </div>
+          <div style="font-size: 2.5rem" class="icons">
+            <i id="photo" class="fa fa-image"></i
+            ><i id="marker" class="fas fa-map-marker-alt"></i
+            ><i id="myBtn" class="fas fa-users"></i>
+            <input type="file" id="file" style="display: none" />
+          </div>
+          <div class="button">
+            <button id="postBtn" class="secondarybutton">Post</button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- The Modal -->
+      <div id="locationModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <textarea id="location" rows="4" cols="50">
+        Add a location here...
+      </textarea
+          >
+        </div>
+      </div>
+  
+      <!-- The Modal -->
+      <div id="tagPeopleModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <textarea id="tags" rows="4" cols="50">
+         Tag people here...
+        </textarea
+          >
+        </div>
+      </div>
+
+</div>
 
     <div class="flex-main">
       <div class="column" id="mainmain">
@@ -190,6 +243,63 @@
 </body>
 
 <script>
+    // Get the modal
+    var modal = document.getElementById("locationModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("marker");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+      modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+
+  <script>
+    // Get the modal
+    var modal = document.getElementById("tagPeopleModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+      modal.style.display = "block";
+      console.log("pepe")
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+
+<script>
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
   }
@@ -198,3 +308,171 @@
     document.getElementById("mySidenav").style.width = "0";
   }
 </script>
+
+
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("post-btn");
+
+    var createBtn = document.getElementById("create-btn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    createBtn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>
+
+
+<script
+    src="https://kit.fontawesome.com/2ec3384389.js"
+    crossorigin="anonymous"
+  ></script>
+
+<script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    crossorigin="anonymous"
+  ></script>
+
+<script>
+    $(function () {
+      $("#photo").click(function () {
+        $("#file").click();
+      });
+      $("#file").on("change", function () {
+        if (event.target.files.length == 0) {
+          return;
+        }
+        $("#photo").attr("src", URL.createObjectURL(event.target.files[0]));
+      });
+      $("button").click(function () {
+        input_fields = ["pic_id"];
+
+        var storageRef = firebase.storage().ref();
+        file = $("#file")[0].files[0];
+        var user = firebase.auth().currentUser;
+        // Create a reference to the '.jpg'
+        var photoRef = storageRef.child(
+          "/images/" + user + "/profilePicture" + file.name
+        );
+        photoRef
+          .put(file)
+          .then(function (snapshot) {
+            var usersRef = db.collection("images");
+            usersRef
+              .doc(uid)
+              .set({
+                pic_id: uid,
+              })
+              .then(function () {
+                console.log("Document successfully written!");
+                alert("Document successfully written!");
+                // location.href = 'profile.html';
+              })
+              .catch(function (error) {
+                console.error("Error writing document: ", error);
+              });
+          })
+          .catch(function (error) {
+            console.error("Error writing document: ", error);
+          });
+      });
+
+      // Points to the root reference
+      // var storageRef = firebase.storage().ref();
+
+      // // Points to 'images'
+      // var imagesRef = storageRef.child('images');
+
+      // // Points to 'images/space.jpg'
+      // // Note that you can use variables to create child values
+      // var fileName = 'space.jpg';
+      // var spaceRef = imagesRef.child(fileName);
+
+      // // File path is 'images/space.jpg'
+      // var path = spaceRef.fullPath
+
+      // // File name is 'space.jpg'
+      // var name = spaceRef.name
+
+      // // Points to 'images'
+      // var imagesRef = spaceRef.parent;
+    });
+    var uid;
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        console.log("signed in");
+        if (user != null) {
+          name = user.displayName;
+          email = user.email;
+          //photoUrl = user.photoURL;
+          uid = user.uid;
+          $("#name").val(name);
+          $("#email").val(email);
+          db.collection("images")
+            .where("pic_id", "==", uid)
+            .get()
+            //data is retrieved from the collection "users" and
+            //sent to the main.html. This would include the user type
+            // (barber or customer), their name, exp, age, gender, etc
+            .then(function (querySnapshot) {
+              if (querySnapshot.size > 0) {
+                //location.href = 'profile.html';
+              }
+              // querySnapshot.forEach(function (doc) {
+              //     // doc.data() is never undefined for query doc snapshots
+              //     console.log(doc.id, " => ", doc.data());
+              // });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: ", error);
+            });
+        }
+      } else {
+        console.log("not signed");
+        location.href = "sign-up.html";
+        // No user is signed in.
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+  <script src="js/createpost.js"></script>
+
+
+
+
+
+
+
+    </html>
