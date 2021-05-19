@@ -121,11 +121,15 @@
 
   });
 
-  $("#btn-logout").click(function(){
-    firebase.auth().signOut();
-    
-  });
-  
+  $("#btn-logout").click(function logout() {
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        location.href = 'sign-up.html';
+      }).catch(function(error) {
+        // An error happened.
+      });
+}
+  ); 
 
   
 
