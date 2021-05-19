@@ -1383,7 +1383,7 @@ CREATE trigger application_notification
         get_user_id(NEW.applicant_username),
         get_full_name_with_id(get_opportunity_owner_id(NEW.opportunity_id)),
         " has reviewed your application. Click here to see results",
-        "opportunites", 
+        "opportunities", 
         NEW.application_id, 
         NEW.timestamp, 
         get_profile_pic(get_user_id(NEW.applicant_username)),  
