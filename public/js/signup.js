@@ -16,7 +16,7 @@
 
 
   
-  // const db = firebase.firestore();
+  const db = firebase.firestore();
 
  
 
@@ -95,15 +95,21 @@
 
 
 
-
+  
   $("#btn-signup").click(function(){
     var email = $("#email").val();
     var password = $("#password").val();
     var cpassword = $("#confirmPassowrd").val();
+    const btn = $("#btn-signup").val();
+
 
     if (email != "" && password != "" && cpassword != "")
     {
-      var result = firebase.auth().createUserWithEmailAndPassword(email, password);
+      var result = firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
+        return  db.collection('user').doc(cred.user.uid).set({
+          name: btn["name"].value
+        })
+      });
 
       result.catch(function(error){
 
@@ -112,8 +118,11 @@
 
         console.log(errorCode);
         window.alert("Message: " + errorMessage);
-      });
 
+  
+      });
+      
+      
     }
     else
     {
@@ -121,15 +130,7 @@
 
   });
 
-  $("#btn-logout").click(function logout() {
-    firebase.auth().signOut().then(function() {
-        // Sign-out successful.
-        location.href = 'sign-up.html';
-      }).catch(function(error) {
-        // An error happened.
-      });
-}
-  ); 
+  
 
   
 
