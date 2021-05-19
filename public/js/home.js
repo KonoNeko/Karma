@@ -133,20 +133,22 @@ function loadRecommendedConnections() {
 // CREATE INDIVIDUAL UI ELEMENTS
 
 
-function createBlankHomePage() {
-  let blankHome = document.getElementById("posts");
+// CREATES A BLANK HOME PAGE.
 
-  let noPosts = document.createElement("p");
-  noPosts.setAttribute("class", "heading3");
-  noPosts.setAttribute(
-    "style",
-    "font-weight: 700; margin-bottom: 10px;"
-  );
-  noPosts.innerHTML = "You currently have no posts on your homepage feed. Connect with other users to see posts here!";
+// function createBlankHomePage() {
+//   let blankHome = document.getElementById("posts");
 
-  blankHome.appendChild(noPosts);
+//   let noPosts = document.createElement("p");
+//   noPosts.setAttribute("class", "heading3");
+//   noPosts.setAttribute(
+//     "style",
+//     "font-weight: 700; margin-bottom: 10px;"
+//   );
+//   noPosts.innerHTML = "You currently have no posts on your homepage feed. Connect with other users to see posts here!";
 
-}
+//   blankHome.appendChild(noPosts);
+
+// }
 
 
 
