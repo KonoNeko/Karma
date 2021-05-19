@@ -10,27 +10,13 @@
 }
 
 .category {
+  display: none;
   margin-top: 20px;
   margin-right: 20px;
-}
-
-#recommended-category,
-#fine-arts-category,
-#sports-category,
-#literacy-category,
-#environment-category,
-#health-category,
-#computers-category {
   width: 100%;
 }
 
-#recommended-opportunities,
-#fine-arts-opportunities,
-#sports-opportunities,
-#literacy-opportunities,
-#environment-opportunities,
-#health-opportunities,
-#computers-opportunities {
+.opportunities {
   display: flex;
   overflow-x: scroll;
   /*overflow-x: hidden;*/
