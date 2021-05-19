@@ -199,13 +199,13 @@ const result = {
 };
 
 const categories = {
-  "Recommended For You": "recommended-category",
-  "Fine Arts and Culture": "fine-arts-category",
-  "Computers and Information Technology": "computers-category",
-  "Environment": "environment-category",
-  "Health and Wellness": "health-category",
-  "Literacy, Libraries, and Learning": "literacy-category",
-  "Sports and Recreation": "sports-category"
+  "Recommended For You": "recommended",
+  "Fine Arts and Culture": "fine-arts",
+  "Computers and Information Technology": "computers",
+  "Environment": "environment",
+  "Health and Wellness": "health",
+  "Literacy, Libraries, and Learning": "literacy",
+  "Sports and Recreation": "sports"
 };
 
 function formatTimestamp(timestamp) {
@@ -259,84 +259,27 @@ function APIRequest(method, url) {
 }
 
 function loadOpportunities() {
-
-  // loadRecommendedOpportunities();
-  // loadFineArtsOpportunities();
-  // loadSportsOpportunities();
-  // loadLiteracyOpportunities();
-  // loadEnvironmentOpportunities();
-  // loadHealthOpportunities();
-  // loadComputersOpportunities();
+  for (const category of Object.keys(categories)) {
+    let categoryList = result[category];
+    for(const id of Object.keys(categoryList)) {
+      console.log(categoryList);
+      loadOpportunity(category, categoryList[id]); 
+    }
+  }
 }
 
-function loadRecommendedOpportunities(oppObj) {
-  let category = document.getElementById("recommended-opportunities");
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-}
-
-function loadFineArtsOpportunities(oppObj) {
-  let category = document.getElementById("fine-arts-opportunities");
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-}
-
-function loadSportsOpportunities(oppObj) {
-  let category = document.getElementById("sports-opportunities");
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-}
-
-function loadLiteracyOpportunities(oppObj) {
-  let category = document.getElementById("literacy-opportunities");
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-  generateOpportunity(category);
-}
-
-function loadEnvironmentOpportunities(oppObj) {
-  let category = document.getElementById("environment-opportunities");
-  generateOpportunity(category);
-
-}
-
-function loadHealthOpportunities(oppObj) {
-  let category = document.getElementById("health-opportunities");
-  generateOpportunity(category);
-
-}
-
-function loadComputersOpportunities(oppObj) {
-  let category = document.getElementById("computers-opportunities");
-  category.style.display = block;
-  generateOpportunity(postObj, category);
-
-}
-
-function loadOpportunity(oppObj) {
-  let categoryID = categories[postObj.category];
-  let category = document.getElementById(categoryID);
-  generateOpportunity(oppObj, category)
+function loadOpportunity(category, oppObj) {
+  let categoryID = categories[category];
+  // console.log(categoryID);
+  let categoryDiv = document.getElementById(categoryID + "-opportunities");
+  let categoryOuterDiv = document.getElementById(categoryID + "-category");
+  categoryOuterDiv.style.display = "block";
+  generateOpportunity(oppObj, categoryDiv)
 }
 
 function generateOpportunity(oppObj, category) {
   let opportunityRole = document.createElement("p");
-  opportunityRole.innerHTML = "opportunityRole Role Role";
+  opportunityRole.innerHTML = oppObj.title;
   opportunityRole.setAttribute("class", "heading3");
   opportunityRole.setAttribute("style", "font-weight: 700 !important;");
 
@@ -345,11 +288,11 @@ function generateOpportunity(oppObj, category) {
   opportunityImgDiv.setAttribute("style", "padding-bottom: 10px");
 
   let opportunityImg = document.createElement("img");
-  opportunityImg.src = "./images/placeholder.jpg";
+  opportunityImg.src = oppObj.image_url;
   opportunityImgDiv.appendChild(opportunityImg);
 
   let opportunityLocation = document.createElement("p");
-  opportunityLocation.innerHTML = "opportunityLocation";
+  opportunityLocation.innerHTML = oppObj.employer;
   opportunityLocation.setAttribute("class", "bodytext");
 
   let opportunityDiv = document.createElement("div");
