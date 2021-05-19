@@ -107,7 +107,7 @@
     {
       var result = firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
         return  db.collection('user').doc(cred.user.uid).set({
-          name: btn["name"].value
+          name: $("#name").val(),
         })
       });
 
