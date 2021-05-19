@@ -1,11 +1,10 @@
-
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
 const notification_types = {
-  "social_posts": generatePostNotification,
-  "opportunities": generateOpportunityNotification,
+  social_posts: generatePostNotification,
+  opportunities: generateOpportunityNotification,
   "profile_follows requested": generateNotificationFollowRequest,
-  "profile_follows accepted": generateNotificationFollow
+  "profile_follows accepted": generateNotificationFollow,
 };
 
 function formatTimestamp(timestamp) {
@@ -20,17 +19,17 @@ function returnHighestTimeDiff(time) {
     day: 86400000,
     hour: 3600000,
     minute: 60000,
-  }
+  };
   let diff = Date.now() - time;
-  for(let [key, value] of Object.entries(ms)) {
-      if (diff > value) {
-          let time = Math.floor(diff/value);
-          let result = `${time} ${key}`;
-          result += (time > 1) ? "s ago" : " ago";
-          return result     
-      } else if (diff < ms.minute) {
-        return "Just now";
-      }
+  for (let [key, value] of Object.entries(ms)) {
+    if (diff > value) {
+      let time = Math.floor(diff / value);
+      let result = `${time} ${key}`;
+      result += time > 1 ? "s ago" : " ago";
+      return result;
+    } else if (diff < ms.minute) {
+      return "Just now";
+    }
   }
 }
 
@@ -43,103 +42,110 @@ function view_notifications(userID) {
   console.log(result);
 }
 
-
 function APIRequest(method, url) {
   console.log(method + ": " + url);
   const xhttp = new XMLHttpRequest();
   xhttp.open(method, url, true);
   xhttp.send();
   xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-          let result = JSON.parse(this.responseText);
-          console.log(result);
-          console.log("loading post");
-          for (let i=0; i<result.length; i++) { // for each notification
-            let currentEvent = result[i].type_of_event;
-            notification_types[currentEvent](result[i]);
-            if(i != result.length - 1) {
-              generateHR();
-            }
-          }
+    if (this.readyState == 4 && this.status == 200) {
+      let result = JSON.parse(this.responseText);
+      console.log(result);
+      console.log("loading post");
+      for (let i = 0; i < result.length; i++) {
+        // for each notification
+        let currentEvent = result[i].type_of_event;
+        notification_types[currentEvent](result[i]);
+        if (i != result.length - 1) {
+          generateHR();
+        }
       }
-  }
+    }
+  };
 }
 
-
 function loadAll() {
+  //  loadWhatsNew();
+  // loadRecommendedConnections();
+
   // generateNoNotifications();
   test = [
     {
-      "username_of_notification": "Karma",
-      "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-      "post_pic_url": null,
-      "message": " is now following you.",
-      "type_of_event": "profile_follows accepted",
-      "id_of_event": 12,
-      "timestamp": "2021-05-19T02:30:55.000Z"
+      username_of_notification: "Karma",
+      profile_pic_url:
+        "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+      post_pic_url: null,
+      message: " is now following you.",
+      type_of_event: "profile_follows accepted",
+      id_of_event: 12,
+      timestamp: "2021-05-19T02:30:55.000Z",
     },
     {
-      "username_of_notification": "Karma",
-      "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-      "post_pic_url": null,
-      "message": " has requested to follow you.",
-      "type_of_event": "profile_follows requested",
-      "id_of_event": 12,
-      "timestamp": "2021-05-14T17:36:19.000Z"
+      username_of_notification: "Karma",
+      profile_pic_url:
+        "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+      post_pic_url: null,
+      message: " has requested to follow you.",
+      type_of_event: "profile_follows requested",
+      id_of_event: 12,
+      timestamp: "2021-05-14T17:36:19.000Z",
     },
     {
-      "username_of_notification": "Team Karma",
-      "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-      "post_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/library.jpeg",
-      "message": " has reviewed your application. Click here to see results",
-      "type_of_event": "opportunities",
-      "id_of_event": 12,
-      "timestamp": "2021-05-13T17:36:19.000Z"
+      username_of_notification: "Team Karma",
+      profile_pic_url:
+        "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+      post_pic_url:
+        "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/library.jpeg",
+      message: " has reviewed your application. Click here to see results",
+      type_of_event: "opportunities",
+      id_of_event: 12,
+      timestamp: "2021-05-13T17:36:19.000Z",
     },
     {
-      "username_of_notification": "Karma",
-      "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-      "post_pic_url": "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
-      "message": " has liked your post.",
-      "type_of_event": "social_posts",
-      "id_of_event": 12,
-      "timestamp": "2021-05-10T17:36:19.000Z"
+      username_of_notification: "Karma",
+      profile_pic_url:
+        "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+      post_pic_url:
+        "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
+      message: " has liked your post.",
+      type_of_event: "social_posts",
+      id_of_event: 12,
+      timestamp: "2021-05-10T17:36:19.000Z",
     },
     {
-      "username_of_notification": "Karma",
-      "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-      "post_pic_url": "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
-      "message": " has commented on your post: Congrats...",
-      "type_of_event": "social_posts",
-      "id_of_event": 12,
-      "timestamp": "2021-05-10T17:36:19.000Z"
+      username_of_notification: "Karma",
+      profile_pic_url:
+        "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+      post_pic_url:
+        "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
+      message: " has commented on your post: Congrats...",
+      type_of_event: "social_posts",
+      id_of_event: 12,
+      timestamp: "2021-05-10T17:36:19.000Z",
     },
   ];
-  
-  for (let i=0; i<test.length; i++) { // for each notification
+
+  for (let i = 0; i < test.length; i++) {
+    // for each notification
     let currentEvent = test[i].type_of_event;
     notification_types[currentEvent](test[i]);
-    if(i != test.length - 1) {
+    if (i != test.length - 1) {
       generateHR();
     }
   }
   // view_notifications('karma');
 }
 
-
 function generateNoNotifications() {
   let noNotificationsDiv = document.getElementById("notifications");
 
   let notification = document.createElement("p");
   notification.setAttribute("class", "heading3");
-  notification.setAttribute(
-    "style",
-    "font-weight: 700; margin-bottom: 10px;"
-  );
-  notification.innerHTML = "You have no new notifications. Check back to see if there are any new notifications!";
+  notification.setAttribute("style", "font-weight: 700; margin-bottom: 10px;");
+  notification.innerHTML =
+    "You have no new notifications. Check back to see if there are any new notifications!";
 
   noNotificationsDiv.appendChild(notification);
-
 }
 
 // function generateTime() {
@@ -384,4 +390,109 @@ function generateNotificationFollowRequest(postObj) {
   notificationDiv.appendChild(deleteDiv);
 
   notificationsDiv.appendChild(notificationDiv);
+}
+
+// RECOMMENDED.JS STUFF // SIDEBAR STUFF ONLY // SIDEBAR STUFF ONLY // RECCOMMENDED.JS STUFF //
+function loadWhatsNew() {
+  let whatsNewDiv = document.getElementById(
+    "whats-new-volunteering-opportunities"
+  );
+
+  createWhatsNew(whatsNewDiv);
+  createWhatsNew(whatsNewDiv);
+  createWhatsNew(whatsNewDiv);
+}
+
+function loadRecommendedConnections() {
+  let recommendedConnectionsDiv = document.getElementById("recommendedUserDiv");
+
+  let hr = document.createElement("hr");
+  document.getElementById("recommendedUserDiv").appendChild(hr);
+  hr.setAttribute("style", "margin-bottom: 20px");
+
+  createRecommendedConnections(recommendedConnectionsDiv);
+  createRecommendedConnections(recommendedConnectionsDiv);
+  createRecommendedConnections(recommendedConnectionsDiv);
+}
+
+function createWhatsNew(whatsNewDiv) {
+  let opportunityRole = document.createElement("p");
+  opportunityRole.innerHTML = "opportunityRole Role Role";
+  opportunityRole.setAttribute("class", "heading3");
+  opportunityRole.setAttribute("style", "font-weight: 700 !important;");
+
+  let opportunityImgDiv = document.createElement("div");
+  opportunityImgDiv.setAttribute("class", "bulletinboardpicture");
+  opportunityImgDiv.setAttribute("style", "padding-bottom: 10px");
+
+  let opportunityImg = document.createElement("img");
+  opportunityImg.src = "./images/placeholder.jpg";
+  opportunityImgDiv.appendChild(opportunityImg);
+
+  let opportunityLocation = document.createElement("p");
+  opportunityLocation.innerHTML = "opportunityLocation";
+  opportunityLocation.setAttribute("class", "bodytext");
+
+  let opportunityDiv = document.createElement("div");
+  opportunityDiv.setAttribute("class", "opportunity");
+  opportunityDiv.setAttribute("style", "margin-bottom: 10px;");
+  opportunityDiv.appendChild(opportunityImgDiv);
+  opportunityDiv.appendChild(opportunityRole);
+  opportunityDiv.appendChild(opportunityLocation);
+
+  whatsNewDiv.appendChild(opportunityDiv);
+}
+
+function createRecommendedConnections(recommendedConnectionsDiv) {
+  let recommendedUserDiv = document.createElement("div");
+  recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
+
+  let storyImgDiv = document.createElement("div");
+  storyImgDiv.setAttribute("class", "profilepic storyImgDiv");
+  storyImgDiv.setAttribute("style", "padding-bottom: 10px; width: 20%");
+  storyImgDiv.setAttribute(
+    "style",
+    "background-image: url('./images/placeholder.jpg')"
+  );
+
+  let nameAndUserName = document.createElement("div");
+  nameAndUserName.setAttribute("class", "name-and-userName");
+  nameAndUserName.setAttribute("style", "width: 50%;");
+
+  let userName = document.createElement("p");
+  userName.setAttribute("class", "userNames");
+  userName.innerHTML = "User name";
+
+  let userNameAt = document.createElement("p");
+  userNameAt.setAttribute("class", "userAt");
+  userNameAt.innerHTML = "@Username";
+
+  recommendedUserDiv.appendChild(storyImgDiv);
+  nameAndUserName.appendChild(userName);
+  nameAndUserName.appendChild(userNameAt);
+
+  recommendedUserDiv.appendChild(nameAndUserName);
+
+  let followUser = document.createElement("div");
+  let followUserButton = document.createElement("button");
+
+  followUserButton.innerHTML = "FOLLOW";
+  followUserButton.setAttribute("class", "followUserButton");
+  followUser.setAttribute("class", "followUser");
+  followUser.setAttribute("style", "width: 40%");
+  followUserButton.setAttribute("style", "width: 70%; min-width: 100px;");
+
+  followUser.appendChild(followUserButton);
+
+  recommendedUserDiv.appendChild(followUser);
+
+  let heading2 = document.createElement("hr");
+  heading2.setAttribute("style", "margin-top: 20px; margin-bottom: 20px;");
+
+  recommendedConnectionsDiv.appendChild(recommendedUserDiv);
+  recommendedUserDiv.setAttribute(
+    "style",
+    "margin-top: 10px; margin-bottom: 10px;"
+  );
+  recommendedConnectionsDiv.appendChild(heading2);
 }

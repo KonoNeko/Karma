@@ -5,8 +5,6 @@
   display: none;
 }
 
-
-
 .above {
   margin-left: 5rem;
 }
@@ -15,22 +13,21 @@
   margin-left: 5rem;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap
+  flex-wrap: nowrap;
 }
 
-.post-btn{
+.post-btn {
   display: none;
   text-align: right;
   /*margin-right: 35px;*/
   /*margin-top: 60px;*/
 }
 /*display on mobile view only*/
-@media only screen
-and (max-device-width : 550px){
+@media only screen and (max-device-width: 550px) {
   .post-btn {
     display: block;
-    position:fixed;
-    bottom:85px;
+    position: fixed;
+    bottom: 85px;
     right: 8px;
   }
 }
@@ -384,7 +381,7 @@ hr {
   color: #000000;
 }
 
-#view-all {
+.view-all {
   top: 1000px;
   width: 328px;
   height: 22px;
