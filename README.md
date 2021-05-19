@@ -44,6 +44,7 @@ The following is a list of technologies and resources that were used in the impl
 * Miro
 * Adobe Photoshop
 * Adobe Illustrator
-* Lordicon
-* Freepik
-* Font Awesome
+* Lordicon Icon Library
+* UnDraw Resource Library
+* Freepik Image LIbrary
+* Font Awesome Icon Library

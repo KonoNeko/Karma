@@ -17,26 +17,10 @@
 
   <body style="overflow-x: hidden" onload="loadOpportunities()">
     <!-- The Modal -->
-    <div id="myModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <div class="modal-column modal-img"></div>
-        <div class="modal-column modal-text">
-          <span class="close">&times;</span>
-          <p id="modalRole" class="heading1">Role opportunity</p>
-          <p id="modalLocation" class="heading2">Location opportunity</p>
-          <p id="modalDescription" class="bodytext">
-            Some text about the opportunity Some text about the opportunity Some
-            text about the opportunity Some text about the opportunity Some text
-            about the opportunity Some text about the opportunity Some text
-            about the opportunity This is supposed to be very long Some text
-            about the opportunity Some text about the opportunitySome text about
-          </p>
-          <button id="modalButton" class="primarybutton">
-            Apply to this opportunity
-          </button>
-        </div>
+    <div id="modalOverlay">
+      <div id="myModal" class="modal">
       </div>
+
     </div>
 
     <div id="mySidenav" class="sidenav">
@@ -172,37 +156,37 @@
       <div class="flex-opportunities">
         <div class="category" id="recommended-category">
           <p class="heading2">Recommended for you</p>
-          <div id="recommended-opportunities"></div>
+          <div id="recommended-opportunities" class="opportunities"></div>
         </div>
 
         <div class="category" id="fine-arts-category">
           <p class="heading2">Fine arts and culture</p>
-          <div id="fine-arts-opportunities"></div>
+          <div id="fine-arts-opportunities" class="opportunities"></div>
         </div>
 
         <div class="category" id="sports-category">
           <p class="heading2">Sports and recreation</p>
-          <div id="sports-opportunities"></div>
+          <div id="sports-opportunities" class="opportunities"></div>
         </div>
 
         <div class="category" id="literacy-category">
           <p class="heading2">Literacy, libraries, and learning</p>
-          <div id="literacy-opportunities"></div>
+          <div id="literacy-opportunities" class="opportunities"></div>
         </div>
 
         <div class="category" id="environment-category">
           <p class="heading2">Environment</p>
-          <div id="environment-opportunities"></div>
+          <div id="environment-opportunities" class="opportunities"></div>
         </div>
 
         <div class="category" id="health-category">
           <p class="heading2">Health and wellness</p>
-          <div id="health-opportunities"></div>
+          <div id="health-opportunities" class="opportunities"></div>
         </div>
 
         <div class="category" id="computers-category">
           <p class="heading2">Computers and information technology</p>
-          <div id="computers-opportunities"></div>
+          <div id="computers-opportunities" class="opportunities"></div>
         </div>
       </div>
 

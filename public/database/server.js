@@ -71,7 +71,6 @@ app.get(ENDPOINT + '/profiles/:userID', (req, res) => {
  * Gets the list of profiles
  */
  app.get(ENDPOINT + '/profiles', (req, res) => {
-    const id = req.params.userID;
     const sql = `SELECT profile_id, full_name, username, profile_pic_url FROM profiles;`;
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -407,7 +406,7 @@ app.put(ENDPOINT + '/profiles/picture', (req, res) => {
  * Gets all followers for a user.
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profiles/followers?id=value
+ * https://marlonfajardo.ca/karma/v1/profiles/followers/value
  */
  app.get(ENDPOINT + '/profiles/followers/:id', (req, res) => {
     const userID = req.params.id;
@@ -423,10 +422,10 @@ app.put(ENDPOINT + '/profiles/picture', (req, res) => {
  * Gets all the profiles that a user is following.
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profile/following?id=value
+ * https://marlonfajardo.ca/karma/v1/profile/following/value
  */
- app.get(ENDPOINT + '/profiles/following', (req, res) => {
-    const userID = req.query.id;
+ app.get(ENDPOINT + '/profiles/following/:id', (req, res) => {
+    const userID = req.params.id;
     const sql = `CALL get_following('${userID}');`;
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -686,7 +685,7 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
  * Gets all conversations for a user
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profile/following
+ * https://marlonfajardo.ca/karma/v1/messages/value/value
  */
  app.get(ENDPOINT + '/messages/:id/:conversation', (req, res) => {
     const userID = req.params.id;
@@ -702,7 +701,7 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
  * Gets all conversations for a user
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profile/following
+ * https://marlonfajardo.ca/karma/v1/messages/value
  */
  app.get(ENDPOINT + '/notifications/:id', (req, res) => {
     const userID = req.params.id;
@@ -714,25 +713,65 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
 });
 
 
+/**
+ * Gets all opportunites recommended for a user.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/opportunities/recommended/value
+ */
+ app.get(ENDPOINT + '/opportunities/recommended/:id', (req, res) => {
+    const userID = req.params.id;
+    const sql = `CALL view_recommended('${userID}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result[0]));
+    });
+});
+
+
+/**
+ * Sends a new message to another user
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/messages?id=value&receiver=value&msg=value
+ */
+ app.post(ENDPOINT + '/messages', (req, res) => {
+    const senderID = req.query.id;
+    const receiverID = req.query.receiver;
+    const newMsg = req.query.msg;
+    const sql = `CALL send_message('${senderID}', '${receiverID}', '${newMsg}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success sending new message");
+        } else {
+            res.send("Error sending new message");
+        }
+    });
+});
+
+
 /*
 TODO:
 -Profile
-DONEa) Add skills (PUT - new_skill_entry)                           TESTED
-DONEb) Remove skills (DELETE - remove_skill_entry)                  TESTED
-DONEc) Add education (POST - new_education_entry)                   TESTED
-DONEd) Edit education (PUT - edit_education_entry)                  TESTED
-DONEe) Add experience (POST - new_experience_entry)                 TESTED
-DONEf) Edit experience (PUT - edit_experience_entry)                TESTED
-DONEg) Add award/certification (POST - new_award_entry)             TESTED
-DONEh) Edit award/certification (PUT - edit_award_entry)            TESTED
-DONEi) Edit profile pic (PUT - change_profile_pic)                  TESTED
-DONEj) Edit bio (PUT - change_bio)                                  TESTED
-DONEk) Request to follow a user (POST - request_to_follow_user)     TESTED
-DONEl) Accept a follow request (PUT - accept_a_follow_request)      TESTED
-DONEm) Unfollow a user (DELETE - unfollow_user)                     TESTED
-DONEn) Get followers (GET - get_followers)                          TESTED
-DONEo) Get following (GET - get_following)                          TESTED
-DONEp) Get all profiles (GET - SELECT...)                           TESTED
+DONEa) Add skills (PUT - new_skill_entry)                           TESTED      DOCUMENTED(5)    
+DONEb) Remove skills (DELETE - remove_skill_entry)                  TESTED      DOCUMENTED(6)
+DONEc) Add education (POST - new_education_entry)                   TESTED      DOCUMENTED(7)
+DONEd) Edit education (PUT - edit_education_entry)                  TESTED      DOCUMENTED(8)
+DONEe) Add experience (POST - new_experience_entry)                 TESTED      DOCUMENTED(9)
+DONEf) Edit experience (PUT - edit_experience_entry)                TESTED      DOCUMENTED(10)
+DONEg) Add award/certification (POST - new_award_entry)             TESTED      DOCUMENTED(11)
+DONEh) Edit award/certification (PUT - edit_award_entry)            TESTED      DOCUMENTED(12)
+DONEi) Edit profile pic (PUT - change_profile_pic)                  TESTED      DOCUMENTED(13)          
+DONEj) Edit bio (PUT - change_bio)                                  TESTED      DOCUMENTED(14)
+DONEk) Request to follow a user (POST - request_to_follow_user)     TESTED      DOCUMENTED(15)
+DONEl) Accept a follow request (PUT - accept_a_follow_request)      TESTED      DOCUMENTED(16)
+DONEm) Unfollow a user (DELETE - unfollow_user)                     TESTED      DOCUMENTED(17)
+DONEn) Get followers (GET - get_followers)                          TESTED      DOCUMENTED(18)
+DONEo) Get following (GET - get_following)                          TESTED      DOCUMENTED(19)
+DONEp) Get all profiles (GET - SELECT...)                           TESTED      DOCUMENTED(20)
+DONEq) Get profiles info (GET - get_profile_info)                   TESTED      DOCUMENTED(4)
+DONEq) Create new profile (GET - create_new_profile)                TESTED      DOCUMENTED(3)
 
 -Bulletin Board
 DONEa) View all opportunities (GET - bulletin_board)                TESTED
@@ -741,11 +780,11 @@ DONEc) Apply to opportunity (POST - apply_for_opportunity)          TESTED
 DONEd) View applicants (GET - view_applicants)                      TESTED
 DONEe) View opportunites applied for (GET - view_user_applications) TESTED
 DONEf) View all categories (GET - SELECT...)                        TESTED
-    g) View recommended opportunitues (GET - ____)
+DONEg) View recommended opportunitues (GET - view_recommended)      TESTED
 
 -Social Posts
 DONEa) View site-wide social feed (GET - posts_feed)                TESTED      DOCUMENTED(1)
-DONEb) View single social post (GET - view_post)                    TESTED
+DONEb) View single social post (GET - view_post)                    TESTED      
 DONEc) Like post (PUT - like_post)                                  TESTED
 DONEd) Unlike post (DELETE - unlike_post)                           TESTED
 DONEe) Comment on a post (POST - comment_on_post)                   TESTED
@@ -756,7 +795,7 @@ DONEi) Delete comment - (DELETE - delete_comment)                   TESTED
 
 -Messages
 DONEa) View messages in conversation (GET - view_a_conversations)   TESTED
-    b) Send message to another user (POST - send_message)
+DONEb) Send message to another user (POST - send_message)           TESTED
 DONEc) View all conversations for a user (GET - view_conversations) TESTED
 
 -Notifications

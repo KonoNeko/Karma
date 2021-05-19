@@ -152,6 +152,7 @@ function sortOpportunities(object) {
         let currentID = object[i]['opportunity_id'];
         let currentCategory = object[i]['category'];
         opportunities[currentCategory][currentID] = object[i];
+        opportunities["Recommended For You"][currentID] = object[i];
     }
     return opportunities;
 }

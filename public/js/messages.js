@@ -22,7 +22,8 @@ window.onresize = function () {
 };
 
 function loadAll() {
-  loadAllMessagers();
+  generateNoMessages();
+  // loadAllMessagers();
 }
 
 function loadAllMessagers() {
@@ -236,4 +237,12 @@ function createMessageSentByOtherUser() {
   messagesSentDiv.appendChild(messagesSentTextDiv);
 
   messagesExpandedDiv.appendChild(messagesSentDiv);
+}
+
+function generateNoMessages() {
+  document
+    .getElementById("no-messages-div")
+    .setAttribute("style", "display: unset");
+  document.getElementById("mainmain").setAttribute("style", "display: none");
+  document.getElementById("sidemain").setAttribute("style", "display: none");
 }
