@@ -19,7 +19,7 @@
     content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
   />
   <!-- <script src="js/API_script.js" type="module"></script> -->
-  <script src="js/home.js" type="module"></script>
+  <!-- <script src="js/home.js"></script> -->
 </head>
 
 <body>
@@ -167,13 +167,13 @@
         <div class="caption">
           <div>
             <textarea rows="4" cols="50">
-  Write a caption here...
+              Write a caption here...
             </textarea>
           </div>
           <div style="font-size: 2.5rem" class="icons">
-            <i id="photo" class="fa fa-image"></i
-            ><i id="marker" class="fas fa-map-marker-alt"></i
-            ><i id="myBtn" class="fas fa-users"></i>
+            <i id="photo" class="fa fa-image"></i>
+            <i id="marker" class="fas fa-map-marker-alt"></i>
+            <i id="myBtn" class="fas fa-users"></i>
             <input type="file" id="file" style="display: none" />
           </div>
           <div class="button">
@@ -189,8 +189,7 @@
           <span class="close">&times;</span>
           <textarea id="location" rows="4" cols="50">
         Add a location here...
-      </textarea
-          >
+      </textarea>
         </div>
       </div>
   
@@ -200,9 +199,8 @@
         <div class="modal-content">
           <span class="close">&times;</span>
           <textarea id="tags" rows="4" cols="50">
-         Tag people here...
-        </textarea
-          >
+            Tag people here...
+          </textarea>
         </div>
       </div>
 
@@ -353,7 +351,7 @@
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     crossorigin="anonymous"
   ></script>
-
+  <script src="js/home.js"></script>
 <script>
     $(function () {
       $("#photo").click(function () {

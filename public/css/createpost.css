@@ -15,7 +15,7 @@
   height: 70px !important;
 }
 
-.caption {
+.newCaption {
   width: 150%;
   background-color: #eff0f3;
   border-radius: 12px;
@@ -67,7 +67,7 @@ textarea {
   height: 70px !important;
 }
 
-.caption {
+.newCaption {
   width: 100%;
   background-color: #eff0f3;
   border-radius: 12px;

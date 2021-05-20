@@ -143,6 +143,7 @@ function loadHome() {
 // READING INFORMATION FROM THE DATABASE
 function loadStories() {
   let story = document.getElementById("stories");
+  console.log(story)
   createStory(story);
   createStory(story);
   createStory(story);
