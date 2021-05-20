@@ -350,8 +350,22 @@ function addEducation() {
   document.getElementById("button-content").appendChild(addEducationInput4);
   document.getElementById("button-content").appendChild(addEducationHeading5);
   document.getElementById("button-content").appendChild(addEducationInput5);
-  document.getElementById("save").onclick(add_Education);
+
   
+
+  // userID, schoolName, description, gpa, start, end, img
+  $("#save").click(function(){
+
+  let schoolName = addEducationInput1.value;
+  let description = addEducationInput.value;
+  let gpa = addEducationInput2.value;
+  let start = addEducationInput3.value;
+  let end = addEducationInput4.value;
+  let img = addEducationInput5.value;
+
+  add_Education(schoolName, description, gpa, start, end, img);
+
+  });
 }
 
 

@@ -89,11 +89,6 @@
     <script src="js/signup.js"></script>
     <script>
       firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-          window.location.href = "home.html";
-        }
-
-<<<<<<< HEAD
 			if(user)
 			{
                 
@@ -104,29 +99,3 @@
 
 		});
 	</script>
-     
-
-
-
-
-  
-
-    
-</body>
-</html>
-=======
-        var result = firebase
-          .auth()
-          .createUserWithEmailAndPassword(email, password)
-          .then((cred) => {
-            db.collection("user")
-              .doc(cred.user.uid)
-              .set({
-                name: $("#name").val(),
-              });
-          });
-      });
-    </script>
-  </body>
-</html>
->>>>>>> 4ca72a50e25548707759e1ae346d877cdabb2761
