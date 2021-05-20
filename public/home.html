@@ -418,42 +418,42 @@
       // // Points to 'images'
       // var imagesRef = spaceRef.parent;
     });
-    // var uid;
-    // firebase.auth().onAuthStateChanged(function (user) {
-    //   if (user) {
-    //     console.log("signed in");
-    //     if (user != null) {
-    //       name = user.displayName;
-    //       email = user.email;
-    //       //photoUrl = user.photoURL;
-    //       uid = user.uid;
-    //       $("#name").val(name);
-    //       $("#email").val(email);
-    //       db.collection("images")
-    //         .where("pic_id", "==", uid)
-    //         .get()
-    //         //data is retrieved from the collection "users" and
-    //         //sent to the main.html. This would include the user type
-    //         // (barber or customer), their name, exp, age, gender, etc
-    //         .then(function (querySnapshot) {
-    //           if (querySnapshot.size > 0) {
-    //             //location.href = 'profile.html';
-    //           }
-    //           // querySnapshot.forEach(function (doc) {
-    //           //     // doc.data() is never undefined for query doc snapshots
-    //           //     console.log(doc.id, " => ", doc.data());
-    //           // });
-    //         })
-    //         .catch(function (error) {
-    //           console.log("Error getting documents: ", error);
-    //         });
-    //     }
-    //   } else {
-    //     console.log("not signed");
-    //     location.href = "sign-up.html";
-    //     // No user is signed in.
-    //   }
-    // });
+    var uid;
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        console.log("signed in");
+        if (user != null) {
+          name = user.displayName;
+          email = user.email;
+          //photoUrl = user.photoURL;
+          uid = user.uid;
+          $("#name").val(name);
+          $("#email").val(email);
+          db.collection("images")
+            .where("pic_id", "==", uid)
+            .get()
+            //data is retrieved from the collection "users" and
+            //sent to the main.html. This would include the user type
+            // (barber or customer), their name, exp, age, gender, etc
+            .then(function (querySnapshot) {
+              if (querySnapshot.size > 0) {
+                //location.href = 'profile.html';
+              }
+              // querySnapshot.forEach(function (doc) {
+              //     // doc.data() is never undefined for query doc snapshots
+              //     console.log(doc.id, " => ", doc.data());
+              // });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: ", error);
+            });
+        }
+      } else {
+        console.log("not signed");
+        location.href = "sign-up.html";
+        // No user is signed in.
+      }
+    });
   </script>
 
 
