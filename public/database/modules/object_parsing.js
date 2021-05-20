@@ -158,6 +158,39 @@ function sortOpportunities(object) {
 }
 
 
+function fillMessages(object, currentConvo) {
+    let msg_keys = ["message_id", "sender", "message", "message_timestamp"];
+    let messages = {};
+    for (let i=0; i<object.length; i++) {
+        if (object[i]['conversation_id'] == currentConvo) {
+            let currentSender = object[i]["sender"];
+            messages[currentSender] = filterObject(object[i], msg_keys);
+        }
+    }
+    return messages;
+}
+
+
+function fillConversations(object) {
+    let conversations = {};
+    let convo_keys = ["conversation_id", "other_user", "other_user_fullname",
+    "other_user_profile_pic", "latest_message", "latest_message_timestamp", "has_unread_messages"];
+
+    for (let i=0; i<object.length; i++) {
+        let currentTime = object[i].latest_message_timestamp;
+        let currentID = object[i].conversation_id;
+        if (!conversations[currentTime]) {
+            // If current conversation doesn't exist
+            let currentConversation = filterObject(object[i], convo_keys);
+            currentConversation.messages = fillMessages(object, currentID);
+            conversations[currentTime] = currentConversation;
+        }
+    }
+    return conversations
+}
+
+
+
 module.exports.profile = fillProfile;
 module.exports.education = fillEducation;
 module.exports.experience = fillExperience;
@@ -167,3 +200,4 @@ module.exports.comments = fillComments;
 module.exports.opportunities = sortOpportunities;
 module.exports.post = fillSocialPost;
 module.exports.posts = fillSocialPosts;
+module.exports.conversations = fillConversations;

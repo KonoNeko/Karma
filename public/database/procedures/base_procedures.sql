@@ -323,13 +323,17 @@ DELIMITER //
 CREATE PROCEDURE view_conversations(IN current_username CHAR(50))
 BEGIN
     SELECT DISTINCT con.conversation_id, 
-    get_other_user(con.conversation_id, current_username) as other_user,
+    get_user_name(get_other_user(con.conversation_id, current_username)) as other_user,
+    get_full_name_with_id(get_other_user(con.conversation_id, current_username)) as other_user_fullname,
+    get_profile_pic(get_other_user(con.conversation_id, current_username)) as other_user_profile_pic,
     get_latest_message(con.conversation_id) as latest_message,
     get_latest_message_timestamp(con.conversation_id) as latest_message_timestamp,
-    (SELECT (get_unread_messages(con.conversation_id, current_username) > 0)) as has_unread_messages
-    FROM conversations con JOIN messages m
+    (SELECT (get_unread_messages(con.conversation_id, current_username) > 0)) as has_unread_messages,
+    m.message_id, get_user_name(m.sender_id) as sender, m.message, m.timestamp as message_timestamp
+    FROM conversations con JOIN messages m ON (con.conversation_id = m.conversation_id)
     WHERE con.user_id_1 = get_user_id(current_username)
-    OR con.user_id_2 = get_user_id(current_username);
+    OR con.user_id_2 = get_user_id(current_username)
+    ORDER BY latest_message_timestamp DESC, m.timestamp;
 END//
 DELIMITER ;
 
@@ -341,7 +345,7 @@ DROP PROCEDURE IF EXISTS view_a_conversation;
 DELIMITER //
 CREATE PROCEDURE view_a_conversation(IN current_conversation INTEGER, IN current_username CHAR(50))
 BEGIN
-    SELECT message_id, get_user_name(sender_id) as sender, `message`, `timestamp`,
+    SELECT 
     get_other_user(current_conversation, current_username) as other_user
     FROM messages
     WHERE conversation_id = current_conversation
@@ -364,11 +368,11 @@ RETURNS CHAR(100) READS SQL DATA
 BEGIN
     IF (SELECT true FROM conversations where conversation_id = current_conversation AND user_id_1 = get_user_id(current_username)) THEN
         RETURN (
-            SELECT get_full_name_with_id(user_id_2) FROM conversations WHERE conversation_id = current_conversation AND user_id_1 = get_user_id(current_username)
+            SELECT user_id_2 FROM conversations WHERE conversation_id = current_conversation AND user_id_1 = get_user_id(current_username)
         );
     ELSEIF (SELECT true FROM conversations where conversation_id = current_conversation AND user_id_2 = get_user_id(current_username)) THEN
         RETURN (
-            SELECT get_full_name_with_id(user_id_1) FROM conversations WHERE conversation_id = current_conversation AND user_id_2 = get_user_id(current_username)
+            SELECT user_id_1 FROM conversations WHERE conversation_id = current_conversation AND user_id_2 = get_user_id(current_username)
         );
     END IF;
 END //

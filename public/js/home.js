@@ -113,22 +113,22 @@ function view_social_feed(userID) {
 }
 
 
-// function APIRequest(method, url) {
-//   console.log(method + ": " + url);
-//   const xhttp = new XMLHttpRequest();
-//   xhttp.open(method, url, true);
-//   xhttp.send();
-//   xhttp.onreadystatechange = function () {
-//       if (this.readyState == 4 && this.status == 200) {
-//         if (result.length == 0) {
-//           // createBlankHomePage()
-//         }
-//         for (let i=0; i<result.length; i++) {
-//             createPost(result[i]);
-//         }
-//       }
-//   }
-// }
+function APIRequest(method, url) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        if (result.length == 0) {
+          // createBlankHomePage()
+        }
+        for (let i=0; i<result.length; i++) {
+            createPost(result[i]);
+        }
+      }
+  }
+}
 
 
 // WINDOW ONLOAD FUNCTION FOR THE HOME PAGE
@@ -143,7 +143,6 @@ function loadHome() {
 // READING INFORMATION FROM THE DATABASE
 function loadStories() {
   let story = document.getElementById("stories");
-  console.log(story)
   createStory(story);
   createStory(story);
   createStory(story);
@@ -212,7 +211,6 @@ function loadRecommendedConnections() {
 // }
 
 
-
 function createStory(stories) {
   let storyImgDiv = document.createElement("div");
   storyImgDiv.setAttribute("class", "profilepic");
@@ -235,8 +233,18 @@ function createStory(stories) {
   stories.appendChild(storyDiv);
 }
 
+function createPostModal(postObj) {
+  // TODO
+}
+
+
 function createPost(postObj) {
-  const post = document.getElementById("posts");
+  const posts = document.getElementById("posts");
+  const post = document.createElement("div");
+  post.className = "post";
+  post.id = "post" + postObj.post_info.post_id;
+  
+
   let topPartDiv = document.createElement("div");
   topPartDiv.setAttribute("class", "topPartDiv");
 
@@ -294,6 +302,7 @@ function createPost(postObj) {
   post.appendChild(likes);
   post.appendChild(caption);
   post.appendChild(comments);
+  posts.appendChild(post);
 }
 
 function createRecommendedConnection(recommended) {
