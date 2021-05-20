@@ -16,29 +16,72 @@ function APIRequest(method, url) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-          let result = JSON.parse(this.responseText);
+          // let result = JSON.parse(this.responseText);
           console.log("success editing profile");
-          console.log(result);
-          for (let i=0; i<result.length; i++) {
-              loadProfile(result[i]);
-          }
+          // console.log(result);
+          // for (let i=0; i<result.length; i++) {
+          //     loadProfile(result[i]);
+          // }
           
       }
   }
 }
 
-function add_Education(userID, schoolName, description) {
+function addEducation(userID, schoolName, description, gpa, start, end, img) {
   const method = "POST";
   const endpoint = "/profiles/education";
   const params = formatParams({
     "id": userID,
     "name": schoolName,
-    "type": description
+    "type": description,
+    "gpa": gpa,
+    "start": start,
+    "end": end,
+    "img": img
   });
   const url = BASE_URL + endpoint + params;
 
   return APIRequest(method, url);
 }
+
+function add_Experience(userID, jobName, workplaceName, start, end, img) {
+  const method = "POST";
+  const endpoint = "/profiles/education";
+  const params = formatParams({
+    "id": userID,
+    "name": jobName,
+    "employer": workplaceName,
+    "start": start,
+    "end": end,
+    "img": img
+  });
+  const url = BASE_URL + endpoint + params;
+
+  return APIRequest(method, url);
+}
+
+
+
+function add_Description(userID, jobName, workplaceName, start, end, img) {
+  const method = "POST";
+  const endpoint = "/profiles/education";
+  const params = formatParams({
+    "id": userID,
+    "name": jobName,
+    "employer": workplaceName,
+    "start": start,
+    "end": end,
+    "img": img
+  });
+  const url = BASE_URL + endpoint + params;
+
+  return APIRequest(method, url);
+}
+
+
+
+
+
 
 
 
@@ -307,8 +350,16 @@ function addEducation() {
   document.getElementById("button-content").appendChild(addEducationInput4);
   document.getElementById("button-content").appendChild(addEducationHeading5);
   document.getElementById("button-content").appendChild(addEducationInput5);
+  document.getElementById("save").onclick(add_Education);
   
 }
+
+
+ 
+  
+
+
+
 
 function addExperience() {
   console.log("Add experience button clicked");
@@ -355,10 +406,6 @@ function addExperience() {
   let addExperienceInput4 = document.createElement("button");
   addExperienceInput4.setAttribute("style", "height: 30px");
 
-
-
-  
-
   document.getElementById("button-content").appendChild(addEducationHeading1);
   document.getElementById("button-content").appendChild(addEducationInput1);
   document.getElementById("button-content").appendChild(addExperienceHeading);
@@ -369,8 +416,10 @@ function addExperience() {
   document.getElementById("button-content").appendChild(addExperienceInput3);
   document.getElementById("button-content").appendChild(addExperienceHeading4);
   document.getElementById("button-content").appendChild(addExperienceInput4);
-}
+  document.getElementById("save").onclick(add_Experience);
 
+
+}
 function createNumPosts(numPosts) {
 
   let post= document.createElement("p");
