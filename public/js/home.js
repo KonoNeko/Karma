@@ -236,7 +236,12 @@ function createStory(stories) {
 }
 
 function createPost(postObj) {
-  const post = document.getElementById("posts");
+  const posts = document.getElementById("posts");
+  const post = document.createElement("div");
+  post.className = "post";
+  post.id = "post" + postObj.post_info.post_id;
+  
+
   let topPartDiv = document.createElement("div");
   topPartDiv.setAttribute("class", "topPartDiv");
 
@@ -294,6 +299,7 @@ function createPost(postObj) {
   post.appendChild(likes);
   post.appendChild(caption);
   post.appendChild(comments);
+  posts.appendChild(post);
 }
 
 function createRecommendedConnection(recommended) {
