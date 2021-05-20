@@ -142,7 +142,7 @@
   overflow: auto;
 }
 
-hr {
+.comment-hr {
   border: 0;
   border-top: 0.5px solid #51b09f;
   background-color: #51b09f;

@@ -5,20 +5,16 @@ function loadHome() {
 
 function loadPost() {
     const placeholderImg = './images/placeholder.jpg';
-    createModal(1);
-    displayPost(placeholderImg);
-    displayPostDetails("Username", "30 minutes ago", placeholderImg);
-    displayComments(placeholderImg);
+    createModal(1, placeholderImg);
 }
 
-function createModal(postID) {
+function createModal(postID, placeholderImg) {
     let overlay = document.createElement("div");
     overlay.id = "modalOverlay";
-    overlay.onclick = hideModal;
 
     let modal = document.createElement("div");
     modal.className = "postModal";
-    modal.id = "modal" + postID;
+    modal.id = "post" + postID;
     modal.style.display = "none";
 
     let leftSideDiv = document.createElement("div");
@@ -58,6 +54,10 @@ function createModal(postID) {
     let commentList = document.createElement("div");
     commentList.id = "commentList";
 
+    let captionDiv = loadCaption(placeholderImg, "Username", "This is a caption.");
+    rightSideDiv.appendChild(captionDiv);
+    rightSideDiv.appendChild(createLine());
+
     rightSideDiv.appendChild(commentList);
     rightSideDiv.appendChild(createLine());
 
@@ -95,16 +95,21 @@ function createModal(postID) {
     
     document.body.appendChild(overlay);
     document.body.appendChild(modal);
+
+    displayPost(placeholderImg);
+    displayPostDetails("Username", "30 minutes ago", placeholderImg);
+    displayComments(placeholderImg);
 }
 
-function hideModal() {
+function hideModal(id) {
     document.getElementById("modalOverlay").style.display = "none";
-    document.getElementById("modal1").style.display = "none";
+    document.getElementById("post" + id).style.display = "none";
 }
 
-function displayModal() {
+function displayModal(id) {
     document.getElementById("modalOverlay").style.display = "block";
-    document.getElementById("modal1").style.display = "flex";
+    document.getElementById("modalOverlay").onclick = () => { hideModal(id) };
+    document.getElementById("post" + id).style.display = "flex";
 }
 
 
@@ -134,6 +139,7 @@ function displayPostDetails(username, time, placeholderImg) {
 
 function createLine() {
     let line = document.createElement("hr");
+    line.className = "comment-hr";
     return line;
 }
 
@@ -215,18 +221,26 @@ function displayComments(placeholderImg) {
     let commentsDiv = document.getElementById("commentList");
 
 
-    let captionDiv = loadCaption(placeholderImg, "Username", "This is a caption.")
-
+    // let captionDiv = loadCaption(placeholderImg, "Username", "This is a caption.");
+    // commentsDiv.appendChild(captionDiv);
+    // commentsDiv.appendChild(createLine());
     let comment1 = createComment(placeholderImg, "username", "This is a comment", "now", 1);
     let comment2 = createComment(placeholderImg, "username", "This is a comment", "5min", 2);
     let comment3 = createComment(placeholderImg, "username", "This is a comment", "10min", 3);
     let comment4 = createComment(placeholderImg, "username", "This is a comment", "15min", 4);
     let comment5 = createComment(placeholderImg, "username", "This is a comment", "20min", 5);
+    let comment6 = createComment(placeholderImg, "username", "This is a comment", "20min", 6);
+    let comment7 = createComment(placeholderImg, "username", "This is a comment", "20min", 7);
+    let comment8 = createComment(placeholderImg, "username", "This is a comment", "20min", 8);
 
-    commentsDiv.appendChild(captionDiv);
+    
+    
     commentsDiv.appendChild(comment1);
     commentsDiv.appendChild(comment2);
     commentsDiv.appendChild(comment3);
     commentsDiv.appendChild(comment4);
     commentsDiv.appendChild(comment5);
+    commentsDiv.appendChild(comment6);
+    commentsDiv.appendChild(comment7);
+    commentsDiv.appendChild(comment8);
 }
