@@ -7,6 +7,7 @@
   <title>Contact us</title>
   <link rel="stylesheet" href="css/createvolunteerpost.css" />
   <link rel="stylesheet" href="css/contact-us.css" />
+  <link rel=stylesheet href = "css/partnerwithus.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/base.css" />
   <link
@@ -156,6 +157,58 @@
     <div class="column" id="mainmain">
       <div id="box" class="box" style="text-align: center">
         <h class="heading1" style="padding-top: 20px">Contact us</h>
+        <p class="bodytext" style="text-align: left; padding-bottom: 10px" >We will reply your message in 7 business day.</p>
+        <div class="container">
+          <form
+                  class="form-format"
+                  target="_blank"
+                  action="https://formsubmit.co/karmavolunteering@gmail.com"
+                  method="POST"
+          >
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col">
+                  <input
+                          type="text"
+                          name="title"
+                          class="form-control"
+                          placeholder="Title"
+                          required
+                  />
+                </div>
+                <div class="col">
+                  <input
+                          type="text"
+                          name="name"
+                          class="form-control"
+                          placeholder="Full name"
+                          required
+                  />
+                </div>
+                <div class="col">
+                  <input
+                          type="email"
+                          name="email"
+                          class="form-control"
+                          placeholder="Email address"
+                          required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+                <textarea
+                        placeholder="Your message"
+                        class="form-control"
+                        name="message"
+                        rows="10"
+                        required
+                ></textarea>
+            </div>
+            <button type="submit" class="bugbutton">Send your message</button>
+          </form>
+        </div>
         <div>
         <div  class="imgbox" style="padding-top: 20px">
           <img src="images/phone.png">
