@@ -237,10 +237,10 @@ function displayComments(placeholderImg) {
     
     commentsDiv.appendChild(comment1);
     commentsDiv.appendChild(comment2);
-    commentsDiv.appendChild(comment3);
-    commentsDiv.appendChild(comment4);
-    commentsDiv.appendChild(comment5);
-    commentsDiv.appendChild(comment6);
-    commentsDiv.appendChild(comment7);
-    commentsDiv.appendChild(comment8);
+    // commentsDiv.appendChild(comment3);
+    // commentsDiv.appendChild(comment4);
+    // commentsDiv.appendChild(comment5);
+    // commentsDiv.appendChild(comment6);
+    // commentsDiv.appendChild(comment7);
+    // commentsDiv.appendChild(comment8);
 }

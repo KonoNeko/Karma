@@ -446,8 +446,9 @@ function createModal(postObj) {
   postDetails.appendChild(nameAndTime);
   rightSideDiv.appendChild(postDetails);
 
-
-  rightSideDiv.appendChild(createLine());
+  let line = createLine();
+  line.id = "lineAfterPostDetails";
+  rightSideDiv.appendChild(line);
 
   let commentList = document.createElement("div");
   commentList.id = "commentList" + post.post_id;

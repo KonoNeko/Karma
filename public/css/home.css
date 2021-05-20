@@ -702,6 +702,21 @@ hr {
   padding-bottom: 10px;
 }
 
+@media screen and (max-width: 1100px) {
+  .postModal {
+    width: 700px;
+  }
+  
+  .leftDiv {
+    width: 60%; /* temp */
+  }
+  
+  .rightDiv {
+    width: 40%; /* temp */
+  }
+} 
+
+
 @media screen and (max-width: 900px) {
   .name-and-userName {
     margin-left: 10px;
@@ -739,6 +754,31 @@ hr {
   .name-and-userName > .userAt {
     font-size: 8px;
   }
+
+  .postModal {
+    flex-direction: column;
+    width: 500px;
+    height: 75%;
+  }
+  
+  .leftDiv {
+    width: 100%;
+    height: 60%; /* temp */
+  }
+  
+  .rightDiv {
+    width: 100%;
+    height: 40%; /* temp */
+  }
+
+  .commentList {
+    height: 40%;
+  }
+
+  .postOwnerTitle {
+    display: none;
+  }
+
 }
 
 @media screen and (max-width: 550px) {
@@ -780,4 +820,28 @@ hr {
     border-radius: 10px;
     outline: none;
   }
+
+  .postModal {
+    flex-direction: column;
+    width: 500px;
+    height: 75%;
+  }
+  
+  .leftDiv {
+    display: none;
+  }
+  
+  .rightDiv {
+    width: 100%;
+    height: 100%; /* temp */
+  }
+
+  .commentList {
+    height: 70%;
+  }
+
+  .postOwnerTitle, #lineAfterPostDetails {
+    display: none;
+  }
+
 }
