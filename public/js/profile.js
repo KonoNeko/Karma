@@ -17,7 +17,7 @@ function APIRequest(method, url) {
   xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
           let result = JSON.parse(this.responseText);
-          console.log("loading post");
+          console.log("success editing profile");
           console.log(result);
           for (let i=0; i<result.length; i++) {
               loadProfile(result[i]);
@@ -26,6 +26,21 @@ function APIRequest(method, url) {
       }
   }
 }
+
+function add_Education(userID, schoolName, description) {
+  const method = "POST";
+  const endpoint = "/profiles/education";
+  const params = formatParams({
+    "id": userID,
+    "name": schoolName,
+    "type": description
+  });
+  const url = BASE_URL + endpoint + params;
+
+  return APIRequest(method, url);
+}
+
+
 
 function showProfile() {
   firebase.auth().onAuthStateChanged(function (user) {
@@ -149,6 +164,7 @@ function loadEducation() {
   let education = document.getElementById("education");
   createEducation(education);
   createEducation(education);
+
 }
 
 function loadExperience() {
@@ -233,19 +249,64 @@ function addEducation() {
   addEducationHeading1.setAttribute("style", "text-align: left");
 
   let addEducationInput1 = document.createElement("textarea");
-  addEducationInput1.setAttribute("style", "height: 50px");
+  addEducationInput1.setAttribute("style", "height: 30px");
+
+  let addEducationHeading2 = document.createElement("p");
+  addEducationHeading2.setAttribute("class", "heading3");
+  addEducationHeading2.innerHTML = "Please enter your gpa:";
+  addEducationHeading2.setAttribute("style", "text-align: left");
+
+  let addEducationInput2 = document.createElement("textarea");
+  addEducationInput2.setAttribute("style", "height: 30px");
+
+
+
+  let addEducationHeading3 = document.createElement("p");
+  addEducationHeading3.setAttribute("class", "heading3");
+  addEducationHeading3.innerHTML = "Please enter the date your started";
+  addEducationHeading3.setAttribute("style", "text-align: left");
+
+  let addEducationInput3 = document.createElement("textarea");
+  addEducationInput3.setAttribute("style", "height: 30px");
+
+
+  let addEducationHeading4 = document.createElement("p");
+  addEducationHeading4.setAttribute("class", "heading3");
+  addEducationHeading4.innerHTML = "Please enter the date you ended";
+  addEducationHeading4.setAttribute("style", "text-align: left");
+
+  let addEducationInput4 = document.createElement("textarea");
+  addEducationInput4.setAttribute("style", "height: 30px");
+
+
+  let addEducationHeading5 = document.createElement("p");
+  addEducationHeading5.setAttribute("class", "heading3");
+  addEducationHeading5.innerHTML = "Please add a image of your school";
+  addEducationHeading5.setAttribute("style", "text-align: left");
+
+  let addEducationInput5 = document.createElement("button");
+  addEducationInput5.setAttribute("style", "height: 20px");
 
   let addEducationHeading = document.createElement("p");
   addEducationHeading.setAttribute("class", "heading3");
-  addEducationHeading.innerHTML = "Add education";
+  addEducationHeading.innerHTML = "Please add the type of certification earned";
   addEducationHeading.setAttribute("style", "text-align: left");
 
   let addEducationInput = document.createElement("textarea");
+  addEducationInput.setAttribute("style", "height: 30px");
 
   document.getElementById("button-content").appendChild(addEducationHeading1);
   document.getElementById("button-content").appendChild(addEducationInput1);
   document.getElementById("button-content").appendChild(addEducationHeading);
   document.getElementById("button-content").appendChild(addEducationInput);
+  document.getElementById("button-content").appendChild(addEducationHeading2);
+  document.getElementById("button-content").appendChild(addEducationInput2);
+  document.getElementById("button-content").appendChild(addEducationHeading3);
+  document.getElementById("button-content").appendChild(addEducationInput3);
+  document.getElementById("button-content").appendChild(addEducationHeading4);
+  document.getElementById("button-content").appendChild(addEducationInput4);
+  document.getElementById("button-content").appendChild(addEducationHeading5);
+  document.getElementById("button-content").appendChild(addEducationInput5);
   
 }
 
@@ -260,19 +321,54 @@ function addExperience() {
   addEducationHeading1.setAttribute("style", "text-align: left");
 
   let addEducationInput1 = document.createElement("textarea");
-  addEducationInput1.setAttribute("style", "height: 50px");
+  addEducationInput1.setAttribute("style", "height: 30px");
 
   let addExperienceHeading = document.createElement("p");
   addExperienceHeading.setAttribute("class", "heading3");
-  addExperienceHeading.innerHTML = "Add experience";
+  addExperienceHeading.innerHTML = "Please eneter the name of the workplace";
   addExperienceHeading.setAttribute("style", "text-align: left");
 
   let addExperienceInput = document.createElement("textarea");
+  addExperienceInput.setAttribute("style", "height: 30px");
+
+  let addExperienceHeading2 = document.createElement("p");
+  addExperienceHeading2.setAttribute("class", "heading3");
+  addExperienceHeading2.innerHTML = "Please eneter the start date";
+  addExperienceHeading2.setAttribute("style", "text-align: left");
+
+  let addExperienceInput2 = document.createElement("textarea");
+  addExperienceInput2.setAttribute("style", "height: 30px");
+
+  let addExperienceHeading3 = document.createElement("p");
+  addExperienceHeading3.setAttribute("class", "heading3");
+  addExperienceHeading3.innerHTML = "Please enter the end date";
+  addExperienceHeading3.setAttribute("style", "text-align: left");
+
+  let addExperienceInput3 = document.createElement("textarea");
+  addExperienceInput3.setAttribute("style", "height: 30px");
+
+  let addExperienceHeading4 = document.createElement("p");
+  addExperienceHeading4.setAttribute("class", "heading3");
+  addExperienceHeading4.innerHTML = "Please add a image of your workplace";
+  addExperienceHeading4.setAttribute("style", "text-align: left");
+
+  let addExperienceInput4 = document.createElement("button");
+  addExperienceInput4.setAttribute("style", "height: 30px");
+
+
+
+  
 
   document.getElementById("button-content").appendChild(addEducationHeading1);
   document.getElementById("button-content").appendChild(addEducationInput1);
   document.getElementById("button-content").appendChild(addExperienceHeading);
   document.getElementById("button-content").appendChild(addExperienceInput);
+  document.getElementById("button-content").appendChild(addExperienceHeading2);
+  document.getElementById("button-content").appendChild(addExperienceInput2);
+  document.getElementById("button-content").appendChild(addExperienceHeading3);
+  document.getElementById("button-content").appendChild(addExperienceInput3);
+  document.getElementById("button-content").appendChild(addExperienceHeading4);
+  document.getElementById("button-content").appendChild(addExperienceInput4);
 }
 
 function createNumPosts(numPosts) {

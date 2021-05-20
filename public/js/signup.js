@@ -106,9 +106,9 @@
     if (email != "" && password != "" && cpassword != "")
     {
       var result = firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
-        return  db.collection('user').doc(cred.user.uid).set({
+          db.collection('user').doc(cred.user.uid).set({
           name: $("#name").val(),
-        })
+        });
       });
 
       result.catch(function(error){
