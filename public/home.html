@@ -4,7 +4,7 @@
   <title>Home</title>
 
   <link rel="icon" type="image/png" href="res/logo0_colored.png" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/home.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/createpost.css" />
@@ -19,7 +19,7 @@
     content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
   />
   <!-- <script src="js/API_script.js" type="module"></script> -->
-  <script src="js/home.js" type="module"></script>
+  <!-- <script src="js/home.js"></script> -->
 </head>
 
 <body>
@@ -116,13 +116,13 @@
           </svg>
           <p class="nav__itemlabel">Menu</p>
           <div class="dropdown-content">
-            <a href="#">About</a>
-            <a href="#">Settings</a>
-            <a href="#">FAQ</a>
-            <a href="#">Contact us</a>
-            <a href="#">Partner with us</a>
-            <a href="#">Donate</a>
-            <a href="#">Report a bug</a>
+            <a href="aboutus.html">About</a>
+            <a href="settings.html">Settings</a>
+            <a href="FAQ.html">FAQ</a>
+            <a href="contact-us.html">Contact us</a>
+            <a href="partnerwithus.html">Partner with us</a>
+            <a href="donate.html">Donate</a>
+            <a href="reportbug.html">Report a bug</a>
           </div>
         </a>
       </li>
@@ -146,8 +146,8 @@
 
       <div id="above-search" class="search">
         <form class="search-form">
-          <input type="text" placeholder="Search" />
-          <button type="submit"><i class="fa fa-search"></i></button>
+          <input id="search-texts" type="search" placeholder="Search" />
+          <button name="search-button"><i class="fa fa-search"></i></button>
         </form>
       </div>
     </div>
@@ -159,28 +159,30 @@
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
+    <div id="postModals">
+    </div>
 
     <div class="create-post-container modal-content">
         <div class="image-poster profilepicture">
           <img src="images/placeholder2.png" />
         </div>
-        <div class="caption">
+        <div class="newCaption">
           <div>
             <textarea rows="4" cols="50">
-  Write a caption here...
+              Write a caption here...
             </textarea>
           </div>
           <div style="font-size: 2.5rem" class="icons">
-            <i id="photo" class="fa fa-image"></i
-            ><i id="marker" class="fas fa-map-marker-alt"></i
-            ><i id="myBtn" class="fas fa-users"></i>
+            <i id="photo" class="fa fa-image"></i>
+            <i id="marker" class="fas fa-map-marker-alt"></i>
+            <i id="myBtn" class="fas fa-users"></i>
             <input type="file" id="file" style="display: none" />
           </div>
           <div class="button">
             <button id="postBtn" class="secondarybutton">Post</button>
           </div>
         </div>
-      </div>
+    </div>
   
       <!-- The Modal -->
       <div id="locationModal" class="modal">
@@ -189,8 +191,7 @@
           <span class="close">&times;</span>
           <textarea id="location" rows="4" cols="50">
         Add a location here...
-      </textarea
-          >
+      </textarea>
         </div>
       </div>
   
@@ -200,9 +201,8 @@
         <div class="modal-content">
           <span class="close">&times;</span>
           <textarea id="tags" rows="4" cols="50">
-         Tag people here...
-        </textarea
-          >
+            Tag people here...
+          </textarea>
         </div>
       </div>
 
@@ -220,7 +220,7 @@
         <div class="search">
           <form class="search-form">
             <input type="text" placeholder="Search" />
-            <button type="submit"><i class="fa fa-search"></i></button>
+            <button onclick="findUsers()" type="submit"><i class="fa fa-search"></i></button>
           </form>
         </div>
         <div id="whats-new" class="whats-new">
@@ -353,7 +353,7 @@
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     crossorigin="anonymous"
   ></script>
-
+  <script src="js/home.js"></script>
 <script>
     $(function () {
       $("#photo").click(function () {
@@ -459,7 +459,7 @@
 
 
 
-
+<script src="js/search.js"></script>
 
 
 
