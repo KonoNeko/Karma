@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+
+#above-search {
+  display: none;
+}
+
+.above {
+  margin-left: 5rem;
+}
+
+.flex-main {
+  margin-left: 5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.flex-main > .column {
+  width: 50%;
+  margin-left: 24px;
+  margin-right: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+#profile-main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: 24px;
+  align-items: center;
+  justify-items: center;
+  margin-bottom: 20px;
+}
+
+#posts {
+  display: flex;
+}
+
+#posts > .postdiv {
+  width: 30%;
+  margin-right: 20px;
+}
+
+.postpic {
+  border-radius: 12px;
+  width: 100%;
+}
+
+#profile-main > .profile-column {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-items: center;
+}
+
+#image-column {
+  width: 30%;
+}
+
+#profile-details-column {
+  width: 70%;
+}
+
+#profile-buttons-div {
+  display: flex;
+  flex-direction: column;
+}
+
+#numbersDiv {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.numbers-column {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+
+.heading-title {
+  padding-top: 24px;
+  padding-left: 24px;
+}
+
+#sidemain > #whats-new {
+  background-color: #eff0f3;
+  margin-top: 24px;
+  padding-left: 24px;
+  padding: 24px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+}
+
+#sidemain > #recommended-connections {
+  background-color: #eff0f3;
+  margin-top: 24px;
+  padding: 24px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+  margin-bottom: 24px;
+}
+
+#editbtn {
+  background-color: #0367a6;
+  padding: 12px 20px;
+  border: none;
+  color: #eff0f3;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  width: 49%;
+  border-radius: 10px;
+  outline: none;
+}
+
+#msgbtn {
+  background-color: #0367a6;
+  padding: 12px 20px;
+  border: none;
+  color: #eff0f3;
+  width: 49%;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 10px;
+  outline: none;
+}
+
+.profilepicture {
+  width: 50%;
+  height: auto;
+}
+
+.skillsbtn {
+  background-color: #0367a6;
+  padding: 12px 20px;
+  border: none;
+  color: #eff0f3;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 40px;
+  outline: none;
+  margin-right: 10px;
+  cursor: none;
+  margin-top: 5px;
+}
+
+.education-post-div > div,
+.experience-post-div > div {
+  width: 50%;
+}
+
+.education-post-div,
+.experience-post-div {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 550px) {
+  .above {
+    margin-left: 0;
+  }
+
+  #above-search {
+    display: unset;
+  }
+
+  #sidemain {
+    display: none;
+  }
+
+  .flex-main > .column {
+    width: 100%;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+  }
+
+  .flex-main {
+    margin-left: 0;
+  }
+
+  #mainmain {
+    margin-top: 60px;
+    margin-bottom: 96px;
+  }
+
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+
+  .menu-and-search {
+    position: fixed;
+    background-color: white;
+    padding-bottom: 12px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .menu-and-search > .mobile-menu > a {
+    width: 20%;
+    height: auto;
+    margin-right: 24px;
+  }
+
+  .menu-and-search > #above-search {
+    width: 80%;
+    margin-right: 24px;
+  }
+
+  .search input[type="text"] {
+    font-family: "Montserrat";
+    border: 0px;
+    padding-left: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 80%;
+    height: 100%;
+  }
+
+  .search input[type="search"] {
+    font-family: "Montserrat";
+    border: 0px;
+    padding-left: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 80%;
+    height: 100%;
+  }
+
+  .search {
+    background-color: white;
+  }
+
+  .search button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 20%;
+    height: 100%;
+  }
+
+  #profile-main {
+    margin-right: 20px;
+  }
+}

@@ -177,6 +177,11 @@ button {
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
+
+button:focus {
+  outline: none;
+}
+
 button i {
   margin-left: 10px;
   -webkit-transform: translateZ(0);

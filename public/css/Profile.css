@@ -24,26 +24,10 @@
   flex-direction: column;
 }
 
-#mainmain > #stories {
-  background-color: red; /* temp */
-  margin-top: 24px;
-  height: 400px; /* temp */
-  width: 100%;
-}
-
-#mainmain > #posts {
-  background-color: purple; /* temp */
-  margin-top: 24px;
-  height: 400px; /* temp */
-  width: 100%;
-  margin-bottom: 24px;
-}
-
 #sidemain > #whats-new {
   background-color: #eff0f3;
   margin-top: 24px;
   padding-left: 24px;
-  height: 400px; /* temp */
   padding: 24px;
   width: 100%;
   border-radius: 12px;
@@ -55,7 +39,6 @@
   margin-top: 24px;
   padding: 24px;
   width: 100%;
-  height: 400px; /* temp */
   border-radius: 12px;
   box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
   margin-bottom: 24px;
@@ -68,7 +51,6 @@
 
 #editbtn {
   margin-left: 330px;
-
   background-color: #0367a6;
   padding: 12px 20px;
   border: none;
@@ -79,9 +61,9 @@
   border-radius: 10px;
   outline: none;
 }
+
 #msgbtn {
   margin-top: 40px;
-
   background-color: #0367a6;
   padding: 12px 20px;
   border: none;
@@ -92,57 +74,40 @@
   border-radius: 10px;
   outline: none;
 }
+
 #greyback {
   background-color: #eff0f3;
-  width: 700px;
-  height: 300px;
-  margin-top: -180px;
 }
 
 #numPosts {
-  margin-left: 420px;
-  margin-bottom: 50px;
   font-size: 14pt;
   font-family: "Open Sans";
   font-weight: bold;
-
-
 }
 
 #following {
-  margin-left: 280px;
-  text-align: justify;
-  margin-top: -50px;
   font-size: 14pt;
   font-family: "Open Sans";
 }
 .followers {
-  margin-left: -120px;
   text-align: justify;
-  margin-top: -50px;
   font-size: 14pt;
   font-family: "Open Sans";
 }
 
 .following {
-  margin-left: 295px;
   text-align: justify;
-  margin-top: -50px;
   font-size: 14pt;
   font-family: "Open Sans";
 }
-#profileDiv{
+#profileDiv {
   width: 1000px;
 }
 #posts {
-  margin-left: 400px;
-  margin-top: 0px;
   font-size: 14pt;
   font-family: "Open Sans";
 }
 #followers {
-  margin-left: 545px;
-  margin-top: -75px;
   font-size: 14pt;
   font-family: "Open Sans";
 }
@@ -151,27 +116,18 @@ p {
 }
 
 h2 {
-  margin-left: 30px;
   font-family: "Montserrat";
   font-weight: 700;
   font-size: 24px;
   color: #0367a6;
 }
 #name {
-  margin-top: 100px;
-  margin-left: 330px;
   font-size: 36px;
   font-family: "Montserrat", sans-serif;
   font-weight: 700; /* bold */
   width: 302px;
   color: #0367a6;
   width: 600px;
-}
-
-#profile {
-  margin-left: 20px;
-  margin-top: -150px;
-  
 }
 
 #move {
@@ -296,7 +252,6 @@ h1 {
   font-size: 14px;
   border-radius: 10px;
   outline: none;
-  margin-left: 550px;
 }
 
 #addskills {
@@ -309,7 +264,6 @@ h1 {
   font-size: 14px;
   border-radius: 10px;
   outline: none;
-  margin-right: 20px;
 
   cursor: pointer;
 }
@@ -323,7 +277,6 @@ h1 {
   font-size: 14px;
   border-radius: 10px;
   outline: none;
-  margin-right: 20px;
   cursor: pointer;
 }
 
@@ -350,32 +303,19 @@ h3 {
 
 .about {
   text-align: left;
-  margin-left: 30px;
 }
 .postpic {
-  width:100px;
-  margin-bottom: -400px;
-  margin-left: -370px;
-
+  width: 100px;
 }
 
 .educationpic {
   width: 150px;
-  margin-left: 30px;
-  margin-top: -40px;
 }
-.schoolheading{
+.schoolheading {
   font-family: "Montserrat";
   font-weight: 500;
   font-size: 18px;
   color: #0367a6;
-  margin-left: 190px;
-  margin-top: -px;
-
-}
-
-.schoolpara{
-  margin-right:290px;
 }
 
 .expheading {
@@ -383,17 +323,11 @@ h3 {
   font-weight: 500;
   font-size: 18px;
   color: #0367a6;
-  margin-left: 190px;
-  margin-top: -px;
-  
 }
 .experiencepic {
   width: 150px;
-  margin-left: 30px;
-  margin-top: -40px;
 }
 .exppara {
-  margin-right:295px;
 }
 
 .awardsheading {
@@ -401,20 +335,15 @@ h3 {
   font-weight: 500;
   font-size: 18px;
   color: #0367a6;
-  margin-left: 190px;
-  margin-top: -px;
-  
 }
 .awardspic {
   width: 150px;
-  margin-left: 30px;
-  margin-top: -40px;
 }
 .awardspara {
-  margin-right:370px;
+  margin-right: 370px;
 }
 
-.skillsbtn{
+.skillsbtn {
   background-color: #0367a6;
   padding: 12px 20px;
   border: none;
@@ -424,10 +353,7 @@ h3 {
   font-size: 14px;
   border-radius: 40px;
   outline: none;
-  margin-left: 30px;
   cursor: none;
-  margin-top: 5px;
-
 }
 
 @media screen and (max-width: 550px) {
@@ -435,8 +361,8 @@ h3 {
     margin-left: 0rem;
     margin-bottom: 100px;
   }
+
   #editbtn {
-    margin-left: 100px;
     width: 150px;
     height: 40px;
     background-color: #49a1b9;
@@ -452,16 +378,12 @@ h3 {
 
     color: #eff0f3;
   }
-  #name{
-  margin-top: 0px;
-  margin-left: 230px;
-  font-size: 29px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 700; /* bold */
-  width: 602px;
-  color: #0367a6;
-  
-
+  #name {
+    font-size: 29px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700; /* bold */
+    width: 602px;
+    color: #0367a6;
   }
   #profileDiv {
     width: 600px;
@@ -503,13 +425,10 @@ h3 {
     margin-top: px;
     font-size: 14pt;
   }
-  #profile{
+  #profile {
     width: 100px;
     height: 100px;
   }
-
-
-
 
   .about {
     text-align: left;
@@ -517,31 +436,29 @@ h3 {
     width: 450px;
   }
   .postpic {
-    width:100px;
+    width: 100px;
     margin-bottom: -450px;
     margin-left: -240px;
-  
   }
-  
+
   .educationpic {
     width: 150px;
     margin-left: 30px;
     margin-top: -40px;
   }
-  .schoolheading{
+  .schoolheading {
     font-family: "Montserrat";
     font-weight: 500;
     font-size: 18px;
     color: #0367a6;
     margin-left: 190px;
     margin-top: -px;
-  
   }
-  
-  .schoolpara{
-    margin-right:290px;
+
+  .schoolpara {
+    margin-right: 290px;
   }
-  
+
   .expheading {
     font-family: "Montserrat";
     font-weight: 500;
@@ -549,7 +466,6 @@ h3 {
     color: #0367a6;
     margin-left: 190px;
     margin-top: -px;
-    
   }
   .experiencepic {
     width: 150px;
@@ -557,9 +473,9 @@ h3 {
     margin-top: -40px;
   }
   .exppara {
-    margin-right:295px;
+    margin-right: 295px;
   }
-  
+
   .awardsheading {
     font-family: "Montserrat";
     font-weight: 500;
@@ -567,7 +483,6 @@ h3 {
     color: #0367a6;
     margin-left: 190px;
     margin-top: -px;
-    
   }
   #posts {
     width: 500px;
@@ -578,13 +493,13 @@ h3 {
     margin-top: -40px;
   }
   .awardspara {
-    margin-right:370px;
+    margin-right: 370px;
   }
-  #skills{
-    width:500px;
+  #skills {
+    width: 500px;
   }
-  
-  .skillsbtn{
+
+  .skillsbtn {
     background-color: #0367a6;
     padding: 12px 20px;
     border: none;
@@ -597,7 +512,6 @@ h3 {
     margin-left: 30px;
     cursor: none;
     margin-top: 5px;
-  
   }
 
   .followers {
@@ -607,7 +521,7 @@ h3 {
     font-size: 14pt;
     font-family: "Open Sans";
   }
-  
+
   .following {
     margin-left: 205px;
     text-align: justify;
@@ -624,105 +538,101 @@ h3 {
   }
 
   /* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
 
-textarea {
-  width: 350px;
-}
+  textarea {
+    width: 350px;
+  }
 
-/* Modal Content */
-.modal-content {
-  position: relative;
-  background-color: #eff0f3;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 500px;
-  height: 550px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-  animation-name: animatetop;
-  animation-duration: 0.4s;
-}
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: #eff0f3;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 500px;
+    height: 550px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+  }
 
-#addskills {
-  background-color: #0367a6;
-  padding: 6px 14px;
-  border: none;
-  color: #eff0f3;
-  font-family: "Montserrat";
-  font-weight: 500;
-  font-size: 12px;
-  border-radius: 10px;
-  outline: none;
-  margin-right: 5px;
+  #addskills {
+    background-color: #0367a6;
+    padding: 6px 14px;
+    border: none;
+    color: #eff0f3;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 12px;
+    border-radius: 10px;
+    outline: none;
+    margin-right: 5px;
 
-  cursor: pointer;
-}
-#addedu {
-  background-color: #0367a6;
-  padding: 6px 14px;
-  border: none;
-  color: #eff0f3;
-  font-family: "Montserrat";
-  font-weight: 500;
-  font-size: 12px;
-  border-radius: 10px;
-  outline: none;
-  margin-right: 5px;
-  cursor: pointer;
-}
+    cursor: pointer;
+  }
+  #addedu {
+    background-color: #0367a6;
+    padding: 6px 14px;
+    border: none;
+    color: #eff0f3;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 12px;
+    border-radius: 10px;
+    outline: none;
+    margin-right: 5px;
+    cursor: pointer;
+  }
 
-#addexp {
-  background-color: #0367a6;
-  padding: 6px 14px;
-  border: none;
-  color: #eff0f3;
-  font-family: "Montserrat";
-  font-weight: 500;
-  font-size: 12px;
-  border-radius: 10px;
-  outline: none;
-  margin-top: 5px;
-  cursor: pointer;
-}
+  #addexp {
+    background-color: #0367a6;
+    padding: 6px 14px;
+    border: none;
+    color: #eff0f3;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 12px;
+    border-radius: 10px;
+    outline: none;
+    margin-top: 5px;
+    cursor: pointer;
+  }
 
-#save {
-  background-color: #0367a6;
-  padding: 6px 14px;
-  border: none;
-  color: #eff0f3;
-  font-family: "Montserrat";
-  font-weight: 500;
-  font-size: 12px;
-  border-radius: 10px;
-  outline: none;
-  margin-left: 250px;
-}
+  #save {
+    background-color: #0367a6;
+    padding: 6px 14px;
+    border: none;
+    color: #eff0f3;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 12px;
+    border-radius: 10px;
+    outline: none;
+    margin-left: 250px;
+  }
 
-#numPosts {
-  margin-left: 300px;
-  position: absolute;
-  font-size: 14pt;
-  font-family: "Open Sans";
-  font-weight: bold;
-  margin-top: 135px;
-
-
-}
-
-
+  #numPosts {
+    margin-left: 300px;
+    position: absolute;
+    font-size: 14pt;
+    font-family: "Open Sans";
+    font-weight: bold;
+    margin-top: 135px;
+  }
 }

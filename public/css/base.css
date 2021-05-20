@@ -11,6 +11,14 @@
   word-wrap: break-word;
 }
 
+button:focus {
+  outline: none !important;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 /* NAVBAR */
 /* color variables */
 :root {
