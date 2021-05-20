@@ -15,29 +15,28 @@ function APIRequest(method, url) {
   xhttp.open(method, url, true);
   xhttp.send();
   xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-          // let result = JSON.parse(this.responseText);
-          console.log("success editing profile");
-          // console.log(result);
-          // for (let i=0; i<result.length; i++) {
-          //     loadProfile(result[i]);
-          // }
-          
-      }
-  }
+    if (this.readyState == 4 && this.status == 200) {
+      // let result = JSON.parse(this.responseText);
+      console.log("success editing profile");
+      // console.log(result);
+      // for (let i=0; i<result.length; i++) {
+      //     loadProfile(result[i]);
+      // }
+    }
+  };
 }
 
 function addEducation(userID, schoolName, description, gpa, start, end, img) {
   const method = "POST";
   const endpoint = "/profiles/education";
   const params = formatParams({
-    "id": userID,
-    "name": schoolName,
-    "type": description,
-    "gpa": gpa,
-    "start": start,
-    "end": end,
-    "img": img
+    id: userID,
+    name: schoolName,
+    type: description,
+    gpa: gpa,
+    start: start,
+    end: end,
+    img: img,
   });
   const url = BASE_URL + endpoint + params;
 
@@ -48,42 +47,33 @@ function add_Experience(userID, jobName, workplaceName, start, end, img) {
   const method = "POST";
   const endpoint = "/profiles/education";
   const params = formatParams({
-    "id": userID,
-    "name": jobName,
-    "employer": workplaceName,
-    "start": start,
-    "end": end,
-    "img": img
+    id: userID,
+    name: jobName,
+    employer: workplaceName,
+    start: start,
+    end: end,
+    img: img,
   });
   const url = BASE_URL + endpoint + params;
 
   return APIRequest(method, url);
 }
-
-
 
 function add_Description(userID, jobName, workplaceName, start, end, img) {
   const method = "POST";
   const endpoint = "/profiles/education";
   const params = formatParams({
-    "id": userID,
-    "name": jobName,
-    "employer": workplaceName,
-    "start": start,
-    "end": end,
-    "img": img
+    id: userID,
+    name: jobName,
+    employer: workplaceName,
+    start: start,
+    end: end,
+    img: img,
   });
   const url = BASE_URL + endpoint + params;
 
   return APIRequest(method, url);
 }
-
-
-
-
-
-
-
 
 function showProfile() {
   firebase.auth().onAuthStateChanged(function (user) {
@@ -150,16 +140,6 @@ function showImages() {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
 // WINDOW ONLOAD FUNCTION FOR THE PROFILE PAGE
 function loadProfile() {
   loadAboutMe();
@@ -189,8 +169,8 @@ function loadPosts() {
 }
 
 function loadNumPosts() {
-  let numPosts = document.getElementById("numPosts");
-  createNumPosts(numPosts)
+  // let numPosts = document.getElementById("numPosts");
+  // createNumPosts(numPosts)
 }
 
 function loadSkills() {
@@ -207,7 +187,6 @@ function loadEducation() {
   let education = document.getElementById("education");
   createEducation(education);
   createEducation(education);
-
 }
 
 function loadExperience() {
@@ -248,7 +227,7 @@ function loadWhatsNew() {
 
 function loadRecommendedConnections() {
   let recommendedUsers = document.getElementById("recommended-connections");
-  
+
   let heading2 = document.createElement("hr");
   heading2.setAttribute("class", "headers");
   recommendedUsers.appendChild(heading2);
@@ -302,8 +281,6 @@ function addEducation() {
   let addEducationInput2 = document.createElement("textarea");
   addEducationInput2.setAttribute("style", "height: 30px");
 
-
-
   let addEducationHeading3 = document.createElement("p");
   addEducationHeading3.setAttribute("class", "heading3");
   addEducationHeading3.innerHTML = "Please enter the date your started";
@@ -312,7 +289,6 @@ function addEducation() {
   let addEducationInput3 = document.createElement("textarea");
   addEducationInput3.setAttribute("style", "height: 30px");
 
-
   let addEducationHeading4 = document.createElement("p");
   addEducationHeading4.setAttribute("class", "heading3");
   addEducationHeading4.innerHTML = "Please enter the date you ended";
@@ -320,7 +296,6 @@ function addEducation() {
 
   let addEducationInput4 = document.createElement("textarea");
   addEducationInput4.setAttribute("style", "height: 30px");
-
 
   let addEducationHeading5 = document.createElement("p");
   addEducationHeading5.setAttribute("class", "heading3");
@@ -351,29 +326,18 @@ function addEducation() {
   document.getElementById("button-content").appendChild(addEducationHeading5);
   document.getElementById("button-content").appendChild(addEducationInput5);
 
-  
-
   // userID, schoolName, description, gpa, start, end, img
-  $("#save").click(function(){
+  $("#save").click(function () {
+    let schoolName = addEducationInput1.value;
+    let description = addEducationInput.value;
+    let gpa = addEducationInput2.value;
+    let start = addEducationInput3.value;
+    let end = addEducationInput4.value;
+    let img = addEducationInput5.value;
 
-  let schoolName = addEducationInput1.value;
-  let description = addEducationInput.value;
-  let gpa = addEducationInput2.value;
-  let start = addEducationInput3.value;
-  let end = addEducationInput4.value;
-  let img = addEducationInput5.value;
-
-  add_Education(schoolName, description, gpa, start, end, img);
-
+    add_Education(schoolName, description, gpa, start, end, img);
   });
 }
-
-
- 
-  
-
-
-
 
 function addExperience() {
   console.log("Add experience button clicked");
@@ -431,17 +395,13 @@ function addExperience() {
   document.getElementById("button-content").appendChild(addExperienceHeading4);
   document.getElementById("button-content").appendChild(addExperienceInput4);
   document.getElementById("save").onclick(add_Experience);
-
-
 }
 function createNumPosts(numPosts) {
-
-  let post= document.createElement("p");
+  let post = document.createElement("p");
   post.setAttribute("class", "followers");
   post.innerHTML = "1";
 
   numPosts.appendChild(post);
-
 }
 
 function createAboutMe(aboutme) {
@@ -450,14 +410,15 @@ function createAboutMe(aboutme) {
 
   let about = document.createElement("p");
   about.setAttribute("class", "about");
-  about.innerHTML = "I am a senior at Burnaby Mountain who is passionate about languages and fine arts. I like tutoring at my high school and working closely with youth. After graduation, I’d like to go to Simon Fraser University for a bachelor’s degree to major in Linguistics and possibly a minor in Interactive Arts and Technology!";
+  about.setAttribute("style", "margin-right: 20px;");
+  about.innerHTML =
+    "I am a senior at Burnaby Mountain who is passionate about languages and fine arts. I like tutoring at my high school and working closely with youth. After graduation, I’d like to go to Simon Fraser University for a bachelor’s degree to major in Linguistics and possibly a minor in Interactive Arts and Technology!";
 
   aboutdiv.appendChild(about);
   aboutme.appendChild(aboutdiv);
-
 }
 
-function createProfilePic(profile){
+function createProfilePic(profile) {
   // let picture = document.createElement("img");
   // picture.setAttribute("class", "postpicture");
   // picture.setAttribute(
@@ -466,133 +427,156 @@ function createProfilePic(profile){
   // );
   // profile.appendChild(picture);
 }
-function createSkills(skills){
+function createSkills(skills) {
   let skillbtn = document.createElement("button");
   skillbtn.setAttribute("class", "skillsbtn");
-  skillbtn.innerHTML = "Leadership"
+  skillbtn.innerHTML = "Leadership";
 
-  skills.appendChild(skillbtn)
-
-
-
+  skills.appendChild(skillbtn);
 }
-function createPost(posts){
+function createPost(posts) {
   let postdiv = document.createElement("div");
   postdiv.setAttribute("class", "postdiv");
 
   let picture = document.createElement("img");
   picture.setAttribute("class", "postpic");
-  picture.src = "./images/placeholder.jpg"
+  picture.src = "./images/placeholder.jpg";
 
-  postdiv.appendChild(picture)
+  postdiv.appendChild(picture);
   // picture.setAttribute(
   //   "style",
   //   "background-image: url('./images/placeholder.jpg')"
   // );
   posts.appendChild(postdiv);
-
 }
-function createEducation(education){
-  let heading1 = document.createElement("h3")
-  heading1.setAttribute("class", "schoolheading");
+function createEducation(education) {
+  let heading1 = document.createElement("p");
+  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("style", "font-weight: bold");
   heading1.innerHTML = "Burnaby Mountain Secondary School";
 
+  let educationdiv = document.createElement("div");
+  educationdiv.setAttribute("class", "education-post-div");
 
-  let postdiv = document.createElement("div");
-  postdiv.setAttribute("class", "postdiv");
+  let picturediv = document.createElement("div");
+  picturediv.setAttribute("class", "postpreviewpicture");
+
+  let educationInfoDiv = document.createElement("div");
 
   let picture = document.createElement("img");
   picture.setAttribute("class", "educationpic");
-  picture.src = "./images/education.jpeg"
+  picture.src = "./images/education.jpeg";
 
-  let para= document.createElement("p");
+  let para = document.createElement("p");
   para.setAttribute("class", "schoolpara");
   para.innerHTML = "September 2016 to June 2021";
 
-  postdiv.appendChild(picture);
-  education.appendChild(heading1);
-  education.appendChild(para);
-  education.appendChild(postdiv);
-  
+  picturediv.appendChild(picture);
 
+  educationdiv.appendChild(picturediv);
+  educationdiv.appendChild(educationInfoDiv);
+
+  educationInfoDiv.appendChild(heading1);
+  educationInfoDiv.appendChild(para);
+  educationInfoDiv.setAttribute(
+    "style",
+    "margin-left: 20px; margin-right: 20px;"
+  );
+
+  education.appendChild(educationdiv);
+  educationdiv.setAttribute("style", "margin-top: 10px");
 }
-function createExperience(experience){
-  let heading1 = document.createElement("h3")
-  heading1.setAttribute("class", "expheading");
-  heading1.innerHTML = "Library assistant";
 
+function createExperience(experience) {
+  let heading1 = document.createElement("p");
+  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("style", "font-weight: bold");
+  heading1.innerHTML = "Library volunteer";
 
-  let postdiv = document.createElement("div");
-  postdiv.setAttribute("class", "postdiv");
+  let experiencendiv = document.createElement("div");
+  experiencendiv.setAttribute("class", "experience-post-div");
+
+  let picturediv = document.createElement("div");
+  picturediv.setAttribute("class", "postpreviewpicture");
+
+  let experienceInfoDiv = document.createElement("div");
 
   let picture = document.createElement("img");
   picture.setAttribute("class", "experiencepic");
-  picture.src = "./images/experience.jpeg"
+  picture.src = "./images/experience.jpeg";
 
-  let para= document.createElement("p");
-  para.setAttribute("class", "exppara");
+  let para = document.createElement("p");
+  para.setAttribute("class", "schoolpara");
   para.innerHTML = "Archimedes Library, Newton";
 
-  postdiv.appendChild(picture);
-  experience.appendChild(heading1);
-  experience.appendChild(para);
-  experience.appendChild(postdiv);
+  picturediv.appendChild(picture);
 
+  experiencendiv.appendChild(picturediv);
+  experiencendiv.appendChild(experienceInfoDiv);
+
+  experienceInfoDiv.appendChild(heading1);
+  experienceInfoDiv.appendChild(para);
+  experienceInfoDiv.setAttribute(
+    "style",
+    "margin-left: 20px; margin-right: 20px;"
+  );
+
+  experience.appendChild(experiencendiv);
+  experiencendiv.setAttribute("style", "margin-top: 10px");
 }
 
-
-function createAwards(awards){
-  let heading1 = document.createElement("h3")
-  heading1.setAttribute("class", "awardsheading");
+function createAwards(awards) {
+  let heading1 = document.createElement("p");
+  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("style", "font-weight: bold");
   heading1.innerHTML = "District Authority Award in English Literature";
 
+  let experiencendiv = document.createElement("div");
+  experiencendiv.setAttribute("class", "experience-post-div");
 
-  let postdiv = document.createElement("div");
-  postdiv.setAttribute("class", "postdiv");
+  let picturediv = document.createElement("div");
+  picturediv.setAttribute("class", "postpreviewpicture");
+
+  let experienceInfoDiv = document.createElement("div");
 
   let picture = document.createElement("img");
-  picture.setAttribute("class", "awardspic");
-  picture.src = "./images/awards.jpg"
+  picture.setAttribute("class", "experiencepic");
+  picture.src = "./images/awards.jpg";
 
-  let para= document.createElement("p");
-  para.setAttribute("class", "awardspara");
-  para.innerHTML = "Received July 2021";
+  let para = document.createElement("p");
+  para.setAttribute("class", "schoolpara");
+  para.innerHTML = "Received in November 2019";
 
-  postdiv.appendChild(picture);
-  awards.appendChild(heading1);
-  awards.appendChild(para);
-  awards.appendChild(postdiv);
+  picturediv.appendChild(picture);
 
+  experiencendiv.appendChild(picturediv);
+  experiencendiv.appendChild(experienceInfoDiv);
+
+  experienceInfoDiv.appendChild(heading1);
+  experienceInfoDiv.appendChild(para);
+  experienceInfoDiv.setAttribute(
+    "style",
+    "margin-left: 20px; margin-right: 20px;"
+  );
+
+  awards.appendChild(experiencendiv);
+  experiencendiv.setAttribute("style", "margin-top: 10px");
 }
 
 function createFollowers(follower) {
-
-  let follow= document.createElement("p");
+  let follow = document.createElement("p");
   follow.setAttribute("class", "followers");
   follow.innerHTML = "150";
 
-
-
   follower.appendChild(follow);
 }
-function createFollowing(following){
-  let follows= document.createElement("p");
+function createFollowing(following) {
+  let follows = document.createElement("p");
   follows.setAttribute("class", "following");
   follows.innerHTML = "135";
 
-
-
   following.appendChild(follows);
-
 }
-
-
-
-
-
-
-
-
 
 function createRecommendedConnection(recommended) {
   // let heading = document.createElement("hr");
@@ -640,7 +624,6 @@ function createRecommendedConnection(recommended) {
 
   recommended.appendChild(recommendedUserDiv);
   recommended.appendChild(heading2);
-  
 
   // let recommendedConnections = document.createElement("p");
   // recommendedConnections.setAttribute("class", "recommendedConnections");
@@ -650,7 +633,6 @@ function createRecommendedConnection(recommended) {
 }
 
 function createWhatsNew(newPost) {
-
   let opportunityRole = document.createElement("p");
   opportunityRole.innerHTML = "opportunityRole Role Role";
   opportunityRole.setAttribute("class", "heading3");
@@ -676,5 +658,4 @@ function createWhatsNew(newPost) {
   opportunityDiv.appendChild(opportunityLocation);
 
   newPost.appendChild(opportunityDiv);
-
 }

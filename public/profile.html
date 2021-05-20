@@ -3,18 +3,18 @@
   <head>
     <!-- FAVICON -->
     <link rel="icon" type="image/png" href="res/logo0_colored.png" />
-    
+
     <title>Profile</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="css/Profile.css" />
+    <link rel="stylesheet" href="css/profile-reworked.css" />
     <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/home.css" />
 
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
   </head>
+
   <body onload="loadProfile()">
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
@@ -126,261 +126,147 @@
     </navbar>
 
     <div class="main" id="main">
-      <div class="mobile-menu" onclick="openNav()">
-        <a href="#">
-          <svg viewBox="0 0 24 24" width="100" title="menu">
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M2 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2zm0 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2zm0 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2z"
-            />
-          </svg>
-        </a>
+      <div class="menu-and-search">
+        <div class="mobile-menu" onclick="openNav()">
+          <a href="#">
+            <svg viewBox="0 0 24 24" width="100" title="menu">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M2 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2zm0 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2zm0 6a2 2 0 0 1 2-2h16a2 2 0 1 1 0 4H4a2 2 0 0 1-2-2z"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <div id="above-search" class="search">
+          <form class="search-form">
+            <input id="search-texts" type="search" placeholder="Search" />
+            <button id="search-button"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
       </div>
+    </div>
 
-      <div class="column" id="move">
-        <div id="innerDiv" class="container">
-          <br />
-          <br />
-          <div class="container" id="innermostDiv">
-            <div class="container" id="profileDiv">
-              <br />
+    <div class="flex-main">
+      <div class="column" id="mainmain">
+        <div id="profile-main">
+          <div class="profilepicture profile-column" id="image-column">
+            <img src="images/placeholder.jpg" />
+          </div>
 
-              <br />
-              <h1><span id="name"></span></h1>
-              <br />
+          <div
+            class="profile-details profile-column"
+            id="profile-details-column"
+          >
+            <p class="heading1" id="name">Your name</p>
+            <p class="heading3" id="email" style="font-weight: bold">
+              @your.user.name
+            </p>
+
+            <div id="numbersDiv">
+              <div class="numbers-column" id="numOfPostsDiv">
+                <p class="bodytitle" id="numOfPosts">31</p>
+                <p>Posts</p>
+              </div>
+
+              <div class="numbers-column" id="numOfFollowersDiv">
+                <p class="bodytitle" id="numOfFollowers">515</p>
+                <p>Followers</p>
+              </div>
+
+              <div class="numbers-column" id="numOfFollowingDiv">
+                <p class="bodytitle" id="numOfFollowing">231</p>
+                <p>Following</p>
+              </div>
+            </div>
+
+            <div class="profile-buttons-div">
+              <button id="editbtn">Edit Profile</button>
+              <button id="msgbtn">Message</button>
             </div>
           </div>
-          <br />
-        </div>
-        <br />
-        <div id="greyback">
-          <div id="profile">
-            <img width="180" height="200" src="images/profile.png" alt="prof" />
-          </div>
-          <div id="numPosts"></div>
-          <div><h4 id="following">Posts</h4></div>
-          <div id="posts">Followers</div>
-          <div id="followers">Following</div>
-          <div id="postDiv" class="container"></div>
-
-
-        <!-- The Modal -->
-        <div id="followersModal" class="modal">
-
-        <!-- Modal content -->
-        <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
         </div>
 
+        <div id="aboutme">
+          <p class="heading2">About me</p>
         </div>
 
+        <div id="posts-div">
+          <p style="margin-top: 20px; margin-bottom: 10px" class="heading2">
+            Posts
+          </p>
+          <div id="posts"></div>
+        </div>
 
+        <div id="skills">
+          <p style="margin-top: 20px" class="heading2">Skills</p>
+        </div>
 
+        <div id="education">
+          <p style="margin-top: 20px" class="heading2">Education</p>
+        </div>
 
+        <div id="experience">
+          <p style="margin-top: 20px" class="heading2">
+            Work and volunteer experience
+          </p>
+        </div>
 
-
-
-
-
-          <button id="editbtn">Edit Profile</button>
-          <button id="msgbtn">Message</button>
-          <br />
-          <br />
-          <br />
-
-          <!-- The Modal -->
-          <div id="myModal" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-              <div class="modal-header">
-                <span class="close">&times;</span>
-                <h1>Edit Profile</h1>
-              </div>
-              <span>
-                <div class="modal-body">
-                  <h3>Add description for your bio</h3>
-                  <textarea> </textarea>
-              <div id="buttons">
-                <button id="addskills" onclick="addSkills()">Add skills</buton>
-
-                <button id="addedu" onclick="addEducation()"
-                  >Add education</buton
-                >
-
-                <button id="addexp" onclick="addExperience()"
-                  >Add experience</buton
-                >
-              </div>
-              <div id="button-content"></div>
-              <button id="save">Save</button>
-                </div>
-              </span>
-            </div>
-          </div>
-
-          <h2>About</h2>
-          <div id="aboutme"> </div>
-          <br /><br />
-          <br>
-          <h2>Posts</h2>
-          <br>
-          <br>
-          <div id="posts"> </div>
-          <br /><br /><br /><br />
- 
-
-          <h2>Skills</h2>
-          <div id="skills"></div>
-          <br /><br /><br /><br />
-      
-
-          <h2>Education</h2>
-          <div id="education"></div>
-          <br /><br /><br /><br />
-
-          <h2>Experience</h2>
-          <div id="experience"></div>
-          <br /><br /><br /><br />
-
-          <h2>Awards and Certifications</h2>
-          <div id="awards"></div>
+        <div id="awards">
+          <p style="margin-top: 20px" class="heading2">Awards</p>
         </div>
       </div>
 
       <div class="column" id="sidemain">
         <div class="search">
           <form class="search-form">
-            <input type="text" placeholder="Search" />
-            <button type="submit"><i class="fa fa-search"></i></button>
+            <input id="search-input" type="text" placeholder="Search" />
+            <button id="searchbar" onclick="findUsers()" type="submit">
+              <i class="fa fa-search"></i>
+            </button>
           </form>
         </div>
         <div id="whats-new" class="whats-new">
           <h1 id="whats-new-title">What's new?</h1>
-          <p id="recommended-title">
+          <p id="recommended-title" class="">
             Recommended volunteering opportunities for you
           </p>
           <div id="whats-new-volunteering-opportunities"></div>
-          <a id="view-all" href="">View all volunteering opportunities</a>
         </div>
         <div id="recommended-connections" class="recommended-connections">
           <h1 id="whoto">Who to connect with</h1>
           <div id="recommendedUserDiv"></div>
-          <!-- <a id="view-all" href="">View all recommended connections</a> -->
         </div>
       </div>
     </div>
-
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"
-    ></script>
-
-    <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
-    <script src="js/signup.js"></script>
-
-<script src="js/profile.js"></script>
-<script src="js/signup.js"></script>
-	<script>
-		firebase.auth().onAuthStateChanged(function(user){
-
-
-			if(!user)
-			{
-				window.location.href = "sign-up.html";
-			}
-		});
-  </script>
-  
-
-  <script>
-      // Get the modal
-      var modal = document.getElementById("followersModal");
-      
-      // Get the button that opens the modal
-      var btn = document.getElementById("followers");
-      
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
-      
-      // When the user clicks the button, open the modal 
-      btn.onclick = function() {
-        modal.style.display = "block";
-      }
-      
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function() {
-        modal.style.display = "none";
-      }
-      
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      }
-      </script>
-
-
-
-
-
-
-
-
-
-
-
-    <script>
-      showProfile();
-
-      // Get the modal
-      var modal = document.getElementById("myModal");
-
-      // Get the button that opens the modal
-      var btn = document.getElementById("editbtn");
-
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
-
-      // When the user clicks the button, open the modal
-      btn.onclick = function () {
-        modal.style.display = "block";
-      };
-
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function () {
-        modal.style.display = "none";
-      };
-
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function (event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      };
-    </script>
-
-    <!-- <script>
-      document.getElementById("editbtn").onclick = function () {
-        location.href = "editprofile.html";
-      };
-    </script> -->
   </body>
+
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"
+  ></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
+  <script src="js/signup.js"></script>
+  <script src="js/profile.js"></script>
+  <script>
+    showProfile();
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (!user) {
+        window.location.href = "sign-up.html";
+      }
+    });
+  </script>
 </html>
