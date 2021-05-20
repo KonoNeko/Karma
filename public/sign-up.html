@@ -1,108 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="res/logo0_colored.png" />
 
-<!-- FAVICON -->
-<link rel="icon" type="image/png" href="res/logo0_colored.png" />
+    <title>Sign-up</title>
 
-<title>Sign-up</title>
-        
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
-    
-    
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+      crossorigin="anonymous"
+    ></script>
+
     <!-- MATERIAL DESIGN ICONIC FONT -->
-<link rel="stylesheet" href="css/signup-fonts.css">
-        
-        <!-- STYLE CSS -->
-<link rel="stylesheet" href="css/sign-up.css">
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
-    
+    <link rel="stylesheet" href="css/signup-fonts.css" />
 
-</head>
-<body>
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="css/sign-up.css" />
+    <link rel="stylesheet" href="css/base.css" />
 
-    <div class="wrapper" style="background-color: aliceblue;">
-        <div class="inner">
-            <div class="image-holder">
-                <img src="res/logo0_colored.png" >
-            </div>
-            
-
-            <form action="">
-
-                <h3>Sign up</h3>
-                <div class="form-wrapper">
-                    <input id="email" type="email" placeholder="Email address" class="form-control">
-                    
-                
-                </div>
-                <div class="form-wrapper">
-                    <input id="name" placeholder="Full Name" class="form-control">
-                    
-                
-                </div>
-                <div class="form-wrapper">
-                    <input id="password" type="password" placeholder="Password" class="form-control">
-                    
-                    
-                </div>
-                <div class="form-wrapper">
-                    <input id="confirmPassword" type="password" placeholder="Confirm Password" class="form-control">
-                    
-                    
-                </div>
-                <div class="form-group container-login100-form-btn">
-                    <button id="btn-signup" type="button">
-                        Sign up
-                        
-                    </button>
-                
-                </div>
-                
-                <div class="w-full text-center" style="margin-top: 49%; font-size: 15px;">
-                    <a href="sign-in.html" class="text-dark">
-                        Already have an account?
-                    </a>
-                
-                </div>
-                </form>
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-1.7.1.min.js"
+    ></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+  </head>
+  <body>
+    <div class="wrapper" style="background-color: #eff0f3">
+      <div class="inner">
+        <div class="image-holder">
+          <img src="res/signup.svg" />
         </div>
+
+        <form action="">
+          <p style="color: #eff0f3" class="heading1">Sign up</p>
+          <div class="form-wrapper">
+            <input
+              id="email"
+              type="email"
+              placeholder="Email address"
+              class="form-control"
+            />
+          </div>
+          <div class="form-wrapper">
+            <input id="name" placeholder="Full Name" class="form-control" />
+          </div>
+          <div class="form-wrapper">
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              class="form-control"
+            />
+          </div>
+          <div class="form-wrapper">
+            <input
+              id="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group container-login100-form-btn">
+            <button id="btn-signup" type="button">Sign up</button>
+          </div>
+
+          <div
+            class="w-full text-center"
+            style="margin-top: 49%; font-size: 15px"
+          >
+            <a href="sign-in.html" class="text-dark">
+              Already have an account?
+            </a>
+          </div>
+        </form>
+      </div>
     </div>
-	<script src="js/signup.js"></script>
-	<script>
-		firebase.auth().onAuthStateChanged(function(user){
-            
-            
+    <script src="js/signup.js"></script>
+    <script>
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          window.location.href = "home.html";
+        }
 
-			if(user)
-			{
-                
-				window.location.href = "home.html";
-                
-			}
-
-            var result = firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
-          db.collection('user').doc(cred.user.uid).set({
-          name: $("#name").val(),
-        });
+        var result = firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then((cred) => {
+            db.collection("user")
+              .doc(cred.user.uid)
+              .set({
+                name: $("#name").val(),
+              });
+          });
       });
-
-
-		});
-	</script>
-     
-
-
-
-
-  
-
-    
-</body>
+    </script>
+  </body>
 </html>
