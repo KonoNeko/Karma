@@ -669,14 +669,15 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
  * Gets all conversations for a user
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/profile/following?id=value
+ * https://marlonfajardo.ca/karma/v1/messages?
  */
- app.get(ENDPOINT + '/messages', (req, res) => {
+ app.get(ENDPOINT + '/messages/:id', (req, res) => {
     const userID = req.params.id;
     const sql = `CALL view_conversations('${userID}');`;
     db.query(sql, (err, result) => {
         if (err) throw err;
-        res.end(JSON.stringify(result[0]));
+        let conversations = filter.conversations(result[0]);
+        res.end(JSON.stringify(conversations));
     });
 });
 
