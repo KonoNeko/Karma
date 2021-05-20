@@ -59,20 +59,13 @@ textarea {
 
 
 .create-post-container {
-  display: flex;
+  position: fixed;
+  display: none;
 }
 
 .profilepicture > img {
   width: 70px !important;
   height: 70px !important;
-}
-
-.newCaption {
-  width: 100%;
-  background-color: #eff0f3;
-  border-radius: 12px;
-  margin-left: 20px;
-  padding: 20px;
 }
 
 textarea {

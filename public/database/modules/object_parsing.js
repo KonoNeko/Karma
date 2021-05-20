@@ -76,7 +76,7 @@ function fillCertifications(object) {
 
 function fillComments(object, currentPost) {
     let comment_keys = ['comment_id', 'post_id', 'user_id', 'comment', 
-    'is_a_reply', 'id_of_comment_receiving_reply', 'comment_date'];
+    'is_a_reply', 'id_of_comment_receiving_reply', 'comment_date', 'commenter_profile_pic', 'comment_poster'];
     let comments = {};
     let commentNum = 0;
     for (let i=0; i<object.length; i++) {

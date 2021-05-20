@@ -21,7 +21,9 @@ const result = [
   "comment": "Glad to see you active in your community!",
   "is_a_reply": 0,
   "id_of_comment_receiving_reply": null,
-  "comment_date": "2021-05-11T06:52:31.000Z"
+  "comment_date": "2021-05-11T06:52:31.000Z",
+  "commenter_profile_pic": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+  "comment_poster": "Karma"
   },
   "totalComments": 1
   }
@@ -46,6 +48,8 @@ const result = [
   "is_a_reply": 0,
   "id_of_comment_receiving_reply": null,
   "comment_date": "2021-05-13T05:23:39.000Z",
+  "commenter_profile_pic": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+  "comment_poster": "Karma",
   "replies": {
   "14": {
   "comment_id": 14,
@@ -54,7 +58,9 @@ const result = [
   "comment": "Yeah same",
   "is_a_reply": 1,
   "id_of_comment_receiving_reply": 10,
-  "comment_date": "2021-05-13T06:07:11.000Z"
+  "comment_date": "2021-05-13T06:07:11.000Z",
+  "commenter_profile_pic": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+  "comment_poster": "marlon"
   }
   }
   },
@@ -85,19 +91,22 @@ function formatTimestamp(timestamp) {
 
 function returnHighestTimeDiff(time) {
   let ms = {
-    y: 31536000000,
-    w: 604800000,
-    d: 86400000,
-    h: 3600000,
-    m: 60000,
-  }
+    year: 31536000000,
+    week: 604800000,
+    day: 86400000,
+    hour: 3600000,
+    minute: 60000,
+  };
   let diff = Date.now() - time;
-  for(let [key, value] of Object.entries(ms)) {
-      if (diff > value) {
-          return `${Math.floor(diff/value)}${key}`;
-      } else if (diff < ms.m) {
-        return "Just now";
-      }
+  for (let [key, value] of Object.entries(ms)) {
+    if (diff > value) {
+      let time = Math.floor(diff / value);
+      let result = `${time} ${key}`;
+      result += time > 1 ? "s ago" : " ago";
+      return result;
+    } else if (diff < ms.minute) {
+      return "Just now";
+    }
   }
 }
 
@@ -233,12 +242,9 @@ function createStory(stories) {
   stories.appendChild(storyDiv);
 }
 
-function createPostModal(postObj) {
-  // TODO
-}
-
 
 function createPost(postObj) {
+  createModal(postObj);
   const posts = document.getElementById("posts");
   const post = document.createElement("div");
   post.className = "post";
@@ -252,20 +258,17 @@ function createPost(postObj) {
   postImgDiv.setAttribute("class", "profilepic topPartDivColumn topPartDivImg");
   postImgDiv.setAttribute("style", "padding-bottom: 10px");
 
-  postImgDiv.setAttribute(
-    "style",
-    `background-image: url('${postObj["post_info"]["profile_pic_url"]}');
-     background-color: #FFFFFF;`
-  );
+  postImgDiv.style.backgroundImage = `url('${postObj.post_info.profile_pic_url}')`;
+  postImgDiv.style.backgroundColor = "#FFFFFF";
 
   let nameAndTimeDiv = document.createElement("div");
   nameAndTimeDiv.setAttribute("class", "name-and-time topPartDivColumn");
 
   let userName = document.createElement("p");
   userName.setAttribute("class", "userName");
-  userName.innerHTML = postObj["post_info"]["username"];
+  userName.innerHTML = postObj.post_info.username;
 
-  let dateObj = formatTimestamp(postObj["post_info"]["post_date"]);
+  let dateObj = formatTimestamp(postObj.post_info.post_date);
   let timePosted = document.createElement("p");
   timePosted.setAttribute("class", "timePosted");
   timePosted.innerHTML = dateObj;
@@ -282,8 +285,9 @@ function createPost(postObj) {
   picture.setAttribute("class", "postpicture");
   picture.setAttribute(
     "style",
-    `background-image: url('${postObj["post_info"]["image_url"]}')`
+    `background-image: url('${postObj.post_info.image_url}')`
   );
+  picture.onclick = function() { displayModal(postObj.post_info.post_id) };
   post.appendChild(picture);
 
   let captionAndComments = document.createElement("div");
@@ -295,8 +299,8 @@ function createPost(postObj) {
   caption.setAttribute("class", "caption");
   comments.setAttribute("class", "comments");
 
-  likes.innerHTML = `${postObj["post_info"]["likes"]} likes`;
-  caption.innerHTML = `${postObj["post_info"]["caption"]}`;
+  likes.innerHTML = (postObj.post_info.likes != 1) ? `${postObj.post_info.likes} likes` : `${postObj.post_info.likes} like`;
+  caption.innerHTML = `${postObj.post_info.caption}`;
   comments.innerHTML = `View all ${postObj.comments.totalComments} comments`;
 
   post.appendChild(likes);
@@ -396,77 +400,269 @@ function createWhatsNew(newPost) {
   opportunityDiv.appendChild(opportunityLocation);
 
   newPost.appendChild(opportunityDiv);
-
-  // let mainDiv = document.createElement("div");
-  // mainDiv.setAttribute("class", "mainDiv");
-
-  // let firstDiv = document.createElement("div");
-  // firstDiv.setAttribute("class", "postDiv");
-
-  // let firstDivPicture = document.createElement("div");
-  // firstDivPicture.setAttribute("class", "postpicture firstDivPicture");
-  // firstDivImg = document.createElement("img");
-  // firstDivImg.src = "./images/placeholder.jpg";
-  // firstDivPicture.appendChild(firstDivImg);
-  // newPost.appendChild(firstDivPicture);
-
-  // let firstDivLocation = document.createElement("p");
-  // firstDivLocation.setAttribute("class", "divLocation");
-  // firstDivLocation.innerHTML = "Burnaby Library";
-  // firstDiv.appendChild(firstDivLocation);
-
-  // let firstDivPosition = document.createElement("p");
-  // firstDivPosition.setAttribute("class", "divPosition");
-  // firstDivPosition.innerHTML = "Languages Tutor";
-  // firstDiv.appendChild(firstDivPosition);
-
-  // let secondDiv = document.createElement("div");
-  // secondDiv.setAttribute("class", "postDiv");
-
-  // let secondDivPicture = document.createElement("div");
-  // secondDivPicture.setAttribute("class", "postpicture");
-  // secondDivPicture.setAttribute(
-  //   "style",
-  //   "background-image: url('./images/placeholder.jpg')"
-  // );
-  // newPost.appendChild(secondDivPicture);
-
-  // let secondDivLocation = document.createElement("p");
-  // secondDivLocation.setAttribute("class", "divLocation");
-  // secondDivLocation.innerHTML = "Burnaby Library";
-  // firstDiv.appendChild(secondDivLocation);
-
-  // let secondDivPosition = document.createElement("p");
-  // secondDivPosition.setAttribute("class", "divPosition");
-  // secondDivPosition.innerHTML = "Languages Tutor";
-  // secondDiv.appendChild(secondDivPosition);
-
-  // let thirdDiv = document.createElement("div");
-  // thirdDiv.setAttribute("class", "postDiv");
-
-  // let thirdDivPicture = document.createElement("div");
-  // thirdDivPicture.setAttribute("class", "postpicture");
-  // thirdDivPicture.setAttribute(
-  //   "style",
-  //   "background-image: url('./images/placeholder.jpg')"
-  // );
-  // newPost.appendChild(thirdDivPicture);
-
-  // let thirdDivLocation = document.createElement("p");
-  // thirdDivLocation.setAttribute("class", "divLocation");
-  // thirdDivLocation.innerHTML = "Burnaby Library";
-  // thirdDiv.appendChild(thirdDivLocation);
-
-  // let thirdDivPosition = document.createElement("p");
-  // thirdDivPosition.setAttribute("class", "divPosition");
-  // thirdDivPosition.innerHTML = "Languages Tutor";
-  // thirdDiv.appendChild(thirdDivPosition);
-
-  // mainDiv.appendChild(firstDiv);
-  // mainDiv.appendChild(secondDiv);
-  // mainDiv.appendChild(thirdDiv);
-
-  // newPost.appendChild(mainDiv);
 }
 
+function createModal(postObj) {
+  let overlay = document.getElementById("modalOverlay");
+
+  let post = postObj.post_info;
+  let comments = postObj.comments;
+
+  let modal = document.createElement("div");
+  modal.className = "postModal";
+  modal.id = "post" + post.post_id;
+  modal.style.display = "none";
+
+  let leftSideDiv = document.createElement("div");
+  leftSideDiv.id = "postPicture" + post.post_id;
+  leftSideDiv.className = "leftDiv";
+
+  let rightSideDiv = document.createElement("div");
+  rightSideDiv.id = "rightDiv" + post.post_id;
+  rightSideDiv.className = "rightDiv";
+
+  let postDetails = document.createElement("div");
+  postDetails.id = "postOwnerTitle" + post.post_id;
+  postDetails.className = "postOwnerTitle";
+
+  let profilePic = document.createElement("div");
+  profilePic.id = "postOwnerProfilePic" + post.post_id;
+  profilePic.className = "profilepic";
+
+  let nameAndTime = document.createElement("div");
+  nameAndTime.id = "nameAndTimeDiv" + post.post_id;
+  nameAndTime.className = "nameAndTimeDiv";
+
+  let username = document.createElement("p");
+  username.id = "postOwnerUsername" + post.post_id;
+
+  let time = document.createElement("p");
+  time.id = "timePosted" + post.post_id;
+  
+  nameAndTime.appendChild(username);
+  nameAndTime.appendChild(time);
+
+  postDetails.appendChild(profilePic);
+  postDetails.appendChild(nameAndTime);
+  rightSideDiv.appendChild(postDetails);
+
+  let line = createLine();
+  line.id = "lineAfterPostDetails";
+  rightSideDiv.appendChild(line);
+
+  let commentList = document.createElement("div");
+  commentList.id = "commentList" + post.post_id;
+  commentList.className = "commentList";
+
+  let captionDiv = loadCaption(
+    post.profile_pic_url, 
+    post.username,
+    post.caption);
+  rightSideDiv.appendChild(captionDiv);
+  rightSideDiv.appendChild(createLine());
+
+  rightSideDiv.appendChild(commentList);
+  rightSideDiv.appendChild(createLine());
+
+  let interactionDiv = document.createElement("div");
+  interactionDiv.id = "interactionDiv" + post.post_id;
+
+  let interactionButtons = document.createElement("div");
+  interactionButtons.id = "interactionButtons" + post.post_id;
+
+  let likesLine = document.createElement("p");
+  likesLine.innerHTML = (post.likes > 1) ? `${post.likes} users like this` : `${post.likes} user likes this`;
+
+  let commentForm = document.createElement("form");
+  commentForm.className = "commentForm";
+  
+  let commentInput = document.createElement("input");
+  commentInput.type = "text";
+  commentInput.placeholder = "Add a comment...";
+
+  let commentSubmit = document.createElement("button");
+  commentSubmit.type = "submit";
+  commentSubmit.innerText = "Post";
+
+  commentForm.appendChild(commentInput);
+  commentForm.appendChild(commentSubmit);
+
+  interactionDiv.appendChild(interactionButtons);
+  interactionDiv.appendChild(likesLine);
+  interactionDiv.appendChild(commentForm);
+  rightSideDiv.appendChild(interactionDiv);
+
+  modal.appendChild(leftSideDiv);
+  modal.appendChild(rightSideDiv);
+
+
+  overlay.appendChild(modal);
+
+  displayPost(post.image_url, post.post_id);
+  displayPostDetails(
+    post.username, formatTimestamp(post.post_date), post.profile_pic_url, post.post_id
+  );
+  displayComments(comments, post.post_id);
+}
+
+function hideModal(id) {
+  document.getElementById("postModalBackground").style.display = "none";
+  document.getElementById("post" + id).style.display = "none";
+}
+
+function displayModal(id) {
+  document.getElementById("postModalBackground").style.display = "block";
+  document.getElementById("postModalBackground").onclick = () => { hideModal(id) };
+  document.getElementById("post" + id).style.display = "flex";
+}
+
+
+function displayPost(img, id) {
+  let postImage = document.getElementById("postPicture" + id);
+  postImage.style.backgroundImage = `url('${img}')`;
+}
+
+function displayPostDetails(username, time, img, id) {
+  let postOwnerTitle = document.getElementById("postOwnerTitle" + id);
+
+  let posterProfilePic = document.getElementById("postOwnerProfilePic" + id);
+  posterProfilePic.style.backgroundImage = `url('${img}')`;
+
+  let nameAndTimeDiv = document.getElementById("nameAndTimeDiv" + id);
+  let userName = document.getElementById("postOwnerUsername" + id);
+  userName.innerHTML = username;
+  let timePosted = document.getElementById("timePosted" + id);
+  timePosted.innerHTML = time;
+  nameAndTimeDiv.appendChild(userName);
+  nameAndTimeDiv.appendChild(timePosted);
+
+  postOwnerTitle.appendChild(posterProfilePic);
+  postOwnerTitle.appendChild(nameAndTimeDiv);
+}
+
+
+function createLine() {
+  let line = document.createElement("hr");
+  line.className = "comment-hr";
+  return line;
+}
+
+function createComment(profilePic, username, comment, timestamp, commentID) {
+  let commentDiv = document.createElement("div");
+  commentDiv.className = "comment";
+  commentDiv.id = commentID;
+
+  let profilePicDiv = document.createElement("div");
+  profilePicDiv.setAttribute("class", "profilepic");
+  profilePicDiv.setAttribute("style", `background-image: url('${profilePic}')`);
+
+  let commentBody = document.createElement("div");
+  commentBody.className = "commentBody";
+
+  let commentParagraph = createCommentParagraph(username, comment);
+
+  let timeAndReply = document.createElement("div");
+  let commentTime = document.createElement("span");
+  commentTime.setAttribute("class", "timeAndReply");
+  commentTime.innerHTML = timestamp;
+  let replyButton = document.createElement("span");
+  replyButton.setAttribute("class", "timeAndReply");
+  replyButton.innerHTML = "Reply";
+  replyButton.id = commentID;
+  timeAndReply.appendChild(commentTime);
+  timeAndReply.appendChild(replyButton);
+
+  commentBody.appendChild(commentParagraph);
+  commentBody.appendChild(timeAndReply);
+
+  commentDiv.appendChild(profilePicDiv);
+  commentDiv.appendChild(commentBody);
+
+  return commentDiv;
+}
+
+
+function createCommentParagraph(username, comment) {
+  let commentParagraph = document.createElement("p");
+  commentParagraph.className = "commentParagraph";
+  let commentUserName = document.createElement("span");
+  commentUserName.setAttribute("class", "commentUsername");
+  commentUserName.innerHTML = username;
+
+  let emptySpace = document.createElement("span");
+  emptySpace.innerText = " ";
+
+  let commentTxt = document.createElement("span");
+  commentTxt.setAttribute("class", "commentTxt");
+  commentTxt.innerHTML = comment;
+
+  commentParagraph.appendChild(commentUserName);
+  commentParagraph.appendChild(emptySpace);
+  commentParagraph.appendChild(commentTxt);
+
+  return commentParagraph;
+}
+
+
+function loadCaption(profilePic, username, caption) {
+  let captionDiv = document.createElement("div");
+  captionDiv.className = "comment";
+  captionDiv.id = "caption";
+
+  let captionImg = document.createElement("div");
+  captionImg.setAttribute("class", "profilepic");
+  captionImg.setAttribute("style", `background-image: url('${profilePic}')`);
+
+  let captionParagraph = createCommentParagraph(username, caption);
+
+  captionDiv.appendChild(captionImg);
+  captionDiv.appendChild(captionParagraph);
+
+  return captionDiv;
+}
+
+
+function displayComments(comments, id) {
+  let commentsDiv = document.getElementById("commentList" + id);
+  if (JSON.stringify(comments) != "{}") {
+    for (const id of Object.keys(comments)) {
+      if (id != "totalComments") {
+        let currentComment = createComment(
+          comments[id].commenter_profile_pic,
+          comments[id].comment_poster,
+          comments[id].comment,
+          formatTimestamp(comments[id].comment_date), id);
+        commentsDiv.appendChild(currentComment);
+      }
+      
+    }
+  }
+  
+  // let captionDiv = loadCaption(placeholderImg, "Username", "This is a caption.");
+  // commentsDiv.appendChild(captionDiv);
+  // commentsDiv.appendChild(createLine());
+  // let comment1 = createComment(placeholderImg, "username", "This is a comment", "now", 1);
+  // let comment2 = createComment(placeholderImg, "username", "This is a comment", "5min", 2);
+  // let comment3 = createComment(placeholderImg, "username", "This is a comment", "10min", 3);
+  // let comment4 = createComment(placeholderImg, "username", "This is a comment", "15min", 4);
+  // let comment5 = createComment(placeholderImg, "username", "This is a comment", "20min", 5);
+  // let comment6 = createComment(placeholderImg, "username", "This is a comment", "20min", 6);
+  // let comment7 = createComment(placeholderImg, "username", "This is a comment", "20min", 7);
+  // let comment8 = createComment(placeholderImg, "username", "This is a comment", "20min", 8);
+
+  
+  
+  // commentsDiv.appendChild(comment1);
+  // commentsDiv.appendChild(comment2);
+  // commentsDiv.appendChild(comment3);
+  // commentsDiv.appendChild(comment4);
+  // commentsDiv.appendChild(comment5);
+  // commentsDiv.appendChild(comment6);
+  // commentsDiv.appendChild(comment7);
+  // commentsDiv.appendChild(comment8);
+}
+
+
+
 loadHome();
+displayModal(1);
