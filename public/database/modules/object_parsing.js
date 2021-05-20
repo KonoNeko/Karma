@@ -177,12 +177,13 @@ function fillConversations(object) {
     "other_user_profile_pic", "latest_message", "latest_message_timestamp", "has_unread_messages"];
 
     for (let i=0; i<object.length; i++) {
+        let currentTime = object[i].latest_message_timestamp;
         let currentID = object[i].conversation_id;
-        if (!conversations[currentID]) {
+        if (!conversations[currentTime]) {
             // If current conversation doesn't exist
             let currentConversation = filterObject(object[i], convo_keys);
             currentConversation.messages = fillMessages(object, currentID);
-            conversations[currentID] = currentConversation;
+            conversations[currentTime] = currentConversation;
         }
     }
     return conversations

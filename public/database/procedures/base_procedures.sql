@@ -333,7 +333,7 @@ BEGIN
     FROM conversations con JOIN messages m ON (con.conversation_id = m.conversation_id)
     WHERE con.user_id_1 = get_user_id(current_username)
     OR con.user_id_2 = get_user_id(current_username)
-    ORDER BY m.timestamp;
+    ORDER BY latest_message_timestamp DESC, m.timestamp;
 END//
 DELIMITER ;
 
