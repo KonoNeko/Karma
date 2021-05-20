@@ -27,7 +27,7 @@ app.get(ENDPOINT + '/posts', (req, res) => {
     const sql = "CALL site_wide_posts_feed();";
     db.query(sql, (err, result) => {
         if (err) throw err;
-        let posts = filter.posts(result);
+        let posts = filter.posts(result[0]);
         res.end(JSON.stringify(posts));
     });
 });
@@ -612,7 +612,7 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
  * Gets all applicants for an opportunity.
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1//opportunities/applicants?id=value
+ * https://marlonfajardo.ca/karma/v1/opportunities/applicants?id=value
  */
  app.get(ENDPOINT + '/opportunities/applicants', (req, res) => {
     const opportunityID = req.query.id;
@@ -774,8 +774,8 @@ DONEq) Get profiles info (GET - get_profile_info)                   TESTED      
 DONEq) Create new profile (GET - create_new_profile)                TESTED      DOCUMENTED(3)
 
 -Bulletin Board
-DONEa) View all opportunities (GET - bulletin_board)                TESTED
-DONEb) Post new opportunity (POST - new_opportunity)                TESTED
+DONEa) View all opportunities (GET - bulletin_board)                TESTED      DOCUMENTED(21)
+DONEb) Post new opportunity (POST - new_opportunity)                TESTED      DOCUMENTED(22)
 DONEc) Apply to opportunity (POST - apply_for_opportunity)          TESTED
 DONEd) View applicants (GET - view_applicants)                      TESTED
 DONEe) View opportunites applied for (GET - view_user_applications) TESTED
@@ -794,9 +794,9 @@ DONEh) View social feed for a user (GET - user_posts_feed)          TESTED      
 DONEi) Delete comment - (DELETE - delete_comment)                   TESTED
 
 -Messages
-DONEa) View messages in conversation (GET - view_a_conversations)   TESTED
-DONEb) Send message to another user (POST - send_message)           TESTED
-DONEc) View all conversations for a user (GET - view_conversations) TESTED
+DONEa) View messages in conversation (GET - view_a_conversations)   TESTED      DOCUMENTED(22)
+DONEb) Send message to another user (POST - send_message)           TESTED      DOCUMENTED(24)
+DONEc) View all conversations for a user (GET - view_conversations) TESTED      DOCUMENTED(23)
 
 -Notifications
 DONEa) View all notifications (GET - view_notifications)            TESTED

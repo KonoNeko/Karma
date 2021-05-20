@@ -62,7 +62,7 @@
 
 /* Modal Content */
 .modal-content {
-  position: absolute;
+  position: fixed;
   background-color: #fefefe;
   border-radius: 12px;
   margin: auto;
@@ -90,8 +90,8 @@
 
 .modal-img {
   width: 60%;
-  /* background-image: url("../images/placeholder1.png"); */
-  background-size: 100%;
+  background-position: 50% 50%;
+  background-size: auto 100%;
 }
 
 .modal-text {
@@ -144,10 +144,6 @@
   .bodytext {
     width: 100%;
     padding-right: 10px;
-  }
-
-  .modal-content {
-    display: block;
   }
 
   .modal-column {

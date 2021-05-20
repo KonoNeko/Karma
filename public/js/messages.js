@@ -1,3 +1,60 @@
+const BASE_URL = "https://marlonfajardo.ca/karma/v1";
+
+function formatTimestamp(timestamp) {
+  let dateObj = new Date(Date.parse(timestamp));
+  return returnHighestTimeDiff(dateObj);
+}
+
+function returnHighestTimeDiff(time) {
+  let ms = {
+    year: 31536000000,
+    week: 604800000,
+    day: 86400000,
+    hour: 3600000,
+    minute: 60000,
+  };
+  let diff = Date.now() - time;
+  for (let [key, value] of Object.entries(ms)) {
+    if (diff > value) {
+      let time = Math.floor(diff / value);
+      let result = `${time} ${key}`;
+      result += time > 1 ? "s ago" : " ago";
+      return result;
+    } else if (diff < ms.minute) {
+      return "Just now";
+    }
+  }
+}
+
+function view_messages(userID) {
+  const method = "GET";
+  const endpoint = "/messages";
+  const params = `/${userID}`;
+  const url = BASE_URL + endpoint + params;
+  APIRequest(method, url); 
+}
+
+
+function APIRequest(method, url) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          let result = JSON.parse(this.responseText);
+          console.log("loading post");
+          console.log(result);
+          for (let i=0; i<result.length; i++) {
+              createPost(result[i]);
+          }
+          
+      }
+  }
+}
+
+
+
 let width =
   window.innerWidth ||
   document.documentElement.clientWidth ||

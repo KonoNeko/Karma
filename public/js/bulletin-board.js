@@ -334,21 +334,21 @@ function loadModal(oppObj) {
   content.appendChild(textDiv);
 
   modal.appendChild(content);
-  document.getElementById("myModal").onclick = function () {
-    hideModal(oppObj.opportunity_id);
-  };
 }
 
 function displayModal(id) {
   var modal = document.getElementById("myModal");
+  modal.onclick = function () {
+    hideModal(id);
+  }
   var content = document.getElementById("modal" + id);
   modal.style.display = "block";
   content.style.display = "flex";
 }
 
 function hideModal(id) {
-  console.log("closing" + id);
   var modal = document.getElementById("myModal");
+  modal.onclick = null;
   var content = document.getElementById("modal" + id);
   modal.style.display = "none";
   content.style.display = "none";
