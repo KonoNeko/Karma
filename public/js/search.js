@@ -1,6 +1,6 @@
 const URL = "https://marlonfajardo.ca/karma/v1/profiles"
 const method = "GET"
-// let users = [];
+
 //@return list of users
 async function  getUsers(){
     // fetch(URL).then(data=>{
@@ -29,7 +29,7 @@ function findUsers(){
         }
     });
 }
-
+findUsers()
 // document.getElementById("search-button").addEventListener("click",  function () {
 //     // let targetUser = document.getElementById("search-texts").value;
 //     let targetUser = "marlon";
