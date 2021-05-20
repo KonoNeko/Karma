@@ -1,5 +1,28 @@
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
+let width =
+  window.innerWidth ||
+  document.documentElement.clientWidth ||
+  document.body.clientWidth;
+
+let height =
+  window.innerHeight ||
+  document.documentElement.clientHeight ||
+  document.body.clientHeight;
+
+window.onresize = function () {
+  location.reload();
+  width =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+
+  height =
+    window.innerHeight ||
+    document.documentElement.clientHeight ||
+    document.body.clientHeight;
+};
+
 function view_profile(userID) {
   const method = "GET";
   const endpoint = "/profile/karma";
@@ -142,6 +165,8 @@ function showImages() {
 
 // WINDOW ONLOAD FUNCTION FOR THE PROFILE PAGE
 function loadProfile() {
+  console.log(width);
+  console.log(height);
   loadAboutMe();
   loadPosts();
   loadNumPosts();
@@ -150,8 +175,8 @@ function loadProfile() {
   loadExperience();
   loadAwards();
   loadProfilepic();
-  loadFollowers();
-  loadFollowing();
+  // loadFollowers();
+  // loadFollowing();
   loadWhatsNew();
   loadRecommendedConnections();
 }
@@ -570,6 +595,7 @@ function createFollowers(follower) {
 
   follower.appendChild(follow);
 }
+
 function createFollowing(following) {
   let follows = document.createElement("p");
   follows.setAttribute("class", "following");
