@@ -1,5 +1,67 @@
 Base API Url: "https://marlonfajardo.ca/karma/v1"
 
+
+
+------- SENDING / RETRIEVING API DATA -------
+
+1) Every time we send or retrieve data from the api, we use this function
+    * Copy APIRequest() and BASE_RUL into the javascript file you are using
+
+        const BASE_URL = "https://marlonfajardo.ca/karma/v1"; // global variable
+        function APIRequest(method, url) {
+            console.log(method + ": " + url);
+            const xhttp = new XMLHttpRequest();
+            xhttp.open(method, url, true);
+            xhttp.send();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    let result = JSON.parse(this.responseText);
+                    console.log(result);
+                    return result;
+                }
+            }
+        }
+
+
+2)  Next, create a function that calls APIRequest
+    Use the API DOCUMENTATION to fill out this function:
+
+        function function_name(parameters) {
+            const method = METHOD;
+            const endpoint = ENDPOINT;
+            const params = formatParams({
+                "param_name": parameters
+            });
+            const url = BASE
+        }
+
+    * EXAMPLE: creating a new profile (#3 in API DOCUMENTATION) 
+
+        function createNewProfile(userID, fullname, isVolunteer) {
+            const method = "POST";
+            const endpoint = "/profiles";
+            const params = formatParams({
+                "id": userID,
+                "name": fullname,
+                "isVolunteer": isVolunteer
+            });
+            const url = BASE_URL + endpoint + params;
+
+            APIRequest(method, url);
+        }
+
+
+3)  Testing isn't possible if it isn't hosted, so just put it in the #homework-help
+    discord channel and @ Marlon for him to test
+
+
+
+
+
+
+------------- API DOCUMENTATION -------------
+
+
 DOCUMENTATION FORMAT
 #)  CATEGORY: Description
     Additional Details
@@ -328,4 +390,38 @@ DOCUMENTATION FORMAT
         NONE
 
     Example URL of the request (replace 'name' with an actual value):
-        https://marlonfajardo.ca/karma/v1/profiles    
+        https://marlonfajardo.ca/karma/v1/profiles
+
+
+21) BULLETIN BOARD: View all opportunites
+    Gets a list of all opportunities sorted by category
+    
+    ENDPOINT:   /opportunities
+
+    METHOD:     GET
+
+    PARAMS:
+        NONE
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/opportunities
+
+
+21) BULLETIN BOARD: View all opportunites
+    Gets a list of all opportunities sorted by category
+    
+    ENDPOINT:   /opportunities
+
+    METHOD:     POST
+
+    PARAMS:
+        id          string:
+        category    string:
+        date        string:
+        title       string:
+        desc        string:
+        requires    string:
+        img         string:
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/opportunities

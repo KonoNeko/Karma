@@ -612,7 +612,7 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
  * Gets all applicants for an opportunity.
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1//opportunities/applicants?id=value
+ * https://marlonfajardo.ca/karma/v1/opportunities/applicants?id=value
  */
  app.get(ENDPOINT + '/opportunities/applicants', (req, res) => {
     const opportunityID = req.query.id;
@@ -774,8 +774,8 @@ DONEq) Get profiles info (GET - get_profile_info)                   TESTED      
 DONEq) Create new profile (GET - create_new_profile)                TESTED      DOCUMENTED(3)
 
 -Bulletin Board
-DONEa) View all opportunities (GET - bulletin_board)                TESTED
-DONEb) Post new opportunity (POST - new_opportunity)                TESTED
+DONEa) View all opportunities (GET - bulletin_board)                TESTED      DOCUMENTED(21)
+DONEb) Post new opportunity (POST - new_opportunity)                TESTED      DOCUMENTED(22)
 DONEc) Apply to opportunity (POST - apply_for_opportunity)          TESTED
 DONEd) View applicants (GET - view_applicants)                      TESTED
 DONEe) View opportunites applied for (GET - view_user_applications) TESTED
