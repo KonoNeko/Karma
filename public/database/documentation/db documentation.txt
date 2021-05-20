@@ -407,21 +407,67 @@ DOCUMENTATION FORMAT
         https://marlonfajardo.ca/karma/v1/opportunities
 
 
-21) BULLETIN BOARD: View all opportunites
-    Gets a list of all opportunities sorted by category
+21) BULLETIN BOARD: Creates a new opportunity
+    Creates a new volunteer opportunity with all needed details
     
     ENDPOINT:   /opportunities
 
     METHOD:     POST
 
     PARAMS:
-        id          string:
-        category    string:
-        date        string:
-        title       string:
-        desc        string:
-        requires    string:
-        img         string:
+        id          string: The current username
+        category    string: The category of the opportunity
+        date        string: The day the event takes place format YYY-MM-DD
+        title       string: The job title
+        desc        string: The job description
+        requires    string: The requirements of the job
+        img         string: The image url of the opportunity (ex. www.website.ca/image.jpg)
 
     Example URL of the request (replace 'value' with an actual value):
         https://marlonfajardo.ca/karma/v1/opportunities
+
+
+22)  MESSAGES: View messages in a conversation
+    Gets the list of messages for a single conversation
+    
+    ENDPOINT:   /messages/{id}/{convo}
+
+    METHOD:     GET
+
+    PARAMS:
+        id          string: The current username
+        convo       string: The id of the conversation (in the database)
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/messages/value/value
+
+
+23)  MESSAGES: View list of conversations.
+    Gets the list of all conversations that a user has
+    
+    ENDPOINT:   /messages
+
+    METHOD:     GET
+
+    PARAMS:
+        id          string: The current username
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/messages?id=value
+    
+
+24)  MESSAGES: Send another user a message
+    Sends a message from the current user to another given user
+    
+    ENDPOINT:   /messages
+
+    METHOD:     POST
+
+    PARAMS:
+        id          string: The current username
+        receiver    string: The username of person receiving messsage
+        msg         string: The actual message being sent
+
+    Example URL of the request (replace 'value' with an actual value):
+        https://marlonfajardo.ca/karma/v1/messages?id=value&receiver=value&msg=value
+    

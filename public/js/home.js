@@ -1,6 +1,83 @@
 
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
+const result = [
+  {
+  "post_info": {
+  "post_id": 1,
+  "image_url": "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
+  "caption": "This is the church I used to volunteer at, St. Mary's Parish! Always a blast with all the people I volunteer with.",
+  "location": "St. Mary's Parish",
+  "post_date": "2021-05-03T21:29:36.000Z",
+  "likes": 2,
+  "username": "marlon",
+  "profile_pic_url": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png"
+  },
+  "comments": {
+  "3": {
+  "comment_id": 3,
+  "post_id": 1,
+  "user_id": 1,
+  "comment": "Glad to see you active in your community!",
+  "is_a_reply": 0,
+  "id_of_comment_receiving_reply": null,
+  "comment_date": "2021-05-11T06:52:31.000Z"
+  },
+  "totalComments": 1
+  }
+  },
+  {
+  "post_info": {
+  "post_id": 2,
+  "image_url": "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
+  "caption": "Volunteering at the sun run was so fun! Can't wait until the day they are able to hold another!",
+  "location": "BC Place",
+  "post_date": "2021-05-04T01:06:34.000Z",
+  "likes": 1,
+  "username": "marlon",
+  "profile_pic_url": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png"
+  },
+  "comments": {
+  "10": {
+  "comment_id": 10,
+  "post_id": 2,
+  "user_id": 1,
+  "comment": "We miss the sun run :(",
+  "is_a_reply": 0,
+  "id_of_comment_receiving_reply": null,
+  "comment_date": "2021-05-13T05:23:39.000Z",
+  "replies": {
+  "14": {
+  "comment_id": 14,
+  "post_id": 2,
+  "user_id": 1,
+  "comment": "Yeah same",
+  "is_a_reply": 1,
+  "id_of_comment_receiving_reply": 10,
+  "comment_date": "2021-05-13T06:07:11.000Z"
+  }
+  }
+  },
+  "totalComments": 2
+  }
+  },
+  {
+  "post_info": {
+  "post_id": 4,
+  "image_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+  "caption": "Welcome to Karma! Use our platform share your experiences with volunteering, find opportunites near you, or network with other community members!",
+  "location": "",
+  "post_date": "2021-05-04T02:58:03.000Z",
+  "likes": 1,
+  "username": "Karma",
+  "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png"
+  },
+  "comments": {
+  "totalComments": 0
+  }
+  }
+];
+
 function formatTimestamp(timestamp) {
   let dateObj = new Date(Date.parse(timestamp));
   return returnHighestTimeDiff(dateObj);
@@ -29,27 +106,29 @@ function view_social_feed(userID) {
   const endpoint = "/posts";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  APIRequest(method, url); 
-}
-
-
-function APIRequest(method, url) {
-  console.log(method + ": " + url);
-  const xhttp = new XMLHttpRequest();
-  xhttp.open(method, url, true);
-  xhttp.send();
-  xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-          let result = JSON.parse(this.responseText);
-          console.log("loading post");
-          console.log(result);
-          for (let i=0; i<result.length; i++) {
-              createPost(result[i]);
-          }
-          
-      }
+  for (let i=0; i<result.length; i++) {
+    createPost(result[i]);
   }
+  // APIRequest(method, url); 
 }
+
+
+// function APIRequest(method, url) {
+//   console.log(method + ": " + url);
+//   const xhttp = new XMLHttpRequest();
+//   xhttp.open(method, url, true);
+//   xhttp.send();
+//   xhttp.onreadystatechange = function () {
+//       if (this.readyState == 4 && this.status == 200) {
+//         if (result.length == 0) {
+//           // createBlankHomePage()
+//         }
+//         for (let i=0; i<result.length; i++) {
+//             createPost(result[i]);
+//         }
+//       }
+//   }
+// }
 
 
 // WINDOW ONLOAD FUNCTION FOR THE HOME PAGE
@@ -59,7 +138,6 @@ function loadHome() {
   loadRecommendedConnections();
   view_social_feed('karma');
   // createBlankHomePage(); // This will show a blank homepage.
-//   loadPosts();
 }
 
 // READING INFORMATION FROM THE DATABASE
@@ -82,24 +160,6 @@ function loadStories() {
   createStory(story);
   createStory(story);
   createStory(story);
-}
-
-function loadPosts() {
-  // let id;
-  // firebase.auth().onAuthStateChanged(function (user) {
-  //   db.collection("users")
-  //     .doc(user.uid)
-  //     .get()
-  //     .then(function (doc) {
-  //       let user = doc.data();
-  //       console.log(user.id);
-  //       id = user.id;
-  //     })
-  //     .catch((error) => {
-  //       console.log(`Error getting data: ${error}`);
-  //     });
-  // });
-  view_social_feed('karma');
 }
 
 function loadWhatsNew() {

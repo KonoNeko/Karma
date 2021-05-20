@@ -27,7 +27,7 @@ app.get(ENDPOINT + '/posts', (req, res) => {
     const sql = "CALL site_wide_posts_feed();";
     db.query(sql, (err, result) => {
         if (err) throw err;
-        let posts = filter.posts(result);
+        let posts = filter.posts(result[0]);
         res.end(JSON.stringify(posts));
     });
 });
@@ -794,9 +794,9 @@ DONEh) View social feed for a user (GET - user_posts_feed)          TESTED      
 DONEi) Delete comment - (DELETE - delete_comment)                   TESTED
 
 -Messages
-DONEa) View messages in conversation (GET - view_a_conversations)   TESTED
-DONEb) Send message to another user (POST - send_message)           TESTED
-DONEc) View all conversations for a user (GET - view_conversations) TESTED
+DONEa) View messages in conversation (GET - view_a_conversations)   TESTED      DOCUMENTED(22)
+DONEb) Send message to another user (POST - send_message)           TESTED      DOCUMENTED(24)
+DONEc) View all conversations for a user (GET - view_conversations) TESTED      DOCUMENTED(23)
 
 -Notifications
 DONEa) View all notifications (GET - view_notifications)            TESTED
