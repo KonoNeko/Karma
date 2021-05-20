@@ -157,31 +157,29 @@
     </div>
 
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
-    <div id="postModals">
-    </div>
-
-    <div class="create-post-container modal-content">
-        <div class="image-poster profilepicture">
-          <img src="images/placeholder2.png" />
-        </div>
-        <div class="newCaption">
-          <div>
-            <textarea rows="4" cols="50">
-              Write a caption here...
-            </textarea>
+    <div id="modalOverlay">
+      <div class="postModalBackground" id="postModalBackground"></div>
+      <div class="create-post-container modal-content" id="createPostModal">
+          <div class="image-poster profilepicture">
+            <img src="images/placeholder2.png" />
           </div>
-          <div style="font-size: 2.5rem" class="icons">
-            <i id="photo" class="fa fa-image"></i>
-            <i id="marker" class="fas fa-map-marker-alt"></i>
-            <i id="myBtn" class="fas fa-users"></i>
-            <input type="file" id="file" style="display: none" />
+          <div class="newCaption">
+            <div>
+              <textarea rows="4" cols="50">
+                Write a caption here...
+              </textarea>
+            </div>
+            <div style="font-size: 2.5rem" class="icons">
+              <i id="photo" class="fa fa-image"></i>
+              <i id="marker" class="fas fa-map-marker-alt"></i>
+              <i id="myBtn" class="fas fa-users"></i>
+              <input type="file" id="file" style="display: none" />
+            </div>
+            <div class="button">
+              <button id="postBtn" class="secondarybutton">Post</button>
+            </div>
           </div>
-          <div class="button">
-            <button id="postBtn" class="secondarybutton">Post</button>
-          </div>
-        </div>
+      </div>
     </div>
   
       <!-- The Modal -->
@@ -206,7 +204,7 @@
         </div>
       </div>
 
-</div>
+  
 
     <div class="flex-main">
       <div class="column" id="mainmain">
@@ -311,34 +309,31 @@
 
 <script>
     // Get the modal
-    var modal = document.getElementById("myModal");
+    var modal = document.getElementById("postModalBackground");
+    var content = document.getElementById("createPostModal");
     
     // Get the button that opens the modal
     var btn = document.getElementById("post-btn");
 
     var createBtn = document.getElementById("create-btn");
     
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-    
     // When the user clicks the button, open the modal 
     btn.onclick = function() {
       modal.style.display = "block";
+      modal.onclick = () => {
+        modal.style.display = "none";
+        modal.onclick = "";
+        content.style.display = "none"
+      }
+      content.style.display = "flex";
     }
 
     createBtn.onclick = function() {
       modal.style.display = "block";
-    }
-    
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
+      modal.onclick = () => {
         modal.style.display = "none";
+        modal.onclick = "";
+        content.style.display = "none"
       }
     }
     </script>
