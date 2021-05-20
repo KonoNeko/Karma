@@ -1,5 +1,26 @@
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
+let result = [
+  {
+  "conversation_id": 1,
+  "other_user": "Karma",
+  "other_user_fullname": "Team Karma",
+  "other_user_profile_pic": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+  "latest_message": "im chillin, wby bb?",
+  "latest_message_timestamp": "2021-05-11 16:35:18",
+  "has_unread_messages": 0
+  },
+  {
+  "conversation_id": 2,
+  "other_user": "testuser",
+  "other_user_fullname": "test user",
+  "other_user_profile_pic": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+  "latest_message": "value",
+  "latest_message_timestamp": "2021-05-19 17:45:34",
+  "has_unread_messages": 1
+  }
+  ]
+
 function formatTimestamp(timestamp) {
   let dateObj = new Date(Date.parse(timestamp));
   return returnHighestTimeDiff(dateObj);
@@ -31,7 +52,10 @@ function view_messages(userID) {
   const endpoint = "/messages";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  APIRequest(method, url); 
+  // APIRequest(method, url);
+  for (let i = 0; i < result.length; i++) {
+    generateMessager(result[i]);
+}
 }
 
 
@@ -41,15 +65,15 @@ function APIRequest(method, url) {
   xhttp.open(method, url, true);
   xhttp.send();
   xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-          let result = JSON.parse(this.responseText);
-          console.log("loading post");
-          console.log(result);
-          for (let i=0; i<result.length; i++) {
-              createPost(result[i]);
-          }
-          
+    if (this.readyState == 4 && this.status == 200) {
+      // let result = JSON.parse(this.responseText);
+      // console.log("loading post");
+      // console.log(result);
+      for (let i = 0; i < result.length; i++) {
+        generateMessager(result[i]);
       }
+
+    }
   }
 }
 
@@ -79,20 +103,22 @@ window.onresize = function () {
 };
 
 function loadAll() {
-  generateNoMessages();
-  // loadAllMessagers();
+  // generateNoMessages();
+  loadAllMessagers();
 }
 
 function loadAllMessagers() {
-  generateMessager();
-  generateLine();
-  generateMessager();
-  generateLine();
-  generateMessager();
-  generateLine();
-  generateMessager();
-  generateLine();
-  generateMessager();
+  // generateMessager();
+  // generateLine();
+  // generateMessager();
+  // generateLine();
+  // generateMessager();
+  // generateLine();
+  // generateMessager();
+  // generateLine();
+  // generateMessager();
+
+  view_messages("");
 }
 
 function loadAllMessages() {
@@ -102,7 +128,7 @@ function loadAllMessages() {
   createMessageSentByYou();
 }
 
-function generateMessager() {
+function generateMessager(msgObj) {
   let mainMessagesDiv = document.getElementById("messages");
 
   let messagerDiv = document.createElement("div");
@@ -112,7 +138,7 @@ function generateMessager() {
   let messagerImgDiv = document.createElement("div");
   let messagerImg = document.createElement("img");
   messagerImgDiv.setAttribute("class", "profilepicture messagerImgDiv");
-  messagerImg.src = "./images/placeholder2.png";
+  messagerImg.src = `${msgObj["other_user_profile_pic"]}`;
 
   let messagerText = document.createElement("div");
   let messagerAuthor = document.createElement("p");
@@ -125,9 +151,9 @@ function generateMessager() {
   messagerMessage.setAttribute("class", "bodytext");
   messagerTime.setAttribute("class", "smallbutton");
 
-  messagerAuthor.innerHTML = "Author Name";
-  messagerMessage.innerHTML = "This is the text that was sent";
-  messagerTime.innerHTML = "3 minutes ago";
+  messagerAuthor.innerHTML = `${msgObj["other_user"]}`;
+  messagerMessage.innerHTML = `${msgObj["latest_message"]}`;
+  messagerTime.innerHTML = `${msgObj["latest_message_timestamp"]}`;
 
   messagerImgDiv.appendChild(messagerImg);
 
