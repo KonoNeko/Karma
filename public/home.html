@@ -4,7 +4,7 @@
   <title>Home</title>
 
   <link rel="icon" type="image/png" href="res/logo0_colored.png" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/home.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/createpost.css" />
@@ -146,8 +146,8 @@
 
       <div id="above-search" class="search">
         <form class="search-form">
-          <input type="text" placeholder="Search" />
-          <button type="submit"><i class="fa fa-search"></i></button>
+          <input id="search-texts" type="search" placeholder="Search" />
+          <button name="search-button"><i class="fa fa-search"></i></button>
         </form>
       </div>
     </div>
@@ -220,7 +220,7 @@
         <div class="search">
           <form class="search-form">
             <input type="text" placeholder="Search" />
-            <button type="submit"><i class="fa fa-search"></i></button>
+            <button onclick="findUsers()" type="submit"><i class="fa fa-search"></i></button>
           </form>
         </div>
         <div id="whats-new" class="whats-new">
@@ -459,7 +459,7 @@
 
 
 
-
+<script src="js/search.js"></script>
 
 
 
