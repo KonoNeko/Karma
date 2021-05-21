@@ -49,6 +49,22 @@ function APIRequest(method, url) {
   };
 }
 
+function add_Skills(userID, skill) {
+  const method = "PUT";
+  const endpoint = "/profiles/skills";
+  const params = formatParams({
+    "id": userID,
+    "skill": skill,
+    
+  });
+  const url = BASE_URL + endpoint + params;
+
+  return APIRequest(method, url);
+}
+
+
+
+
 function add_Education(userID, schoolName, description, gpa, start, end, img) {
   const method = "POST";
   const endpoint = "/profiles/education";
@@ -327,6 +343,15 @@ function addSkills() {
 
   document.getElementById("button-content").appendChild(addSkillsHeading);
   document.getElementById("button-content").appendChild(addSkillsInput);
+
+
+  $("#save").click(function () {
+    let skill = addSkillsInput.value;
+
+    add_Skills(skill);
+  });
+
+
 }
 
 function addEducation() {
