@@ -943,18 +943,18 @@ function createAwards(awards, awardsObj) {
   experiencendiv.setAttribute("style", "margin-top: 10px");
 }
 
-function createFollowers(followerObj) {
+function createFollowers(follower, followerObj) {
   let follow = document.createElement("p");
   follow.setAttribute("class", "followers");
-  follow.innerHTML = `${followerObj["info"]["followers"]}`;
+  follow.innerHTML = `${followerObj.followers}`;
 
   follower.appendChild(follow);
 }
 
-function createFollowing(followingObj) {
+function createFollowing(following, followingObj) {
   let follows = document.createElement("p");
   follows.setAttribute("class", "following");
-  follows.innerHTML = `${followingObj["info"]["following"]}`;;
+  follows.innerHTML = `${followingObj.following}`;
 
   following.appendChild(follows);
 }
