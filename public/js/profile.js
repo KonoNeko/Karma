@@ -1,3 +1,5 @@
+
+
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
 let result = {
@@ -114,10 +116,10 @@ window.onresize = function () {
 
 function view_profile(userID) {
   const method = "GET";
-  const endpoint = "/profile/karma";
+  const endpoint = "/profiles";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  let result = APIRequest(method, url);
+  let result = APIRequestViewProfile(method, url);
   console.log(result);
 }
 
@@ -136,6 +138,23 @@ function APIRequest(method, url) {
       // }
     }
   };
+}
+
+function APIRequestViewProfile(method, url) {
+  loadProfile(result);
+  // console.log(method + ": " + url);
+  // const xhttp = new XMLHttpRequest();
+  // xhttp.open(method, url, true);
+  // xhttp.send();
+  // xhttp.onreadystatechange = function () {
+  //   if (this.readyState == 4 && this.status == 200) {
+  //     // let result = JSON.parse(this.responseText);
+  //     console.log("success editing profile");
+  //     console.log(result);
+  //     loadProfile(result);
+
+  //   }
+  // };
 }
 
 function add_Skills(userID, skill) {
@@ -281,17 +300,17 @@ function showImages() {
 }
 
 // WINDOW ONLOAD FUNCTION FOR THE PROFILE PAGE
-function loadProfile() {
-  console.log(width);
+function loadProfile(profileObj) {
+  console.log(profileObj);
   console.log(height);
-  loadAboutMe();
-  loadPosts();
-  loadNumPosts();
-  loadSkills();
-  loadEducation();
-  loadExperience();
-  loadAwards();
-  loadProfilepic();
+  loadAboutMe(profileObj);
+  loadPosts(profileObj);
+  loadNumPosts(profileObj);
+  loadSkills(profileObj);
+  loadEducation(profileObj);
+  loadExperience(profileObj);
+  loadAwards(profileObj);
+  loadProfilepic(profileObj);
   // loadFollowers();
   // loadFollowing();
   loadWhatsNew();
@@ -299,63 +318,70 @@ function loadProfile() {
 }
 
 // READING INFORMATION FROM THE DATABASE
-function loadAboutMe() {
+function loadAboutMe(profileObj) {
   let aboutme = document.getElementById("aboutme");
-  createAboutMe(aboutme);
+  createAboutMe(aboutme, profileObj);
 }
 
-function loadPosts() {
+function loadPosts(profileObj) {
   let posts = document.getElementById("posts");
-  createPost(posts);
+  createPost(posts, profileObj);
   createPost(posts);
 }
 
-function loadNumPosts() {
+function loadNumPosts(profileObj) {
   // let numPosts = document.getElementById("numPosts");
   // createNumPosts(numPosts)
 }
 
-function loadSkills() {
+function loadSkills(profileObj) {
   let skills = document.getElementById("skills");
-  createSkills(skills);
-  createSkills(skills);
-  createSkills(skills);
-  createSkills(skills);
-  createSkills(skills);
-  createSkills(skills);
+  for (let key of Object.keys(profileObj.skills)) {
+    createSkills(skills, profileObj.skills[key]);
+    console.log(profileObj.skills[key]);
+    console.log(key);
+  }
+  // createSkills(skills,profileObj);
+  // createSkills(skills,profileObj);
+  // createSkills(skills,profileObj);
+  // createSkills(skills,profileObj);
+  // createSkills(skills,profileObj);
+  // createSkills(skills,profileObj);
 }
 
-function loadEducation() {
+function loadEducation(profileObj) {
   let education = document.getElementById("education");
-  createEducation(education);
-  createEducation(education);
+  for (let key of Object.keys(profileObj.education))
+    createEducation(education, profileObj.education[key]);
+    // console.log(profileObj.education[key])
+  // createEducation(education,profileObj);
 }
 
-function loadExperience() {
+function loadExperience(profileObj) {
   let experience = document.getElementById("experience");
-  createExperience(experience);
-  createExperience(experience);
+  for (let key of Object.keys(profileObj.experience))
+    createExperience(experience, profileObj.experience[key]);
 }
 
-function loadAwards() {
+function loadAwards(profileObj) {
   let awards = document.getElementById("awards");
-  createAwards(awards);
-  createAwards(awards);
+  createAwards(awards, profileObj);
+  createAwards(awards, profileObj);
 }
 
-function loadProfilepic() {
+function loadProfilepic(profileObj) {
   let profilepic = document.getElementById("profile");
-  createProfilePic(profilepic);
+  createProfilePic(profilepic, profileObj);
 }
 
-function loadFollowing() {
+function loadFollowing(profileObj) {
   let following = document.getElementById("following");
-  createFollowing(following);
+  createFollowing(following, profileObj);
 }
 
-function loadFollowers() {
+function loadFollowers(profileObj) {
   let follower = document.getElementById("followers");
-  createFollowers(follower);
+  createFollowers(follower, profileObj);
 }
 
 function loadWhatsNew() {
@@ -650,6 +676,14 @@ function addAwards() {
 
 
 
+
+
+
+
+
+
+
+
 function createNumPosts(numPosts) {
   let post = document.createElement("p");
   post.setAttribute("class", "followers");
@@ -658,22 +692,17 @@ function createNumPosts(numPosts) {
   numPosts.appendChild(post);
 }
 
-function createAboutMe(aboutme) {
+function createAboutMe(aboutMe, aboutMeObj) {
   let aboutdiv = document.createElement("div");
   aboutdiv.setAttribute("class", "aboutdiv");
 
   let about = document.createElement("p");
   about.setAttribute("class", "about");
   about.setAttribute("style", "margin-right: 20px;");
-  about.innerHTML =
-    "I am a senior at Burnaby Mountain who is passionate about languages and fine arts. I like tutoring at my high school and working closely with youth. After graduation, I’d like to go to Simon Fraser University for a bachelor’s degree to major in Linguistics and possibly a minor in Interactive Arts and Technology!";
+  about.innerHTML = `${aboutMeObj.info.bio}`;
 
   aboutdiv.appendChild(about);
-  aboutme.appendChild(aboutdiv);
-
-
-
-
+  aboutMe.appendChild(aboutdiv);
 }
 
 function createProfilePic(profile) {
@@ -685,10 +714,14 @@ function createProfilePic(profile) {
   // );
   // profile.appendChild(picture);
 }
-function createSkills(skills) {
+
+
+function createSkills(skills, skillsObj) {
   let skillbtn = document.createElement("button");
   skillbtn.setAttribute("class", "skillsbtn");
-  skillbtn.innerHTML = "Leadership";
+  skillbtn.innerHTML = `${skillsObj.skill_title}`;
+  console.log(skillsObj);
+  // console.log(skillsObj.skill_title);
 
   skills.appendChild(skillbtn);
 }
@@ -707,11 +740,11 @@ function createPost(posts) {
   // );
   posts.appendChild(postdiv);
 }
-function createEducation(education) {
+function createEducation(education, educationObj) {
   let heading1 = document.createElement("p");
   heading1.setAttribute("class", "heading3");
   heading1.setAttribute("style", "font-weight: bold");
-  heading1.innerHTML = "Burnaby Mountain Secondary School";
+  heading1.innerHTML = `${educationObj.school_name}`;
 
   let educationdiv = document.createElement("div");
   educationdiv.setAttribute("class", "education-post-div");
@@ -727,7 +760,7 @@ function createEducation(education) {
 
   let para = document.createElement("p");
   para.setAttribute("class", "schoolpara");
-  para.innerHTML = "September 2016 to June 2021";
+  para.innerHTML = `${educationObj.start_date}`;
 
   picturediv.appendChild(picture);
 
@@ -745,11 +778,11 @@ function createEducation(education) {
   educationdiv.setAttribute("style", "margin-top: 10px");
 }
 
-function createExperience(experience) {
+function createExperience(experience, experienceObj) {
   let heading1 = document.createElement("p");
   heading1.setAttribute("class", "heading3");
   heading1.setAttribute("style", "font-weight: bold");
-  heading1.innerHTML = "Library volunteer";
+  heading1.innerHTML = `${experienceObj.job_title}`;
 
   let experiencendiv = document.createElement("div");
   experiencendiv.setAttribute("class", "experience-post-div");
@@ -765,7 +798,7 @@ function createExperience(experience) {
 
   let para = document.createElement("p");
   para.setAttribute("class", "schoolpara");
-  para.innerHTML = "Archimedes Library, Newton";
+  para.innerHTML = `${experienceObj.employer}`;
 
   picturediv.appendChild(picture);
 
@@ -918,3 +951,6 @@ function createWhatsNew(newPost) {
 
   newPost.appendChild(opportunityDiv);
 }
+
+
+view_profile("marlon");

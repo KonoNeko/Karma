@@ -292,6 +292,13 @@ function createPost(postObj) {
 
   let captionAndComments = document.createElement("div");
   captionAndComments.setAttribute("class", "captionAndComments");
+
+  let pic = document.createElement("img")
+  pic.setAttribute("src", "images/preheart.png");
+  pic.setAttribute("class", "likebtn");
+  pic.id = "preheart";
+  pic.setAttribute("onclick", "like()")
+
   let likes = document.createElement("p");
   let caption = document.createElement("p");
   let comments = document.createElement("p");
@@ -302,7 +309,7 @@ function createPost(postObj) {
   likes.innerHTML = (postObj.post_info.likes != 1) ? `${postObj.post_info.likes} likes` : `${postObj.post_info.likes} like`;
   caption.innerHTML = `${postObj.post_info.caption}`;
   comments.innerHTML = `View all ${postObj.comments.totalComments} comments`;
-
+  post.appendChild(pic);
   post.appendChild(likes);
   post.appendChild(caption);
   post.appendChild(comments);
