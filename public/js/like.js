@@ -3,13 +3,13 @@ function like(){
     heart.setAttribute("src", "images/likeheart.png");
 }
 
-const URL = " https://marlonfajardo.ca/karma/v1/posts"
-const method = "GET"
+const URL2 = " https://marlonfajardo.ca/karma/v1/posts"
+const method2 = "GET"
 
 //@return list of users
 async function  getPost(){
 
-    let response = await fetch(URL);
+    let response = await fetch(URL2);
     let data = await response.json();
     return data;
 }
@@ -24,4 +24,4 @@ function addLikes(){
         }
     });
 }
-addLikes()
+// addLikes()

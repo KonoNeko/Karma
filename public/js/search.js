@@ -20,7 +20,7 @@ async function  getUsers(){
 // }
 function findUsers(){
     getUsers().then(users => {
-        let targetUser = document.getElementById("search-input")
+        // let targetUser = document.getElementById("search-input")
         for (let i = 0; i < users.length; i++){
             // look for the entry with a matching `users` value
             // if (users[i].username === targetUser){
@@ -29,7 +29,7 @@ function findUsers(){
         }
     });
 }
-findUsers()
+findUsers();
 // document.getElementById("search-button").addEventListener("click",  function () {
 //     // let targetUser = document.getElementById("search-texts").value;
 //     let targetUser = "marlon";
