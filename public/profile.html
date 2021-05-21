@@ -148,6 +148,44 @@
       </div>
     </div>
 
+    <div id="followersModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closefollowers">&times;</span>
+        <p>Some text in the modal...</p>
+      </div>
+    </div>
+
+    <!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span id="closemymodal" class="close">&times;</span>
+      <h1 class="heading1">Edit Profile</h1>
+    </div>
+    <span>
+      <div class="modal-body">
+        <h3 class="heading2">Add description for your bio</h3>
+        <textarea> </textarea>
+    <div id="buttons">
+      <button id="addskills" onclick="addSkills()">Add skills</buton>
+
+      <button id="addedu" onclick="addEducation()"
+        >Add education</buton
+      >
+
+      <button id="addexp" onclick="addExperience()"
+        >Add experience</buton
+      >
+    </div>
+    <div id="button-content"></div>
+    <button id="save">Save</button>
+      </div>
+    </span>
+  </div>
+</div>
+
+
     <div class="flex-main">
       <div class="column" id="mainmain">
         <div id="profile-main">
@@ -182,8 +220,8 @@
             </div>
 
             <div class="profile-buttons-div">
-              <button id="editbtn">Edit Profile</button>
-              <button id="msgbtn">Message</button>
+              <button id="editbtn">Edit profile</button>
+              <button id="msgbtn">View applications</button>
             </div>
           </div>
         </div>
@@ -268,5 +306,50 @@
         window.location.href = "sign-up.html";
       }
     });
+
+    // followers MODAL
+    // Get the modal
+    var followersmodal = document.getElementById("followersModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("numOfFollowersDiv");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("closefollowers");
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function () {
+      followersmodal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      followersmodal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == followersmodal) {
+        followersmodal.style.display = "none";
+      }
+    };
+
+    // editBtnModal
+    var editbtnmodal = document.getElementById("myModal");
+    var editbtn = document.getElementById("editbtn");
+    var editbtnspan = document.getElementById("closemymodal");
+    editbtn.onclick = function() {
+      editbtnmodal.style.display = "block";
+    }
+
+    editbtnspan.onclick = function() {
+      editbtnmodal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+      if (event.target == editbtnmodal) {
+        editbtnmodal.style.display = "none";
+      }
+    };
   </script>
 </html>
