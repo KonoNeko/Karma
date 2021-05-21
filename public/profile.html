@@ -192,9 +192,10 @@
 
 
 <div id="viewapplicationsmodal" class="modal">
-  <div class="modal-content">
+  <div id="viewapplicationsmodal-content" class="modal-content">
     <span class="close" id="closeapplications">&times;</span>
     <p class="heading1">View your applications</p>
+    <button onclick="addApplication()" id="addapplication">Add application</button>
   </div>
 </div>
 
@@ -310,6 +311,7 @@
   <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
   <script src="js/signup.js"></script>
   <script src="js/profile.js"></script>
+  <script src="js/viewapplications.js"></script>
   <script>
     showProfile();
 

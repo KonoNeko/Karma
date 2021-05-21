@@ -24,6 +24,41 @@
   flex-direction: column;
 }
 
+.applicationDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.applicationImgDiv {
+  width: 20%;
+  max-width: 100px;
+}
+
+.applicationDivColumn {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.applicationDetailsDiv {
+  width: 50%;
+}
+
+.applicationStatusDiv {
+  width: 30%;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
+}
+
+.applicationDetailsDiv,
+.applicationStatusDiv {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 #profile-main {
   display: flex;
   flex-direction: row;
@@ -259,6 +294,11 @@ h3 {
 
 textarea {
   width: 350px;
+}
+
+hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #save {
