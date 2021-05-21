@@ -672,4 +672,3 @@ function displayComments(comments, id) {
 
 
 loadHome();
-displayModal(1);

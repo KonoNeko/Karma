@@ -1,55 +1,92 @@
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
+
 let result = {
-  "2021-05-19 17:45:34": {
-    conversation_id: 2,
-    other_user: "testuser",
-    other_user_fullname: "test user",
-    other_user_profile_pic:
-      "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-    latest_message: "value",
-    latest_message_timestamp: "2021-05-19 17:45:34",
-    has_unread_messages: 1,
-    messages: {
-      marlon: {
-        message_id: 8,
-        sender: "marlon",
-        message: "value",
-        message_timestamp: "2021-05-19T21:42:31.000Z",
-      },
-      testuser: {
-        message_id: 9,
-        sender: "testuser",
-        message: "value",
-        message_timestamp: "2021-05-19T21:45:34.000Z",
-      },
-    },
+  "2021-05-21 00:55:01": {
+  "conversation_id": 2,
+  "other_user": "testuser",
+  "other_user_fullname": "test user",
+  "other_user_profile_pic": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+  "profile_pic": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+  "latest_message": "value",
+  "latest_message_timestamp": "2021-05-21 00:55:01",
+  "has_unread_messages": 1,
+  "messages": [
+  {
+  "message_id": 6,
+  "sender": "marlon",
+  "message": "you a bum",
+  "message_timestamp": "2021-05-11T19:56:27.000Z"
+  },
+  {
+  "message_id": 8,
+  "sender": "marlon",
+  "message": "value",
+  "message_timestamp": "2021-05-19T21:42:31.000Z"
+  },
+  {
+  "message_id": 9,
+  "sender": "testuser",
+  "message": "value",
+  "message_timestamp": "2021-05-19T21:45:34.000Z"
+  },
+  {
+  "message_id": 10,
+  "sender": "testuser",
+  "message": "value",
+  "message_timestamp": "2021-05-21T04:48:24.000Z"
+  },
+  {
+  "message_id": 11,
+  "sender": "testuser",
+  "message": "value",
+  "message_timestamp": "2021-05-21T04:49:12.000Z"
+  },
+  {
+  "message_id": 12,
+  "sender": "testuser",
+  "message": "value",
+  "message_timestamp": "2021-05-21T04:55:00.000Z"
+  },
+  {
+  "message_id": 13,
+  "sender": "testuser",
+  "message": "value",
+  "message_timestamp": "2021-05-21T04:55:01.000Z"
+  }
+  ]
   },
   "2021-05-11 16:35:18": {
-    conversation_id: 1,
-    other_user: "Karma",
-    other_user_fullname: "Team Karma",
-    other_user_profile_pic:
-      "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-    latest_message: "im chillin, wby bb?",
-    latest_message_timestamp: "2021-05-11 16:35:18",
-    has_unread_messages: 0,
-    messages: {
-      marlon: {
-        message_id: 7,
-        sender: "marlon",
-        message: "im chillin, wby bb?",
-        message_timestamp: "2021-05-11T20:35:18.000Z",
-      },
-      Karma: {
-        message_id: 5,
-        sender: "Karma",
-        message: "hey boo wyd",
-        message_timestamp: "2021-05-11T19:55:58.000Z",
-      },
-    },
+  "conversation_id": 1,
+  "other_user": "Karma",
+  "other_user_fullname": "Team Karma",
+  "other_user_profile_pic": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+  "profile_pic": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+  "latest_message": "im chillin, wby bb?",
+  "latest_message_timestamp": "2021-05-11 16:35:18",
+  "has_unread_messages": 0,
+  "messages": [
+  {
+  "message_id": 4,
+  "sender": "marlon",
+  "message": "heyyyy karma",
+  "message_timestamp": "2021-05-11T19:55:03.000Z"
   },
-};
+  {
+  "message_id": 5,
+  "sender": "Karma",
+  "message": "hey boo wyd",
+  "message_timestamp": "2021-05-11T19:55:58.000Z"
+  },
+  {
+  "message_id": 7,
+  "sender": "marlon",
+  "message": "im chillin, wby bb?",
+  "message_timestamp": "2021-05-11T20:35:18.000Z"
+  }
+  ]
+  }
+  };
 
 function formatTimestamp(timestamp) {
   let dateObj = new Date(Date.parse(timestamp));
@@ -83,6 +120,9 @@ function view_messages(userID) {
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
   // APIRequest(method, url);
+  if (JSON.stringify(result) === "{}") {
+    generateNoMessages();
+  }
   let keys = Object.keys(result);
   for (let i = 0; i < keys.length; i++) {
     generateMessager(result[keys[i]]);
@@ -124,7 +164,7 @@ let height =
   document.body.clientHeight;
 
 window.onresize = function () {
-  location.reload();
+  // location.reload();
   width =
     window.innerWidth ||
     document.documentElement.clientWidth ||
@@ -152,7 +192,7 @@ function loadAllMessagers() {
   // generateLine();
   // generateMessager();
 
-  view_messages("");
+  view_messages("marlon"); // Replace with firebase username
 }
 
 function loadAllMessages() {
@@ -162,7 +202,7 @@ function loadAllMessages() {
   createMessageSentByYou();
 }
 
-function generateMessager(msgObj) {
+function generateMessager(convo) {
   let mainMessagesDiv = document.getElementById("messages");
 
   let messagerDiv = document.createElement("div");
@@ -172,7 +212,7 @@ function generateMessager(msgObj) {
   let messagerImgDiv = document.createElement("div");
   let messagerImg = document.createElement("img");
   messagerImgDiv.setAttribute("class", "profilepicture messagerImgDiv");
-  messagerImg.src = `${msgObj["other_user_profile_pic"]}`;
+  messagerImg.src = `${convo.other_user_profile_pic}`;
 
   let messagerText = document.createElement("div");
   let messagerAuthor = document.createElement("p");
@@ -185,11 +225,9 @@ function generateMessager(msgObj) {
   messagerMessage.setAttribute("class", "bodytext");
   messagerTime.setAttribute("class", "smallbutton");
 
-  messagerAuthor.innerHTML = `${msgObj["other_user"]}`;
-  messagerMessage.innerHTML = `${msgObj["latest_message"]}`;
-  messagerTime.innerHTML = `${formatTimestamp(
-    msgObj["latest_message_timestamp"]
-  )}`;
+  messagerAuthor.innerHTML = `${convo.other_user}`;
+  messagerMessage.innerHTML = `${convo.latest_message}`;
+  messagerTime.innerHTML = `${formatTimestamp(convo.latest_message_timestamp)}`;
 
   messagerImgDiv.appendChild(messagerImg);
 
@@ -200,7 +238,7 @@ function generateMessager(msgObj) {
   messagerText.appendChild(messagerMessage);
   messagerText.appendChild(messagerTime);
 
-  messagerDiv.setAttribute("onclick", "revealMessages()");
+  messagerDiv.onclick = () => { revealMessages(convo); };
 
   mainMessagesDiv.appendChild(messagerDiv);
 }
@@ -212,36 +250,36 @@ function returnToMessages() {
     .setAttribute("style", "display: unset; width: 100%;");
 }
 
-function revealMessages() {
+function revealMessages(convo) {
   console.log(width);
   if (width > 600) {
     document.getElementById("messages-user-information").innerHTML = "";
-    document.getElementById("messages-expanded").innerHTML = "";
+    document.getElementById("messagesList").innerHTML = "";
 
     document.getElementById("mainmain").setAttribute("style", "width: 50%");
     document.getElementById("sidemain").setAttribute("style", "display: unset");
-
-    generateMessages();
-    createMessageSentByOtherUser();
-    createMessageSentByOtherUser();
-    createMessageSentByYou();
   } else {
     document.getElementById("messages-user-information").innerHTML = "";
-    document.getElementById("messages-expanded").innerHTML = "";
+    document.getElementById("messagesList").innerHTML = "";
 
     document.getElementById("mainmain").setAttribute("style", "display: none");
     document
       .getElementById("sidemain")
-      .setAttribute("style", "display: unset; width: 100%;");
-
-    generateMessages();
-    createMessageSentByOtherUser();
-    createMessageSentByOtherUser();
-    createMessageSentByYou();
+      .setAttribute("style", "display: unset; width: 100%;"); 
+  }
+  generateMessages(convo);
+  let messageList = Object.keys(convo.messages);
+  for (let i=0; i < messageList.length; i++) {
+    let currentMsg = convo.messages[messageList[i]];
+    if (currentMsg.sender === convo.other_user) {
+      createMessageSentByOtherUser(currentMsg, convo.other_user_profile_pic);
+    } else {
+      createMessageSentByYou(currentMsg, convo.profile_pic);
+    }
   }
 }
 
-function generateMessages() {
+function generateMessages(msgObj) {
   let messagerInformationDiv = document.getElementById(
     "messages-user-information"
   );
@@ -252,10 +290,10 @@ function generateMessages() {
   let messagerUsername = document.createElement("p");
 
   messagerImgDiv.setAttribute("class", "smallMessagerImgDiv profilepicture");
-  messagerImg.src = "./images/placeholder1.png";
-  messagerName.innerHTML = "name of messenger";
+  messagerImg.src = msgObj.other_user_profile_pic;
+  messagerName.innerHTML = msgObj.other_user_fullname;
   messagerName.setAttribute("class", "bodytitle");
-  messagerUsername.innerHTML = "@" + "messenger.username";
+  messagerUsername.innerHTML = "@" + msgObj.other_user;
   messagerUsername.setAttribute("class", "bodytext");
 
   messagerImgDiv.appendChild(messagerImg);
@@ -269,6 +307,7 @@ function generateMessages() {
 
   messagerInformationDiv.appendChild(messagerImgDiv);
   messagerInformationDiv.appendChild(messagerAuthorText);
+
 }
 
 function generateLine() {
@@ -278,15 +317,15 @@ function generateLine() {
   mainMessagesDiv.appendChild(hr);
 }
 
-function createMessageSentByYou() {
-  let messagesExpandedDiv = document.getElementById("messages-expanded");
+function createMessageSentByYou(currentMsg, profile_pic) {
+  let messagesExpandedDiv = document.getElementById("messagesList");
 
   let messagesSentDiv = document.createElement("div");
   messagesSentDiv.setAttribute("class", "messagesSentByYouDiv");
 
   let messagesSentImgDiv = document.createElement("div");
   let messagesSentImg = document.createElement("img");
-  messagesSentImg.src = "./images/placeholder1.png";
+  messagesSentImg.src = profile_pic;
   messagesSentImgDiv.setAttribute(
     "class",
     "messagesSentByYouImgDiv profilepicture"
@@ -310,9 +349,9 @@ function createMessageSentByYou() {
   messagesSentTextDiv.appendChild(messagesSentText);
   messagesSentTextDiv.appendChild(messagesSentTime);
 
-  messagesSentAuthor.innerHTML = "astrisfrost";
-  messagesSentText.innerHTML = "why... are you messaging like that?";
-  messagesSentTime.innerHTML = "3 minutes " + "ago";
+  messagesSentAuthor.innerHTML = currentMsg.sender;
+  messagesSentText.innerHTML = currentMsg.message;
+  messagesSentTime.innerHTML = formatTimestamp(currentMsg.message_timestamp);
 
   messagesSentDiv.appendChild(messagesSentTextDiv);
   messagesSentDiv.appendChild(messagesSentImgDiv);
@@ -321,15 +360,15 @@ function createMessageSentByYou() {
   messagesExpandedDiv.appendChild(messagesSentDiv);
 }
 
-function createMessageSentByOtherUser() {
-  let messagesExpandedDiv = document.getElementById("messages-expanded");
+function createMessageSentByOtherUser(currentMsg, profile_pic) {
+  let messagesExpandedDiv = document.getElementById("messagesList");
 
   let messagesSentDiv = document.createElement("div");
   messagesSentDiv.setAttribute("class", "messagesSentDiv");
 
   let messagesSentImgDiv = document.createElement("div");
   let messagesSentImg = document.createElement("img");
-  messagesSentImg.src = "./images/placeholder2.png";
+  messagesSentImg.src = profile_pic;
   messagesSentImgDiv.setAttribute("class", "messagesSentImgDiv profilepicture");
   messagesSentImgDiv.appendChild(messagesSentImg);
 
@@ -347,10 +386,10 @@ function createMessageSentByOtherUser() {
   messagesSentTextDiv.appendChild(messagesSentText);
   messagesSentTextDiv.appendChild(messagesSentTime);
 
-  messagesSentAuthor.innerHTML = "williamblack";
-  messagesSentText.innerHTML =
-    "what is UP homeboys and homegirls and hometheys today we are going to be volunteering at Burnaby Park Secondary School. We're gonna hit up the gym to referee for their first boys's soccer game of the season. Stay tuned and make sure to like and subscribe for more content!";
-  messagesSentTime.innerHTML = "7 minutes " + "ago";
+  messagesSentAuthor.innerHTML = currentMsg.sender;
+  messagesSentText.innerHTML = currentMsg.message;
+  // messagesSentText.innerHTML = "what is UP homeboys and homegirls and hometheys today we are going to be volunteering at Burnaby Park Secondary School. We're gonna hit up the gym to referee for their first boys's soccer game of the season. Stay tuned and make sure to like and subscribe for more content!";
+  messagesSentTime.innerHTML = formatTimestamp(currentMsg.message_timestamp);
 
   messagesSentDiv.appendChild(messagesSentImgDiv);
   messagesSentDiv.appendChild(messagesSentTextDiv);

@@ -8,6 +8,11 @@
   flex-wrap: nowrap;
 }
 
+.messages-expanded {
+  height: 60%;
+  overflow: auto;
+}
+
 .heading-title {
   margin-top: 20px;
   margin-left: 20px;
@@ -152,8 +157,13 @@ hr {
 
 .return-to-messages {
   font-weight: bolder;
+  float: right;
   display: none;
   margin-bottom: 10px;
+}
+
+.return-to-messages:hover {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 900px) {

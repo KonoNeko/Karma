@@ -1,5 +1,94 @@
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
+let result = {
+  "info": {
+    "profile_id": 1,
+    "username": "marlon",
+    "full_name": "Marlon Fajardo",
+    "bio": "This is my bio",
+    "posts": 2,
+    "followers": 0,
+    "following": 0,
+    "profile_pic_url": "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+    "is_volunteer": 1
+  },
+  "education": {
+    "1": {
+      "education_id": 1,
+      "school_name": "Burnaby South Secondary",
+      "start_date": "06/2020",
+      "end_date": "01/2021",
+      "gpa": 3.5,
+      "certification_type": "High School Diploma",
+      "edu_image_url": "https://www.studyinburnaby.ca/wp-content/uploads/2017/05/Burnaby-South-Secondary.jpg"
+    },
+    "2": {
+      "education_id": 2,
+      "school_name": "British Columbia Institute of Technology",
+      "start_date": "06/2020",
+      "end_date": "01/2021",
+      "gpa": 3.5,
+      "certification_type": "Technical Diploma",
+      "edu_image_url": "https://pbs.twimg.com/profile_images/1291056095440433152/fKpCeIld_400x400.png"
+    }
+  },
+  "skills": {
+    "1": {
+      "skill_id": 1,
+      "skill_title": "Creativity"
+    },
+    "2": {
+      "skill_id": 2,
+      "skill_title": "Leadership"
+    },
+    "3": {
+      "skill_id": 3,
+      "skill_title": "Problem Solving"
+    },
+    "4": {
+      "skill_id": 4,
+      "skill_title": "Communication"
+    }
+  },
+  "experience": {
+    "1": {
+      "experience_id": 1,
+      "job_title": "Warehouse Associate",
+      "employer": "Continental Importers",
+      "exp_image_url": "https://www.eastvillagevancouver.ca/wp-content/uploads/2016/07/static1.squarespace.jpg"
+    },
+    "2": {
+      "experience_id": 2,
+      "job_title": "Production Specialist",
+      "employer": "Fine Line Signs",
+      "exp_image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/0naXOdpTDnO34kJob1ajLQ/ls.jpg"
+    }
+  },
+  "certifications": {
+    "1": {
+      "experience_id": 1,
+      "job_title": "Warehouse Associate",
+      "employer": "Continental Importers",
+      "exp_image_url": "https://www.eastvillagevancouver.ca/wp-content/uploads/2016/07/static1.squarespace.jpg"
+    },
+    "2": {
+      "experience_id": 2,
+      "job_title": "Production Specialist",
+      "employer": "Fine Line Signs",
+      "exp_image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/0naXOdpTDnO34kJob1ajLQ/ls.jpg"
+    }
+  }
+};
+
+
+
+
+
+
+
+
+
+
 let width =
   window.innerWidth ||
   document.documentElement.clientWidth ||
@@ -55,7 +144,7 @@ function add_Skills(userID, skill) {
   const params = formatParams({
     "id": userID,
     "skill": skill,
-    
+
   });
   const url = BASE_URL + endpoint + params;
 
@@ -550,7 +639,7 @@ function addAwards() {
     let awardTitle = addAwardInput1.value;
     let date = addAwardInput2.value;
     let img = addAwardInput3.value;
-    
+
 
     add_Awards(awardTitle, date, img);
   });
@@ -584,7 +673,7 @@ function createAboutMe(aboutme) {
 
 
 
-  
+
 }
 
 function createProfilePic(profile) {
@@ -732,18 +821,18 @@ function createAwards(awards) {
   experiencendiv.setAttribute("style", "margin-top: 10px");
 }
 
-function createFollowers(follower) {
+function createFollowers(followerObj) {
   let follow = document.createElement("p");
   follow.setAttribute("class", "followers");
-  follow.innerHTML = "150";
+  follow.innerHTML = `${followerObj["info"]["followers"]}`;
 
   follower.appendChild(follow);
 }
 
-function createFollowing(following) {
+function createFollowing(followingObj) {
   let follows = document.createElement("p");
   follows.setAttribute("class", "following");
-  follows.innerHTML = "135";
+  follows.innerHTML = `${followingObj["info"]["following"]}`;;
 
   following.appendChild(follows);
 }
