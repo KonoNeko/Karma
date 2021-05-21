@@ -26,7 +26,7 @@ function findUsers(){
             if (users[i].username === targetUser){
                 console.log(users[i].username);
                 alert("we find the "+users[i].username);
-            }else if(targetUser===null){
+            }else if(targetUser === ""){
                 alert("the input can not be null");
             }else{
                 alert("the input users did not exist");
@@ -34,6 +34,7 @@ function findUsers(){
         }
     });
 }
+
 // findUsers();
 // document.getElementById("search-button").addEventListener("click",  function () {
 //     // let targetUser = document.getElementById("search-texts").value;
