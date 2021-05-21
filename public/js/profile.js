@@ -326,10 +326,10 @@ function showProfile() {
       .get()
       .then(function (doc) {
         let user = doc.data();
-        console.log(user.name);
-        console.log(user.email);
-        document.getElementById("name").innerHTML = user.name;
-        document.getElementById("email").innerHTML = user.email;
+        console.log(user.fullName);
+        console.log(user.username);
+        document.getElementById("name").innerHTML = user.fullName;
+        document.getElementById("username").innerHTML = "@" + user.username;
       })
 
       .catch((error) => {
@@ -396,8 +396,8 @@ function loadProfile(profileObj) {
   loadExperience(profileObj);
   loadAwards(profileObj);
   loadProfilepic(profileObj);
-  // loadFollowers();
-  // loadFollowing();
+  loadFollowers(profileObj);
+  loadFollowing(profileObj);
   loadWhatsNew();
   loadRecommendedConnections();
 }
@@ -416,8 +416,8 @@ function loadPosts(profileObj) {
 }
 
 function loadNumPosts(profileObj) {
-  // let numPosts = document.getElementById("numPosts");
-  // createNumPosts(numPosts)
+  let numPosts = document.getElementById("numOfPosts");
+  createNumPosts(numPosts, profileObj.info.posts)
 }
 
 function loadSkills(profileObj) {
@@ -464,12 +464,12 @@ function loadProfilepic(profileObj) {
 }
 
 function loadFollowing(profileObj) {
-  let following = document.getElementById("following");
+  let following = document.getElementById("numOfFollowing");
   createFollowing(following, profileObj);
 }
 
 function loadFollowers(profileObj) {
-  let follower = document.getElementById("followers");
+  let follower = document.getElementById("numOfFollowers");
   createFollowers(follower, profileObj);
 }
 
@@ -761,24 +761,8 @@ function addAwards() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-function createNumPosts(numPosts) {
-  let post = document.createElement("p");
-  post.setAttribute("class", "followers");
-  post.innerHTML = "1";
-
-  numPosts.appendChild(post);
+function createNumPosts(numPosts, number) {
+  numPosts.innerHTML = number;
 }
 
 function createAboutMe(aboutMe, aboutMeObj) {
@@ -944,19 +928,11 @@ function createAwards(awards, awardsObj) {
 }
 
 function createFollowers(follower, followerObj) {
-  let follow = document.createElement("p");
-  follow.setAttribute("class", "followers");
-  follow.innerHTML = `${followerObj.followers}`;
-
-  follower.appendChild(follow);
+  follower.innerHTML = `${followerObj.info.followers}`;
 }
 
 function createFollowing(following, followingObj) {
-  let follows = document.createElement("p");
-  follows.setAttribute("class", "following");
-  follows.innerHTML = `${followingObj.following}`;
-
-  following.appendChild(follows);
+  following.innerHTML = `${followingObj.info.followers}`;
 }
 
 function createRecommendedConnection(recommended) {
