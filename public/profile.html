@@ -148,6 +148,57 @@
       </div>
     </div>
 
+    <div id="followersModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closefollowers">&times;</span>
+        <p>Some text in the modal...</p>
+      </div>
+    </div>
+
+    <!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span id="closemymodal" class="close">&times;</span>
+      <h1 class="heading1">Edit Profile</h1>
+    </div>
+    <span>
+      <div class="modal-body">
+        
+    <div id="buttons">
+
+      <button id="addskills" onclick="addAboutMe()">Add Bio</buton>
+
+      <button id="addskills" onclick="addSkills()">Add skills</buton>
+
+      <button id="addedu" onclick="addEducation()"
+        >Add education</buton
+      >
+
+      <button id="addexp" onclick="addExperience()"
+        >Add experience</buton
+      >
+      <button id="addexp" onclick="addAwards()"
+        >Add awards</buton
+      >
+    </div>
+    <div id="button-content"></div>
+    <button id="save">Save</button>
+      </div>
+    </span>
+  </div>
+</div>
+
+
+<div id="viewapplicationsmodal" class="modal">
+  <div id="viewapplicationsmodal-content" class="modal-content">
+    <span class="close" id="closeapplications">&times;</span>
+    <p class="heading1">View your applications</p>
+    <button onclick="addApplication()" id="addapplication">Add application</button>
+  </div>
+</div>
+
     <div class="flex-main">
       <div class="column" id="mainmain">
         <div id="profile-main">
@@ -171,7 +222,7 @@
               </div>
 
               <div class="numbers-column" id="numOfFollowersDiv">
-                <p class="bodytitle" id="numOfFollowers">515</p>
+                <p class="bodytitle modalBtn" id="numOfFollowers">515</p>
                 <p>Followers</p>
               </div>
 
@@ -182,8 +233,8 @@
             </div>
 
             <div class="profile-buttons-div">
-              <button id="editbtn">Edit Profile</button>
-              <button id="msgbtn">Message</button>
+              <button class="modalBtn" id="editbtn">Edit profile</button>
+              <button class='modalBtn' id="msgbtn">View applications</button>
             </div>
           </div>
         </div>
@@ -260,6 +311,7 @@
   <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
   <script src="js/signup.js"></script>
   <script src="js/profile.js"></script>
+  <script src="js/viewapplications.js"></script>
   <script>
     showProfile();
 
@@ -268,5 +320,117 @@
         window.location.href = "sign-up.html";
       }
     });
+
+    // // followers MODAL
+    // // Get the modal
+    // var followersmodal = document.getElementById("followersModal");
+
+    // // Get the button that opens the modal
+    // var btn = document.getElementById("numOfFollowersDiv");
+
+    // // Get the <span> element that closes the modal
+    // var span = document.getElementById("closefollowers");
+
+    // // When the user clicks on the button, open the modal
+    // btn.onclick = function () {
+    //   followersmodal.style.display = "block";
+    // };
+
+    // // When the user clicks on <span> (x), close the modal
+    // span.onclick = function () {
+    //   followersmodal.style.display = "none";
+    // };
+
+    // // When the user clicks anywhere outside of the modal, close it
+    // window.onclick = function (event) {
+    //   if (event.target == followersmodal) {
+    //     followersmodal.style.display = "none";
+    //   }
+    // };
+
+    // // editBtnModal
+    // var editbtnmodal = document.getElementById("myModal");
+    // var editbtn = document.getElementById("editbtn");
+    // var editbtnspan = document.getElementById("closemymodal");
+    // editbtn.onclick = function() {
+    //   editbtnmodal.style.display = "block";
+    // }
+
+    // editbtnspan.onclick = function() {
+    //   editbtnmodal.style.display = "none";
+    // }
+
+    // window.onclick = function (event) {
+    //   if (event.target == editbtnmodal) {
+    //     editbtnmodal.style.display = "none";
+    //   }
+    // };
+
+    // // view applications modal
+    // var viewapplicationsmodal = document.getElementById("viewapplicationsmodal");
+    // var viewapplicationsbtn = document.getElementById("msgbtn");
+    // var viewapplicationsspan = document.getElementById("closeapplications");
+    // viewapplicationsbtn.onclick = function() {
+    //   viewapplicationsmodal.style.display = "block";
+    // }
+
+    // viewapplicationsspan.onclick = function() {
+    //   viewapplicationsmodal.style.display = "none";
+    // }
+
+    // window.onclick = function(event) {
+    //   if (event.target == viewapplicationsmodal) {
+    //     viewapplicationsmodal.style.display = "none";
+    //   }
+    // }
+
+    // Get the modal
+var modal = document.getElementsByClassName('modal');
+
+// Get the button that opens the modal
+var btn = document.getElementsByClassName("modalBtn");
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close");
+
+// When the user clicks the button, open the modal 
+btn[0].onclick = function() {
+    modal[0].style.display = "block";
+}
+
+btn[1].onclick = function() {
+    modal[1].style.display = "block";
+}
+
+btn[2].onclick = function() {
+  modal[2].style.display="block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span[0].onclick = function() {
+    modal[0].style.display = "none";
+}
+
+span[1].onclick = function() {
+    modal[1].style.display = "none";
+}
+
+span[2].onclick = function() {
+    modal[2].style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal[0]) {
+         modal[0].style.display = "none";
+     }
+    if (event.target == modal[1]) {
+         modal[1].style.display = "none";
+     }  
+     if (event.target == modal[2]) {
+         modal[2].style.display = "none";
+     }  
+}
   </script>
 </html>

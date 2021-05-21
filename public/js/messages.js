@@ -124,14 +124,13 @@ function view_messages(userID) {
     generateNoMessages();
   }
   let keys = Object.keys(result);
-  for (let i=0; i<keys.length; i++) {
+  for (let i = 0; i < keys.length; i++) {
     generateMessager(result[keys[i]]);
     if (i != keys.length - 1) {
       generateLine();
     }
   }
 }
-
 
 function APIRequest(method, url) {
   console.log(method + ": " + url);
@@ -144,17 +143,15 @@ function APIRequest(method, url) {
       // console.log("loading post");
       // console.log(result);
       let keys = Object.keys(result);
-      for (let i=0; i<keys.length; i++) {
+      for (let i = 0; i < keys.length; i++) {
         generateMessager(result[keys[i]]);
         if (i != keys.length - 1) {
           generateLine();
         }
       }
     }
-  }
+  };
 }
-
-
 
 let width =
   window.innerWidth ||
