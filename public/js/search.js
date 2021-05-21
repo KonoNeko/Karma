@@ -20,16 +20,21 @@ async function  getUsers(){
 // }
 function findUsers(){
     getUsers().then(users => {
-        let targetUser = document.getElementById("search-input")
+        let targetUser = document.getElementById("search-input").value;
         for (let i = 0; i < users.length; i++){
             // look for the entry with a matching `users` value
-            // if (users[i].username === targetUser){
-                console.log(users[i].username)
-            // }
+            if (users[i].username === targetUser){
+                console.log(users[i].username);
+                alert("we find the "+users[i].username);
+            }else if(targetUser===null){
+                alert("the input can not be null");
+            }else{
+                alert("the input users did not exist");
+            }
         }
     });
 }
-findUsers()
+// findUsers();
 // document.getElementById("search-button").addEventListener("click",  function () {
 //     // let targetUser = document.getElementById("search-texts").value;
 //     let targetUser = "marlon";
