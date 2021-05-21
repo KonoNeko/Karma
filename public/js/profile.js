@@ -9,17 +9,17 @@ let result = {
     "full_name": "Marlon Fajardo",
     "bio": "This is my bio",
     "posts": 2,
-    "followers": 0,
-    "following": 0,
-    "profile_pic_url": "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+    "followers": 1,
+    "following": 1,
+    "profile_pic_url": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
     "is_volunteer": 1
   },
   "education": {
     "1": {
       "education_id": 1,
       "school_name": "Burnaby South Secondary",
-      "start_date": "06/2020",
-      "end_date": "01/2021",
+      "edu_start_date": "09-2013",
+      "edu_end_date": "06-2018",
       "gpa": 3.5,
       "certification_type": "High School Diploma",
       "edu_image_url": "https://www.studyinburnaby.ca/wp-content/uploads/2017/05/Burnaby-South-Secondary.jpg"
@@ -27,8 +27,8 @@ let result = {
     "2": {
       "education_id": 2,
       "school_name": "British Columbia Institute of Technology",
-      "start_date": "06/2020",
-      "end_date": "01/2021",
+      "edu_start_date": "09-2019",
+      "edu_end_date": "05-2021",
       "gpa": 3.5,
       "certification_type": "Technical Diploma",
       "edu_image_url": "https://pbs.twimg.com/profile_images/1291056095440433152/fKpCeIld_400x400.png"
@@ -50,6 +50,18 @@ let result = {
     "4": {
       "skill_id": 4,
       "skill_title": "Communication"
+    },
+    "5": {
+      "skill_id": 5,
+      "skill_title": "Fast Learner"
+    },
+    "6": {
+      "skill_id": 6,
+      "skill_title": "Reliable"
+    },
+    "7": {
+      "skill_id": 7,
+      "skill_title": "Community Member"
     }
   },
   "experience": {
@@ -57,29 +69,102 @@ let result = {
       "experience_id": 1,
       "job_title": "Warehouse Associate",
       "employer": "Continental Importers",
-      "exp_image_url": "https://www.eastvillagevancouver.ca/wp-content/uploads/2016/07/static1.squarespace.jpg"
+      "exp_image_url": "https://www.eastvillagevancouver.ca/wp-content/uploads/2016/07/static1.squarespace.jpg",
+      "exp_start_date": "06-2020",
+      "exp_end_date": "01-2021"
     },
     "2": {
       "experience_id": 2,
       "job_title": "Production Specialist",
       "employer": "Fine Line Signs",
-      "exp_image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/0naXOdpTDnO34kJob1ajLQ/ls.jpg"
+      "exp_image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/0naXOdpTDnO34kJob1ajLQ/ls.jpg",
+      "exp_start_date": "06/2014",
+      "exp_end_date": "08-2019"
+    },
+    "4": {
+      "experience_id": 4,
+      "job_title": "Sales Associate",
+      "employer": "Sears Canada",
+      "exp_image_url": "https://www.ianbrignell.com/wp-content/uploads/2016/08/Sears-1024x915.gif",
+      "exp_start_date": "06-2017",
+      "exp_end_date": "01-2018"
     }
   },
   "certifications": {
     "1": {
-      "experience_id": 1,
-      "job_title": "Warehouse Associate",
-      "employer": "Continental Importers",
-      "exp_image_url": "https://www.eastvillagevancouver.ca/wp-content/uploads/2016/07/static1.squarespace.jpg"
-    },
-    "2": {
-      "experience_id": 2,
-      "job_title": "Production Specialist",
-      "employer": "Fine Line Signs",
-      "exp_image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/0naXOdpTDnO34kJob1ajLQ/ls.jpg"
+      "award_id": 1,
+      "title": "Wep Page Design Award",
+      "date_received": "06-2018",
+      "awards_image_url": "https://www.pngkey.com/png/detail/441-4414776_trophy-clipart-cute-silhouette-trophy-clipart.png"
     }
-  }
+  },
+  "posts": [
+    {
+      "post_info": {
+        "post_id": 1,
+        "image_url": "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
+        "caption": "This is the church I used to volunteer at, St. Mary's Parish! Always a blast with all the people I volunteer with.",
+        "location": "St. Mary's Parish",
+        "post_date": "2021-05-03T21:29:36.000Z",
+        "likes": 2,
+        "username": "marlon",
+        "profile_pic_url": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png"
+      },
+      "comments": {
+        "3": {
+          "comment_id": 3,
+          "post_id": 1,
+          "user_id": 1,
+          "comment": "Glad to see you active in your community!",
+          "is_a_reply": 0,
+          "id_of_comment_receiving_reply": null,
+          "comment_date": "2021-05-11T06:52:31.000Z",
+          "commenter_profile_pic": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+          "comment_poster": "Karma"
+        },
+        "totalComments": 1
+      }
+    },
+    {
+      "post_info": {
+        "post_id": 2,
+        "image_url": "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
+        "caption": "Volunteering at the sun run was so fun! Can't wait until the day they are able to hold another!",
+        "location": "BC Place",
+        "post_date": "2021-05-04T01:06:34.000Z",
+        "likes": 1,
+        "username": "marlon",
+        "profile_pic_url": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png"
+      },
+      "comments": {
+        "10": {
+          "comment_id": 10,
+          "post_id": 2,
+          "user_id": 1,
+          "comment": "We miss the sun run :(",
+          "is_a_reply": 0,
+          "id_of_comment_receiving_reply": null,
+          "comment_date": "2021-05-13T05:23:39.000Z",
+          "commenter_profile_pic": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+          "comment_poster": "Karma",
+          "replies": {
+            "14": {
+              "comment_id": 14,
+              "post_id": 2,
+              "user_id": 1,
+              "comment": "Yeah same",
+              "is_a_reply": 1,
+              "id_of_comment_receiving_reply": 10,
+              "comment_date": "2021-05-13T06:07:11.000Z",
+              "commenter_profile_pic": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+              "comment_poster": "marlon"
+            }
+          }
+        },
+        "totalComments": 2
+      }
+    }
+  ]
 };
 
 
@@ -325,8 +410,9 @@ function loadAboutMe(profileObj) {
 
 function loadPosts(profileObj) {
   let posts = document.getElementById("posts");
-  createPost(posts, profileObj);
-  createPost(posts);
+  for (let key of profileObj.posts) {
+    createPost(posts, key);
+  }
 }
 
 function loadNumPosts(profileObj) {
@@ -351,22 +437,25 @@ function loadSkills(profileObj) {
 
 function loadEducation(profileObj) {
   let education = document.getElementById("education");
-  for (let key of Object.keys(profileObj.education))
+  for (let key of Object.keys(profileObj.education)) {
     createEducation(education, profileObj.education[key]);
-    // console.log(profileObj.education[key])
+  }
+  // console.log(profileObj.education[key])
   // createEducation(education,profileObj);
 }
 
 function loadExperience(profileObj) {
   let experience = document.getElementById("experience");
-  for (let key of Object.keys(profileObj.experience))
+  for (let key of Object.keys(profileObj.experience)) {
     createExperience(experience, profileObj.experience[key]);
+  }
 }
 
 function loadAwards(profileObj) {
   let awards = document.getElementById("awards");
-  createAwards(awards, profileObj);
-  createAwards(awards, profileObj);
+  for (let key of Object.keys(profileObj.certifications)) {
+    createAwards(awards, profileObj.certifications[key]);
+  }
 }
 
 function loadProfilepic(profileObj) {
@@ -725,13 +814,13 @@ function createSkills(skills, skillsObj) {
 
   skills.appendChild(skillbtn);
 }
-function createPost(posts) {
+function createPost(posts, postsObj) {
   let postdiv = document.createElement("div");
   postdiv.setAttribute("class", "postdiv");
 
   let picture = document.createElement("img");
   picture.setAttribute("class", "postpic");
-  picture.src = "./images/placeholder.jpg";
+  picture.src = `${postsObj.post_info.image_url}`;
 
   postdiv.appendChild(picture);
   // picture.setAttribute(
@@ -816,11 +905,11 @@ function createExperience(experience, experienceObj) {
   experiencendiv.setAttribute("style", "margin-top: 10px");
 }
 
-function createAwards(awards) {
+function createAwards(awards, awardsObj) {
   let heading1 = document.createElement("p");
   heading1.setAttribute("class", "heading3");
   heading1.setAttribute("style", "font-weight: bold");
-  heading1.innerHTML = "District Authority Award in English Literature";
+  heading1.innerHTML = `${awardsObj.title}`;
 
   let experiencendiv = document.createElement("div");
   experiencendiv.setAttribute("class", "experience-post-div");
