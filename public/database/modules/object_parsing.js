@@ -88,14 +88,15 @@ function fillComments(object, currentPost) {
                 // If a replies object doesn't exist yet
                 if(!comments[comment_being_replied_to]['replies']) {
                     comments[comment_being_replied_to]['replies'] = {};
+                } else if (!comments[comment_being_replied_to]['replies'][currentID]) {
+                    comments[comment_being_replied_to]['replies'][currentID] = filterObject(object[i], comment_keys);
+                    commentNum++;
                 }
-                comments[comment_being_replied_to]['replies'][currentID] = filterObject(object[i], comment_keys);
-                
             } else if (!comments[currentID]) {
             // If current comment isn't parsed
                 comments[currentID] = filterObject(object[i], comment_keys);
+                commentNum++;
             }
-            commentNum++;
         }
     }
     comments.totalComments = commentNum;
