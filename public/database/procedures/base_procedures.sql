@@ -65,7 +65,11 @@ DROP PROCEDURE IF EXISTS get_profile_info;
 DELIMITER //
 CREATE PROCEDURE get_profile_info(IN current_username VARCHAR(50))
 BEGIN
-    SELECT prof.*, edu.*, ex.*, sk.*, aw.*
+    SELECT prof.*, edu.*, ex.*, sk.*, aw.*, sp.*,
+    get_user_name(pc.user_id) as comment_poster, pc.comment, pc.is_a_reply,
+    pc.comment_id, get_profile_pic(pc.user_id) as commenter_profile_pic,
+    pc.id_of_comment_receiving_reply, pc.post_date as comment_date
+
     FROM profiles prof
     INNER JOIN profile_education pe
     ON prof.profile_id = pe.profile_id
@@ -87,7 +91,14 @@ BEGIN
     INNER JOIN awards_certifications aw
     ON aw.award_id = pa.award_id
 
-    WHERE prof.username = current_username;
+    INNER JOIN social_posts sp
+    ON prof.profile_id = sp.user_id
+
+    LEFT JOIN post_comments pc
+    on sp.post_id = pc.post_id
+
+    WHERE prof.username = current_username
+    ORDER BY pc.post_date;
 END//
 DELIMITER ;
 

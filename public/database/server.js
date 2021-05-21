@@ -60,7 +60,8 @@ app.get(ENDPOINT + '/profiles/:userID', (req, res) => {
             education: filter.education(response),
             skills: filter.skills(response),
             experience: filter.experience(response),
-            certifications: filter.certifications(response)
+            certifications: filter.certifications(response),
+            posts: filter.posts(response)
         };
         res.end(JSON.stringify(profile));
     });
