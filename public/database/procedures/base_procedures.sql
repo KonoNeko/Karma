@@ -326,6 +326,7 @@ BEGIN
     get_user_name(get_other_user(con.conversation_id, current_username)) as other_user,
     get_full_name_with_id(get_other_user(con.conversation_id, current_username)) as other_user_fullname,
     get_profile_pic(get_other_user(con.conversation_id, current_username)) as other_user_profile_pic,
+    get_profile_pic(get_user_id(current_username)) as profile_pic,
     get_latest_message(con.conversation_id) as latest_message,
     get_latest_message_timestamp(con.conversation_id) as latest_message_timestamp,
     (SELECT (get_unread_messages(con.conversation_id, current_username) > 0)) as has_unread_messages,
