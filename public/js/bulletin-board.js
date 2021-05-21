@@ -287,6 +287,7 @@ function loadModal(oppObj) {
   let content = document.createElement("div");
   content.id = "modal" + oppObj.opportunity_id;
   content.className = "modal-content";
+  content.value = "posting";
 
   let img = document.createElement("div");
   img.className = "modal-column modal-img";
@@ -295,6 +296,7 @@ function loadModal(oppObj) {
 
   let textDiv = document.createElement("div");
   textDiv.className = "modal-column modal-text";
+  textDiv.id = "textModal" + oppObj.opportunity_id;
 
   let close = document.createElement("span");
   let title = document.createElement("p");
@@ -317,23 +319,115 @@ function loadModal(oppObj) {
   close.innerHTML = "&times;";
   title.innerText = oppObj.title;
   location.innerText = "Posted By " + oppObj.employer;
-  description.innerText = oppObj.description + "<br>" + oppObj.requirements;
+  description.innerHTML = oppObj.description + "<br>" + oppObj.requirements;
   btn.innerText = "Apply to this opportunity";
 
-  close.onclick = function () {
-    hideModal(oppObj.opportunity_id);
+
+  btn.onclick = () => {
+    displayApplication(oppObj);
   };
 
-  textDiv.appendChild(close);
+  // close.onclick = function () {
+  //   hideModal(oppObj.opportunity_id);
+  // };
+
+  // textDiv.appendChild(close);
   textDiv.appendChild(title);
   textDiv.appendChild(location);
   textDiv.appendChild(description);
   textDiv.appendChild(btn);
 
   content.appendChild(img);
-  content.appendChild(textDiv);
+  content.appendChild(textDiv);  
+  loadApplication(content, oppObj);
 
   modal.appendChild(content);
+}
+
+function displayApplication(oppObj) {
+  document.getElementById("application" + oppObj.opportunity_id).style.display = "block";
+  document.getElementById("textModal" + oppObj.opportunity_id).style.display = "none";
+
+  document.getElementById("myModal").onclick = () => {
+    document.getElementById("textModal" + oppObj.opportunity_id).style.display = "block";
+    document.getElementById("application" + oppObj.opportunity_id).style.display = "none";
+    hideModal(oppObj.opportunity_id);
+  }
+}
+
+function loadApplication(content, oppObj) {
+  let textModal = document.createElement("div");
+  textModal.className = "modal-column modal-text applicationDiv";
+  textModal.id = "application" + oppObj.opportunity_id;
+
+  let title = document.createElement("p");
+  let nameLabel = document.createElement("p");
+  let nameText = document.createElement("p");
+  let emailLabel = document.createElement("p");
+  let emailText = document.createElement("p");
+  let phoneLabel = document.createElement("p");
+  let phoneText = document.createElement("input");
+  let btn = document.createElement("btn");
+
+  title.id = "modalRole";
+  location.id = "modalLocation";
+  btn.id = "modalButton";
+
+  title.className = "heading1";
+  location.className = "heading2";
+
+  btn.className = "primarybutton";
+  nameLabel.className = "applicationLabel";
+  emailLabel.className = "applicationLabel";
+  phoneLabel.className = "applicationLabel";
+  nameText.className = "applicationText";
+  emailText.className = "applicationText";
+  phoneText.className = "applicationText";
+
+  title.innerText = `Application for ${oppObj.title} with ${oppObj.employer}`;
+  nameLabel.innerHTML = "Name";
+  emailLabel.innerHTML = "Email";
+  phoneLabel.type = "text";
+  phoneLabel.innerHTML = "Phone Number";
+  // let info = get_firebase_info();
+  // nameText.innerHTML = info.name;
+  // emailText.innerHTML = info.name;
+  // phoneText.innerHTML = info.name;
+  nameText.innerHTML = "Marlon Fajardo";
+  emailText.innerHTML = "email@email.com";
+  phoneText.innerHTML = "(778) 123-4567";
+  btn.innerText = "Send Application";
+
+  textModal.appendChild(title);
+  textModal.appendChild(nameLabel);
+  textModal.appendChild(nameText);
+  textModal.appendChild(emailLabel);
+  textModal.appendChild(emailText);
+  textModal.appendChild(phoneLabel);
+  textModal.appendChild(phoneText);
+  textModal.appendChild(btn);
+  textModal.style.textAlign = "left";
+
+  content.appendChild(textModal);
+}
+
+function get_firebase_info() {
+  let info = {};
+  firebase.auth().onAuthStateChanged(function (user) {
+    db.collection("users")
+      .doc(user.uid)
+      .get()
+      .then(function (doc) {
+        let user = doc.data();
+        info['name'] = user.name;
+        info['email'] = user.email;
+        // info['username'] = user.username;  // Does this even exist???
+        return info;
+      })
+      .catch((error) => {
+        console.log(`Error getting data: ${error}`);
+      });
+  });
 }
 
 function displayModal(id) {

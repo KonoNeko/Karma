@@ -122,8 +122,13 @@
   margin-left: 50px;
 }
 
+.applicationDiv {
+  display: none
+}
+
 .primarybutton {
-  width: 100%;
+  position: absolute;
+  bottom: 24px;
   padding: 20px;
 }
 
