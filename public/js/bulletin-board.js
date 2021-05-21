@@ -231,12 +231,53 @@ function returnHighestTimeDiff(time) {
   }
 }
 
-function view_social_feed(userID) {
+function formatParams(params) {
+  let string = "?";
+  let keys = Object.keys(params);
+  for(let i=0; i<keys.length; i++) {
+    string += `${keys[i]}=${params[keys[i]]}`;
+    if (i < keys.legnth - 1) {
+      string += "&";
+    }
+  }
+  return string;
+}
+
+function view_opportunities(userID) {
   const method = "GET";
-  const endpoint = "/posts";
+  const endpoint = "/opportunities";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
   APIRequest(method, url); 
+}
+
+function send_application(oppObj) {
+  let user = get_firebase_info();
+  const params = formatParams({
+    "id": user.username, // still don't know if a firebase username exists
+    "post": oppObj.opportunity_id,
+    "msg": document.getElementById("message" + oppObj.opportunity_id).value,
+    "email": document.getElementById("email" + oppObj.opportunity_id).textContent,
+    "phone": document.getElementById("phone" + oppObj.opportunity_id),
+    "city": "Vancouver, British Columbia"
+  });
+  const method = "POST";
+  const endpoint = "/opportunities/applications";
+  const url = BASE_URL + endpoint + params
+  APIRequestSendApplication(method, url);
+}
+
+function APIRequestSendApplication(method, url) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          let result = JSON.parse(this.responseText);
+          console.log(result);
+      }
+  }
 }
 
 
@@ -250,8 +291,11 @@ function APIRequest(method, url) {
           // let result = JSON.parse(this.responseText);
           // console.log("loading post");
           // console.log(result);
-          for (let i=0; i<result.length; i++) {
-              createPost(result[i]);
+          for (const category of Object.keys(categories)) {
+            let categoryList = result[category];
+            for(const id of Object.keys(categoryList)) {
+              loadOpportunity(category, categoryList[id]); 
+            }
           }
           
       }
@@ -367,11 +411,17 @@ function loadApplication(content, oppObj) {
   let emailText = document.createElement("p");
   let phoneLabel = document.createElement("p");
   let phoneText = document.createElement("input");
+  let messageLabel = document.createElement("p");
+  let messageText = document.createElement("textarea");
   let btn = document.createElement("btn");
 
   title.id = "modalRole";
   location.id = "modalLocation";
   btn.id = "modalButton";
+  nameText.id = "name" + oppObj.opportunity_id;
+  emailText.id = "email" + oppObj.opportunity_id;
+  phoneText.id = "phone" + oppObj.opportunity_id;
+  messageText.id = "message" + oppObj.opportunity_id;
 
   title.className = "heading1";
   location.className = "heading2";
@@ -380,22 +430,25 @@ function loadApplication(content, oppObj) {
   nameLabel.className = "applicationLabel";
   emailLabel.className = "applicationLabel";
   phoneLabel.className = "applicationLabel";
+  messageLabel.className = "applicationLabel";
   nameText.className = "applicationText";
   emailText.className = "applicationText";
-  phoneText.className = "applicationText";
+  phoneText.className = "applicationInput";
+  messageText.className = "applicationTextArea";
 
   title.innerText = `Application for ${oppObj.title} with ${oppObj.employer}`;
   nameLabel.innerHTML = "Name";
   emailLabel.innerHTML = "Email";
   phoneLabel.type = "text";
   phoneLabel.innerHTML = "Phone Number";
+  messageLabel.innerHTML = "Message";
   // let info = get_firebase_info();
   // nameText.innerHTML = info.name;
   // emailText.innerHTML = info.name;
   // phoneText.innerHTML = info.name;
   nameText.innerHTML = "Marlon Fajardo";
   emailText.innerHTML = "email@email.com";
-  phoneText.innerHTML = "(778) 123-4567";
+  phoneText.value = "(778) 123-4567";
   btn.innerText = "Send Application";
 
   textModal.appendChild(title);
@@ -405,6 +458,8 @@ function loadApplication(content, oppObj) {
   textModal.appendChild(emailText);
   textModal.appendChild(phoneLabel);
   textModal.appendChild(phoneText);
+  textModal.appendChild(messageLabel);
+  textModal.appendChild(messageText);
   textModal.appendChild(btn);
   textModal.style.textAlign = "left";
 
