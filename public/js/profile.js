@@ -325,7 +325,7 @@ function loadAboutMe(profileObj) {
 
 function loadPosts(profileObj) {
   let posts = document.getElementById("posts");
-  createPost(posts,profileObj);
+  createPost(posts, profileObj);
   createPost(posts);
 }
 
@@ -351,35 +351,37 @@ function loadSkills(profileObj) {
 
 function loadEducation(profileObj) {
   let education = document.getElementById("education");
-  createEducation(education,profileObj);
-  createEducation(education,profileObj);
+  for (let key of Object.keys(profileObj.education))
+    createEducation(education, profileObj.education[key]);
+    // console.log(profileObj.education[key])
+  // createEducation(education,profileObj);
 }
 
 function loadExperience(profileObj) {
   let experience = document.getElementById("experience");
-  createExperience(experience,profileObj);
-  createExperience(experience,profileObj);
+  for (let key of Object.keys(profileObj.experience))
+    createExperience(experience, profileObj.experience[key]);
 }
 
 function loadAwards(profileObj) {
   let awards = document.getElementById("awards");
-  createAwards(awards,profileObj);
-  createAwards(awards,profileObj);
+  createAwards(awards, profileObj);
+  createAwards(awards, profileObj);
 }
 
 function loadProfilepic(profileObj) {
   let profilepic = document.getElementById("profile");
-  createProfilePic(profilepic,profileObj);
+  createProfilePic(profilepic, profileObj);
 }
 
 function loadFollowing(profileObj) {
   let following = document.getElementById("following");
-  createFollowing(following,profileObj);
+  createFollowing(following, profileObj);
 }
 
 function loadFollowers(profileObj) {
   let follower = document.getElementById("followers");
-  createFollowers(follower,profileObj);
+  createFollowers(follower, profileObj);
 }
 
 function loadWhatsNew() {
@@ -742,7 +744,7 @@ function createEducation(education, educationObj) {
   let heading1 = document.createElement("p");
   heading1.setAttribute("class", "heading3");
   heading1.setAttribute("style", "font-weight: bold");
-  heading1.innerHTML = "Burnaby Mountain Secondary School";
+  heading1.innerHTML = `${educationObj.school_name}`;
 
   let educationdiv = document.createElement("div");
   educationdiv.setAttribute("class", "education-post-div");
@@ -758,7 +760,7 @@ function createEducation(education, educationObj) {
 
   let para = document.createElement("p");
   para.setAttribute("class", "schoolpara");
-  para.innerHTML = "September 2016 to June 2021";
+  para.innerHTML = `${educationObj.start_date}`;
 
   picturediv.appendChild(picture);
 
@@ -776,11 +778,11 @@ function createEducation(education, educationObj) {
   educationdiv.setAttribute("style", "margin-top: 10px");
 }
 
-function createExperience(experience) {
+function createExperience(experience, experienceObj) {
   let heading1 = document.createElement("p");
   heading1.setAttribute("class", "heading3");
   heading1.setAttribute("style", "font-weight: bold");
-  heading1.innerHTML = "Library volunteer";
+  heading1.innerHTML = `${experienceObj.job_title}`;
 
   let experiencendiv = document.createElement("div");
   experiencendiv.setAttribute("class", "experience-post-div");
@@ -796,7 +798,7 @@ function createExperience(experience) {
 
   let para = document.createElement("p");
   para.setAttribute("class", "schoolpara");
-  para.innerHTML = "Archimedes Library, Newton";
+  para.innerHTML = `${experienceObj.employer}`;
 
   picturediv.appendChild(picture);
 
