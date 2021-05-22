@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "target": "karma",
     "public": "public",
     "ignore": [
       "firebase.json",

@@ -1,3 +1,21 @@
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+  apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
+  authDomain: "karma-535f3.firebaseapp.com",
+  databaseURL: "https://karma-535f3-default-rtdb.firebaseio.com",
+  projectId: "karma-535f3",
+  storageBucket: "karma-535f3.appspot.com",
+  messagingSenderId: "1023587584355",
+  appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
+  measurementId: "G-VTZ4TEWFBW"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);  
+const db = firebase.firestore();
+
+let info = {};
+get_firebase_info();
 
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
@@ -252,19 +270,26 @@ function view_opportunities(userID) {
 }
 
 function send_application(oppObj) {
-  let user = get_firebase_info();
-  const params = formatParams({
-    "id": user.username, // still don't know if a firebase username exists
-    "post": oppObj.opportunity_id,
-    "msg": document.getElementById("message" + oppObj.opportunity_id).value,
-    "email": document.getElementById("email" + oppObj.opportunity_id).textContent,
-    "phone": document.getElementById("phone" + oppObj.opportunity_id),
-    "city": "Vancouver, British Columbia"
-  });
-  const method = "POST";
-  const endpoint = "/opportunities/applications";
-  const url = BASE_URL + endpoint + params
-  APIRequestSendApplication(method, url);
+  let msg = document.getElementById("message" + oppObj.opportunity_id).value;
+  let email = document.getElementById("email" + oppObj.opportunity_id).textContent;
+  let phone = document.getElementById("phone" + oppObj.opportunity_id).value;
+
+  if (email != "" && phone != "") {
+    const params = formatParams({
+      "id": info.username,
+      "post": oppObj.opportunity_id,
+      "msg": msg,
+      "email": email,
+      "phone": phone,
+      "city": "Vancouver, British Columbia"
+    });
+    const method = "POST";
+    const endpoint = "/opportunities/applications";
+    const url = BASE_URL + endpoint + params
+    APIRequestSendApplication(method, url);
+  } else {
+    alert("Could not send application, some fields were left unfilled.")
+  }
 }
 
 function APIRequestSendApplication(method, url) {
@@ -382,13 +407,13 @@ function loadModal(oppObj) {
   textDiv.appendChild(btn);
 
   content.appendChild(img);
-  content.appendChild(textDiv);  
-  loadApplication(content, oppObj);
-
+  content.appendChild(textDiv);
   modal.appendChild(content);
 }
 
 function displayApplication(oppObj) {
+  let content = document.getElementById("modal" + oppObj.opportunity_id);
+  loadApplication(content, oppObj);
   document.getElementById("application" + oppObj.opportunity_id).style.display = "block";
   document.getElementById("textModal" + oppObj.opportunity_id).style.display = "none";
 
@@ -442,15 +467,17 @@ function loadApplication(content, oppObj) {
   phoneLabel.type = "text";
   phoneLabel.innerHTML = "Phone Number";
   messageLabel.innerHTML = "Message";
-  // let info = get_firebase_info();
-  // nameText.innerHTML = info.name;
-  // emailText.innerHTML = info.name;
-  // phoneText.innerHTML = info.name;
+  nameText.innerHTML = info.fullNmae;
+  emailText.innerHTML = info.email;
   nameText.innerHTML = "Marlon Fajardo";
   emailText.innerHTML = "email@email.com";
-  phoneText.value = "(778) 123-4567";
+  phoneText.placeholder = "(123) 456-7890";
   btn.innerText = "Send Application";
 
+  btn.onclick = () => {
+    send_application(oppObj);
+  }
+ 
   textModal.appendChild(title);
   textModal.appendChild(nameLabel);
   textModal.appendChild(nameText);
@@ -463,21 +490,21 @@ function loadApplication(content, oppObj) {
   textModal.appendChild(btn);
   textModal.style.textAlign = "left";
 
+
   content.appendChild(textModal);
 }
 
-function get_firebase_info() {
-  let info = {};
+async function get_firebase_info() {
   firebase.auth().onAuthStateChanged(function (user) {
     db.collection("users")
       .doc(user.uid)
       .get()
       .then(function (doc) {
         let user = doc.data();
-        info['name'] = user.name;
-        info['email'] = user.email;
-        // info['username'] = user.username;  // Does this even exist???
-        return info;
+        console.log(user);
+        info.fullName = user.fullName;
+        info.email = user.email;
+        info.username = user.username; 
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
