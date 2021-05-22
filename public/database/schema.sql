@@ -184,7 +184,7 @@ CREATE TABLE volunteer_categories (
 );
 
 CREATE TABLE notifications (
-    `notifiation_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `notification_id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `profile_id` INTEGER NOT NULL,
     `username_of_notification` CHAR(50) NOT NULL,
     `profile_pic_url` TEXT NOT NULL,

@@ -1316,7 +1316,7 @@ CREATE PROCEDURE view_notifications(IN current_username CHAR(50))
 BEGIN
     SELECT * FROM notifications
     WHERE profile_id = get_user_id(current_username)
-    ORDER BY notifiation_id DESC;
+    ORDER BY notification_id DESC;
 END//
 DELIMITER ;
 
