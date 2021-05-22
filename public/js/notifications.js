@@ -78,6 +78,20 @@ function accept_request(userID, follower) {
 }
 
 
+function request_follow(userID, follower) {
+  const method = "POST";
+  const endpoint = "/profiles/followers";
+  const params = formatParams({
+    "id": userID,
+    "follower": follower,
+
+  });
+  const url = BASE_URL + endpoint + params;
+
+  return APIRequest(method, url);
+}
+
+
 
 
 
@@ -409,17 +423,35 @@ function generateNotificationFollowRequest(postObj) {
 
   notificationsDiv.appendChild(notificationDiv);
 
-  $(".follow-btn").click(function () {
-    let userID = followDiv.value;
-    let follower = followDiv.value;
-    accept_request(userID, follower);
-  });
 
+  
 
-
-
-
+  
 }
+
+$("").click(function () {
+  let userID = followDiv.value;
+  let follower = followDiv.value;
+  accept_request(userID, follower);
+});
+
+
+$("").click(function () {
+  let userID = followDiv.value;
+  let follower = followDiv.value;
+  request_follow(userID, follower);
+});
+
+
+
+
+
+
+
+
+
+
+
 
 // RECOMMENDED.JS STUFF // SIDEBAR STUFF ONLY // SIDEBAR STUFF ONLY // RECCOMMENDED.JS STUFF //
 function loadWhatsNew() {
