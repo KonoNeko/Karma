@@ -144,18 +144,11 @@ function formatParams(params) {
   let keys = Object.keys(params);
   for(let i=0; i<keys.length; i++) {
     string += `${keys[i]}=${params[keys[i]]}`;
-    if (i < keys.legnth - 1) {
+    if (i < keys.length - 1) {
       string += "&";
     }
   }
   return string;
-}
-  let result = APIRequest(method, url);
-  while(true) {
-    if (result) {
-      return result;
-    }
-  }
 }
 
 
@@ -207,4 +200,5 @@ function returnHighestTimeDiff(time) {
         return "Just now";
       }
   }
+}
 }
