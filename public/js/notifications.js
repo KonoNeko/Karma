@@ -406,6 +406,12 @@ function generateNotificationFollowRequest(postObj) {
   notificationConfirmButton.id = postObj.notification_id;
   notificationConfirmButton.innerHTML = "<i class='fas fa-check-circle'></i>";
 
+  $("").click(function () {
+  let userID = notificationConfirmButton.value;
+  let follower = notificationConfirmButton.value;
+  accept_request(userID, follower);
+});
+
   let notificationDeleteButton = document.createElement("button");
   notificationDeleteButton.id = postObj.notification_id;
   notificationDeleteButton.innerHTML = "<i class='fas fa-trash-alt'></i>";
