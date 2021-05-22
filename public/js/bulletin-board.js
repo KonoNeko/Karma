@@ -254,10 +254,11 @@ function formatParams(params) {
   let keys = Object.keys(params);
   for(let i=0; i<keys.length; i++) {
     string += `${keys[i]}=${params[keys[i]]}`;
-    if (i < keys.legnth - 1) {
+    if (i < keys.length - 1) {
       string += "&";
     }
   }
+  console.log(string);
   return string;
 }
 
@@ -299,7 +300,7 @@ function APIRequestSendApplication(method, url) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-          let result = JSON.parse(this.responseText);
+          let result = this.responseText;
           console.log(result);
       }
   }
@@ -469,8 +470,6 @@ function loadApplication(content, oppObj) {
   messageLabel.innerHTML = "Message";
   nameText.innerHTML = info.fullNmae;
   emailText.innerHTML = info.email;
-  nameText.innerHTML = "Marlon Fajardo";
-  emailText.innerHTML = "email@email.com";
   phoneText.placeholder = "(123) 456-7890";
   btn.innerText = "Send Application";
 
