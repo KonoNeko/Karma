@@ -1,4 +1,7 @@
 // Your web app's Firebase configuration
+
+const e = require("express");
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
   apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
@@ -16,6 +19,9 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
+
+let info = {};
+get_firebase_info();
 
 const result = [
   {
@@ -112,6 +118,24 @@ const result = [
   },
 ];
 
+async function get_firebase_info() {
+  firebase.auth().onAuthStateChanged(function (user) {
+    db.collection("users")
+      .doc(user.uid)
+      .get()
+      .then(function (doc) {
+        let user = doc.data();
+        console.log(user);
+        info.fullName = user.fullName;
+        info.email = user.email;
+        info.username = user.username; 
+      })
+      .catch((error) => {
+        console.log(`Error getting data: ${error}`);
+      });
+  });
+}
+
 function formatTimestamp(timestamp) {
   let dateObj = new Date(Date.parse(timestamp));
   return returnHighestTimeDiff(dateObj);
@@ -146,7 +170,31 @@ function view_social_feed(userID) {
   for (let i = 0; i < result.length; i++) {
     createPost(result[i]);
   }
-  // APIRequest(method, url);
+  // APIRequest(method, url).then(
+  //   (result) => { 
+  //     let socialPosts = JSON.parse(result)[0];
+  //     for (let i = 0; i < result.length; i++) {
+  //       createPost(socialPosts[i]);
+  //     }
+  //   },
+  //   (err) => { console.log(err); }
+  // );
+}
+
+function createNewPost() {
+  const method = "GET";
+  const endpoint = "/posts";
+  const params = formatParams({
+    id: info.username,
+    img: document.getElementById("imageUrl").textContent,
+    caption: document.getElementById("captionInput").value,
+    location: document.getElementById("location").value
+  });
+  const url = BASE_URL + endpoint + params;
+  APIRequest(method, url).then(
+    (result) => { console.log("Successfull posted\n" + result)},
+    (err) => { console.log(err); }
+  );
 }
 
 function APIRequest(method, url) {
@@ -156,12 +204,7 @@ function APIRequest(method, url) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      if (result.length == 0) {
-        // createBlankHomePage()
-      }
-      for (let i = 0; i < result.length; i++) {
-        createPost(result[i]);
-      }
+      return this.responseText;
     }
   };
 }
@@ -596,27 +639,44 @@ function displayComments(comments, id) {
       }
     }
   }
-
-  // let captionDiv = loadCaption(placeholderImg, "Username", "This is a caption.");
-  // commentsDiv.appendChild(captionDiv);
-  // commentsDiv.appendChild(createLine());
-  // let comment1 = createComment(placeholderImg, "username", "This is a comment", "now", 1);
-  // let comment2 = createComment(placeholderImg, "username", "This is a comment", "5min", 2);
-  // let comment3 = createComment(placeholderImg, "username", "This is a comment", "10min", 3);
-  // let comment4 = createComment(placeholderImg, "username", "This is a comment", "15min", 4);
-  // let comment5 = createComment(placeholderImg, "username", "This is a comment", "20min", 5);
-  // let comment6 = createComment(placeholderImg, "username", "This is a comment", "20min", 6);
-  // let comment7 = createComment(placeholderImg, "username", "This is a comment", "20min", 7);
-  // let comment8 = createComment(placeholderImg, "username", "This is a comment", "20min", 8);
-
-  // commentsDiv.appendChild(comment1);
-  // commentsDiv.appendChild(comment2);
-  // commentsDiv.appendChild(comment3);
-  // commentsDiv.appendChild(comment4);
-  // commentsDiv.appendChild(comment5);
-  // commentsDiv.appendChild(comment6);
-  // commentsDiv.appendChild(comment7);
-  // commentsDiv.appendChild(comment8);
 }
+
+/*
+Credit to Deepak K for following code snippet.
+https://compile.blog/imgur-api-image-uploader/
+*/
+
+const uploadFileButton = document.getElementById("file-upload");
+let posted = false;
+uploadFileButton.addEventListener("change", ev => {
+  const formdata = new FormData()
+  formdata.append("image", ev.target.files[0])
+  fetch("https://api.imgur.com/3/image/", {
+      method: "post",
+      headers: {
+          Authorization: "Client-ID 4409588f10776f7"
+      },
+      body: formdata
+  }).then(data => data.json()).then(data => {
+      posted = true;
+      document.getElementById("imageUrl").innerText = data.data.link;
+  });
+})
+
+let link = document.getElementById("imageUrl").textContent;
+document.getElementById("postBtn").onclick = () => {
+  if (link != "" && posted && JSON.stringify(info) != "{}") {
+    console.log("Posting");
+    createNewPost();
+  } else if (!posted) {
+    window.alert("Please wait for image to finish uploading");
+  } else if (JSON.stringify(info) === "{}") {
+    window.alert("It doesn't look like you are signed in redirecting you now.");
+    window.location.href("sign-up.html")
+  } else if (link === '') {
+    window.alert("No image is upload");
+  }
+}
+
 
 loadHome();
