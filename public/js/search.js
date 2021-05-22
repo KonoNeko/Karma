@@ -21,17 +21,25 @@ async function  getUsers(){
 function findUsers(){
     getUsers().then(users => {
         let targetUser = document.getElementById("search-input").value;
+        // let showUser = document.createElement("textarea")
+        let area = document.getElementById("above-search")
+        if(targetUser === "")
+        {
+            alert("The input user does no exist");
+        }
         for (let i = 0; i < users.length; i++){
             // look for the entry with a matching `users` value
             if (users[i].username === targetUser){
+                let userName = users[i].username;
+                alert("We find "+ users[i].username)
                 console.log(users[i].username);
-                alert("we find the "+users[i].username);
-            }else if(targetUser === ""){
-                alert("the input can not be null");
-            }else{
-                alert("the input users did not exist");
+                let div123 = document.getElementById("searchResult");
+                let para = document.createElement("p");
+                para.innerHTML= users[i].username
+                div123.appendChild(para);
             }
-        }
+
+            }
     });
 }
 
