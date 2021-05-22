@@ -172,11 +172,13 @@
           <div class="newCaption">
             <div>
               <textarea rows="4" cols="50" placeholder="Write a caption here..."></textarea>
+              <img id="image">
+              <p id="url"></p>
             </div>
             <div style="font-size: 2.5rem" class="icons">
-              <i id="photo" class="fa fa-image dropzone"></i>
+              <label for="file-upload" class="fa fa-image"></label>
+              <input id="file-upload" type="file" style="display:none"/>
               <i id="marker" class="fas fa-map-marker-alt"></i>
-              <input type="file" id="file" style="display: none" />
             </div>
             <div class="button">
               <button id="postBtn" class="secondarybutton">Post</button>
@@ -313,8 +315,28 @@
   <script src="js/home.js"></script>
 
 <script src="js/search.js"></script>
-<script src="js/imgur.js"></script>
-<script src="js/upload.js">
+<script>
+  /*
+  Credit to Deepak K for following code snippet.
+  https://compile.blog/imgur-api-image-uploader/
+  */
+  const img = document.getElementById("image")
+  const file = document.getElementById("file-upload")
+  const url = document.getElementById("url");
+  file.addEventListener("change", ev => {
+      const formdata = new FormData()
+      formdata.append("image", ev.target.files[0])
+      fetch("https://api.imgur.com/3/image/", {
+          method: "post",
+          headers: {
+              Authorization: "Client-ID 4409588f10776f7"
+          },
+          body: formdata
+      }).then(data => data.json()).then(data => {
+          img.src = data.data.link
+          url.innerText = data.data.link
+      })
+  })
 </script>
 
 
