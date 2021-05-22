@@ -3,7 +3,7 @@ const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 const notification_types = {
   social_posts: generatePostNotification,
   opportunities: generateOpportunityNotification,
-  "profile_follows requested": generateNotificationFollowRequest,
+  "profile_follows request": generateNotificationFollowRequest,
   "profile_follows accepted": generateNotificationFollow,
 };
 
@@ -95,13 +95,24 @@ function loadAll() {
   // generateNoNotifications();
   let test = [
       {
+        notification_id: 50,
+        profile_id: 1,
+        username_of_notification: "testuser",
+        profile_pic_url: "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+        post_pic_url: null,
+        message: " has requested to follow you.",
+        type_of_event: "profile_follows request",
+        id_of_event: 16,
+        timestamp: "2021-05-22T21:21:51.000Z"
+      },
+      {
         notification_id: 41,
         profile_id: 1,
         username_of_notification: "Karma",
         profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
         post_pic_url: null,
-        message: " has requested to follow you.",
-        type_of_event: "profile_follows requested",
+        message: " is now following you.",
+        type_of_event: "profile_follows accepted",
         id_of_event: 12,
         timestamp: "2021-05-13T17:36:19.000Z"
       },
