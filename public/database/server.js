@@ -45,6 +45,28 @@ app.get(ENDPOINT + '/posts/:userID', (req, res) => {
     });
 });
 
+/**
+ * Creates a new social post to be posted to the social feed.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/posts?id=value&img=value&caption=value&location=value
+ */
+ app.post(ENDPOINT + '/posts', (req, res) => {
+    const userID = req.query.id;
+    const imageUrl = req.query.img;
+    const caption = req.query.caption;
+    const location = req.query.location;
+    const sql = `CALL create_post("${userID}", "${imageUrl}", "${caption}", "${location}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success creating social post");
+        } else {
+            res.send("Error creating social post");
+        }
+    });
+});
+
 
 /**
  * Gets the profile information for a given user.
@@ -794,6 +816,7 @@ DONEf) View all comments (GET - view_comments)                      TESTED
     g) View stories -  **TODO**
 DONEh) View social feed for a user (GET - user_posts_feed)          TESTED      DOCUMENTED(2)
 DONEi) Delete comment - (DELETE - delete_comment)                   TESTED
+    h) Create a new post (POST - )
 
 -Messages
 DONEa) View messages in conversation (GET - view_a_conversations)   TESTED      DOCUMENTED(22)
