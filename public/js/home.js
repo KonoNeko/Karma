@@ -171,6 +171,7 @@ function loadHome() {
   loadWhatsNew();
   loadRecommendedConnections();
   view_social_feed("karma");
+
   // createBlankHomePage(); // This will show a blank homepage.
 }
 
@@ -196,52 +197,27 @@ function loadStories() {
   createStory(story);
 }
 
-function loadWhatsNew() {
-  let whatsNew = document.getElementById(
-    "whats-new-volunteering-opportunities"
-  );
-  createWhatsNew(whatsNew);
-  createWhatsNew(whatsNew);
-  createWhatsNew(whatsNew);
-}
-
-function loadRecommendedConnections() {
-  let recommendedUsers = document.getElementById("recommended-connections");
-
-  let heading2 = document.createElement("hr");
-  recommendedUsers.appendChild(heading2);
-
-  createRecommendedConnection(recommendedUsers);
-  createRecommendedConnection(recommendedUsers);
-  createRecommendedConnection(recommendedUsers);
-
-  let viewAll = document.createElement("a");
-  viewAll.id = "view-all";
-  viewAll.innerHTML = "View all recommended connections";
-  viewAll.setAttribute("style", "margin-top: 20px");
-  // viewAll.setAttribute("href", ""); // YOU NEED SOMETHING IN HERE OR IT BREAKS THE CODE
-
-  recommendedUsers.appendChild(viewAll);
-}
-
 // CREATE INDIVIDUAL UI ELEMENTS
 
-// CREATES A BLANK HOME PAGE.
+function createBlankHomePage() {
+  let blankHome = document.getElementById("posts");
 
-// function createBlankHomePage() {
-//   let blankHome = document.getElementById("posts");
+  let noPostsImg = document.createElement("img");
+  noPostsImg.src = "./res/home.svg";
+  noPostsImg.setAttribute("style", "width: 100%;");
 
-//   let noPosts = document.createElement("p");
-//   noPosts.setAttribute("class", "heading3");
-//   noPosts.setAttribute(
-//     "style",
-//     "font-weight: 700; margin-bottom: 10px;"
-//   );
-//   noPosts.innerHTML = "You currently have no posts on your homepage feed. Connect with other users to see posts here!";
+  let noPosts = document.createElement("p");
+  noPosts.setAttribute("class", "heading4");
+  noPosts.setAttribute(
+    "style",
+    "font-weight: 700; margin-bottom: 10px; color: #214049;"
+  );
+  noPosts.innerHTML =
+    "You currently have no posts on your homepage feed. Connect with other users to see posts here!";
 
-//   blankHome.appendChild(noPosts);
-
-// }
+  blankHome.appendChild(noPostsImg);
+  blankHome.appendChild(noPosts);
+}
 
 function createStory(stories) {
   let storyImgDiv = document.createElement("div");
@@ -379,99 +355,6 @@ function createPost(postObj) {
   post.appendChild(comments);
 
   posts.appendChild(post);
-}
-
-function createRecommendedConnection(recommended) {
-  // let heading = document.createElement("hr");
-  // heading.setAttribute("class", "headers");
-
-  // recommended.appendChild(heading);
-
-  let recommendedUserDiv = document.createElement("div");
-  recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
-
-  let storyImgDiv = document.createElement("div");
-  storyImgDiv.setAttribute("class", "profilepic storyImgDiv");
-  storyImgDiv.setAttribute("style", "padding-bottom: 10px; width: 20%");
-  storyImgDiv.setAttribute(
-    "style",
-    "background-image: url('./images/placeholder.jpg')"
-  );
-
-  let nameAndUserName = document.createElement("div");
-  nameAndUserName.setAttribute("class", "name-and-userName");
-  nameAndUserName.setAttribute("style", "width: 50%;");
-
-  let userName = document.createElement("p");
-  userName.setAttribute("class", "userNames");
-  userName.innerHTML = "User name";
-
-  let userNameAt = document.createElement("p");
-  userNameAt.setAttribute("class", "userAt");
-  userNameAt.innerHTML = "@Username";
-
-  recommendedUserDiv.appendChild(storyImgDiv);
-  nameAndUserName.appendChild(userName);
-  nameAndUserName.appendChild(userNameAt);
-
-  recommendedUserDiv.appendChild(nameAndUserName);
-
-  let followUser = document.createElement("div");
-  let followUserButton = document.createElement("button");
-
-  followUserButton.innerHTML = "FOLLOW";
-  followUserButton.setAttribute("class", "followUserButton");
-  followUser.setAttribute("class", "followUser");
-  followUser.setAttribute("style", "width: 40%");
-  followUserButton.setAttribute("style", "width: 70%; min-width: 100px;");
-
-  followUser.appendChild(followUserButton);
-
-  recommendedUserDiv.appendChild(followUser);
-
-  let heading2 = document.createElement("hr");
-  heading2.setAttribute("style", "margin-top: 20px; margin-bottom: 20px;");
-
-  recommended.appendChild(recommendedUserDiv);
-  recommendedUserDiv.setAttribute(
-    "style",
-    "margin-top: 10px; margin-bottom: 10px;"
-  );
-  recommended.appendChild(heading2);
-
-  // let recommendedConnections = document.createElement("p");
-  // recommendedConnections.setAttribute("class", "recommendedConnections");
-  // recommendedConnections.innerHTML = "View all recommended connections";
-
-  // recommended.appendChild(recommendedConnections);
-}
-
-function createWhatsNew(newPost) {
-  let opportunityRole = document.createElement("p");
-  opportunityRole.innerHTML = "opportunityRole Role Role";
-  opportunityRole.setAttribute("class", "heading3");
-  opportunityRole.setAttribute("style", "font-weight: 700 !important;");
-
-  let opportunityImgDiv = document.createElement("div");
-  opportunityImgDiv.setAttribute("class", "bulletinboardpicture");
-  opportunityImgDiv.setAttribute("style", "padding-bottom: 10px");
-
-  let opportunityImg = document.createElement("img");
-  opportunityImg.src = "./images/placeholder.jpg";
-  opportunityImgDiv.appendChild(opportunityImg);
-
-  let opportunityLocation = document.createElement("p");
-  opportunityLocation.innerHTML = "opportunityLocation";
-  opportunityLocation.setAttribute("class", "bodytext");
-
-  let opportunityDiv = document.createElement("div");
-  opportunityDiv.setAttribute("class", "opportunity");
-  opportunityDiv.setAttribute("style", "margin-bottom: 10px;");
-  opportunityDiv.appendChild(opportunityImgDiv);
-  opportunityDiv.appendChild(opportunityRole);
-  opportunityDiv.appendChild(opportunityLocation);
-
-  newPost.appendChild(opportunityDiv);
 }
 
 function createModal(postObj) {

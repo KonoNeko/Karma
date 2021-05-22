@@ -1,0 +1,207 @@
+/* START RECOMMENDED STUFF START RECOMMENDED STUFF START RECOMMENDED STUFF START RECOMMENDED STUFF */
+#sidemain > #whats-new {
+    background-color: #eff0f3;
+    margin-top: 24px;
+    padding-left: 24px;
+    padding: 24px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+  }
+  
+  #sidemain > #recommended-connections {
+    background-color: #eff0f3;
+    margin-top: 24px;
+    padding-bottom: 24px !important;
+    padding-left: 24px;
+    padding-top: 24px;
+    padding-right: 24px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+    margin-bottom: 24px;
+  }
+
+.recommendedUserDiv {
+  display: flex;
+  align-items: stretch;
+}
+
+#sidemain {
+    margin-left: 0px !important;
+}
+
+.heading3 {
+  font-weight: 900 !important;
+  color: #214049 !important;
+}
+
+#whats-new > .heading2 {
+  margin-bottom: 10px;
+}
+
+#whats-new > .heading3 {
+  margin-bottom: 10px;
+}
+
+#recommended-connections > .heading2 {
+  margin-bottom: 20px;
+}
+
+.storyImgDiv {
+  border-radius: 50%;
+  min-width: 80px;
+  min-height: 80px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.followUserButton {
+  /* Accent */
+  border: 1.5px solid #51b09f;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 40px;
+  /* Body Title */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px;
+  color: #51b09f;
+  text-align: center;
+}
+
+.userNames {
+  /* Heading 3 */
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+
+  color: #000000;
+}
+
+.userAt {
+  height: 19px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px
+  color: #000000;
+}
+
+.name-and-userName {
+  justify-content: center;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.followUser {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.followUserButton {
+    /* Accent */
+    border: 1.5px solid #51b09f;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 40px;
+    /* Body Title */
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px;
+    color: #51b09f;
+    text-align: center;
+  }
+
+#whats-new-volunteering-opportunities::-webkit-scrollbar {
+  display: none;
+}
+
+#stories::-webkit-scrollbar {
+  display: none;
+}
+
+#whats-new-volunteering-opportunities::-webkit-scrollbar {
+  display: none;
+}
+
+#posts::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  .name-and-userName {
+    margin-left: 10px;
+  }
+
+  .name-and-userName > .userNames {
+    font-size: 14px;
+  }
+
+  .name-and-userName > .userAt {
+    font-size: 10px;
+  }
+
+  .storyImgDiv {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+  }
+
+  .followUserButton {
+    font-size: 12px;
+  }
+}
+
+#whats-new > a,
+#recommended-connections > a {
+  text-decoration: none !important;
+  color: #51b09f !important;
+}
+
+#whats-new-volunteering-opportunities {
+  display: flex;
+  overflow: auto;
+  margin-bottom: 20px;
+}
+
+#whats-new-volunteering-opportunities:-webkit-scrollbar {
+  display: none;
+}
+
+#whats-new-volunteering-opportunities {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.opportunity {
+  flex: 1 0 10%; /* The important bit. This percentage decides your columns. 
+      The percent can be px. It just represents your minimum starting width.
+       */
+  padding: 20px;
+  margin-right: 10px;
+  width: 150px;
+  background-color: #eff0f3;
+  color: #214049;
+  border-radius: 12px;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+  box-shadow: 5px 5px 18px -8px rgba(33, 64, 73, 0.65);
+}
+
+/* END RECOMMENDED SIDEBAR STUFF */
