@@ -28,6 +28,22 @@ button {
   outline: none;
 }
 
+#volunteer {
+  text-align: center;
+  display: flex;
+}
+
+#volunteer > div {
+  margin: 0 auto;
+}
+
+
+#isVolunteer:hover {
+  border: none;
+  outline: none;
+  color: #51b09f;
+}
+
 .form-wrapper > input:focus {
   outline: none;
 }

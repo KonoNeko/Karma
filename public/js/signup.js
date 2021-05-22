@@ -1,4 +1,7 @@
 
+const BASE_URL = "https://marlonfajardo.ca/karma/v1";
+
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
@@ -17,6 +20,44 @@ firebase.initializeApp(firebaseConfig);
 
   
 const db = firebase.firestore();
+
+async function APIRequest(method, url) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          let result = JSON.parse(this.responseText);
+          console.log(result);
+          return result;
+      }
+  }
+}
+
+function formatParams(params) {
+  let string = "?";
+  let keys = Object.keys(params);
+  for(let i=0; i<keys.length; i++) {
+    string += `${keys[i]}=${params[keys[i]]}`;
+    if (i < keys.length - 1) {
+      string += "&";
+    }
+  }
+  return string;
+}
+
+async function createNewProfile(username, full_name, isVolunteer) {
+  let method = "POST"; // CHANGE TO POST
+  let endpoint = "/profiles";
+  const params = formatParams({
+    "id": username,
+    "name":  full_name,
+    "isVolunteer": isVolunteer
+  });
+  const url = BASE_URL + endpoint + params;
+  return await APIRequest(method, url);
+}
 
 
 $("#btn-login").click(function(){
@@ -60,12 +101,10 @@ $("#btn-signup").click(function(){
   let cpassword = $("#confirmPassowrd").val();
   let full_name = $("#name").val();
   let username = $("#username").val();
-  const btn = $("#btn-signup").val();
+  let isVolunteer = $('input[name="isVolunteer"]:checked').val();
 
-  
-
-
-  if (email != "" && password != "" && cpassword != "" && full_name != "" && username != "") {
+  if (email != "" && password != "" && cpassword != "" && full_name != "" && 
+      username != "" && isVolunteer) {
     usernameExists().then( // ensures usernames are unique
       (userExists) => {
         if (userExists) {
@@ -75,29 +114,34 @@ $("#btn-signup").click(function(){
             db.collection('users').doc(cred.user.uid).set({
               email: email,
               fullName: full_name,
-              username: username 
+              username: username, 
+              isVolunteer: isVolunteer
             });
           });
     
           result.catch(function(error){
-    
             var errorCode = error.code;
             var errorMessage = error.message;
-    
             console.log(errorCode);
             window.alert("Message: " + errorMessage);
-    
-
           });
         }
       },
       (error) => {console.log(error);}
     );
+    let profileMade = false;
+    createNewProfile(username, full_name, parseInt(isVolunteer)).then (
+      (response) => { 
+        console.log(response);
+        profileMade = true; 
+      },
+      (error) => { console.log(error); }
+    );
     setInterval(() => {
       usernameExists().then(
         (userExists) => {
           firebase.auth().onAuthStateChanged(function (user) {
-            if(user && userExists) { 
+            if(user && userExists && profileMade) { 
               window.location.href = "home.html"; 
             }
           });
@@ -106,6 +150,7 @@ $("#btn-signup").click(function(){
       );
     }, 1000);
   } else {
+    alert(isVolunteer);
     window.alert("Please fill out all fields.");    
   }
 });
