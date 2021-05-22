@@ -416,14 +416,14 @@ function generateNotificationFollowRequest(postObj) {
   notificationsDiv.appendChild(notificationDiv);
 }
 
-// $("").click(function () {
-//   let userID = followDiv.value;
-//   let follower = followDiv.value;
-//   accept_request(userID, follower);
-// });
+$("").click(function () {
+  let userID = followDiv.value;
+  let follower = followDiv.value;
+  accept_request(userID, follower);
+});
 
-// $("").click(function () {
-//   let userID = followDiv.value;
-//   let follower = followDiv.value;
-//   request_follow(userID, follower);
-// });
+$("").click(function () {
+  let userID = followDiv.value;
+  let follower = followDiv.value;
+  request_follow(userID, follower);
+});
