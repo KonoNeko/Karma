@@ -263,6 +263,7 @@ function createPost(postObj) {
 
   let userName = document.createElement("p");
   userName.setAttribute("class", "userName bodytitle");
+  userName.id = "userName";
   userName.innerHTML = postObj.post_info.username;
 
   let dateObj = formatTimestamp(postObj.post_info.post_date);
@@ -297,9 +298,10 @@ function createPost(postObj) {
   let likeIcon = document.createElement("i");
   likeIcon.setAttribute("class", "far fa-heart");
   likeIcon.setAttribute("onclick", "like()");
+  likeIcon.id = "likeBtn"
   likeIcon.setAttribute(
     "style",
-    "font-size: 24px; color: #214049; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;"
+    "font-size: 24px; color: #214049; margin-right: 10px; margin-top: 10px; margin-bottom:"
   );
 
   let commentIcon = document.createElement("i");
