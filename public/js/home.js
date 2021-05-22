@@ -429,6 +429,7 @@ function createModal(postObj) {
   interactionButtons.id = "interactionButtons" + post.post_id;
 
   let likesLine = document.createElement("p");
+  likesLine.setAttribute("style","margin-left: 10px;")
   likesLine.innerHTML =
     post.likes > 1
       ? `${post.likes} users like this`
@@ -439,9 +440,11 @@ function createModal(postObj) {
 
   let commentInput = document.createElement("input");
   commentInput.type = "text";
+  commentInput.setAttribute("style","margin-left: 10px;")
   commentInput.placeholder = "Add a comment...";
 
   let commentSubmit = document.createElement("button");
+  commentSubmit.setAttribute("style","margin-left: 10px;")
   commentSubmit.type = "submit";
   commentSubmit.innerText = "Post";
 
