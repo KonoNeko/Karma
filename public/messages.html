@@ -7,6 +7,7 @@
   <title>Messages</title>
   <link rel="stylesheet" href="css/messages.css" />
   <link rel="stylesheet" href="css/base.css" />
+
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -167,28 +168,35 @@
       </div>
 
       <div class="column" id="sidemain">
-        <h1 onclick="returnToMessages()" class="heading3 return-to-messages">
-          x
-        </h1>
-        <br />
-        <br />
+        <i
+          onclick="returnToMessages()"
+          class="fas fa-times return-to-messages"
+          style="color: #214049"
+        ></i>
+
         <div
           class="messages-user-information"
           id="messages-user-information"
         ></div>
         <hr />
         <div class="messages-expanded" id="messagesList"></div>
-        <div id="above-search" class="search">
-          <form class="search-form">
-            <input type="text" placeholder="Compose a message" />
-            <button type="submit"><i class="fa fa-paper-plane"></i></button>
-          </form>
+        <div class="sticky-send-message-div">
+          <div id="above-search" class="sticky-send-message search">
+            <form class="search-form">
+              <input type="text" placeholder="Compose a message" />
+              <button type="submit"><i class="fa fa-paper-plane"></i></button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </body>
 
+<script
+  src="https://kit.fontawesome.com/2ec3384389.js"
+  crossorigin="anonymous"
+></script>
 <script src="js/messages.js"></script>
 <script>
   function openNav() {

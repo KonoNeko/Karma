@@ -1,92 +1,95 @@
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
-
 let result = {
   "2021-05-21 00:55:01": {
-  "conversation_id": 2,
-  "other_user": "testuser",
-  "other_user_fullname": "test user",
-  "other_user_profile_pic": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-  "profile_pic": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-  "latest_message": "value",
-  "latest_message_timestamp": "2021-05-21 00:55:01",
-  "has_unread_messages": 1,
-  "messages": [
-  {
-  "message_id": 6,
-  "sender": "marlon",
-  "message": "you a bum",
-  "message_timestamp": "2021-05-11T19:56:27.000Z"
-  },
-  {
-  "message_id": 8,
-  "sender": "marlon",
-  "message": "value",
-  "message_timestamp": "2021-05-19T21:42:31.000Z"
-  },
-  {
-  "message_id": 9,
-  "sender": "testuser",
-  "message": "value",
-  "message_timestamp": "2021-05-19T21:45:34.000Z"
-  },
-  {
-  "message_id": 10,
-  "sender": "testuser",
-  "message": "value",
-  "message_timestamp": "2021-05-21T04:48:24.000Z"
-  },
-  {
-  "message_id": 11,
-  "sender": "testuser",
-  "message": "value",
-  "message_timestamp": "2021-05-21T04:49:12.000Z"
-  },
-  {
-  "message_id": 12,
-  "sender": "testuser",
-  "message": "value",
-  "message_timestamp": "2021-05-21T04:55:00.000Z"
-  },
-  {
-  "message_id": 13,
-  "sender": "testuser",
-  "message": "value",
-  "message_timestamp": "2021-05-21T04:55:01.000Z"
-  }
-  ]
+    conversation_id: 2,
+    other_user: "testuser",
+    other_user_fullname: "test user",
+    other_user_profile_pic:
+      "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+    profile_pic:
+      "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+    latest_message: "value",
+    latest_message_timestamp: "2021-05-21 00:55:01",
+    has_unread_messages: 1,
+    messages: [
+      {
+        message_id: 6,
+        sender: "marlon",
+        message: "you a bum",
+        message_timestamp: "2021-05-11T19:56:27.000Z",
+      },
+      {
+        message_id: 8,
+        sender: "marlon",
+        message: "value",
+        message_timestamp: "2021-05-19T21:42:31.000Z",
+      },
+      {
+        message_id: 9,
+        sender: "testuser",
+        message: "value",
+        message_timestamp: "2021-05-19T21:45:34.000Z",
+      },
+      {
+        message_id: 10,
+        sender: "testuser",
+        message: "value",
+        message_timestamp: "2021-05-21T04:48:24.000Z",
+      },
+      {
+        message_id: 11,
+        sender: "testuser",
+        message: "value",
+        message_timestamp: "2021-05-21T04:49:12.000Z",
+      },
+      {
+        message_id: 12,
+        sender: "testuser",
+        message: "value",
+        message_timestamp: "2021-05-21T04:55:00.000Z",
+      },
+      {
+        message_id: 13,
+        sender: "testuser",
+        message: "value",
+        message_timestamp: "2021-05-21T04:55:01.000Z",
+      },
+    ],
   },
   "2021-05-11 16:35:18": {
-  "conversation_id": 1,
-  "other_user": "Karma",
-  "other_user_fullname": "Team Karma",
-  "other_user_profile_pic": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-  "profile_pic": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-  "latest_message": "im chillin, wby bb?",
-  "latest_message_timestamp": "2021-05-11 16:35:18",
-  "has_unread_messages": 0,
-  "messages": [
-  {
-  "message_id": 4,
-  "sender": "marlon",
-  "message": "heyyyy karma",
-  "message_timestamp": "2021-05-11T19:55:03.000Z"
+    conversation_id: 1,
+    other_user: "Karma",
+    other_user_fullname: "Team Karma",
+    other_user_profile_pic:
+      "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+    profile_pic:
+      "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+    latest_message: "im chillin, wby bb?",
+    latest_message_timestamp: "2021-05-11 16:35:18",
+    has_unread_messages: 0,
+    messages: [
+      {
+        message_id: 4,
+        sender: "marlon",
+        message: "heyyyy karma",
+        message_timestamp: "2021-05-11T19:55:03.000Z",
+      },
+      {
+        message_id: 5,
+        sender: "Karma",
+        message: "hey boo wyd",
+        message_timestamp: "2021-05-11T19:55:58.000Z",
+      },
+      {
+        message_id: 7,
+        sender: "marlon",
+        message: "im chillin, wby bb?",
+        message_timestamp: "2021-05-11T20:35:18.000Z",
+      },
+    ],
   },
-  {
-  "message_id": 5,
-  "sender": "Karma",
-  "message": "hey boo wyd",
-  "message_timestamp": "2021-05-11T19:55:58.000Z"
-  },
-  {
-  "message_id": 7,
-  "sender": "marlon",
-  "message": "im chillin, wby bb?",
-  "message_timestamp": "2021-05-11T20:35:18.000Z"
-  }
-  ]
-  }
-  };
+};
 
 function formatTimestamp(timestamp) {
   let dateObj = new Date(Date.parse(timestamp));
@@ -238,7 +241,9 @@ function generateMessager(convo) {
   messagerText.appendChild(messagerMessage);
   messagerText.appendChild(messagerTime);
 
-  messagerDiv.onclick = () => { revealMessages(convo); };
+  messagerDiv.onclick = () => {
+    revealMessages(convo);
+  };
 
   mainMessagesDiv.appendChild(messagerDiv);
 }
@@ -265,11 +270,11 @@ function revealMessages(convo) {
     document.getElementById("mainmain").setAttribute("style", "display: none");
     document
       .getElementById("sidemain")
-      .setAttribute("style", "display: unset; width: 100%;"); 
+      .setAttribute("style", "display: unset; width: 100%;");
   }
   generateMessages(convo);
   let messageList = Object.keys(convo.messages);
-  for (let i=0; i < messageList.length; i++) {
+  for (let i = 0; i < messageList.length; i++) {
     let currentMsg = convo.messages[messageList[i]];
     if (currentMsg.sender === convo.other_user) {
       createMessageSentByOtherUser(currentMsg, convo.other_user_profile_pic);
@@ -307,7 +312,6 @@ function generateMessages(msgObj) {
 
   messagerInformationDiv.appendChild(messagerImgDiv);
   messagerInformationDiv.appendChild(messagerAuthorText);
-
 }
 
 function generateLine() {

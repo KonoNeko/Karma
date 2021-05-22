@@ -301,6 +301,10 @@ svg {
   border-radius: 10px;
 }
 
+.mobile-menu > a > svg {
+  fill: #214049 !important;
+}
+
 hr {
   border: 0.5px solid #51b09f;
   background-color: #51b09f;
