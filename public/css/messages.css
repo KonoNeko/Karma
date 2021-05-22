@@ -12,7 +12,7 @@
   overflow: auto;
 }
 
-.sticky-send-message {
+.sticky-send-message-div {
   bottom: 0;
   position: sticky;
 }
