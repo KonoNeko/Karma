@@ -95,18 +95,18 @@ function loadAll() {
   // generateNoNotifications();
   let test = [
       {
-        notifiation_id: 41,
+        notification_id: 41,
         profile_id: 1,
         username_of_notification: "Karma",
         profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
         post_pic_url: null,
-        message: " is now following you.",
-        type_of_event: "profile_follows accepted",
+        message: " has requested to follow you.",
+        type_of_event: "profile_follows requested",
         id_of_event: 12,
         timestamp: "2021-05-13T17:36:19.000Z"
       },
       {
-        notifiation_id: 25,
+        notification_id: 25,
         profile_id: 1,
         username_of_notification: "Team Karma",
         profile_pic_url: "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
@@ -117,7 +117,7 @@ function loadAll() {
         timestamp: "2021-05-12T20:24:40.000Z"
       },
       {
-        notifiation_id: 4,
+        notification_id: 4,
         profile_id: 1,
         username_of_notification: "Karma",
         profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
@@ -128,7 +128,7 @@ function loadAll() {
         timestamp: "2021-05-12T06:01:37.000Z"
       },
       {
-        notifiation_id: 2,
+        notification_id: 2,
         profile_id: 1,
         username_of_notification: "Karma",
         profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
