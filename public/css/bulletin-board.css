@@ -16,10 +16,18 @@
   width: 100%;
 }
 
+.category::-webkit-scrollbar {
+  display: none;
+}
+
+.opportunities::-webkit-scrollbar {
+  display: none;
+}
+
 .opportunities {
   display: flex;
   overflow-x: scroll;
-  /*overflow-x: hidden;*/
+  /* overflow-x: hidden; */
   flex-direction: row;
   margin-right: 20px;
 }
@@ -29,12 +37,10 @@
 }
 
 .opportunity {
-  flex: 1 0 18%; /* The important bit. This percentage decides your columns. 
-    The percent can be px. It just represents your minimum starting width.
-     */
   padding: 20px;
   margin-right: 10px;
   width: 200px;
+  min-width: 200px;
   background-color: #eff0f3;
   color: #214049;
   border-radius: 12px;
@@ -123,7 +129,7 @@
 }
 
 .applicationDiv {
-  display: none
+  display: none;
 }
 
 .primarybutton {

@@ -9,8 +9,12 @@
 }
 
 .messages-expanded {
-  height: 60%;
   overflow: auto;
+}
+
+.sticky-send-message-div {
+  bottom: 0;
+  position: sticky;
 }
 
 .heading-title {
@@ -156,7 +160,7 @@ hr {
 }
 
 .return-to-messages {
-  font-weight: bolder;
+  display: block;
   float: right;
   display: none;
   margin-bottom: 10px;
@@ -181,9 +185,21 @@ hr {
 /* I KNOW THE !IMPORTANTS ARE TERRIBLE PRACTICE */
 /* SUE ME */
 @media screen and (max-width: 600px) {
+  .sticky-send-message-div {
+    left: 0px;
+    bottom: 5rem;
+    width: 100%;
+    position: fixed;
+    padding: 10px;
+    background-color: #eff0f3;
+  }
+
+  .search {
+    margin-top: 0px !important;
+  }
+
   .return-to-messages {
     display: unset;
-    font-weight: bolder;
     margin-bottom: 10px;
   }
 

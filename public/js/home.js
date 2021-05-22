@@ -8,96 +8,108 @@ var firebaseConfig = {
   storageBucket: "karma-535f3.appspot.com",
   messagingSenderId: "1023587584355",
   appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
-  measurementId: "G-VTZ4TEWFBW"
+  measurementId: "G-VTZ4TEWFBW",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-  
+
 const db = firebase.firestore();
 
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
 const result = [
   {
-  "post_info": {
-  "post_id": 1,
-  "image_url": "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
-  "caption": "This is the church I used to volunteer at, St. Mary's Parish! Always a blast with all the people I volunteer with.",
-  "location": "St. Mary's Parish",
-  "post_date": "2021-05-03T21:29:36.000Z",
-  "likes": 2,
-  "username": "marlon",
-  "profile_pic_url": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png"
-  },
-  "comments": {
-  "3": {
-  "comment_id": 3,
-  "post_id": 1,
-  "user_id": 1,
-  "comment": "Glad to see you active in your community!",
-  "is_a_reply": 0,
-  "id_of_comment_receiving_reply": null,
-  "comment_date": "2021-05-11T06:52:31.000Z",
-  "commenter_profile_pic": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-  "comment_poster": "Karma"
-  },
-  "totalComments": 1
-  }
-  },
-  {
-  "post_info": {
-  "post_id": 2,
-  "image_url": "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
-  "caption": "Volunteering at the sun run was so fun! Can't wait until the day they are able to hold another!",
-  "location": "BC Place",
-  "post_date": "2021-05-04T01:06:34.000Z",
-  "likes": 1,
-  "username": "marlon",
-  "profile_pic_url": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png"
-  },
-  "comments": {
-  "10": {
-  "comment_id": 10,
-  "post_id": 2,
-  "user_id": 1,
-  "comment": "We miss the sun run :(",
-  "is_a_reply": 0,
-  "id_of_comment_receiving_reply": null,
-  "comment_date": "2021-05-13T05:23:39.000Z",
-  "commenter_profile_pic": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-  "comment_poster": "Karma",
-  "replies": {
-  "14": {
-  "comment_id": 14,
-  "post_id": 2,
-  "user_id": 1,
-  "comment": "Yeah same",
-  "is_a_reply": 1,
-  "id_of_comment_receiving_reply": 10,
-  "comment_date": "2021-05-13T06:07:11.000Z",
-  "commenter_profile_pic": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-  "comment_poster": "marlon"
-  }
-  }
-  },
-  "totalComments": 2
-  }
+    post_info: {
+      post_id: 1,
+      image_url:
+        "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
+      caption:
+        "This is the church I used to volunteer at, St. Mary's Parish! Always a blast with all the people I volunteer with.",
+      location: "St. Mary's Parish",
+      post_date: "2021-05-03T21:29:36.000Z",
+      likes: 2,
+      username: "marlon",
+      profile_pic_url:
+        "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+    },
+    comments: {
+      3: {
+        comment_id: 3,
+        post_id: 1,
+        user_id: 1,
+        comment: "Glad to see you active in your community!",
+        is_a_reply: 0,
+        id_of_comment_receiving_reply: null,
+        comment_date: "2021-05-11T06:52:31.000Z",
+        commenter_profile_pic:
+          "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+        comment_poster: "Karma",
+      },
+      totalComments: 1,
+    },
   },
   {
-  "post_info": {
-  "post_id": 4,
-  "image_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-  "caption": "Welcome to Karma! Use our platform share your experiences with volunteering, find opportunites near you, or network with other community members!",
-  "location": "",
-  "post_date": "2021-05-04T02:58:03.000Z",
-  "likes": 1,
-  "username": "Karma",
-  "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png"
+    post_info: {
+      post_id: 2,
+      image_url:
+        "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
+      caption:
+        "Volunteering at the sun run was so fun! Can't wait until the day they are able to hold another!",
+      location: "BC Place",
+      post_date: "2021-05-04T01:06:34.000Z",
+      likes: 1,
+      username: "marlon",
+      profile_pic_url:
+        "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+    },
+    comments: {
+      10: {
+        comment_id: 10,
+        post_id: 2,
+        user_id: 1,
+        comment: "We miss the sun run :(",
+        is_a_reply: 0,
+        id_of_comment_receiving_reply: null,
+        comment_date: "2021-05-13T05:23:39.000Z",
+        commenter_profile_pic:
+          "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+        comment_poster: "Karma",
+        replies: {
+          14: {
+            comment_id: 14,
+            post_id: 2,
+            user_id: 1,
+            comment: "Yeah same",
+            is_a_reply: 1,
+            id_of_comment_receiving_reply: 10,
+            comment_date: "2021-05-13T06:07:11.000Z",
+            commenter_profile_pic:
+              "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+            comment_poster: "marlon",
+          },
+        },
+      },
+      totalComments: 2,
+    },
   },
-  "comments": {
-  "totalComments": 0
-  }
-  }
+  {
+    post_info: {
+      post_id: 4,
+      image_url:
+        "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+      caption:
+        "Welcome to Karma! Use our platform share your experiences with volunteering, find opportunites near you, or network with other community members!",
+      location: "",
+      post_date: "2021-05-04T02:58:03.000Z",
+      likes: 1,
+      username: "Karma",
+      profile_pic_url:
+        "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+    },
+    comments: {
+      totalComments: 0,
+    },
+  },
 ];
 
 function formatTimestamp(timestamp) {
@@ -131,12 +143,11 @@ function view_social_feed(userID) {
   const endpoint = "/posts";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  for (let i=0; i<result.length; i++) {
+  for (let i = 0; i < result.length; i++) {
     createPost(result[i]);
   }
-  // APIRequest(method, url); 
+  // APIRequest(method, url);
 }
-
 
 function APIRequest(method, url) {
   console.log(method + ": " + url);
@@ -144,24 +155,23 @@ function APIRequest(method, url) {
   xhttp.open(method, url, true);
   xhttp.send();
   xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        if (result.length == 0) {
-          // createBlankHomePage()
-        }
-        for (let i=0; i<result.length; i++) {
-            createPost(result[i]);
-        }
+    if (this.readyState == 4 && this.status == 200) {
+      if (result.length == 0) {
+        // createBlankHomePage()
       }
-  }
+      for (let i = 0; i < result.length; i++) {
+        createPost(result[i]);
+      }
+    }
+  };
 }
-
 
 // WINDOW ONLOAD FUNCTION FOR THE HOME PAGE
 function loadHome() {
-  loadStories();
   loadWhatsNew();
   loadRecommendedConnections();
-  view_social_feed('karma');
+  view_social_feed("karma");
+
   // createBlankHomePage(); // This will show a blank homepage.
 }
 
@@ -187,54 +197,27 @@ function loadStories() {
   createStory(story);
 }
 
-function loadWhatsNew() {
-  let whatsNew = document.getElementById(
-    "whats-new-volunteering-opportunities"
-  );
-  createWhatsNew(whatsNew);
-  createWhatsNew(whatsNew);
-  createWhatsNew(whatsNew);
-}
-
-function loadRecommendedConnections() {
-  let recommendedUsers = document.getElementById("recommended-connections");
-
-  let heading2 = document.createElement("hr");
-  recommendedUsers.appendChild(heading2);
-
-  createRecommendedConnection(recommendedUsers);
-  createRecommendedConnection(recommendedUsers);
-  createRecommendedConnection(recommendedUsers);
-
-  let viewAll = document.createElement("a");
-  viewAll.id = "view-all";
-  viewAll.innerHTML = "View all recommended connections";
-  viewAll.setAttribute("style", "margin-top: 20px");
-  // viewAll.setAttribute("href", ""); // YOU NEED SOMETHING IN HERE OR IT BREAKS THE CODE
-
-  recommendedUsers.appendChild(viewAll);
-}
-
 // CREATE INDIVIDUAL UI ELEMENTS
 
+function createBlankHomePage() {
+  let blankHome = document.getElementById("posts");
 
-// CREATES A BLANK HOME PAGE.
+  let noPostsImg = document.createElement("img");
+  noPostsImg.src = "./res/home.svg";
+  noPostsImg.setAttribute("style", "width: 100%;");
 
-// function createBlankHomePage() {
-//   let blankHome = document.getElementById("posts");
+  let noPosts = document.createElement("p");
+  noPosts.setAttribute("class", "heading4");
+  noPosts.setAttribute(
+    "style",
+    "font-weight: 700; margin-bottom: 10px; color: #214049;"
+  );
+  noPosts.innerHTML =
+    "You currently have no posts on your homepage feed. Connect with other users to see posts here!";
 
-//   let noPosts = document.createElement("p");
-//   noPosts.setAttribute("class", "heading3");
-//   noPosts.setAttribute(
-//     "style",
-//     "font-weight: 700; margin-bottom: 10px;"
-//   );
-//   noPosts.innerHTML = "You currently have no posts on your homepage feed. Connect with other users to see posts here!";
-
-//   blankHome.appendChild(noPosts);
-
-// }
-
+  blankHome.appendChild(noPostsImg);
+  blankHome.appendChild(noPosts);
+}
 
 function createStory(stories) {
   let storyImgDiv = document.createElement("div");
@@ -258,14 +241,12 @@ function createStory(stories) {
   stories.appendChild(storyDiv);
 }
 
-
 function createPost(postObj) {
   createModal(postObj);
   const posts = document.getElementById("posts");
   const post = document.createElement("div");
   post.className = "post";
   post.id = "post" + postObj.post_info.post_id;
-  
 
   let topPartDiv = document.createElement("div");
   topPartDiv.setAttribute("class", "topPartDiv");
@@ -281,20 +262,22 @@ function createPost(postObj) {
   nameAndTimeDiv.setAttribute("class", "name-and-time topPartDivColumn");
 
   let userName = document.createElement("p");
-  userName.setAttribute("class", "userName");
+  userName.setAttribute("class", "userName bodytitle");
   userName.innerHTML = postObj.post_info.username;
 
   let dateObj = formatTimestamp(postObj.post_info.post_date);
   let timePosted = document.createElement("p");
-  timePosted.setAttribute("class", "timePosted");
+  timePosted.setAttribute("class", "timePosted smalltext");
   timePosted.innerHTML = dateObj;
 
   nameAndTimeDiv.appendChild(userName);
   nameAndTimeDiv.appendChild(timePosted);
+  nameAndTimeDiv.setAttribute("style", "margin-left: 10px");
 
   topPartDiv.appendChild(postImgDiv);
   topPartDiv.appendChild(nameAndTimeDiv);
- 
+  topPartDiv.setAttribute("style", "margin-bottom: 10px");
+
   post.appendChild(topPartDiv);
 
   let picture = document.createElement("div");
@@ -303,126 +286,75 @@ function createPost(postObj) {
     "style",
     `background-image: url('${postObj.post_info.image_url}')`
   );
-  picture.onclick = function() { displayModal(postObj.post_info.post_id) };
+  picture.onclick = function () {
+    displayModal(postObj.post_info.post_id);
+  };
   post.appendChild(picture);
 
   let captionAndComments = document.createElement("div");
   captionAndComments.setAttribute("class", "captionAndComments");
 
-  let pic = document.createElement("img")
-  pic.setAttribute("src", "images/preheart.png");
-  pic.setAttribute("class", "likebtn");
-  pic.id = "preheart";
-  pic.setAttribute("onclick", "like()")
+  let likeIcon = document.createElement("i");
+  likeIcon.setAttribute("class", "far fa-heart");
+  likeIcon.setAttribute("onclick", "like()");
+  likeIcon.setAttribute(
+    "style",
+    "font-size: 24px; color: #214049; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;"
+  );
+
+  let commentIcon = document.createElement("i");
+  commentIcon.setAttribute("class", "far fa-comment");
+  commentIcon.setAttribute(
+    "style",
+    "font-size: 24px; color: #214049;  margin-right: 10px; margin-top: 10px; margin-bottom: 10px;"
+  );
+
+  let shareIcon = document.createElement("i");
+  shareIcon.setAttribute("class", "far fa-share-square");
+  shareIcon.setAttribute(
+    "style",
+    "font-size: 24px; color: #214049; margin-top: 10px; margin-bottom: 10px;"
+  );
+
+  // let pic = document.createElement("img");
+  // pic.setAttribute("src", "images/preheart.png");
+  // pic.setAttribute("class", "likebtn");
+  // pic.id = "preheart";
+  // pic.setAttribute("onclick", "like()");
 
   let likes = document.createElement("p");
   let caption = document.createElement("p");
   let comments = document.createElement("p");
-  likes.setAttribute("class", "likes");
+  likes.setAttribute("class", "likes bodytitle");
   caption.setAttribute("class", "caption");
-  comments.setAttribute("class", "comments");
+  comments.setAttribute("class", "comments smalltext");
 
-  likes.innerHTML = (postObj.post_info.likes != 1) ? `${postObj.post_info.likes} likes` : `${postObj.post_info.likes} like`;
-  caption.innerHTML = `${postObj.post_info.caption}`;
+  let userSpan = document.createElement("span");
+  userSpan.setAttribute("class", "bodytitle");
+  userSpan.innerHTML = postObj.post_info.username + " ";
+
+  let captionSpan = document.createElement("span");
+  captionSpan.setAttribute("class", "bodytext");
+  captionSpan.innerHTML = `${postObj.post_info.caption}`;
+
+  likes.innerHTML =
+    postObj.post_info.likes != 1
+      ? `${postObj.post_info.likes} likes`
+      : `${postObj.post_info.likes} like`;
+
+  caption.appendChild(userSpan);
+  caption.appendChild(captionSpan);
   comments.innerHTML = `View all ${postObj.comments.totalComments} comments`;
-  post.appendChild(pic);
+
+  post.appendChild(likeIcon);
+  post.appendChild(commentIcon);
+  post.appendChild(shareIcon);
+
   post.appendChild(likes);
   post.appendChild(caption);
   post.appendChild(comments);
+
   posts.appendChild(post);
-}
-
-function createRecommendedConnection(recommended) {
-  // let heading = document.createElement("hr");
-  // heading.setAttribute("class", "headers");
-
-  // recommended.appendChild(heading);
-
-  let recommendedUserDiv = document.createElement("div");
-  recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
-
-  let storyImgDiv = document.createElement("div");
-  storyImgDiv.setAttribute("class", "profilepic storyImgDiv");
-  storyImgDiv.setAttribute("style", "padding-bottom: 10px; width: 20%");
-  storyImgDiv.setAttribute(
-    "style",
-    "background-image: url('./images/placeholder.jpg')"
-  );
-
-  let nameAndUserName = document.createElement("div");
-  nameAndUserName.setAttribute("class", "name-and-userName");
-  nameAndUserName.setAttribute("style", "width: 50%;");
-
-  let userName = document.createElement("p");
-  userName.setAttribute("class", "userNames");
-  userName.innerHTML = "User name";
-
-  let userNameAt = document.createElement("p");
-  userNameAt.setAttribute("class", "userAt");
-  userNameAt.innerHTML = "@Username";
-
-  recommendedUserDiv.appendChild(storyImgDiv);
-  nameAndUserName.appendChild(userName);
-  nameAndUserName.appendChild(userNameAt);
-
-  recommendedUserDiv.appendChild(nameAndUserName);
-
-  let followUser = document.createElement("div");
-  let followUserButton = document.createElement("button");
-
-  followUserButton.innerHTML = "FOLLOW";
-  followUserButton.setAttribute("class", "followUserButton");
-  followUser.setAttribute("class", "followUser");
-  followUser.setAttribute("style", "width: 40%");
-  followUserButton.setAttribute("style", "width: 70%; min-width: 100px;");
-
-  followUser.appendChild(followUserButton);
-
-  recommendedUserDiv.appendChild(followUser);
-
-  let heading2 = document.createElement("hr");
-  heading2.setAttribute("style", "margin-top: 20px; margin-bottom: 20px;");
-
-  recommended.appendChild(recommendedUserDiv);
-  recommendedUserDiv.setAttribute(
-    "style",
-    "margin-top: 10px; margin-bottom: 10px;"
-  );
-  recommended.appendChild(heading2);
-
-  // let recommendedConnections = document.createElement("p");
-  // recommendedConnections.setAttribute("class", "recommendedConnections");
-  // recommendedConnections.innerHTML = "View all recommended connections";
-
-  // recommended.appendChild(recommendedConnections);
-}
-
-function createWhatsNew(newPost) {
-  let opportunityRole = document.createElement("p");
-  opportunityRole.innerHTML = "opportunityRole Role Role";
-  opportunityRole.setAttribute("class", "heading3");
-  opportunityRole.setAttribute("style", "font-weight: 700 !important;");
-
-  let opportunityImgDiv = document.createElement("div");
-  opportunityImgDiv.setAttribute("class", "bulletinboardpicture");
-  opportunityImgDiv.setAttribute("style", "padding-bottom: 10px");
-
-  let opportunityImg = document.createElement("img");
-  opportunityImg.src = "./images/placeholder.jpg";
-  opportunityImgDiv.appendChild(opportunityImg);
-
-  let opportunityLocation = document.createElement("p");
-  opportunityLocation.innerHTML = "opportunityLocation";
-  opportunityLocation.setAttribute("class", "bodytext");
-
-  let opportunityDiv = document.createElement("div");
-  opportunityDiv.setAttribute("class", "opportunity");
-  opportunityDiv.setAttribute("style", "margin-bottom: 10px;");
-  opportunityDiv.appendChild(opportunityImgDiv);
-  opportunityDiv.appendChild(opportunityRole);
-  opportunityDiv.appendChild(opportunityLocation);
-
-  newPost.appendChild(opportunityDiv);
 }
 
 function createModal(postObj) {
@@ -461,7 +393,7 @@ function createModal(postObj) {
 
   let time = document.createElement("p");
   time.id = "timePosted" + post.post_id;
-  
+
   nameAndTime.appendChild(username);
   nameAndTime.appendChild(time);
 
@@ -478,9 +410,10 @@ function createModal(postObj) {
   commentList.className = "commentList";
 
   let captionDiv = loadCaption(
-    post.profile_pic_url, 
+    post.profile_pic_url,
     post.username,
-    post.caption);
+    post.caption
+  );
   rightSideDiv.appendChild(captionDiv);
   rightSideDiv.appendChild(createLine());
 
@@ -494,11 +427,14 @@ function createModal(postObj) {
   interactionButtons.id = "interactionButtons" + post.post_id;
 
   let likesLine = document.createElement("p");
-  likesLine.innerHTML = (post.likes > 1) ? `${post.likes} users like this` : `${post.likes} user likes this`;
+  likesLine.innerHTML =
+    post.likes > 1
+      ? `${post.likes} users like this`
+      : `${post.likes} user likes this`;
 
   let commentForm = document.createElement("form");
   commentForm.className = "commentForm";
-  
+
   let commentInput = document.createElement("input");
   commentInput.type = "text";
   commentInput.placeholder = "Add a comment...";
@@ -518,12 +454,14 @@ function createModal(postObj) {
   modal.appendChild(leftSideDiv);
   modal.appendChild(rightSideDiv);
 
-
   overlay.appendChild(modal);
 
   displayPost(post.image_url, post.post_id);
   displayPostDetails(
-    post.username, formatTimestamp(post.post_date), post.profile_pic_url, post.post_id
+    post.username,
+    formatTimestamp(post.post_date),
+    post.profile_pic_url,
+    post.post_id
   );
   displayComments(comments, post.post_id);
 }
@@ -535,10 +473,11 @@ function hideModal(id) {
 
 function displayModal(id) {
   document.getElementById("postModalBackground").style.display = "block";
-  document.getElementById("postModalBackground").onclick = () => { hideModal(id) };
+  document.getElementById("postModalBackground").onclick = () => {
+    hideModal(id);
+  };
   document.getElementById("post" + id).style.display = "flex";
 }
-
 
 function displayPost(img, id) {
   let postImage = document.getElementById("postPicture" + id);
@@ -562,7 +501,6 @@ function displayPostDetails(username, time, img, id) {
   postOwnerTitle.appendChild(posterProfilePic);
   postOwnerTitle.appendChild(nameAndTimeDiv);
 }
-
 
 function createLine() {
   let line = document.createElement("hr");
@@ -604,7 +542,6 @@ function createComment(profilePic, username, comment, timestamp, commentID) {
   return commentDiv;
 }
 
-
 function createCommentParagraph(username, comment) {
   let commentParagraph = document.createElement("p");
   commentParagraph.className = "commentParagraph";
@@ -626,7 +563,6 @@ function createCommentParagraph(username, comment) {
   return commentParagraph;
 }
 
-
 function loadCaption(profilePic, username, caption) {
   let captionDiv = document.createElement("div");
   captionDiv.className = "comment";
@@ -644,7 +580,6 @@ function loadCaption(profilePic, username, caption) {
   return captionDiv;
 }
 
-
 function displayComments(comments, id) {
   let commentsDiv = document.getElementById("commentList" + id);
   if (JSON.stringify(comments) != "{}") {
@@ -654,13 +589,14 @@ function displayComments(comments, id) {
           comments[id].commenter_profile_pic,
           comments[id].comment_poster,
           comments[id].comment,
-          formatTimestamp(comments[id].comment_date), id);
+          formatTimestamp(comments[id].comment_date),
+          id
+        );
         commentsDiv.appendChild(currentComment);
       }
-      
     }
   }
-  
+
   // let captionDiv = loadCaption(placeholderImg, "Username", "This is a caption.");
   // commentsDiv.appendChild(captionDiv);
   // commentsDiv.appendChild(createLine());
@@ -673,8 +609,6 @@ function displayComments(comments, id) {
   // let comment7 = createComment(placeholderImg, "username", "This is a comment", "20min", 7);
   // let comment8 = createComment(placeholderImg, "username", "This is a comment", "20min", 8);
 
-  
-  
   // commentsDiv.appendChild(comment1);
   // commentsDiv.appendChild(comment2);
   // commentsDiv.appendChild(comment3);
@@ -684,7 +618,5 @@ function displayComments(comments, id) {
   // commentsDiv.appendChild(comment7);
   // commentsDiv.appendChild(comment8);
 }
-
-
 
 loadHome();

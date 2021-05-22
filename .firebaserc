@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "karma-535f3"
+  },
+  "targets": {
+    "karma-535f3": {
+      "hosting": {
+        "karma": [
+          "karmavolunteering"
+        ]
+      }
+    }
+  }
+}

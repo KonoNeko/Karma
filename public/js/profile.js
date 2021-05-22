@@ -1,180 +1,185 @@
-
-
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
 let result = {
-  "info": {
-    "profile_id": 1,
-    "username": "marlon",
-    "full_name": "Marlon Fajardo",
-    "bio": "This is my bio",
-    "posts": 2,
-    "followers": 1,
-    "following": 1,
-    "profile_pic_url": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-    "is_volunteer": 1
+  info: {
+    profile_id: 1,
+    username: "marlon",
+    full_name: "Marlon Fajardo",
+    bio: "This is my bio",
+    posts: 2,
+    followers: 1,
+    following: 1,
+    profile_pic_url:
+      "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+    is_volunteer: 1,
   },
-  "education": {
-    "1": {
-      "education_id": 1,
-      "school_name": "Burnaby South Secondary",
-      "edu_start_date": "09-2013",
-      "edu_end_date": "06-2018",
-      "gpa": 3.5,
-      "certification_type": "High School Diploma",
-      "edu_image_url": "https://www.studyinburnaby.ca/wp-content/uploads/2017/05/Burnaby-South-Secondary.jpg"
+  education: {
+    1: {
+      education_id: 1,
+      school_name: "Burnaby South Secondary",
+      edu_start_date: "09-2013",
+      edu_end_date: "06-2018",
+      gpa: 3.5,
+      certification_type: "High School Diploma",
+      edu_image_url:
+        "https://www.studyinburnaby.ca/wp-content/uploads/2017/05/Burnaby-South-Secondary.jpg",
     },
-    "2": {
-      "education_id": 2,
-      "school_name": "British Columbia Institute of Technology",
-      "edu_start_date": "09-2019",
-      "edu_end_date": "05-2021",
-      "gpa": 3.5,
-      "certification_type": "Technical Diploma",
-      "edu_image_url": "https://pbs.twimg.com/profile_images/1291056095440433152/fKpCeIld_400x400.png"
-    }
+    2: {
+      education_id: 2,
+      school_name: "British Columbia Institute of Technology",
+      edu_start_date: "09-2019",
+      edu_end_date: "05-2021",
+      gpa: 3.5,
+      certification_type: "Technical Diploma",
+      edu_image_url:
+        "https://pbs.twimg.com/profile_images/1291056095440433152/fKpCeIld_400x400.png",
+    },
   },
-  "skills": {
-    "1": {
-      "skill_id": 1,
-      "skill_title": "Creativity"
+  skills: {
+    1: {
+      skill_id: 1,
+      skill_title: "Creativity",
     },
-    "2": {
-      "skill_id": 2,
-      "skill_title": "Leadership"
+    2: {
+      skill_id: 2,
+      skill_title: "Leadership",
     },
-    "3": {
-      "skill_id": 3,
-      "skill_title": "Problem Solving"
+    3: {
+      skill_id: 3,
+      skill_title: "Problem Solving",
     },
-    "4": {
-      "skill_id": 4,
-      "skill_title": "Communication"
+    4: {
+      skill_id: 4,
+      skill_title: "Communication",
     },
-    "5": {
-      "skill_id": 5,
-      "skill_title": "Fast Learner"
+    5: {
+      skill_id: 5,
+      skill_title: "Fast Learner",
     },
-    "6": {
-      "skill_id": 6,
-      "skill_title": "Reliable"
+    6: {
+      skill_id: 6,
+      skill_title: "Reliable",
     },
-    "7": {
-      "skill_id": 7,
-      "skill_title": "Community Member"
-    }
+    7: {
+      skill_id: 7,
+      skill_title: "Community Member",
+    },
   },
-  "experience": {
-    "1": {
-      "experience_id": 1,
-      "job_title": "Warehouse Associate",
-      "employer": "Continental Importers",
-      "exp_image_url": "https://www.eastvillagevancouver.ca/wp-content/uploads/2016/07/static1.squarespace.jpg",
-      "exp_start_date": "06-2020",
-      "exp_end_date": "01-2021"
+  experience: {
+    1: {
+      experience_id: 1,
+      job_title: "Warehouse Associate",
+      employer: "Continental Importers",
+      exp_image_url:
+        "https://www.eastvillagevancouver.ca/wp-content/uploads/2016/07/static1.squarespace.jpg",
+      exp_start_date: "06-2020",
+      exp_end_date: "01-2021",
     },
-    "2": {
-      "experience_id": 2,
-      "job_title": "Production Specialist",
-      "employer": "Fine Line Signs",
-      "exp_image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/0naXOdpTDnO34kJob1ajLQ/ls.jpg",
-      "exp_start_date": "06/2014",
-      "exp_end_date": "08-2019"
+    2: {
+      experience_id: 2,
+      job_title: "Production Specialist",
+      employer: "Fine Line Signs",
+      exp_image_url:
+        "https://s3-media0.fl.yelpcdn.com/bphoto/0naXOdpTDnO34kJob1ajLQ/ls.jpg",
+      exp_start_date: "06/2014",
+      exp_end_date: "08-2019",
     },
-    "4": {
-      "experience_id": 4,
-      "job_title": "Sales Associate",
-      "employer": "Sears Canada",
-      "exp_image_url": "https://www.ianbrignell.com/wp-content/uploads/2016/08/Sears-1024x915.gif",
-      "exp_start_date": "06-2017",
-      "exp_end_date": "01-2018"
-    }
+    4: {
+      experience_id: 4,
+      job_title: "Sales Associate",
+      employer: "Sears Canada",
+      exp_image_url:
+        "https://www.ianbrignell.com/wp-content/uploads/2016/08/Sears-1024x915.gif",
+      exp_start_date: "06-2017",
+      exp_end_date: "01-2018",
+    },
   },
-  "certifications": {
-    "1": {
-      "award_id": 1,
-      "title": "Wep Page Design Award",
-      "date_received": "06-2018",
-      "awards_image_url": "https://www.pngkey.com/png/detail/441-4414776_trophy-clipart-cute-silhouette-trophy-clipart.png"
-    }
+  certifications: {
+    1: {
+      award_id: 1,
+      title: "Wep Page Design Award",
+      date_received: "06-2018",
+      awards_image_url:
+        "https://www.pngkey.com/png/detail/441-4414776_trophy-clipart-cute-silhouette-trophy-clipart.png",
+    },
   },
-  "posts": [
+  posts: [
     {
-      "post_info": {
-        "post_id": 1,
-        "image_url": "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
-        "caption": "This is the church I used to volunteer at, St. Mary's Parish! Always a blast with all the people I volunteer with.",
-        "location": "St. Mary's Parish",
-        "post_date": "2021-05-03T21:29:36.000Z",
-        "likes": 2,
-        "username": "marlon",
-        "profile_pic_url": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png"
+      post_info: {
+        post_id: 1,
+        image_url:
+          "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
+        caption:
+          "This is the church I used to volunteer at, St. Mary's Parish! Always a blast with all the people I volunteer with.",
+        location: "St. Mary's Parish",
+        post_date: "2021-05-03T21:29:36.000Z",
+        likes: 2,
+        username: "marlon",
+        profile_pic_url:
+          "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
       },
-      "comments": {
-        "3": {
-          "comment_id": 3,
-          "post_id": 1,
-          "user_id": 1,
-          "comment": "Glad to see you active in your community!",
-          "is_a_reply": 0,
-          "id_of_comment_receiving_reply": null,
-          "comment_date": "2021-05-11T06:52:31.000Z",
-          "commenter_profile_pic": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-          "comment_poster": "Karma"
+      comments: {
+        3: {
+          comment_id: 3,
+          post_id: 1,
+          user_id: 1,
+          comment: "Glad to see you active in your community!",
+          is_a_reply: 0,
+          id_of_comment_receiving_reply: null,
+          comment_date: "2021-05-11T06:52:31.000Z",
+          commenter_profile_pic:
+            "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+          comment_poster: "Karma",
         },
-        "totalComments": 1
-      }
+        totalComments: 1,
+      },
     },
     {
-      "post_info": {
-        "post_id": 2,
-        "image_url": "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
-        "caption": "Volunteering at the sun run was so fun! Can't wait until the day they are able to hold another!",
-        "location": "BC Place",
-        "post_date": "2021-05-04T01:06:34.000Z",
-        "likes": 1,
-        "username": "marlon",
-        "profile_pic_url": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png"
+      post_info: {
+        post_id: 2,
+        image_url:
+          "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
+        caption:
+          "Volunteering at the sun run was so fun! Can't wait until the day they are able to hold another!",
+        location: "BC Place",
+        post_date: "2021-05-04T01:06:34.000Z",
+        likes: 1,
+        username: "marlon",
+        profile_pic_url:
+          "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
       },
-      "comments": {
-        "10": {
-          "comment_id": 10,
-          "post_id": 2,
-          "user_id": 1,
-          "comment": "We miss the sun run :(",
-          "is_a_reply": 0,
-          "id_of_comment_receiving_reply": null,
-          "comment_date": "2021-05-13T05:23:39.000Z",
-          "commenter_profile_pic": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-          "comment_poster": "Karma",
-          "replies": {
-            "14": {
-              "comment_id": 14,
-              "post_id": 2,
-              "user_id": 1,
-              "comment": "Yeah same",
-              "is_a_reply": 1,
-              "id_of_comment_receiving_reply": 10,
-              "comment_date": "2021-05-13T06:07:11.000Z",
-              "commenter_profile_pic": "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-              "comment_poster": "marlon"
-            }
-          }
+      comments: {
+        10: {
+          comment_id: 10,
+          post_id: 2,
+          user_id: 1,
+          comment: "We miss the sun run :(",
+          is_a_reply: 0,
+          id_of_comment_receiving_reply: null,
+          comment_date: "2021-05-13T05:23:39.000Z",
+          commenter_profile_pic:
+            "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+          comment_poster: "Karma",
+          replies: {
+            14: {
+              comment_id: 14,
+              post_id: 2,
+              user_id: 1,
+              comment: "Yeah same",
+              is_a_reply: 1,
+              id_of_comment_receiving_reply: 10,
+              comment_date: "2021-05-13T06:07:11.000Z",
+              commenter_profile_pic:
+                "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+              comment_poster: "marlon",
+            },
+          },
         },
-        "totalComments": 2
-      }
-    }
-  ]
+        totalComments: 2,
+      },
+    },
+  ],
 };
-
-
-
-
-
-
-
-
-
 
 let width =
   window.innerWidth ||
@@ -246,29 +251,25 @@ function add_Skills(userID, skill) {
   const method = "PUT";
   const endpoint = "/profiles/skills";
   const params = formatParams({
-    "id": userID,
-    "skill": skill,
-
+    id: userID,
+    skill: skill,
   });
   const url = BASE_URL + endpoint + params;
 
   return APIRequest(method, url);
 }
 
-
-
-
 function add_Education(userID, schoolName, description, gpa, start, end, img) {
   const method = "POST";
   const endpoint = "/profiles/education";
   const params = formatParams({
-    "id": userID,
-    "name": schoolName,
-    "type": description,
-    "gpa": gpa,
-    "start": start,
-    "end": end,
-    "img": img,
+    id: userID,
+    name: schoolName,
+    type: description,
+    gpa: gpa,
+    start: start,
+    end: end,
+    img: img,
   });
   const url = BASE_URL + endpoint + params;
 
@@ -279,40 +280,38 @@ function add_Experience(userID, jobName, workplaceName, start, end, img) {
   const method = "POST";
   const endpoint = "/profiles/experience";
   const params = formatParams({
-    "id": userID,
-    "name": jobName,
-    "employer": workplaceName,
-    "start": start,
-    "end": end,
-    "img": img,
+    id: userID,
+    name: jobName,
+    employer: workplaceName,
+    start: start,
+    end: end,
+    img: img,
   });
   const url = BASE_URL + endpoint + params;
 
   return APIRequest(method, url);
 }
-
 
 function add_Awards(userID, awardTitle, date, img) {
   const method = "POST";
   const endpoint = "/profiles/experience";
   const params = formatParams({
-    "id": userID,
-    "title": awardTitle,
-    "date": date,
-    "img": img,
+    id: userID,
+    title: awardTitle,
+    date: date,
+    img: img,
   });
   const url = BASE_URL + endpoint + params;
 
   return APIRequest(method, url);
 }
 
-
 function add_Description(userID, bio) {
   const method = "POST";
   const endpoint = "/profiles/bio";
   const params = formatParams({
-    "id": userID,
-    "bio": bio,
+    id: userID,
+    bio: bio,
   });
   const url = BASE_URL + endpoint + params;
 
@@ -417,7 +416,7 @@ function loadPosts(profileObj) {
 
 function loadNumPosts(profileObj) {
   let numPosts = document.getElementById("numOfPosts");
-  createNumPosts(numPosts, profileObj.info.posts)
+  createNumPosts(numPosts, profileObj.info.posts);
 }
 
 function loadSkills(profileObj) {
@@ -473,35 +472,6 @@ function loadFollowers(profileObj) {
   createFollowers(follower, profileObj);
 }
 
-function loadWhatsNew() {
-  let whatsNew = document.getElementById(
-    "whats-new-volunteering-opportunities"
-  );
-  createWhatsNew(whatsNew);
-  createWhatsNew(whatsNew);
-  createWhatsNew(whatsNew);
-}
-
-function loadRecommendedConnections() {
-  let recommendedUsers = document.getElementById("recommended-connections");
-
-  let heading2 = document.createElement("hr");
-  heading2.setAttribute("class", "headers");
-  recommendedUsers.appendChild(heading2);
-
-  createRecommendedConnection(recommendedUsers);
-  createRecommendedConnection(recommendedUsers);
-  createRecommendedConnection(recommendedUsers);
-
-  let viewAll = document.createElement("a");
-  viewAll.id = "view-all";
-  viewAll.href = "";
-  viewAll.innerHTML = "View all recommended connections";
-
-  recommendedUsers.appendChild(viewAll);
-}
-
-
 function addAboutMe() {
   console.log("Add skills button clicked");
 
@@ -521,17 +491,7 @@ function addAboutMe() {
     let bio = addEducationInput1.value;
     add_Description(bio);
   });
-
-
-
-
-
 }
-
-
-
-
-
 
 function addSkills() {
   console.log("Add skills button clicked");
@@ -548,14 +508,11 @@ function addSkills() {
   document.getElementById("button-content").appendChild(addSkillsHeading);
   document.getElementById("button-content").appendChild(addSkillsInput);
 
-
   $("#save").click(function () {
     let skill = addSkillsInput.value;
 
     add_Skills(skill);
   });
-
-
 }
 
 function addEducation() {
@@ -703,10 +660,6 @@ function addExperience() {
 
     add_Experience(jobName, workplaceName, start, end, img);
   });
-
-
-
-
 }
 
 function addAwards() {
@@ -730,7 +683,6 @@ function addAwards() {
   let addAwardInput2 = document.createElement("textarea");
   addAwardInput2.setAttribute("style", "height: 30px");
 
-
   let addAwardHeading3 = document.createElement("p");
   addAwardHeading3.setAttribute("class", "heading3");
   addAwardHeading3.innerHTML = "Please add a image of the certificate/award";
@@ -739,7 +691,6 @@ function addAwards() {
   let addAwardInput3 = document.createElement("button");
   addAwardInput3.setAttribute("style", "height: 20px");
 
-
   document.getElementById("button-content").appendChild(addAwardHeading1);
   document.getElementById("button-content").appendChild(addAwardInput1);
   document.getElementById("button-content").appendChild(addAwardHeading2);
@@ -747,19 +698,14 @@ function addAwards() {
   document.getElementById("button-content").appendChild(addAwardHeading3);
   document.getElementById("button-content").appendChild(addAwardInput3);
 
-
-
-
   $("#save").click(function () {
     let awardTitle = addAwardInput1.value;
     let date = addAwardInput2.value;
     let img = addAwardInput3.value;
 
-
     add_Awards(awardTitle, date, img);
   });
 }
-
 
 function createNumPosts(numPosts, number) {
   numPosts.innerHTML = number;
@@ -787,7 +733,6 @@ function createProfilePic(profile) {
   // );
   // profile.appendChild(picture);
 }
-
 
 function createSkills(skills, skillsObj) {
   let skillbtn = document.createElement("button");
@@ -934,88 +879,5 @@ function createFollowers(follower, followerObj) {
 function createFollowing(following, followingObj) {
   following.innerHTML = `${followingObj.info.followers}`;
 }
-
-function createRecommendedConnection(recommended) {
-  // let heading = document.createElement("hr");
-  // heading.setAttribute("class", "headers");
-
-  // recommended.appendChild(heading);
-
-  let recommendedUserDiv = document.createElement("div");
-  recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
-
-  let storyImgDiv = document.createElement("div");
-  storyImgDiv.setAttribute("class", "profilepic");
-  storyImgDiv.setAttribute("style", "padding-bottom: 10px");
-
-  storyImgDiv.setAttribute(
-    "style",
-    "background-image: url('./images/placeholder.jpg')"
-  );
-
-  let nameAndUserName = document.createElement("div");
-  nameAndUserName.setAttribute("class", "name-and-userName");
-
-  let userName = document.createElement("p");
-  userName.setAttribute("class", "userNames");
-  userName.innerHTML = "User name";
-
-  let userNameAt = document.createElement("p");
-  userNameAt.setAttribute("class", "userAt");
-  userNameAt.innerHTML = "@Username";
-
-  recommendedUserDiv.appendChild(storyImgDiv);
-  nameAndUserName.appendChild(userName);
-  nameAndUserName.appendChild(userNameAt);
-
-  recommendedUserDiv.appendChild(nameAndUserName);
-
-  let followUser = document.createElement("div");
-  followUser.innerHTML = "FOLLOW";
-  followUser.setAttribute("class", "followUser");
-
-  recommendedUserDiv.appendChild(followUser);
-
-  let heading2 = document.createElement("hr");
-  heading2.setAttribute("class", "headers");
-
-  recommended.appendChild(recommendedUserDiv);
-  recommended.appendChild(heading2);
-
-  // let recommendedConnections = document.createElement("p");
-  // recommendedConnections.setAttribute("class", "recommendedConnections");
-  // recommendedConnections.innerHTML = "View all recommended connections";
-
-  // recommended.appendChild(recommendedConnections);
-}
-
-function createWhatsNew(newPost) {
-  let opportunityRole = document.createElement("p");
-  opportunityRole.innerHTML = "opportunityRole Role Role";
-  opportunityRole.setAttribute("class", "heading3");
-  opportunityRole.setAttribute("style", "font-weight: 700 !important;");
-
-  let opportunityImgDiv = document.createElement("div");
-  opportunityImgDiv.setAttribute("class", "bulletinboardpicture");
-  opportunityImgDiv.setAttribute("style", "padding-bottom: 10px");
-
-  let opportunityImg = document.createElement("img");
-  opportunityImg.src = "./images/placeholder.jpg";
-  opportunityImgDiv.appendChild(opportunityImg);
-
-  let opportunityLocation = document.createElement("p");
-  opportunityLocation.innerHTML = "opportunityLocation";
-  opportunityLocation.setAttribute("class", "bodytext");
-
-  let opportunityDiv = document.createElement("div");
-  opportunityDiv.setAttribute("class", "opportunity");
-  opportunityDiv.setAttribute("style", "margin-bottom: 10px;");
-  opportunityDiv.appendChild(opportunityImgDiv);
-  opportunityDiv.appendChild(opportunityRole);
-  opportunityDiv.appendChild(opportunityLocation);
-
-  newPost.appendChild(opportunityDiv);
-}
-
 
 view_profile("marlon");

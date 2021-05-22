@@ -62,16 +62,16 @@
 .postModal {
   position: fixed;
   display: flex;
-  background-color: #EFF0F3; /* temp */
+  background-color: #eff0f3; /* temp */
   height: 600px; /* temp */
   width: 1000px; /* temp */
   border-radius: 25px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   z-index: 4;
 }
-  
+
 .nameAndTimeDiv {
   justify-content: center;
   margin-left: 20px;
@@ -95,7 +95,7 @@
 #profile {
   margin-top: 5px;
   width: 48px;
-  height: 48px; 
+  height: 48px;
 }
 
 .postOwnerTitle {
@@ -124,11 +124,9 @@
   line-height: 19px;
   /* identical to box height */
 
-
   color: #000000;
 }
-  
-  
+
 .timeAndReply {
   margin-right: 10px;
 
@@ -139,8 +137,7 @@
   font-size: 10px;
   line-height: 14px;
   /* identical to box height */
-  
-  
+
   color: #000000;
 }
 
@@ -154,16 +151,16 @@
   display: flex;
   flex-direction: column;
 }
-  
+
 .commentTxt {
   /* Body text */
-  
+
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 19px;
-  
+
   color: #000000;
   word-wrap: break-word;
 }
@@ -200,13 +197,12 @@
 }
 
 #mainmain > #stories {
-  background-color: #eff0f3; /* temp */
   margin-top: 24px;
   width: 100%;
   border-radius: 12px;
 }
 
-.likebtn{
+.likebtn {
   margin-top: 10px;
   margin-left: 10px;
   width: 40px;
@@ -214,7 +210,6 @@
 }
 
 #mainmain > #posts {
-  background-color: #eff0f3; /* temp */
   margin-top: 24px;
   width: 100%;
   margin-bottom: 24px;
@@ -713,16 +708,15 @@ hr {
   .postModal {
     width: 700px;
   }
-  
+
   .leftDiv {
     width: 60%; /* temp */
   }
-  
+
   .rightDiv {
     width: 40%; /* temp */
   }
-} 
-
+}
 
 @media screen and (max-width: 900px) {
   .name-and-userName {
@@ -767,12 +761,12 @@ hr {
     width: 500px;
     height: 75%;
   }
-  
+
   .leftDiv {
     width: 100%;
     height: 60%; /* temp */
   }
-  
+
   .rightDiv {
     width: 100%;
     height: 40%; /* temp */
@@ -785,7 +779,6 @@ hr {
   .postOwnerTitle {
     display: none;
   }
-
 }
 
 @media screen and (max-width: 550px) {
@@ -833,11 +826,11 @@ hr {
     width: 100%;
     height: 75%;
   }
-  
+
   .leftDiv {
     display: none;
   }
-  
+
   .rightDiv {
     width: 100%;
     height: 100%; /* temp */
@@ -847,8 +840,8 @@ hr {
     height: 70%;
   }
 
-  .postOwnerTitle, #lineAfterPostDetails {
+  .postOwnerTitle,
+  #lineAfterPostDetails {
     display: none;
   }
-
 }
