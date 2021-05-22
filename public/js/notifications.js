@@ -64,6 +64,24 @@ function APIRequest(method, url) {
   };
 }
 
+function accept_request(userID, follower) {
+  const method = "PUT";
+  const endpoint = "/profiles/followers";
+  const params = formatParams({
+    "id": userID,
+    "follower": follower,
+
+  });
+  const url = BASE_URL + endpoint + params;
+
+  return APIRequest(method, url);
+}
+
+
+
+
+
+
 function loadAll() {
   //  loadWhatsNew();
   // loadRecommendedConnections();
@@ -379,7 +397,7 @@ function generateNotificationFollowRequest(postObj) {
   let notificationConfirmButton = document.createElement("button");
   notificationConfirmButton.innerHTML = "<i class='fas fa-check-circle'></i>";
 
-  notificationDeleteButton = document.createElement("button");
+  let notificationDeleteButton = document.createElement("button");
   notificationDeleteButton.innerHTML = "<i class='fas fa-trash-alt'></i>";
   followDiv.appendChild(notificationConfirmButton);
   deleteDiv.appendChild(notificationDeleteButton);
@@ -390,6 +408,17 @@ function generateNotificationFollowRequest(postObj) {
   notificationDiv.appendChild(deleteDiv);
 
   notificationsDiv.appendChild(notificationDiv);
+
+  $(".follow-btn").click(function () {
+    let userID = followDiv.value;
+    let follower = followDiv.value;
+    accept_request(userID, follower);
+  });
+
+
+
+
+
 }
 
 // RECOMMENDED.JS STUFF // SIDEBAR STUFF ONLY // SIDEBAR STUFF ONLY // RECCOMMENDED.JS STUFF //
