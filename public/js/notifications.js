@@ -95,48 +95,48 @@ function loadAll() {
   // generateNoNotifications();
   let test = [
       {
-        "notifiation_id": 41,
-        "profile_id": 1,
-        "username_of_notification": "Karma",
-        "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-        "post_pic_url": null,
-        "message": " is now following you.",
-        "type_of_event": "profile_follows accepted",
-        "id_of_event": 12,
-        "timestamp": "2021-05-13T17:36:19.000Z"
+        notifiation_id: 41,
+        profile_id: 1,
+        username_of_notification: "Karma",
+        profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+        post_pic_url: null,
+        message: " is now following you.",
+        type_of_event: "profile_follows accepted",
+        id_of_event: 12,
+        timestamp: "2021-05-13T17:36:19.000Z"
       },
       {
-        "notifiation_id": 25,
-        "profile_id": 1,
-        "username_of_notification": "Team Karma",
-        "profile_pic_url": "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
-        "post_pic_url": "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder-1024x512.png",
-        "message": " has reviewed your application. Click here to see results",
-        "type_of_event": "opportunities",
-        "id_of_event": 3,
-        "timestamp": "2021-05-12T20:24:40.000Z"
+        notifiation_id: 25,
+        profile_id: 1,
+        username_of_notification: "Team Karma",
+        profile_pic_url: "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+        post_pic_url: "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder-1024x512.png",
+        message: " has reviewed your application. Click here to see results",
+        type_of_event: "opportunities",
+        id_of_event: 3,
+        timestamp: "2021-05-12T20:24:40.000Z"
       },
       {
-        "notifiation_id": 4,
-        "profile_id": 1,
-        "username_of_notification": "Karma",
-        "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-        "post_pic_url": "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
-        "message": " has liked your post.",
-        "type_of_event": "social_posts",
-        "id_of_event": 2,
-        "timestamp": "2021-05-12T06:01:37.000Z"
+        notifiation_id: 4,
+        profile_id: 1,
+        username_of_notification: "Karma",
+        profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+        post_pic_url: "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
+        message: " has liked your post.",
+        type_of_event: "social_posts",
+        id_of_event: 2,
+        timestamp: "2021-05-12T06:01:37.000Z"
       },
       {
-        "notifiation_id": 2,
-        "profile_id": 1,
-        "username_of_notification": "Karma",
-        "profile_pic_url": "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-        "post_pic_url": "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
-        "message": " has liked your post.",
-        "type_of_event": "social_posts",
-        "id_of_event": 1,
-        "timestamp": "2021-05-12T05:52:02.000Z"
+        notifiation_id: 2,
+        profile_id: 1,
+        username_of_notification: "Karma",
+        profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+        post_pic_url: "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
+        message: " has liked your post.",
+        type_of_event: "social_posts",
+        id_of_event: 1,
+        timestamp: "2021-05-12T05:52:02.000Z"
       }
     ];
 
@@ -392,10 +392,11 @@ function generateNotificationFollowRequest(postObj) {
   deleteI.setAttribute("class", "fas fa-trash-alt");
 
   let notificationConfirmButton = document.createElement("button");
-  notificationConfirmButton.id = postObj.notification_id
+  notificationConfirmButton.id = postObj.notification_id;
   notificationConfirmButton.innerHTML = "<i class='fas fa-check-circle'></i>";
 
   let notificationDeleteButton = document.createElement("button");
+  notificationDeleteButton.id = postObj.notification_id;
   notificationDeleteButton.innerHTML = "<i class='fas fa-trash-alt'></i>";
   followDiv.appendChild(notificationConfirmButton);
   deleteDiv.appendChild(notificationDeleteButton);
