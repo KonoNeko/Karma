@@ -1,5 +1,3 @@
-const BASE_URL = "https://marlonfajardo.ca/karma/v1";
-
 let result = {
   info: {
     profile_id: 1,
@@ -209,8 +207,7 @@ function view_profile(userID) {
   const endpoint = "/profiles";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  let result = APIRequestViewProfile(method, url);
-  console.log(result);
+  APIRequestViewProfile(method, url);
 }
 
 function APIRequest(method, url) {
@@ -228,6 +225,25 @@ function APIRequest(method, url) {
       // }
     }
   };
+}
+
+function get_firebase_info() {
+  let info = {};
+  firebase.auth().onAuthStateChanged(function (user) {
+    db.collection("users")
+      .doc(user.uid)
+      .get()
+      .then(function (doc) {
+        let user = doc.data();
+        info['fullName'] = user.fullName;
+        info['email'] = user.email;
+        info['username'] = user.username; 
+        return info;
+      })
+      .catch((error) => {
+        console.log(`Error getting data: ${error}`);
+      });
+  });
 }
 
 function APIRequestViewProfile(method, url) {
@@ -294,7 +310,7 @@ function add_Experience(userID, jobName, workplaceName, start, end, img) {
 
 function add_Awards(userID, awardTitle, date, img) {
   const method = "POST";
-  const endpoint = "/profiles/experience";
+  const endpoint = "/profiles/awardsAndCertifications";
   const params = formatParams({
     id: userID,
     title: awardTitle,
@@ -335,52 +351,6 @@ function showProfile() {
         console.log(`Error getting data: ${error}`);
       });
   });
-}
-
-function showImages() {
-  var storage = firebase.storage();
-  var storageRef = storage.ref();
-
-  $("#List").find("tbody").html("");
-
-  var i = 0;
-
-  storageRef
-    .child("images/" + "profilePicture/")
-    .listAll()
-    .then(function (result) {
-      result.items.forEach(function (imageRef) {
-        i++;
-        displayImage(i, imageRef);
-      });
-    });
-  function displayImage(row, images) {
-    images.getDownloadURL().then(function (url) {
-      console.log(url);
-
-      let new_html = "";
-      new_html += "<tr>";
-      new_html += "<td>";
-      new_html += row;
-      new_html += "</td>";
-      new_html += "<td>";
-      new_html +=
-        '<img src= " ' + url + ' " width="100px" style= "float:right">';
-      new_html += "</td>";
-      new_html += "</tr>";
-      // $('#List').find('tbody').append(new_html);
-
-      let myImg = `
-    <div><br>
-      <img src="${url}" width="90%" height="90%"><br>
-      <button id="like">Like</button>
-      <br>
-    </div>
-    `;
-
-      $("#postDiv").append(myImg);
-    });
-  }
 }
 
 // WINDOW ONLOAD FUNCTION FOR THE PROFILE PAGE
@@ -426,12 +396,6 @@ function loadSkills(profileObj) {
     console.log(profileObj.skills[key]);
     console.log(key);
   }
-  // createSkills(skills,profileObj);
-  // createSkills(skills,profileObj);
-  // createSkills(skills,profileObj);
-  // createSkills(skills,profileObj);
-  // createSkills(skills,profileObj);
-  // createSkills(skills,profileObj);
 }
 
 function loadEducation(profileObj) {
@@ -439,8 +403,6 @@ function loadEducation(profileObj) {
   for (let key of Object.keys(profileObj.education)) {
     createEducation(education, profileObj.education[key]);
   }
-  // console.log(profileObj.education[key])
-  // createEducation(education,profileObj);
 }
 
 function loadExperience(profileObj) {
@@ -473,7 +435,7 @@ function loadFollowers(profileObj) {
 }
 
 function addAboutMe() {
-  console.log("Add skills button clicked");
+  console.log("Add about me button clicked");
 
   document.getElementById("button-content").innerHTML = "";
 
@@ -581,6 +543,8 @@ function addEducation() {
   document.getElementById("button-content").appendChild(addEducationHeading5);
   document.getElementById("button-content").appendChild(addEducationInput5);
 
+  let info = get_firebase_info();
+
   // userID, schoolName, description, gpa, start, end, img
   $("#save").click(function () {
     let schoolName = addEducationInput1.value;
@@ -590,7 +554,7 @@ function addEducation() {
     let end = addEducationInput4.value;
     let img = addEducationInput5.value;
 
-    add_Education(schoolName, description, gpa, start, end, img);
+    add_Education(info.username, schoolName, description, gpa, start, end, img);
   });
 }
 
@@ -719,6 +683,7 @@ function createAboutMe(aboutMe, aboutMeObj) {
   about.setAttribute("class", "about");
   about.setAttribute("style", "margin-right: 20px;");
   about.innerHTML = `${aboutMeObj.info.bio}`;
+  
 
   aboutdiv.appendChild(about);
   aboutMe.appendChild(aboutdiv);
@@ -881,3 +846,4 @@ function createFollowing(following, followingObj) {
 }
 
 view_profile("marlon");
+showProfile();

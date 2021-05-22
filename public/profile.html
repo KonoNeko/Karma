@@ -16,7 +16,7 @@
     />
   </head>
 
-  <body onload='loadProfile()'>
+  <body>
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
         >&times;</a
@@ -317,8 +317,6 @@
   <script src="js/profile.js"></script>
   <script src="js/viewapplications.js"></script>
   <script>
-    showProfile();
-
     firebase.auth().onAuthStateChanged(function (user) {
       if (!user) {
         window.location.href = "sign-up.html";
