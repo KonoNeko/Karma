@@ -18,6 +18,11 @@
     name="viewport"
     content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
   />
+  <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
 </head>
 
 <body onload="loadAll()">
@@ -184,7 +189,7 @@
           <div id="above-search" class="sticky-send-message search">
             <form class="search-form">
               <input id="user-input" type="text" placeholder="Compose a message" />
-              <button type="submit"><i class="fa fa-paper-plane"></i></button>
+              <button id="sendMessage"><i class="fa fa-paper-plane"></i></button>
             </form>
           </div>
         </div>

@@ -1,3 +1,23 @@
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+  apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
+  authDomain: "karma-535f3.firebaseapp.com",
+  databaseURL: "https://karma-535f3-default-rtdb.firebaseio.com",
+  projectId: "karma-535f3",
+  storageBucket: "karma-535f3.appspot.com",
+  messagingSenderId: "1023587584355",
+  appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
+  measurementId: "G-VTZ4TEWFBW"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);  
+const db = firebase.firestore();
+
+let info = {};
+get_firebase_info();
+
+
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
 let result = {
@@ -117,41 +137,56 @@ function returnHighestTimeDiff(time) {
   }
 }
 
+async function get_firebase_info() {
+  firebase.auth().onAuthStateChanged(function (user) {
+    db.collection("users")
+      .doc(user.uid)
+      .get()
+      .then(function (doc) {
+        let user = doc.data();
+        console.log(user);
+        info.fullName = user.fullName;
+        info.email = user.email;
+        info.username = user.username; 
+      })
+      .catch((error) => {
+        console.log(`Error getting data: ${error}`);
+      });
+  });
+}
+
 function view_messages(userID) {
   const method = "GET";
   const endpoint = "/messages";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  // APIRequest(method, url);
-  if (JSON.stringify(result) === "{}") {
+  APIRequest(method, url, generateMessagesAfterRequest);
+}
+
+function generateMessagesAfterRequest(results) {
+  results = JSON.parse(results);
+  console.log("Generating");
+  console.log(results);
+  if (JSON.stringify(results) === "{}") {
     generateNoMessages();
   }
-  let keys = Object.keys(result);
+  let keys = Object.keys(results);
   for (let i = 0; i < keys.length; i++) {
-    generateMessager(result[keys[i]]);
+    generateMessager(results[keys[i]]);
     if (i != keys.length - 1) {
       generateLine();
     }
   }
 }
 
-function APIRequest(method, url) {
+function APIRequest(method, url, callback) {
   console.log(method + ": " + url);
   const xhttp = new XMLHttpRequest();
   xhttp.open(method, url, true);
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      // let result = JSON.parse(this.responseText);
-      // console.log("loading post");
-      // console.log(result);
-      let keys = Object.keys(result);
-      for (let i = 0; i < keys.length; i++) {
-        generateMessager(result[keys[i]]);
-        if (i != keys.length - 1) {
-          generateLine();
-        }
-      }
+      callback(this.responseText);
     }
   };
 }
@@ -168,33 +203,21 @@ function formatParams(params) {
   return string;
 }
 
-function view_new_messages(userID) {
-  const method = "POST";
-  const endpoint = "/messages";
-  const params = formatParams({
-    "id": userID,
-    "receiver": username,
-    "msg": actualmessage
-});
-
-  const url = BASE_URL + endpoint + params;
-  APIRequestSendMessages(method, url);
-}
-
-
-function APIRequestSendMessages(method, url) {
-  console.log(method + ": " + url);
-  const xhttp = new XMLHttpRequest();
-  xhttp.open(method, url, true);
-  xhttp.send();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      // let result = JSON.parse(this.responseText);
-      // console.log("loading post");
-      // console.log(result);
-      console.log("NICE DUDE!");
-    }
-  };
+function send_message() {
+  let message = document.getElementById("user-input").value;
+  let receiver = document.getElementById("otherUser").textContent;
+  console.log(`Sending "${message}" to ${receiver} from ${info.username}`)
+  if (message != "" && receiver != "" && JSON.stringify(info) != "{}") {
+    const method = "POST";
+    const endpoint = "/messages";
+    const params = formatParams({
+      "id": info.username,
+      "receiver": document.getElementById("otherUser").textContent,
+      "msg": message
+    });
+    const url = BASE_URL + endpoint + params;
+    APIRequest(method, url, console.log);
+  }
 }
 
 let width =
@@ -290,6 +313,8 @@ function generateMessager(convo) {
 }
 
 function returnToMessages() {
+  document.getElementById("user-input").value = "";
+  document.getElementById("sendMessage").onclick = "";
   document.getElementById("sidemain").setAttribute("style", "display: none");
   document
     .getElementById("mainmain")
@@ -297,6 +322,7 @@ function returnToMessages() {
 }
 
 function revealMessages(convo) {
+  document.getElementById("sendMessage").onclick = send_message;
   console.log(width);
   if (width > 600) {
     document.getElementById("messages-user-information").innerHTML = "";
@@ -323,6 +349,7 @@ function revealMessages(convo) {
       createMessageSentByYou(currentMsg, convo.profile_pic);
     }
   }
+
 }
 
 function generateMessages(msgObj) {
@@ -339,7 +366,7 @@ function generateMessages(msgObj) {
   messagerImg.src = msgObj.other_user_profile_pic;
   messagerName.innerHTML = msgObj.other_user_fullname;
   messagerName.setAttribute("class", "bodytitle");
-  messagerUsername.innerHTML = "@" + msgObj.other_user;
+  messagerUsername.innerHTML = "@" + `<span id=otherUser>${msgObj.other_user}</span>`;
   messagerUsername.setAttribute("class", "bodytext");
 
   messagerImgDiv.appendChild(messagerImg);
@@ -455,5 +482,4 @@ function generateNoMessages() {
 function createSendMessage() {
   let userValue = document.getElementById("user-input").value;
   createMessageSentByYou(userValue);
-
 }
