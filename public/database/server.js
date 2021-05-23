@@ -593,7 +593,7 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
  * Gets all opportunites posted sorted by category.
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/post/like
+ * https://marlonfajardo.ca/karma/v1/opportunities
  */
  app.get(ENDPOINT + '/opportunities', (req, res) => {
     const sql = `SELECT * FROM bulletin_board;`;
