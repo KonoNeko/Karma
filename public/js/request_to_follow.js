@@ -9,9 +9,11 @@ function APIRequest(method, url, callback) {
     xhttp.send();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        let response = this.responseText;
+        let response;
         try {
-          response = JSON.parse(response);
+          response = JSON.parse(this.responseText);
+        } catch(err) {
+          response = this.responseText;
         } finally {
           callback(response);
         }
@@ -19,7 +21,17 @@ function APIRequest(method, url, callback) {
     };
   }
 
-
+function formatParams(params) {
+  let string = "?";
+  let keys = Object.keys(params);
+  for(let i=0; i<keys.length; i++) {
+    string += `${keys[i]}=${params[keys[i]]}`;
+    if (i < keys.length - 1) {
+      string += "&";
+    }
+  }
+  return string;
+}
 
 function request_follow(userID, follower) {
   const method = "POST";

@@ -17,8 +17,6 @@ firebase.initializeApp(firebaseConfig);
   
 const db = firebase.firestore();
 
-const BASE_URL = "https://marlonfajardo.ca/karma/v1";
-
 let info = {};
 get_firebase_info();
 
@@ -95,25 +93,6 @@ function loadNotifications(notis) {
   }
 }
 
-function APIRequest(method, url, callback) {
-  console.log(method + ": " + url);
-  const xhttp = new XMLHttpRequest();
-  xhttp.open(method, url, true);
-  xhttp.send();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      if (this.readyState == 4 && this.status == 200) {
-        let response = this.responseText;
-        try {
-          response = JSON.parse(response);
-        } finally {
-          callback(response);
-        }
-      }
-    }
-  };
-}
-
 function accept_request(userID, follower) {
   const method = "PUT";
   const endpoint = "/profiles/followers";
@@ -126,79 +105,8 @@ function accept_request(userID, follower) {
   APIRequest(method, url, console.log);
 }
 
-function request_follow(userID, follower) {
-  const method = "POST";
-  const endpoint = "/profiles/followers";
-  const params = formatParams({
-    id: userID,
-    follower: follower,
-  });
-  const url = BASE_URL + endpoint + params;
-
-  return APIRequest(method, url);
-}
-
 function loadAll() {
   loadWhatsNew();
-
-  // generateNoNotifications();
-  // let test = [
-  //     {
-  //       notification_id: 50,
-  //       profile_id: 1,
-  //       username_of_notification: "testuser",
-  //       profile_pic_url: "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-  //       post_pic_url: null,
-  //       message: " has requested to follow you.",
-  //       type_of_event: "profile_follows request",
-  //       id_of_event: 16,
-  //       timestamp: "2021-05-22T21:21:51.000Z"
-  //     },
-  //     {
-  //       notification_id: 41,
-  //       profile_id: 1,
-  //       username_of_notification: "Karma",
-  //       profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-  //       post_pic_url: null,
-  //       message: " is now following you.",
-  //       type_of_event: "profile_follows accepted",
-  //       id_of_event: 12,
-  //       timestamp: "2021-05-13T17:36:19.000Z"
-  //     },
-  //     {
-  //       notification_id: 25,
-  //       profile_id: 1,
-  //       username_of_notification: "Team Karma",
-  //       profile_pic_url: "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
-  //       post_pic_url: "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder-1024x512.png",
-  //       message: " has reviewed your application. Click here to see results",
-  //       type_of_event: "opportunities",
-  //       id_of_event: 3,
-  //       timestamp: "2021-05-12T20:24:40.000Z"
-  //     },
-  //     {
-  //       notification_id: 4,
-  //       profile_id: 1,
-  //       username_of_notification: "Karma",
-  //       profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-  //       post_pic_url: "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
-  //       message: " has liked your post.",
-  //       type_of_event: "social_posts",
-  //       id_of_event: 2,
-  //       timestamp: "2021-05-12T06:01:37.000Z"
-  //     },
-  //     {
-  //       notification_id: 2,
-  //       profile_id: 1,
-  //       username_of_notification: "Karma",
-  //       profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-  //       post_pic_url: "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
-  //       message: " has liked your post.",
-  //       type_of_event: "social_posts",
-  //       id_of_event: 1,
-  //       timestamp: "2021-05-12T05:52:02.000Z"
-  //     }
-  //   ];
 }
 
 function generateNoNotifications() {
@@ -212,20 +120,6 @@ function generateNoNotifications() {
 
   noNotificationsDiv.appendChild(notification);
 }
-
-// function generateTime() {
-//   let notificationsDiv = document.getElementById("notifications");
-
-//   let notificationTime = document.createElement("p");
-//   notificationTime.setAttribute("class", "heading3");
-//   notificationTime.setAttribute(
-//     "style",
-//     "font-weight: 700; margin-bottom: 10px;"
-//   );
-//   notificationTime.innerHTML = "Recent";
-
-//   notificationsDiv.appendChild(notificationTime);
-// }
 
 function generateHR() {
   let hr = document.createElement("hr");
@@ -385,6 +279,13 @@ function generateNotificationFollow(postObj) {
   notificationFollowButton.innerHTML = "<i class='fas fa-user-plus'></i>";
   followDiv.appendChild(notificationFollowButton);
 
+  notificationFollowButton.onclick = () => {
+    console.log(`${postObj.current_user} is requesting to follow ${postObj.username_of_notification}`);
+    let userID = postObj.username_of_notification;
+    let follower = postObj.current_user;
+    request_follow(userID, follower);
+  }
+
   notificationDiv.appendChild(notificationImgDiv);
   notificationDiv.appendChild(notificationText);
   notificationDiv.appendChild(followDiv);
@@ -445,11 +346,11 @@ function generateNotificationFollowRequest(postObj) {
   notificationConfirmButton.id = postObj.notification_id;
   notificationConfirmButton.innerHTML = "<i class='fas fa-check-circle'></i>";
 
-  $("").click(function () {
-  let userID = notificationConfirmButton.value;
-  let follower = notificationConfirmButton.value;
-  accept_request(userID, follower);
-});
+  notificationConfirmButton.onclick = () => {
+    let userID = postObj.current_user;
+    let follower = postObj.username_of_notification;
+    accept_request(userID, follower);
+  }
 
   let notificationDeleteButton = document.createElement("button");
   notificationDeleteButton.id = postObj.notification_id;
