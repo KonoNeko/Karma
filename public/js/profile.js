@@ -61,13 +61,14 @@ function get_firebase_info() {
         info['email'] = user.email;
         info['username'] = user.username; 
         view_profile(info.username);
-        return info;
+        loadRecommendedConnections(info.username);
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
       });
   });
 }
+
 
 function add_Skills(userID, skill) {
   const method = "PUT";
@@ -78,7 +79,7 @@ function add_Skills(userID, skill) {
   });
   const url = BASE_URL + endpoint + params;
 
-  return APIRequest(method, url);
+  APIRequest(method, url, console.log);
 }
 
 function add_Education(userID, schoolName, description, gpa, start, end, img) {
@@ -95,7 +96,7 @@ function add_Education(userID, schoolName, description, gpa, start, end, img) {
   });
   const url = BASE_URL + endpoint + params;
 
-  return APIRequest(method, url);
+  APIRequest(method, url, console.log);
 }
 
 function add_Experience(userID, jobName, workplaceName, start, end, img) {
@@ -111,7 +112,7 @@ function add_Experience(userID, jobName, workplaceName, start, end, img) {
   });
   const url = BASE_URL + endpoint + params;
 
-  return APIRequest(method, url);
+  APIRequest(method, url, console.log);
 }
 
 function add_Awards(userID, awardTitle, date, img) {
@@ -125,7 +126,7 @@ function add_Awards(userID, awardTitle, date, img) {
   });
   const url = BASE_URL + endpoint + params;
 
-  return APIRequest(method, url);
+  APIRequest(method, url, console.log);
 }
 
 function add_Description(userID, bio) {
@@ -137,7 +138,7 @@ function add_Description(userID, bio) {
   });
   const url = BASE_URL + endpoint + params;
 
-  return APIRequest(method, url);
+  APIRequest(method, url, console.log);
 }
 
 function showProfile() {
@@ -172,7 +173,6 @@ function loadProfile(profileObj) {
   loadFollowers(profileObj);
   loadFollowing(profileObj);
   loadWhatsNew();
-  loadRecommendedConnections();
 }
 
 // READING INFORMATION FROM THE DATABASE
