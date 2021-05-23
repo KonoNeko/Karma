@@ -1,4 +1,46 @@
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+  apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
+  authDomain: "karma-535f3.firebaseapp.com",
+  databaseURL: "https://karma-535f3-default-rtdb.firebaseio.com",
+  projectId: "karma-535f3",
+  storageBucket: "karma-535f3.appspot.com",
+  messagingSenderId: "1023587584355",
+  appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
+  measurementId: "G-VTZ4TEWFBW"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+  
+const db = firebase.firestore();
+
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
+
+let info = {};
+get_firebase_info();
+
+function get_firebase_info() {
+  let info = {};
+  firebase.auth().onAuthStateChanged(function (user) {
+    db.collection("users")
+      .doc(user.uid)
+      .get()
+      .then(function (doc) {
+        let user = doc.data();
+        info['fullName'] = user.fullName;
+        info['email'] = user.email;
+        info['username'] = user.username; 
+        view_notifications(info.username);
+        loadRecommendedConnections(info.username);
+      })
+      .catch((error) => {
+        console.log(`Error getting data: ${error}`);
+      });
+  });
+}
 
 const notification_types = {
   social_posts: generatePostNotification,
@@ -35,29 +77,37 @@ function returnHighestTimeDiff(time) {
 
 function view_notifications(userID) {
   const method = "GET";
-  const endpoint = "/notifications/karma";
+  const endpoint = "/notifications";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  let result = APIRequest(method, url);
-  console.log(result);
+  APIRequest(method, url, loadNotifications);
 }
 
-function APIRequest(method, url) {
+function loadNotifications(notis) {
+  console.log(notis);
+  for (let i = 0; i < notis.length; i++) {
+    // for each notification
+    let currentEvent = notis[i].type_of_event;
+    notification_types[currentEvent](notis[i]);
+    if (i != notis.length - 1) {
+      generateHR();
+    }
+  }
+}
+
+function APIRequest(method, url, callback) {
   console.log(method + ": " + url);
   const xhttp = new XMLHttpRequest();
   xhttp.open(method, url, true);
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      let result = JSON.parse(this.responseText);
-      console.log(result);
-      console.log("loading post");
-      for (let i = 0; i < result.length; i++) {
-        // for each notification
-        let currentEvent = result[i].type_of_event;
-        notification_types[currentEvent](result[i]);
-        if (i != result.length - 1) {
-          generateHR();
+      if (this.readyState == 4 && this.status == 200) {
+        let response = this.responseText;
+        try {
+          response = JSON.parse(response);
+        } finally {
+          callback(response);
         }
       }
     }
@@ -73,7 +123,7 @@ function accept_request(userID, follower) {
   });
   const url = BASE_URL + endpoint + params;
 
-  return APIRequest(method, url);
+  APIRequest(method, url, console.log);
 }
 
 function request_follow(userID, follower) {
@@ -90,76 +140,65 @@ function request_follow(userID, follower) {
 
 function loadAll() {
   loadWhatsNew();
-  loadRecommendedConnections();
 
   // generateNoNotifications();
-  let test = [
-      {
-        notification_id: 50,
-        profile_id: 1,
-        username_of_notification: "testuser",
-        profile_pic_url: "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-        post_pic_url: null,
-        message: " has requested to follow you.",
-        type_of_event: "profile_follows request",
-        id_of_event: 16,
-        timestamp: "2021-05-22T21:21:51.000Z"
-      },
-      {
-        notification_id: 41,
-        profile_id: 1,
-        username_of_notification: "Karma",
-        profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-        post_pic_url: null,
-        message: " is now following you.",
-        type_of_event: "profile_follows accepted",
-        id_of_event: 12,
-        timestamp: "2021-05-13T17:36:19.000Z"
-      },
-      {
-        notification_id: 25,
-        profile_id: 1,
-        username_of_notification: "Team Karma",
-        profile_pic_url: "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
-        post_pic_url: "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder-1024x512.png",
-        message: " has reviewed your application. Click here to see results",
-        type_of_event: "opportunities",
-        id_of_event: 3,
-        timestamp: "2021-05-12T20:24:40.000Z"
-      },
-      {
-        notification_id: 4,
-        profile_id: 1,
-        username_of_notification: "Karma",
-        profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-        post_pic_url: "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
-        message: " has liked your post.",
-        type_of_event: "social_posts",
-        id_of_event: 2,
-        timestamp: "2021-05-12T06:01:37.000Z"
-      },
-      {
-        notification_id: 2,
-        profile_id: 1,
-        username_of_notification: "Karma",
-        profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-        post_pic_url: "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
-        message: " has liked your post.",
-        type_of_event: "social_posts",
-        id_of_event: 1,
-        timestamp: "2021-05-12T05:52:02.000Z"
-      }
-    ];
-
-  for (let i = 0; i < test.length; i++) {
-    // for each notification
-    let currentEvent = test[i].type_of_event;
-    notification_types[currentEvent](test[i]);
-    if (i != test.length - 1) {
-      generateHR();
-    }
-  }
-  // view_notifications('karma');
+  // let test = [
+  //     {
+  //       notification_id: 50,
+  //       profile_id: 1,
+  //       username_of_notification: "testuser",
+  //       profile_pic_url: "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
+  //       post_pic_url: null,
+  //       message: " has requested to follow you.",
+  //       type_of_event: "profile_follows request",
+  //       id_of_event: 16,
+  //       timestamp: "2021-05-22T21:21:51.000Z"
+  //     },
+  //     {
+  //       notification_id: 41,
+  //       profile_id: 1,
+  //       username_of_notification: "Karma",
+  //       profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+  //       post_pic_url: null,
+  //       message: " is now following you.",
+  //       type_of_event: "profile_follows accepted",
+  //       id_of_event: 12,
+  //       timestamp: "2021-05-13T17:36:19.000Z"
+  //     },
+  //     {
+  //       notification_id: 25,
+  //       profile_id: 1,
+  //       username_of_notification: "Team Karma",
+  //       profile_pic_url: "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+  //       post_pic_url: "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder-1024x512.png",
+  //       message: " has reviewed your application. Click here to see results",
+  //       type_of_event: "opportunities",
+  //       id_of_event: 3,
+  //       timestamp: "2021-05-12T20:24:40.000Z"
+  //     },
+  //     {
+  //       notification_id: 4,
+  //       profile_id: 1,
+  //       username_of_notification: "Karma",
+  //       profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+  //       post_pic_url: "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
+  //       message: " has liked your post.",
+  //       type_of_event: "social_posts",
+  //       id_of_event: 2,
+  //       timestamp: "2021-05-12T06:01:37.000Z"
+  //     },
+  //     {
+  //       notification_id: 2,
+  //       profile_id: 1,
+  //       username_of_notification: "Karma",
+  //       profile_pic_url: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
+  //       post_pic_url: "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
+  //       message: " has liked your post.",
+  //       type_of_event: "social_posts",
+  //       id_of_event: 1,
+  //       timestamp: "2021-05-12T05:52:02.000Z"
+  //     }
+  //   ];
 }
 
 function generateNoNotifications() {
