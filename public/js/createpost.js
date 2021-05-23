@@ -21,25 +21,25 @@
 //   }
 
 
-function createPost() {
-    let posts = [];
+// function createPost() {
+//     let posts = [];
 
-    const addPost = (ev) => {
-        ev.preventDefault();
-        let post = {
-            caption: document.getElementsByClassName('caption'),
-            location: document.getElementById('locaiton'),
-            tags: document.getElementById('tags')
-        }
-        posts.push(post);
+//     const addPost = (ev) => {
+//         ev.preventDefault();
+//         let post = {
+//             caption: document.getElementsByClassName('caption'),
+//             location: document.getElementById('locaiton'),
+//             tags: document.getElementById('tags')
+//         }
+//         posts.push(post);
 
-        console.warn('added', {posts});
-        let pre = document.querySelector('#msg pre');
-        pre.textContent = '\n' + JSON.stringify(posts, '\t', 2);
-    }
-    document.addEventListener('DOMContentLoaded', ()=>{
-        document.getElementById('postBtn').addEventListener('click', addPost);
-    })
+//         console.warn('added', {posts});
+//         let pre = document.querySelector('#msg pre');
+//         pre.textContent = '\n' + JSON.stringify(posts, '\t', 2);
+//     }
+//     document.addEventListener('DOMContentLoaded', ()=>{
+//         document.getElementById('postBtn').addEventListener('click', addPost);
+//     })
 
-    console.log(posts);
-}
+//     console.log(posts);
+// }
