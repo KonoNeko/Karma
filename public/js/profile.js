@@ -1,3 +1,5 @@
+
+
 let result = {
   info: {
     profile_id: 1,
@@ -207,22 +209,22 @@ function view_profile(userID) {
   const endpoint = "/profiles";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  APIRequestViewProfile(method, url);
+  APIRequest(method, url, loadProfile);
 }
 
-function APIRequest(method, url) {
+function APIRequest(method, url, callback) {
   console.log(method + ": " + url);
   const xhttp = new XMLHttpRequest();
   xhttp.open(method, url, true);
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      // let result = JSON.parse(this.responseText);
-      console.log("success editing profile");
-      // console.log(result);
-      // for (let i=0; i<result.length; i++) {
-      //     loadProfile(result[i]);
-      // }
+      let response = this.responseText;
+      try {
+        response = JSON.parse(response);
+      } finally {
+        callback(response);
+      }
     }
   };
 }
@@ -341,8 +343,6 @@ function showProfile() {
       .get()
       .then(function (doc) {
         let user = doc.data();
-        console.log(user.fullName);
-        console.log(user.username);
         document.getElementById("name").innerHTML = user.fullName;
         document.getElementById("username").innerHTML = "@" + user.username;
       })
