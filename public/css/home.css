@@ -309,7 +309,9 @@
     width: 80%;
     height: 100%;
   }
-
+#comment-text a:hover{
+  color: red;
+}
   .search input[type="search"] {
     font-family: "Montserrat";
     border: 0px;
