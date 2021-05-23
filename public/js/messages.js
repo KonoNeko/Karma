@@ -148,6 +148,7 @@ async function get_firebase_info() {
         info.fullName = user.fullName;
         info.email = user.email;
         info.username = user.username; 
+        view_messages(info.username);
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
@@ -246,20 +247,6 @@ window.onresize = function () {
 function loadAll() {
   // generateNoMessages();
   loadAllMessagers();
-}
-
-function loadAllMessagers() {
-  // generateMessager();
-  // generateLine();
-  // generateMessager();
-  // generateLine();
-  // generateMessager();
-  // generateLine();
-  // generateMessager();
-  // generateLine();
-  // generateMessager();
-
-  view_messages("marlon"); // Replace with firebase username
 }
 
 function loadAllMessages() {
