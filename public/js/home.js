@@ -1,7 +1,5 @@
 // Your web app's Firebase configuration
 
-const e = require("express");
-
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
   apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
@@ -120,20 +118,31 @@ const result = [
 
 async function get_firebase_info() {
   firebase.auth().onAuthStateChanged(function (user) {
-    db.collection("users")
-      .doc(user.uid)
-      .get()
+    return db.collection("users").doc(user.uid).get()
       .then(function (doc) {
         let user = doc.data();
         console.log(user);
         info.fullName = user.fullName;
         info.email = user.email;
-        info.username = user.username; 
+        info.username = user.username;
+        view_social_feed(info.username); 
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
       });
   });
+}
+
+function formatParams(params) {
+  let string = "?";
+  let keys = Object.keys(params);
+  for(let i=0; i<keys.length; i++) {
+    string += `${keys[i]}=${params[keys[i]]}`;
+    if (i < keys.length - 1) {
+      string += "&";
+    }
+  }
+  return string;
 }
 
 function formatTimestamp(timestamp) {
@@ -167,22 +176,23 @@ function view_social_feed(userID) {
   const endpoint = "/posts";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  for (let i = 0; i < result.length; i++) {
-    createPost(result[i]);
+  // for (let i = 0; i < result.length; i++) {
+  //   createPost(result[i]);
+  // }
+  APIRequest(method, url, loopThroughSocialPosts);
+}
+
+function loopThroughSocialPosts(results) {
+  let posts = JSON.parse(results);
+  console.log("This is being called" + posts.length);
+  for (let i = 0; i < posts.length; i++) {
+    console.log(posts[i]);
+    createPost(posts[i]);
   }
-  // APIRequest(method, url).then(
-  //   (result) => { 
-  //     let socialPosts = JSON.parse(result)[0];
-  //     for (let i = 0; i < result.length; i++) {
-  //       createPost(socialPosts[i]);
-  //     }
-  //   },
-  //   (err) => { console.log(err); }
-  // );
 }
 
 function createNewPost() {
-  const method = "GET";
+  const method = "POST";
   const endpoint = "/posts";
   const params = formatParams({
     id: info.username,
@@ -191,32 +201,33 @@ function createNewPost() {
     location: document.getElementById("location").value
   });
   const url = BASE_URL + endpoint + params;
-  APIRequest(method, url).then(
-    (result) => { console.log("Successfull posted\n" + result)},
-    (err) => { console.log(err); }
-  );
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    window.location.reload();
+  });
 }
 
-function APIRequest(method, url) {
+function APIRequest(method, url, callback) {
   console.log(method + ": " + url);
   const xhttp = new XMLHttpRequest();
   xhttp.open(method, url, true);
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      return this.responseText;
+      console.log(this.responseText);
+      callback(this.responseText);
     }
   };
 }
 
 // WINDOW ONLOAD FUNCTION FOR THE HOME PAGE
-function loadHome() {
-  loadWhatsNew();
-  loadRecommendedConnections();
-  view_social_feed("karma");
+// function loadHome() {
+//   // loadWhatsNew();
+//   // loadRecommendedConnections();
+//   view_social_feed(info.username);
 
-  // createBlankHomePage(); // This will show a blank homepage.
-}
+//   // createBlankHomePage(); // This will show a blank homepage.
+// }
 
 // READING INFORMATION FROM THE DATABASE
 function loadStories() {
@@ -663,8 +674,8 @@ uploadFileButton.addEventListener("change", ev => {
   });
 })
 
-let link = document.getElementById("imageUrl").textContent;
 document.getElementById("postBtn").onclick = () => {
+  let link = document.getElementById("imageUrl").textContent;
   if (link != "" && posted && JSON.stringify(info) != "{}") {
     console.log("Posting");
     createNewPost();
@@ -674,9 +685,9 @@ document.getElementById("postBtn").onclick = () => {
     window.alert("It doesn't look like you are signed in redirecting you now.");
     window.location.href("sign-up.html")
   } else if (link === '') {
-    window.alert("No image is upload");
+    window.alert("No image is uploaded");
   }
 }
 
 
-loadHome();
+// loadHome();

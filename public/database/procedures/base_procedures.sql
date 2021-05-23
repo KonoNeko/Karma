@@ -589,7 +589,7 @@ BEGIN
     pc.id_of_comment_receiving_reply, pc.post_date as comment_date
     FROM posts_feed pf LEFT JOIN post_comments pc ON (pf.post_id = pc.post_id)
     WHERE is_following(current_username, pf.user_id) OR pf.user_id = get_user_id(current_username)
-    ORDER BY pf.post_date, pc.post_date;
+    ORDER BY pf.post_date DESC, pc.post_date;
 END//
 DELIMITER ;
 
