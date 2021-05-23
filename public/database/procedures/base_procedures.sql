@@ -123,6 +123,21 @@ BEGIN
 END//
 DELIMITER ;
 
+/*
+Gets 3 random users that the current user is not following.
+*/
+DROP PROCEDURE IF EXISTS recommended_users;
+DELIMITER //
+CREATE PROCEDURE recommended_users(IN current_username VARCHAR(50))
+BEGIN
+    SELECT * FROM profiles p
+    WHERE p.profile_id <> (
+        SELECT pf.profile_id FROM profile_follows pf WHERE pf.follower_id = get_user_id(current_username))
+    ORDER BY RAND()
+    LIMIT 3;
+END//
+DELIMITER ;
+
 
 /*
 Creates a new education entry with the associated username.

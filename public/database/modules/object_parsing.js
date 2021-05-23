@@ -141,6 +141,7 @@ function fillSocialPosts(object) {
 
 function sortOpportunities(object) {
     let opportunities = {
+        "Recommended For You": {},
         "Fine Arts and Culture": {}, 
         "Sports and Recreation": {},
         "Literacy, Libraries, and Learning": {}, 
