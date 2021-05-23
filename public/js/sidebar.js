@@ -1,15 +1,47 @@
 // RECOMMENDED.JS STUFF // SIDEBAR STUFF ONLY // SIDEBAR STUFF ONLY // RECCOMMENDED.JS STUFF //
 function loadWhatsNew() {
-  let whatsNewDiv = document.getElementById(
-    "whats-new-volunteering-opportunities"
-  );
+  const method = "GET";
+  const endpoint = "/opportunities";
+  const params = "";
+  const url = BASE_URL + endpoint + params;
 
-  createWhatsNew(whatsNewDiv);
-  createWhatsNew(whatsNewDiv);
-  createWhatsNew(whatsNewDiv);
+  APIRequest(method, url, getOpportunites);
 }
 
-function loadRecommendedConnections() {
+function loadRecommendedConnections(username) {
+  const method = "GET";
+  const endpoint = "/profiles/recommended";
+  const params = `/${username}`;
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, getRecommendedUsers);
+}
+
+function APIRequest(method, url, callback) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let response = this.responseText;
+      try {
+        response = JSON.parse(response);
+      } finally {
+        callback(response);
+      }
+    }
+  };
+}
+
+function getOpportunites(results) {
+  results = results["Recommended For You"];
+  for(let key of Object.keys(results)) {
+    createWhatsNew(results[key]);
+  }
+}
+
+function getRecommendedUsers() {
   let recommendedConnectionsDiv = document.getElementById("recommendedUserDiv");
 
   let hr = document.createElement("hr");
@@ -21,9 +53,10 @@ function loadRecommendedConnections() {
   createRecommendedConnections(recommendedConnectionsDiv);
 }
 
-function createWhatsNew(whatsNewDiv) {
+function createWhatsNew(oppObj) {
+  let whatsNewDiv = document.getElementById("whats-new-volunteering-opportunities");
   let opportunityRole = document.createElement("p");
-  opportunityRole.innerHTML = "opportunityRole Role Role";
+  opportunityRole.innerHTML = oppObj.title;
   opportunityRole.setAttribute("class", "heading3");
   opportunityRole.setAttribute("style", "font-weight: 700 !important;");
 
@@ -32,11 +65,11 @@ function createWhatsNew(whatsNewDiv) {
   opportunityImgDiv.setAttribute("style", "padding-bottom: 10px");
 
   let opportunityImg = document.createElement("img");
-  opportunityImg.src = "./images/placeholder.jpg";
+  opportunityImg.src = oppObj.image_url;
   opportunityImgDiv.appendChild(opportunityImg);
 
   let opportunityLocation = document.createElement("p");
-  opportunityLocation.innerHTML = "opportunityLocation";
+  opportunityLocation.innerHTML = oppObj.employer;
   opportunityLocation.setAttribute("class", "bodytext");
 
   let opportunityDiv = document.createElement("div");
