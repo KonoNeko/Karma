@@ -156,6 +156,47 @@ function APIRequest(method, url) {
   };
 }
 
+function formatParams(params) {
+  let string = "?";
+  let keys = Object.keys(params);
+  for(let i=0; i<keys.length; i++) {
+    string += `${keys[i]}=${params[keys[i]]}`;
+    if (i < keys.length - 1) {
+      string += "&";
+    }
+  }
+  return string;
+}
+
+function view_new_messages(userID) {
+  const method = "POST";
+  const endpoint = "/messages";
+  const params = formatParams({
+    "id": userID,
+    "receiver": username,
+    "msg": actualmessage
+});
+
+  const url = BASE_URL + endpoint + params;
+  APIRequestSendMessages(method, url);
+}
+
+
+function APIRequestSendMessages(method, url) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      // let result = JSON.parse(this.responseText);
+      // console.log("loading post");
+      // console.log(result);
+      console.log("NICE DUDE!");
+    }
+  };
+}
+
 let width =
   window.innerWidth ||
   document.documentElement.clientWidth ||
@@ -407,4 +448,12 @@ function generateNoMessages() {
     .setAttribute("style", "display: unset");
   document.getElementById("mainmain").setAttribute("style", "display: none");
   document.getElementById("sidemain").setAttribute("style", "display: none");
+}
+
+
+
+function createSendMessage() {
+  let userValue = document.getElementById("user-input").value;
+  createMessageSentByYou(userValue);
+
 }
