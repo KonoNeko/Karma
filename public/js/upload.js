@@ -17,12 +17,12 @@ var feedback = function(res) {
     reportInfo(res, true);
     if (res.success === true) {
         var get_link = res.data.link.replace(/^http:\/\//i, 'https://');
+        alert(get_link)
         document.querySelector('.status').classList.add('bg-success');
-        return get_link;
-        // var content =
-        //     'Image : ' + '<br><input class="image-url" value=\"' + get_link + '\"/>'
-        //      + '<img class="img" alt="Imgur-Upload" src=\"' + get_link + '\"/>';
-        // addImg('.status', content);
+        var content =
+            'Image : ' + '<br><input class="image-url" value=\"' + get_link + '\"/>'
+             + '<img class="img" alt="Imgur-Upload" src=\"' + get_link + '\"/>';
+        addImg('.status', content);
     }
 };
 

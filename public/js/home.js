@@ -317,6 +317,7 @@ function createPost(postObj) {
 
   let userName = document.createElement("p");
   userName.setAttribute("class", "userName bodytitle");
+  userName.id = "userName";
   userName.innerHTML = postObj.post_info.username;
 
   let dateObj = formatTimestamp(postObj.post_info.post_date);
@@ -351,9 +352,13 @@ function createPost(postObj) {
   let likeIcon = document.createElement("i");
   likeIcon.setAttribute("class", "far fa-heart");
   likeIcon.setAttribute("onclick", "like()");
+  likeIcon.id = "likeBtn"
+  likeIcon.onclick = function () {
+    like();
+  };
   likeIcon.setAttribute(
     "style",
-    "font-size: 24px; color: #214049; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;"
+    "font-size: 24px; color: #214049; margin-right: 10px; margin-top: 10px; margin-bottom:"
   );
 
   let commentIcon = document.createElement("i");
@@ -362,6 +367,9 @@ function createPost(postObj) {
     "style",
     "font-size: 24px; color: #214049;  margin-right: 10px; margin-top: 10px; margin-bottom: 10px;"
   );
+  commentIcon.onclick = function () {
+    displayModal(postObj.post_info.post_id);
+  };
 
   let shareIcon = document.createElement("i");
   shareIcon.setAttribute("class", "far fa-share-square");
@@ -382,7 +390,10 @@ function createPost(postObj) {
   likes.setAttribute("class", "likes bodytitle");
   caption.setAttribute("class", "caption");
   comments.setAttribute("class", "comments smalltext");
-
+  comments.id = "comment-text"
+  comments.onclick = function () {
+    displayModal(postObj.post_info.post_id);
+  };
   let userSpan = document.createElement("span");
   userSpan.setAttribute("class", "bodytitle");
   userSpan.innerHTML = postObj.post_info.username + " ";
@@ -481,6 +492,7 @@ function createModal(postObj) {
   interactionButtons.id = "interactionButtons" + post.post_id;
 
   let likesLine = document.createElement("p");
+  likesLine.setAttribute("style","margin-left: 10px;")
   likesLine.innerHTML =
     post.likes > 1
       ? `${post.likes} users like this`
@@ -491,9 +503,11 @@ function createModal(postObj) {
 
   let commentInput = document.createElement("input");
   commentInput.type = "text";
+  commentInput.setAttribute("style","margin-left: 10px;")
   commentInput.placeholder = "Add a comment...";
 
   let commentSubmit = document.createElement("button");
+  commentSubmit.setAttribute("style","margin-left: 10px;")
   commentSubmit.type = "submit";
   commentSubmit.innerText = "Post";
 
