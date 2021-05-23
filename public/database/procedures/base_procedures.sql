@@ -1331,7 +1331,7 @@ DROP PROCEDURE IF EXISTS view_notifications;
 DELIMITER //
 CREATE PROCEDURE view_notifications(IN current_username CHAR(50))
 BEGIN
-    SELECT * FROM notifications
+    SELECT *, current_username as `current_user` FROM notifications
     WHERE profile_id = get_user_id(current_username)
     ORDER BY notification_id DESC;
 END//
