@@ -262,12 +262,12 @@ function formatParams(params) {
   return string;
 }
 
-function view_opportunities(userID) {
+function view_opportunities() {
   const method = "GET";
   const endpoint = "/opportunities";
-  const params = `/${userID}`;
+  const params = "";
   const url = BASE_URL + endpoint + params;
-  APIRequest(method, url); 
+  APIRequest(method, url, loadOpportunities); 
 }
 
 function send_application(oppObj) {
@@ -287,50 +287,35 @@ function send_application(oppObj) {
     const method = "POST";
     const endpoint = "/opportunities/applications";
     const url = BASE_URL + endpoint + params
-    APIRequestSendApplication(method, url);
+    APIRequest(method, url, console.log);
   } else {
     alert("Could not send application, some fields were left unfilled.")
   }
 }
 
-function APIRequestSendApplication(method, url) {
+
+function APIRequest(method, url, callback) {
   console.log(method + ": " + url);
   const xhttp = new XMLHttpRequest();
   xhttp.open(method, url, true);
   xhttp.send();
   xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-          let result = this.responseText;
-          console.log(result);
+        callback(this.responseText);
       }
   }
 }
 
-
-function APIRequest(method, url) {
-  console.log(method + ": " + url);
-  const xhttp = new XMLHttpRequest();
-  xhttp.open(method, url, true);
-  xhttp.send();
-  xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-          // let result = JSON.parse(this.responseText);
-          // console.log("loading post");
-          // console.log(result);
-          for (const category of Object.keys(categories)) {
-            let categoryList = result[category];
-            for(const id of Object.keys(categoryList)) {
-              loadOpportunity(category, categoryList[id]); 
-            }
-          }
-          
-      }
+function loadOpportunities(results) {
+  let opportunities;
+  try {
+    opportunities = JSON.parse(results);
+  } catch(err) {
+    console.log(err.message);
+    opportunities = results;
   }
-}
-
-function loadOpportunities() {
   for (const category of Object.keys(categories)) {
-    let categoryList = result[category];
+    let categoryList = opportunities[category];
     for(const id of Object.keys(categoryList)) {
       loadOpportunity(category, categoryList[id]); 
     }
@@ -503,7 +488,8 @@ async function get_firebase_info() {
         console.log(user);
         info.fullName = user.fullName;
         info.email = user.email;
-        info.username = user.username; 
+        info.username = user.username;
+        view_opportunities();
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
