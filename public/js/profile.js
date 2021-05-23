@@ -1,185 +1,5 @@
-
-
-let result = {
-  info: {
-    profile_id: 1,
-    username: "marlon",
-    full_name: "Marlon Fajardo",
-    bio: "This is my bio",
-    posts: 2,
-    followers: 1,
-    following: 1,
-    profile_pic_url:
-      "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-    is_volunteer: 1,
-  },
-  education: {
-    1: {
-      education_id: 1,
-      school_name: "Burnaby South Secondary",
-      edu_start_date: "09-2013",
-      edu_end_date: "06-2018",
-      gpa: 3.5,
-      certification_type: "High School Diploma",
-      edu_image_url:
-        "https://www.studyinburnaby.ca/wp-content/uploads/2017/05/Burnaby-South-Secondary.jpg",
-    },
-    2: {
-      education_id: 2,
-      school_name: "British Columbia Institute of Technology",
-      edu_start_date: "09-2019",
-      edu_end_date: "05-2021",
-      gpa: 3.5,
-      certification_type: "Technical Diploma",
-      edu_image_url:
-        "https://pbs.twimg.com/profile_images/1291056095440433152/fKpCeIld_400x400.png",
-    },
-  },
-  skills: {
-    1: {
-      skill_id: 1,
-      skill_title: "Creativity",
-    },
-    2: {
-      skill_id: 2,
-      skill_title: "Leadership",
-    },
-    3: {
-      skill_id: 3,
-      skill_title: "Problem Solving",
-    },
-    4: {
-      skill_id: 4,
-      skill_title: "Communication",
-    },
-    5: {
-      skill_id: 5,
-      skill_title: "Fast Learner",
-    },
-    6: {
-      skill_id: 6,
-      skill_title: "Reliable",
-    },
-    7: {
-      skill_id: 7,
-      skill_title: "Community Member",
-    },
-  },
-  experience: {
-    1: {
-      experience_id: 1,
-      job_title: "Warehouse Associate",
-      employer: "Continental Importers",
-      exp_image_url:
-        "https://www.eastvillagevancouver.ca/wp-content/uploads/2016/07/static1.squarespace.jpg",
-      exp_start_date: "06-2020",
-      exp_end_date: "01-2021",
-    },
-    2: {
-      experience_id: 2,
-      job_title: "Production Specialist",
-      employer: "Fine Line Signs",
-      exp_image_url:
-        "https://s3-media0.fl.yelpcdn.com/bphoto/0naXOdpTDnO34kJob1ajLQ/ls.jpg",
-      exp_start_date: "06/2014",
-      exp_end_date: "08-2019",
-    },
-    4: {
-      experience_id: 4,
-      job_title: "Sales Associate",
-      employer: "Sears Canada",
-      exp_image_url:
-        "https://www.ianbrignell.com/wp-content/uploads/2016/08/Sears-1024x915.gif",
-      exp_start_date: "06-2017",
-      exp_end_date: "01-2018",
-    },
-  },
-  certifications: {
-    1: {
-      award_id: 1,
-      title: "Wep Page Design Award",
-      date_received: "06-2018",
-      awards_image_url:
-        "https://www.pngkey.com/png/detail/441-4414776_trophy-clipart-cute-silhouette-trophy-clipart.png",
-    },
-  },
-  posts: [
-    {
-      post_info: {
-        post_id: 1,
-        image_url:
-          "https://www.citynews1130.com/wp-content/blogs.dir/sites/9/2019/04/21/church.jpg",
-        caption:
-          "This is the church I used to volunteer at, St. Mary's Parish! Always a blast with all the people I volunteer with.",
-        location: "St. Mary's Parish",
-        post_date: "2021-05-03T21:29:36.000Z",
-        likes: 2,
-        username: "marlon",
-        profile_pic_url:
-          "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-      },
-      comments: {
-        3: {
-          comment_id: 3,
-          post_id: 1,
-          user_id: 1,
-          comment: "Glad to see you active in your community!",
-          is_a_reply: 0,
-          id_of_comment_receiving_reply: null,
-          comment_date: "2021-05-11T06:52:31.000Z",
-          commenter_profile_pic:
-            "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-          comment_poster: "Karma",
-        },
-        totalComments: 1,
-      },
-    },
-    {
-      post_info: {
-        post_id: 2,
-        image_url:
-          "https://images.prismic.io/bcplace/4bb395e33a509c8e65e897a1b51988a6e739b072_vancouver_sun_run.jpg",
-        caption:
-          "Volunteering at the sun run was so fun! Can't wait until the day they are able to hold another!",
-        location: "BC Place",
-        post_date: "2021-05-04T01:06:34.000Z",
-        likes: 1,
-        username: "marlon",
-        profile_pic_url:
-          "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-      },
-      comments: {
-        10: {
-          comment_id: 10,
-          post_id: 2,
-          user_id: 1,
-          comment: "We miss the sun run :(",
-          is_a_reply: 0,
-          id_of_comment_receiving_reply: null,
-          comment_date: "2021-05-13T05:23:39.000Z",
-          commenter_profile_pic:
-            "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/res/logo0_colored.png",
-          comment_poster: "Karma",
-          replies: {
-            14: {
-              comment_id: 14,
-              post_id: 2,
-              user_id: 1,
-              comment: "Yeah same",
-              is_a_reply: 1,
-              id_of_comment_receiving_reply: 10,
-              comment_date: "2021-05-13T06:07:11.000Z",
-              commenter_profile_pic:
-                "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png",
-              comment_poster: "marlon",
-            },
-          },
-        },
-        totalComments: 2,
-      },
-    },
-  ],
-};
+let info;
+get_firebase_info();
 
 let width =
   window.innerWidth ||
@@ -240,29 +60,13 @@ function get_firebase_info() {
         info['fullName'] = user.fullName;
         info['email'] = user.email;
         info['username'] = user.username; 
+        view_profile(info.username);
         return info;
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
       });
   });
-}
-
-function APIRequestViewProfile(method, url) {
-  loadProfile(result);
-  // console.log(method + ": " + url);
-  // const xhttp = new XMLHttpRequest();
-  // xhttp.open(method, url, true);
-  // xhttp.send();
-  // xhttp.onreadystatechange = function () {
-  //   if (this.readyState == 4 && this.status == 200) {
-  //     // let result = JSON.parse(this.responseText);
-  //     console.log("success editing profile");
-  //     console.log(result);
-  //     loadProfile(result);
-
-  //   }
-  // };
 }
 
 function add_Skills(userID, skill) {
@@ -542,8 +346,6 @@ function addEducation() {
   document.getElementById("button-content").appendChild(addEducationInput4);
   document.getElementById("button-content").appendChild(addEducationHeading5);
   document.getElementById("button-content").appendChild(addEducationInput5);
-
-  let info = get_firebase_info();
 
   // userID, schoolName, description, gpa, start, end, img
   $("#save").click(function () {
@@ -845,5 +647,5 @@ function createFollowing(following, followingObj) {
   following.innerHTML = `${followingObj.info.followers}`;
 }
 
-view_profile("marlon");
+
 showProfile();
