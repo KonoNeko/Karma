@@ -256,7 +256,7 @@ function loadApplication(content, oppObj) {
   phoneLabel.type = "text";
   phoneLabel.innerHTML = "Phone Number";
   messageLabel.innerHTML = "Message";
-  nameText.innerHTML = info.fullNmae;
+  nameText.innerHTML = info.fullName;
   emailText.innerHTML = info.email;
   phoneText.placeholder = "(123) 456-7890";
   btn.innerText = "Send Application";
