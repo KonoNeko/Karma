@@ -809,13 +809,13 @@ DONEg) View recommended opportunitues (GET - view_recommended)      TESTED
 -Social Posts
 DONEa) View site-wide social feed (GET - posts_feed)                TESTED      DOCUMENTED(1)
 DONEb) View single social post (GET - view_post)                    TESTED      
-DONEc) Like post (PUT - like_post)                                  TESTED
-DONEd) Unlike post (DELETE - unlike_post)                           TESTED
-DONEe) Comment on a post (POST - comment_on_post)                   TESTED
+DONEc) Like post (PUT - like_post)                                  TESTED      DOCUMENTED(25)
+DONEd) Unlike post (DELETE - unlike_post)                           TESTED      DOCUMENTED(26)
+DONEe) Comment on a post (POST - comment_on_post)                   TESTED      DOCUMENTED(27)
 DONEf) View all comments (GET - view_comments)                      TESTED
     g) View stories -  **TODO**
 DONEh) View social feed for a user (GET - user_posts_feed)          TESTED      DOCUMENTED(2)
-DONEi) Delete comment - (DELETE - delete_comment)                   TESTED
+DONEi) Delete comment - (DELETE - delete_comment)                   TESTED      DOCUMENTED(28)
     h) Create a new post (POST - )
 
 -Messages

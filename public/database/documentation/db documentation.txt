@@ -427,7 +427,7 @@ DOCUMENTATION FORMAT
         https://marlonfajardo.ca/karma/v1/opportunities
 
 
-22)  MESSAGES: View messages in a conversation
+22) MESSAGES: View messages in a conversation
     Gets the list of messages for a single conversation
     
     ENDPOINT:   /messages/{id}/{convo}
@@ -442,7 +442,7 @@ DOCUMENTATION FORMAT
         https://marlonfajardo.ca/karma/v1/messages/value/value
 
 
-23)  MESSAGES: View list of conversations.
+23) MESSAGES: View list of conversations.
     Gets the list of all conversations that a user has
     
     ENDPOINT:   /messages
@@ -456,7 +456,7 @@ DOCUMENTATION FORMAT
         https://marlonfajardo.ca/karma/v1/messages?id=value
     
 
-24)  MESSAGES: Send another user a message
+24) MESSAGES: Send another user a message
     Sends a message from the current user to another given user
     
     ENDPOINT:   /messages
@@ -470,4 +470,67 @@ DOCUMENTATION FORMAT
 
     Example URL of the request (replace 'value' with an actual value):
         https://marlonfajardo.ca/karma/v1/messages?id=value&receiver=value&msg=value
+
+
+25) SOCIAL POSTS: Like a post
+    Like a social post.
+
+    ENDPOINT:   /post/like
+    
+    METHOD:     POST
+
+    PARAMS:
+        id          string: The current username
+        post        integer: The post id of the post being liked (in the database)
+
+    Example URL of the request (replace 'name' with an actual value):
+        https://marlonfajardo.ca/karma/v1/post/like?id=value&post=value
+
+
+26) SOCIAL POSTS: Unlike a post
+    Deletes your like from a post.
+
+    ENDPOINT:   /post/like
+    
+    METHOD:     DELETE
+
+    PARAMS:
+        id          string: The current username
+        post        integer: The post id of the post being liked (in the database)
+
+    Example URL of the request (replace 'name' with an actual value):
+        https://marlonfajardo.ca/karma/v1/post/like?id=value&post=value
+
+
+
+27) SOCIAL POSTS: Creates a comment on a post
+    Adds a new comment to a social post
+
+    ENDPOINT:   /post/comment
+    
+    METHOD:     POST
+
+    PARAMS:
+        id          string: The current username
+        post        integer: The post id of the post being liked (in the database)
+        msg         string: The comment the user is making
+
+    Example URL of the request (replace 'name' with an actual value):
+        https://marlonfajardo.ca/karma/v1/post/comment?id=value&post=value&msg=value
+
+
+28) SOCIAL POSTS: Deletes a comment from a post
+    Deletes an existing comment from a social post
+
+    ENDPOINT:   /post/comment
+    
+    METHOD:     DELETE
+
+    PARAMS:
+        id          string: The id of the comment (in the database)
+
+    Example URL of the request (replace 'name' with an actual value):
+        https://marlonfajardo.ca/karma/v1/post/comment?id=value
+
+
     
