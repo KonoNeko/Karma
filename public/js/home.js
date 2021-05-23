@@ -1,5 +1,4 @@
 // Your web app's Firebase configuration
-
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
   apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
@@ -17,9 +16,6 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
-
-let info = {};
-get_firebase_info();
 
 const result = [
   {
@@ -116,35 +112,6 @@ const result = [
   },
 ];
 
-async function get_firebase_info() {
-  firebase.auth().onAuthStateChanged(function (user) {
-    return db.collection("users").doc(user.uid).get()
-      .then(function (doc) {
-        let user = doc.data();
-        console.log(user);
-        info.fullName = user.fullName;
-        info.email = user.email;
-        info.username = user.username;
-        view_social_feed(info.username); 
-      })
-      .catch((error) => {
-        console.log(`Error getting data: ${error}`);
-      });
-  });
-}
-
-function formatParams(params) {
-  let string = "?";
-  let keys = Object.keys(params);
-  for(let i=0; i<keys.length; i++) {
-    string += `${keys[i]}=${params[keys[i]]}`;
-    if (i < keys.length - 1) {
-      string += "&";
-    }
-  }
-  return string;
-}
-
 function formatTimestamp(timestamp) {
   let dateObj = new Date(Date.parse(timestamp));
   return returnHighestTimeDiff(dateObj);
@@ -176,58 +143,37 @@ function view_social_feed(userID) {
   const endpoint = "/posts";
   const params = `/${userID}`;
   const url = BASE_URL + endpoint + params;
-  // for (let i = 0; i < result.length; i++) {
-  //   createPost(result[i]);
-  // }
-  APIRequest(method, url, loopThroughSocialPosts);
-}
-
-function loopThroughSocialPosts(results) {
-  let posts = JSON.parse(results);
-  console.log("This is being called" + posts.length);
-  for (let i = 0; i < posts.length; i++) {
-    console.log(posts[i]);
-    createPost(posts[i]);
+  for (let i = 0; i < result.length; i++) {
+    createPost(result[i]);
   }
+  // APIRequest(method, url);
 }
 
-function createNewPost() {
-  const method = "POST";
-  const endpoint = "/posts";
-  const params = formatParams({
-    id: info.username,
-    img: document.getElementById("imageUrl").textContent,
-    caption: document.getElementById("captionInput").value,
-    location: document.getElementById("location").value
-  });
-  const url = BASE_URL + endpoint + params;
-  APIRequest(method, url, (res) => {
-    console.log(res);
-    window.location.reload();
-  });
-}
-
-function APIRequest(method, url, callback) {
+function APIRequest(method, url) {
   console.log(method + ": " + url);
   const xhttp = new XMLHttpRequest();
   xhttp.open(method, url, true);
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
-      callback(this.responseText);
+      if (result.length == 0) {
+        // createBlankHomePage()
+      }
+      for (let i = 0; i < result.length; i++) {
+        createPost(result[i]);
+      }
     }
   };
 }
 
 // WINDOW ONLOAD FUNCTION FOR THE HOME PAGE
-// function loadHome() {
-//   // loadWhatsNew();
-//   // loadRecommendedConnections();
-//   view_social_feed(info.username);
+function loadHome() {
+  loadWhatsNew();
+  loadRecommendedConnections();
+  view_social_feed("karma");
 
-//   // createBlankHomePage(); // This will show a blank homepage.
-// }
+  // createBlankHomePage(); // This will show a blank homepage.
+}
 
 // READING INFORMATION FROM THE DATABASE
 function loadStories() {
@@ -351,14 +297,14 @@ function createPost(postObj) {
 
   let likeIcon = document.createElement("i");
   likeIcon.setAttribute("class", "far fa-heart");
-  likeIcon.setAttribute("onclick", "like()");
+  likeIcon.setAttribute("onclick", "like(this)");
   likeIcon.id = "likeBtn"
-  likeIcon.onclick = function () {
-    like();
-  };
+  // likeIcon.onclick = function () {
+  //   like(this);
+  // };
   likeIcon.setAttribute(
     "style",
-    "font-size: 24px; color: #214049; margin-right: 10px; margin-top: 10px; margin-bottom:"
+    "font-size: 24px; color: #214049; margin-right: 10px; margin-top: 10px;"
   );
 
   let commentIcon = document.createElement("i");
@@ -388,6 +334,7 @@ function createPost(postObj) {
   let caption = document.createElement("p");
   let comments = document.createElement("p");
   likes.setAttribute("class", "likes bodytitle");
+  likes.id = "likeText"
   caption.setAttribute("class", "caption");
   comments.setAttribute("class", "comments smalltext");
   comments.id = "comment-text"
@@ -508,7 +455,10 @@ function createModal(postObj) {
 
   let commentSubmit = document.createElement("button");
   commentSubmit.setAttribute("style","margin-left: 10px;")
-  commentSubmit.type = "submit";
+  commentSubmit.onclick = function () {
+    addComments();
+  };
+  commentSubmit.type = "button";
   commentSubmit.innerText = "Post";
 
   commentForm.appendChild(commentInput);
@@ -664,44 +614,27 @@ function displayComments(comments, id) {
       }
     }
   }
+
+  // let captionDiv = loadCaption(placeholderImg, "Username", "This is a caption.");
+  // commentsDiv.appendChild(captionDiv);
+  // commentsDiv.appendChild(createLine());
+  // let comment1 = createComment(placeholderImg, "username", "This is a comment", "now", 1);
+  // let comment2 = createComment(placeholderImg, "username", "This is a comment", "5min", 2);
+  // let comment3 = createComment(placeholderImg, "username", "This is a comment", "10min", 3);
+  // let comment4 = createComment(placeholderImg, "username", "This is a comment", "15min", 4);
+  // let comment5 = createComment(placeholderImg, "username", "This is a comment", "20min", 5);
+  // let comment6 = createComment(placeholderImg, "username", "This is a comment", "20min", 6);
+  // let comment7 = createComment(placeholderImg, "username", "This is a comment", "20min", 7);
+  // let comment8 = createComment(placeholderImg, "username", "This is a comment", "20min", 8);
+
+  // commentsDiv.appendChild(comment1);
+  // commentsDiv.appendChild(comment2);
+  // commentsDiv.appendChild(comment3);
+  // commentsDiv.appendChild(comment4);
+  // commentsDiv.appendChild(comment5);
+  // commentsDiv.appendChild(comment6);
+  // commentsDiv.appendChild(comment7);
+  // commentsDiv.appendChild(comment8);
 }
 
-/*
-Credit to Deepak K for following code snippet.
-https://compile.blog/imgur-api-image-uploader/
-*/
-
-const uploadFileButton = document.getElementById("file-upload");
-let posted = false;
-uploadFileButton.addEventListener("change", ev => {
-  const formdata = new FormData()
-  formdata.append("image", ev.target.files[0])
-  fetch("https://api.imgur.com/3/image/", {
-      method: "post",
-      headers: {
-          Authorization: "Client-ID 4409588f10776f7"
-      },
-      body: formdata
-  }).then(data => data.json()).then(data => {
-      posted = true;
-      document.getElementById("imageUrl").innerText = data.data.link;
-  });
-})
-
-document.getElementById("postBtn").onclick = () => {
-  let link = document.getElementById("imageUrl").textContent;
-  if (link != "" && posted && JSON.stringify(info) != "{}") {
-    console.log("Posting");
-    createNewPost();
-  } else if (!posted) {
-    window.alert("Please wait for image to finish uploading");
-  } else if (JSON.stringify(info) === "{}") {
-    window.alert("It doesn't look like you are signed in redirecting you now.");
-    window.location.href("sign-up.html")
-  } else if (link === '') {
-    window.alert("No image is uploaded");
-  }
-}
-
-
-// loadHome();
+loadHome();
