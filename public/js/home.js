@@ -183,7 +183,13 @@ function view_social_feed(userID) {
 }
 
 function loopThroughSocialPosts(results) {
-  let posts = JSON.parse(results);
+  let posts;
+  try {
+    posts = JSON.parse(results);
+  } catch(err) {
+    console.log(err.message);
+    posts = results;
+  }
   console.log("This is being called" + posts.length);
   for (let i = 0; i < posts.length; i++) {
     console.log(posts[i]);
