@@ -1,4 +1,13 @@
 // RECOMMENDED.JS STUFF // SIDEBAR STUFF ONLY // SIDEBAR STUFF ONLY // RECCOMMENDED.JS STUFF //
+let firebase_info = {};
+
+
+function get_firebase_username() {
+  firebase.auth().onAuthStateChanged(function (user) {
+    return db.collection("users").doc(user.uid).get();
+  });
+}
+
 function loadWhatsNew() {
   const method = "GET";
   const endpoint = "/opportunities";
@@ -9,6 +18,7 @@ function loadWhatsNew() {
 }
 
 function loadRecommendedConnections(username) {
+  firebase_info.username = username;
   const method = "GET";
   const endpoint = "/profiles/recommended";
   const params = `/${username}`;
@@ -41,16 +51,10 @@ function getOpportunites(results) {
   }
 }
 
-function getRecommendedUsers() {
-  let recommendedConnectionsDiv = document.getElementById("recommendedUserDiv");
-
-  let hr = document.createElement("hr");
-  document.getElementById("recommendedUserDiv").appendChild(hr);
-  hr.setAttribute("style", "margin-bottom: 20px");
-
-  createRecommendedConnections(recommendedConnectionsDiv);
-  createRecommendedConnections(recommendedConnectionsDiv);
-  createRecommendedConnections(recommendedConnectionsDiv);
+function getRecommendedUsers(users) {
+  for(let user of users) {
+    createRecommendedConnections(user);
+  }
 }
 
 function createWhatsNew(oppObj) {
@@ -82,7 +86,12 @@ function createWhatsNew(oppObj) {
   whatsNewDiv.appendChild(opportunityDiv);
 }
 
-function createRecommendedConnections(recommendedConnectionsDiv) {
+function createRecommendedConnections(user) {
+  let recommendedConnectionsDiv = document.getElementById("recommendedUserDiv");
+  let hr = document.createElement("hr");
+  recommendedConnectionsDiv.appendChild(hr);
+  hr.setAttribute("style", "margin-bottom: 20px");
+
   let recommendedUserDiv = document.createElement("div");
   recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
 
@@ -91,7 +100,7 @@ function createRecommendedConnections(recommendedConnectionsDiv) {
   storyImgDiv.setAttribute("style", "padding-bottom: 10px; width: 20%");
   storyImgDiv.setAttribute(
     "style",
-    "background-image: url('./images/placeholder.jpg')"
+    `background-image: url("${user.profile_pic_url}")`
   );
 
   let nameAndUserName = document.createElement("div");
@@ -100,11 +109,12 @@ function createRecommendedConnections(recommendedConnectionsDiv) {
 
   let userName = document.createElement("p");
   userName.setAttribute("class", "userNames");
-  userName.innerHTML = "User name";
+  userName.innerHTML = user.full_name;
 
   let userNameAt = document.createElement("p");
   userNameAt.setAttribute("class", "userAt");
-  userNameAt.innerHTML = "@Username";
+  userNameAt.innerHTML = 
+  `@<span id="recommendedUser${user.profile_id}">${user.username}</span>`;
 
   recommendedUserDiv.appendChild(storyImgDiv);
   nameAndUserName.appendChild(userName);
@@ -114,6 +124,12 @@ function createRecommendedConnections(recommendedConnectionsDiv) {
 
   let followUser = document.createElement("div");
   let followUserButton = document.createElement("button");
+
+  followUserButton.onclick = () => {
+    console.log(firebase_info);
+    console.log(`You trying to follow ${user.username}`);
+  }
+  
 
   followUserButton.innerHTML = "FOLLOW";
   followUserButton.setAttribute("class", "followUserButton");
