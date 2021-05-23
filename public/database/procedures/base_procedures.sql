@@ -563,6 +563,24 @@ BEGIN
 END //
 DELIMITER ;
 
+DROP FUNCTION IF EXISTS follow_status;
+DELIMITER //
+CREATE FUNCTION follow_status(current_username CHAR(50), other_username CHAR(50)) 
+RETURNS CHAR(10) READS SQL DATA
+BEGIN
+    RETURN (
+        SELECT
+            CASE
+            WHEN request_accepted = 1 THEN "following"
+            WHEN request_accepted = 0 THEN "requested" 
+            ELSE "none"
+            END
+            FROM profile_follows
+            WHERE profile_id = get_user_id(other_username) AND follower_id = get_user_id(current_username)
+    );
+END //
+DELIMITER ;
+
 
 /*
 Gathers all the posts to fill a social feed
@@ -1331,7 +1349,9 @@ DROP PROCEDURE IF EXISTS view_notifications;
 DELIMITER //
 CREATE PROCEDURE view_notifications(IN current_username CHAR(50))
 BEGIN
-    SELECT *, current_username as `current_user` FROM notifications
+    SELECT *, current_username as `current_user`,
+    follow_status(current_username, username_of_notification) as follow_status
+    FROM notifications
     WHERE profile_id = get_user_id(current_username)
     ORDER BY notification_id DESC;
 END//
