@@ -1439,6 +1439,24 @@ CREATE trigger follow_notification
         NULL
     );
 
+/*
+Automatically creates a new notification when a user accepts a follow request.
+*/
+DROP TRIGGER IF EXISTS accept_request_notification;
+CREATE trigger accept_request_notification
+    AFTER UPDATE ON profile_follows
+    FOR EACH ROW
+    CALL create_notification(
+        NEW.follower_id,
+        get_user_name(NEW.profile_id),
+        " has accepted your follow request.",
+        "profile_follows accept", 
+        NEW.follow_id, 
+        NEW.timestamp, 
+        get_profile_pic(NEW.profile_id),  
+        NULL
+    );
+
 
 /*
 Automatically creates a new notification when a user's application is reviewed.
