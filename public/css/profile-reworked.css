@@ -22,7 +22,7 @@
 .heading-and-edit > i {
   width: 5%;
   justify-content: flex-end;
-  color: #0367A6;
+  color: #0367a6;
   font-size: 20px;
 }
 
@@ -335,11 +335,11 @@ hr {
   .heading-and-edit > p {
     width: 86%;
   }
-  
+
   .heading-and-edit > i {
     width: 18%;
     justify-content: flex-end;
-    color: #0367A6;
+    color: #0367a6;
     font-size: 20px;
   }
 

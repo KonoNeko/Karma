@@ -57,9 +57,9 @@ function get_firebase_info() {
       .get()
       .then(function (doc) {
         let user = doc.data();
-        info['fullName'] = user.fullName;
-        info['email'] = user.email;
-        info['username'] = user.username; 
+        info["fullName"] = user.fullName;
+        info["email"] = user.email;
+        info["username"] = user.username;
         view_profile(info.username);
         loadRecommendedConnections(info.username);
       })
@@ -68,7 +68,6 @@ function get_firebase_info() {
       });
   });
 }
-
 
 function add_Skills(userID, skill) {
   const method = "PUT";
@@ -174,7 +173,8 @@ function showProfile() {
 function loadProfile(profileObj) {
   console.log(profileObj);
   console.log(height);
-  document.getElementById("mainProfilePic").src = profileObj.info.profile_pic_url;
+  document.getElementById("mainProfilePic").src =
+    profileObj.info.profile_pic_url;
   loadAboutMe(profileObj);
   loadPosts(profileObj);
   loadNumPosts(profileObj);
@@ -272,42 +272,44 @@ function addAboutMe() {
   });
 }
 
-
-
 function addProfilePic() {
   console.log("Add pic button clicked");
 
   const uploadFileButton = document.getElementById("file-upload");
-let posted = false;
-uploadFileButton.addEventListener("change", ev => {
-  const formdata = new FormData()
-  formdata.append("image", ev.target.files[0])
-  fetch("https://api.imgur.com/3/image/", {
+  let posted = false;
+  uploadFileButton.addEventListener("change", (ev) => {
+    const formdata = new FormData();
+    formdata.append("image", ev.target.files[0]);
+    fetch("https://api.imgur.com/3/image/", {
       method: "post",
       headers: {
-          Authorization: "Client-ID 4409588f10776f7"
+        Authorization: "Client-ID 4409588f10776f7",
       },
-      body: formdata
-  }).then(data => data.json()).then(data => {
-      posted = true;
-      document.getElementById("imageUrl").innerText = data.data.link;
+      body: formdata,
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        posted = true;
+        document.getElementById("imageUrl").innerText = data.data.link;
+      });
   });
-})
 
-document.getElementById("postBtn").onclick = () => {
-  let link = document.getElementById("imageUrl").textContent;
-  if (link != "" && posted && JSON.stringify(info) != "{}") {
-    console.log("Posting");
-    createNewPost();
-  } else if (!posted) {
-    window.alert("Please wait for image to finish uploading");
-  } else if (JSON.stringify(info) === "{}") {
-    window.alert("It doesn't look like you are signed in redirecting you now.");
-    window.location.href("sign-up.html")
-  } else if (link === '') {
-    window.alert("No image is uploaded");
-  }
-}
+  document.getElementById("postBtn").onclick = () => {
+    let link = document.getElementById("imageUrl").textContent;
+    if (link != "" && posted && JSON.stringify(info) != "{}") {
+      console.log("Posting");
+      createNewPost();
+    } else if (!posted) {
+      window.alert("Please wait for image to finish uploading");
+    } else if (JSON.stringify(info) === "{}") {
+      window.alert(
+        "It doesn't look like you are signed in redirecting you now."
+      );
+      window.location.href("sign-up.html");
+    } else if (link === "") {
+      window.alert("No image is uploaded");
+    }
+  };
 
   // $("#save").click(function () {
   //   let picUrl= addEducationInput1.value;
@@ -538,9 +540,9 @@ function createAboutMe(aboutMe, aboutMeObj) {
 
   let about = document.createElement("p");
   about.setAttribute("class", "about");
+  about.setAttribute("id", "aboutMe-Profile");
   about.setAttribute("style", "margin-right: 20px;");
   about.innerHTML = `${aboutMeObj.info.bio}`;
-  
 
   aboutdiv.appendChild(about);
   aboutMe.appendChild(aboutdiv);
@@ -701,6 +703,5 @@ function createFollowers(follower, followerObj) {
 function createFollowing(following, followingObj) {
   following.innerHTML = `${followingObj.info.followers}`;
 }
-
 
 showProfile();
