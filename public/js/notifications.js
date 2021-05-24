@@ -45,6 +45,7 @@ const notification_types = {
   opportunities: generateOpportunityNotification,
   "profile_follows request": generateNotificationFollowRequest,
   "profile_follows accepted": generateNotificationFollow,
+  "profile_follows accept": generateNotificationRequestAccpeted,
 };
 
 function formatTimestamp(timestamp) {
@@ -276,15 +277,68 @@ function generateNotificationFollow(postObj) {
 
   let notificationFollowButton = document.createElement("button");
   followDiv.setAttribute("class", "follow-btn");
-  notificationFollowButton.innerHTML = "<i class='fas fa-user-plus'></i>";
   followDiv.appendChild(notificationFollowButton);
 
   notificationFollowButton.onclick = () => {
-    console.log(`${postObj.current_user} is requesting to follow ${postObj.username_of_notification}`);
     let userID = postObj.username_of_notification;
     let follower = postObj.current_user;
     request_follow(userID, follower);
   }
+
+  if (postObj.follow_status === "following") {
+    notificationFollowButton.style.backgroundColor = "#51b09f";
+    notificationFollowButton.innerHTML = "<i class='fas fa-user-check'></i>";
+  } else if (postObj.follow_status === "requested") {
+    notificationFollowButton.style.backgroundColor = "#6b7e86";
+    notificationFollowButton.innerHTML = "<i class='fas fa-user-clock'></i>";
+  } else {
+    notificationFollowButton.style.backgroundColor = "#0367a6";
+    notificationFollowButton.innerHTML = "<i class='fas fa-user-plus'></i>";
+  }
+
+  notificationDiv.appendChild(notificationImgDiv);
+  notificationDiv.appendChild(notificationText);
+  notificationDiv.appendChild(followDiv);
+
+  notificationsDiv.appendChild(notificationDiv);
+}
+
+function generateNotificationRequestAccpeted(postObj) {
+  let notificationsDiv = document.getElementById("notifications");
+
+  let notificationDiv = document.createElement("div");
+  notificationDiv.setAttribute("class", "notificationDiv");
+
+  let notificationImgDiv = document.createElement("div");
+  let notificationImg = document.createElement("img");
+  notificationImgDiv.setAttribute("class", "profilepicture notificationImgDiv");
+  notificationImg.src = postObj.profile_pic_url;
+
+  let notificationText = document.createElement("div");
+  notificationText.setAttribute("class", "notificationText");
+
+  let notificationActionAuthor = document.createElement("p");
+  let notificationAuthor = document.createElement("span");
+  let notificationAction = document.createElement("span");
+  let notificationTime = document.createElement("p");
+
+  notificationText.setAttribute("style", "padding-left: 20px; width: 100%;");
+  notificationAuthor.setAttribute("class", "bodytitle");
+  notificationAction.setAttribute("class", "bodytext");
+  notificationTime.setAttribute("class", "smalltext");
+  notificationTime.setAttribute("style", "padding-top: 5px");
+
+  notificationAuthor.innerHTML = postObj.username_of_notification;
+  notificationAction.innerHTML = postObj.message;
+  notificationTime.innerHTML = formatTimestamp(postObj.timestamp);
+
+  notificationText.appendChild(notificationActionAuthor);
+  notificationText.appendChild(notificationTime);
+  notificationActionAuthor.appendChild(notificationAuthor);
+  notificationActionAuthor.appendChild(notificationAction);
+  notificationImgDiv.appendChild(notificationImg);
+
+  let followDiv = document.createElement("div");
 
   notificationDiv.appendChild(notificationImgDiv);
   notificationDiv.appendChild(notificationText);

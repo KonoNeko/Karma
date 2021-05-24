@@ -131,8 +131,9 @@ DELIMITER //
 CREATE PROCEDURE recommended_users(IN current_username VARCHAR(50))
 BEGIN
     SELECT * FROM profiles p
-    WHERE p.profile_id <> (
+    WHERE p.profile_id NOT IN (
         SELECT pf.profile_id FROM profile_follows pf WHERE pf.follower_id = get_user_id(current_username))
+    AND p.username <> current_username
     ORDER BY RAND()
     LIMIT 3;
 END//
@@ -563,6 +564,24 @@ BEGIN
 END //
 DELIMITER ;
 
+DROP FUNCTION IF EXISTS follow_status;
+DELIMITER //
+CREATE FUNCTION follow_status(current_username CHAR(50), other_username CHAR(50)) 
+RETURNS CHAR(10) READS SQL DATA
+BEGIN
+    RETURN (
+        SELECT
+            CASE
+            WHEN request_accepted = 1 THEN "following"
+            WHEN request_accepted = 0 THEN "requested" 
+            ELSE "none"
+            END
+            FROM profile_follows
+            WHERE profile_id = get_user_id(other_username) AND follower_id = get_user_id(current_username)
+    );
+END //
+DELIMITER ;
+
 
 /*
 Gathers all the posts to fill a social feed
@@ -760,8 +779,14 @@ DELIMITER //
 CREATE PROCEDURE request_to_follow_user(IN user_following CHAR(50), 
 IN user_being_followed CHAR(50))
 BEGIN
-    INSERT INTO profile_follows (profile_id, follower_id)
-    VALUES (get_user_id(user_being_followed), get_user_id(user_following));
+    IF (
+        SELECT COUNT(follow_id) FROM profile_follows 
+        WHERE follower_id = get_user_id(user_following)
+        AND profile_id = get_user_id(user_being_followed)
+        ) = 0 THEN
+        INSERT INTO profile_follows (profile_id, follower_id)
+        VALUES (get_user_id(user_being_followed), get_user_id(user_following));
+    END IF;
 END//
 DELIMITER ;
 
@@ -1331,7 +1356,9 @@ DROP PROCEDURE IF EXISTS view_notifications;
 DELIMITER //
 CREATE PROCEDURE view_notifications(IN current_username CHAR(50))
 BEGIN
-    SELECT *, current_username as `current_user` FROM notifications
+    SELECT *, current_username as `current_user`,
+    follow_status(current_username, username_of_notification) as follow_status
+    FROM notifications
     WHERE profile_id = get_user_id(current_username)
     ORDER BY notification_id DESC;
 END//
@@ -1416,6 +1443,24 @@ CREATE trigger follow_notification
         NEW.follow_id, 
         NEW.timestamp, 
         get_profile_pic(NEW.follower_id),  
+        NULL
+    );
+
+/*
+Automatically creates a new notification when a user accepts a follow request.
+*/
+DROP TRIGGER IF EXISTS accept_request_notification;
+CREATE trigger accept_request_notification
+    AFTER UPDATE ON profile_follows
+    FOR EACH ROW
+    CALL create_notification(
+        NEW.follower_id,
+        get_user_name(NEW.profile_id),
+        " has accepted your follow request.",
+        "profile_follows accept", 
+        NEW.follow_id, 
+        NEW.timestamp, 
+        get_profile_pic(NEW.profile_id),  
         NULL
     );
 
