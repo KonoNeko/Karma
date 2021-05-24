@@ -1,12 +1,11 @@
 // RECOMMENDED.JS STUFF // SIDEBAR STUFF ONLY // SIDEBAR STUFF ONLY // RECCOMMENDED.JS STUFF //
 let firebase_info = {};
 
-
-function get_firebase_username() {
-  firebase.auth().onAuthStateChanged(function (user) {
-    return db.collection("users").doc(user.uid).get();
-  });
-}
+// function get_firebase_username() {
+//   firebase.auth().onAuthStateChanged(function (user) {
+//     return db.collection("users").doc(user.uid).get();
+//   });
+// }
 
 function loadWhatsNew() {
   const method = "GET";
@@ -27,6 +26,30 @@ function loadRecommendedConnections(username) {
   APIRequest(method, url, getRecommendedUsers);
 }
 
+function formatParams(params) {
+  let string = "?";
+  let keys = Object.keys(params);
+  for(let i=0; i<keys.length; i++) {
+    string += `${keys[i]}=${params[keys[i]]}`;
+    if (i < keys.length - 1) {
+      string += "&";
+    }
+  }
+  return string;
+}
+
+function request_follow(userID, follower) {
+  const method = "POST";
+  const endpoint = "/profiles/followers";
+  const params = formatParams({
+    "id": userID,
+    "follower": follower,
+  });
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, console.log);
+}
+
 function APIRequest(method, url, callback) {
   console.log(method + ": " + url);
   const xhttp = new XMLHttpRequest();
@@ -34,9 +57,11 @@ function APIRequest(method, url, callback) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      let response = this.responseText;
+      let response;
       try {
         response = JSON.parse(response);
+      } catch(err) {
+        response = this.responseText;
       } finally {
         callback(response);
       }
@@ -126,8 +151,12 @@ function createRecommendedConnections(user) {
   let followUserButton = document.createElement("button");
 
   followUserButton.onclick = () => {
-    console.log(firebase_info);
-    console.log(`You trying to follow ${user.username}`);
+    request_follow(user.username, firebase_info.username);
+    followUserButton.style.color = "white";
+    followUserButton.style.backgroundColor = "#a7b7be";
+    followUserButton.style.border = "0";
+    followUserButton.innerHTML = "REQUESTED";
+    followUserButton.onclick = "";
   }
   
 

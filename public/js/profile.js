@@ -39,9 +39,11 @@ function APIRequest(method, url, callback) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      let response = this.responseText;
+      let response;
       try {
         response = JSON.parse(response);
+      } catch(err) {
+        response = this.responseText;
       } finally {
         callback(response);
       }
