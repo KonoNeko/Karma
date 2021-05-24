@@ -406,7 +406,7 @@ Deletes an existing story.
 */
 DROP PROCEDURE IF EXISTS delete_story;
 DELIMITER //
-CREATE PROCEDURE post_story(IN current_username CHAR(50), IN current_story INTEGER)
+CREATE PROCEDURE delete_story(IN current_username CHAR(50), IN current_story INTEGER)
 BEGIN
     DELETE FROM stories 
     WHERE profile_id = get_user_id(current_username)
@@ -418,9 +418,9 @@ DELIMITER ;
 /*
 Gets all stories from users that the current user is following.
 */
-DROP PROCEDURE IF EXISTS delete_story;
+DROP PROCEDURE IF EXISTS view_stories;
 DELIMITER //
-CREATE PROCEDURE post_story(IN current_username CHAR(50))
+CREATE PROCEDURE view_stories(IN current_username CHAR(50))
 BEGIN
     SELECT * FROM stories s
     WHERE is_following(current_username, s.profile_id)
