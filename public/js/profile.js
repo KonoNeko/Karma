@@ -277,18 +277,41 @@ function addAboutMe() {
 function addProfilePic() {
   console.log("Add pic button clicked");
 
-  document.getElementById("button-content").innerHTML = "";
-
-
-  
-
-  document.getElementById("button-content").appendChild(addAboutMeHeading);
-  document.getElementById("button-content").appendChild(addAboutMeInput);
-
-  $("#save").click(function () {
-    let picUrl= addEducationInput1.value;
-    add_ProfilePic(picUrl);
+  const uploadFileButton = document.getElementById("file-upload");
+let posted = false;
+uploadFileButton.addEventListener("change", ev => {
+  const formdata = new FormData()
+  formdata.append("image", ev.target.files[0])
+  fetch("https://api.imgur.com/3/image/", {
+      method: "post",
+      headers: {
+          Authorization: "Client-ID 4409588f10776f7"
+      },
+      body: formdata
+  }).then(data => data.json()).then(data => {
+      posted = true;
+      document.getElementById("imageUrl").innerText = data.data.link;
   });
+})
+
+document.getElementById("postBtn").onclick = () => {
+  let link = document.getElementById("imageUrl").textContent;
+  if (link != "" && posted && JSON.stringify(info) != "{}") {
+    console.log("Posting");
+    createNewPost();
+  } else if (!posted) {
+    window.alert("Please wait for image to finish uploading");
+  } else if (JSON.stringify(info) === "{}") {
+    window.alert("It doesn't look like you are signed in redirecting you now.");
+    window.location.href("sign-up.html")
+  } else if (link === '') {
+    window.alert("No image is uploaded");
+  }
+}
+
+  // $("#save").click(function () {
+  //   let picUrl= addEducationInput1.value;
+  //   add_ProfilePic(picUrl);
 }
 
 function addSkills() {
