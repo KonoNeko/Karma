@@ -131,8 +131,9 @@ DELIMITER //
 CREATE PROCEDURE recommended_users(IN current_username VARCHAR(50))
 BEGIN
     SELECT * FROM profiles p
-    WHERE p.profile_id <> (
+    WHERE p.profile_id NOT IN (
         SELECT pf.profile_id FROM profile_follows pf WHERE pf.follower_id = get_user_id(current_username))
+    AND p.username <> current_username
     ORDER BY RAND()
     LIMIT 3;
 END//
@@ -778,8 +779,14 @@ DELIMITER //
 CREATE PROCEDURE request_to_follow_user(IN user_following CHAR(50), 
 IN user_being_followed CHAR(50))
 BEGIN
-    INSERT INTO profile_follows (profile_id, follower_id)
-    VALUES (get_user_id(user_being_followed), get_user_id(user_following));
+    IF (
+        SELECT COUNT(follow_id) FROM profile_follows 
+        WHERE follower_id = get_user_id(user_following)
+        AND profile_id = get_user_id(user_being_followed)
+        ) = 0 THEN
+        INSERT INTO profile_follows (profile_id, follower_id)
+        VALUES (get_user_id(user_being_followed), get_user_id(user_following));
+    END IF;
 END//
 DELIMITER ;
 
