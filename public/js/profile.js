@@ -141,6 +141,18 @@ function add_Description(userID, bio) {
   APIRequest(method, url, console.log);
 }
 
+function add_ProfilePic(userID, picUrl) {
+  const method = "PUT";
+  const endpoint = "/profiles/picture";
+  const params = formatParams({
+    id: userID,
+    picUrl: picUrl,
+  });
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, console.log);
+}
+
 function showProfile() {
   firebase.auth().onAuthStateChanged(function (user) {
     db.collection("users")
@@ -257,6 +269,25 @@ function addAboutMe() {
   $("#save").click(function () {
     let bio = addEducationInput1.value;
     add_Description(bio);
+  });
+}
+
+
+
+function addProfilePic() {
+  console.log("Add pic button clicked");
+
+  document.getElementById("button-content").innerHTML = "";
+
+
+  
+
+  document.getElementById("button-content").appendChild(addAboutMeHeading);
+  document.getElementById("button-content").appendChild(addAboutMeInput);
+
+  $("#save").click(function () {
+    let picUrl= addEducationInput1.value;
+    add_ProfilePic(picUrl);
   });
 }
 
