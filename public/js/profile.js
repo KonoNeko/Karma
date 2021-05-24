@@ -162,6 +162,7 @@ function showProfile() {
 function loadProfile(profileObj) {
   console.log(profileObj);
   console.log(height);
+  document.getElementById("mainProfilePic").src = profileObj.info.profile_pic_url;
   loadAboutMe(profileObj);
   loadPosts(profileObj);
   loadNumPosts(profileObj);
