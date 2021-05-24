@@ -133,7 +133,7 @@ document.getElementById("post-opportunity-btn").onclick = () => {
   let link = document.getElementById("imageUrl").textContent;
   if (link != "" && posted && JSON.stringify(info) != "{}") {
     console.log("Posting");
-    createNewPost();
+    addVolunteeringPost();
   } else if (!posted) {
     window.alert("Please wait for image to finish uploading");
   } else if (JSON.stringify(info) === "{}") {
