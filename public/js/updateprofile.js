@@ -4,44 +4,42 @@ const educationBtn = document.getElementById("edit-education-btn");
 const experienceBtn = document.getElementById("edit-experience-btn");
 const awardsBtn = document.getElementById("edit-awards-btn");
 
-aboutMeBtn.onclick = function () {
-  let aboutMeInput = document.createElement("input");
-  aboutMeInput.setAttribute("style", "width: 100%");
-  aboutMeInput.value = document.getElementById("aboutMe-Profile").textContent;
+aboutMeBtn.setAttribute("onclick", "aboutMeOnclick()");
+skillsBtn.setAttribute("onclick", "skillsOnclick()");
+educationBtn.setAttribute("onclick", "educationOnclick()");
+experienceBtn.setAttribute("onclick", "experienceOnclick()");
+awardsBtn.setAttribute("onclick", "awardsOnclick()");
 
-  let cancelBtn = document.createElement("button");
-  cancelBtn.setAttribute("class", "quarternarybutton");
-  cancelBtn.setAttribute("style", "margin-right: 8px");
-  cancelBtn.innerHTML = "Cancel";
+function aboutMeOnclick() {
+  document
+    .getElementById("aboutme-edit")
+    .setAttribute("style", "display: unset");
 
-  let updateBtn = document.createElement("button");
-  updateBtn.setAttribute("class", "tertiarybutton");
-  updateBtn.innerHTML = "Update your description";
+  document.getElementById("aboutme-paragraph").value =
+    document.getElementById("aboutMe-Profile").textContent;
 
-  let aboutMeDiv = document.getElementById("aboutme");
-  aboutMeDiv.innerHTML = "";
+  document
+    .getElementById("aboutMe-Profile")
+    .setAttribute("style", "display: none");
 
-  let headingAndEditDiv = document.createElement("div");
-  headingAndEditDiv.setAttribute("class", "heading-and-edit");
-  headingAndEditDiv.setAttribute("style", "margin-bottom: 10px");
+  document.getElementById("aboutme-cancel").onclick = function () {
+    document
+      .getElementById("aboutme-edit")
+      .setAttribute("style", "display: none");
+    document
+      .getElementById("aboutMe-Profile")
+      .setAttribute("style", "display: unset");
+  };
 
-  let heading = document.createElement("p");
-  heading.setAttribute("class", "heading2");
-  heading.innerHTML = "About me";
+  document.getElementById("aboutme-edit").onclick = function () {
+    /* BACKEND GUY DO UR MAGIC HERE */
+  };
+}
 
-  let edit = document.createElement("i");
-  edit.setAttribute("class", "fas fa-edit");
-  edit.setAttribute("id", "edit-about-btn");
+function skillsOnclick() {}
 
-  headingAndEditDiv.appendChild(heading);
-  headingAndEditDiv.appendChild(edit);
+function educationOnclick() {}
 
-  let buttonsDiv = document.createElement("div");
-  buttonsDiv.appendChild(cancelBtn);
-  buttonsDiv.appendChild(updateBtn);
-  buttonsDiv.setAttribute("style", "margin-top: 8px");
+function experienceOnclick() {}
 
-  aboutMeDiv.appendChild(headingAndEditDiv);
-  aboutMeDiv.appendChild(aboutMeInput);
-  aboutMeDiv.appendChild(buttonsDiv);
-};
+function experienceOnclick() {}
