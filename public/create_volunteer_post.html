@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/createvolunteerpost.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/sidebar.css" />
+
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -25,7 +26,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
 </head>
 
-<body onload="loadAll()">
+<body>
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
       >&times;</a
@@ -185,19 +186,20 @@
 
           <div class="form-row">
             <label for="opportunity-description">Opportunity description</label>
-            <textarea rows="4" cols="200" name="opportunity-description" id="opportunity-description">
+            <textarea rows="4" name="opportunity-description" id="opportunity-description">
             </textarea>
           </div>
 
           <div class="form-row">
             <label for="opportunity-requirements">Opportunity requirements</label>
-            <textarea rows="4" cols="200" name="opportunity-requirements" id="opportunity-requirements">
+            <textarea rows="4" name="opportunity-requirements" id="opportunity-requirements">
             </textarea>
           </div>
 
           <p id="imageUrl" style="display: none;"></p>
           <div class="button-row">
-            <button id="upload-image-opportunity-btn">Upload image</button>
+            <label for="file-upload" class="fa fa-image"></label>
+            <input id="file-upload" type="file" style="display:none"/>
             <button id="post-opportunity-btn">Post volunteer opportunity</button>
           </div>
         </div>
