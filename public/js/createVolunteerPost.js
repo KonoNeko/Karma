@@ -37,7 +37,6 @@ async function get_firebase_info() {
       .then(function (doc) {
         let user = doc.data();
         console.log(user);
-        info.id = user.id;
         info.fullName = user.fullName;
         info.email = user.email;
         info.username = user.username;
@@ -73,7 +72,7 @@ function formatParams(params) {
 }
 
 function addVolunteeringPost() {
-  let id = info.id;
+  let id = info.username;
   let category = document.getElementById("opportunity-category").options[
     document.getElementById("opportunity-category").selectedIndex
   ].text;
