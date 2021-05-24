@@ -424,7 +424,7 @@ DOCUMENTATION FORMAT
         img         string: The image url of the opportunity (ex. www.website.ca/image.jpg)
 
     Example URL of the request (replace 'value' with an actual value):
-        https://marlonfajardo.ca/karma/v1/opportunities
+        https://marlonfajardo.ca/karma/v1/opportunities?id=value&category=value&date=value&title=value&desc=value&requires=value&img=value
 
 
 22) MESSAGES: View messages in a conversation

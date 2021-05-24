@@ -593,7 +593,7 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
  * Gets all opportunites posted sorted by category.
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/post/like
+ * https://marlonfajardo.ca/karma/v1/opportunities
  */
  app.get(ENDPOINT + '/opportunities', (req, res) => {
     const sql = `SELECT * FROM bulletin_board;`;
@@ -771,6 +771,22 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
         } else {
             res.send("Error sending new message");
         }
+    });
+});
+
+
+/**
+ * Gets 3 random profiles to connect with.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/recommended/value
+ */
+ app.get(ENDPOINT + '/profiles/recommended/:id', (req, res) => {
+    const userID = req.params.id;
+    const sql = `CALL recommended_users('${userID}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result[0]));
     });
 });
 
