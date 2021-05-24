@@ -104,7 +104,7 @@ function addVolunteeringPost() {
 }
 
 const uploadFileButton = document.getElementById(
-  "upload-image-opportunity-btn"
+  "file-upload"
 );
 let posted = false;
 
