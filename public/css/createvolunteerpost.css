@@ -9,6 +9,12 @@
   margin-left: 5rem;
 }
 
+input,
+textarea,
+select {
+  font-family: "Open Sans";
+}
+
 .flex-main {
   margin-left: 5rem;
   display: flex;

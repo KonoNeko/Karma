@@ -1,3 +1,13 @@
+function load() {
+  document.getElementById("opportunity-requirements").value = document
+    .getElementById("opportunity-requirements")
+    .value.trim();
+
+  document.getElementById("opportunity-description").value = document
+    .getElementById("opportunity-description")
+    .value.trim();
+}
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
