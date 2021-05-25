@@ -142,16 +142,18 @@ function add_Description(userID, bio) {
   APIRequest(method, url, console.log);
 }
 
-function add_ProfilePic(userID, picUrl) {
+function add_ProfilePic(userID) {
   const method = "PUT";
   const endpoint = "/profiles/picture";
   const params = formatParams({
     id: userID,
-    picUrl: picUrl,
+    picUrl: document.getElementById("mainProfilePic").textContent,
   });
   const url = BASE_URL + endpoint + params;
-
-  APIRequest(method, url, console.log);
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    window.location.reload();
+  });
 }
 
 function showProfile() {
@@ -292,15 +294,15 @@ function addProfilePic() {
       .then((data) => data.json())
       .then((data) => {
         posted = true;
-        document.getElementById("imageUrl").innerText = data.data.link;
+        document.getElementById("mainProfilePic").innerText = data.data.link;
       });
   });
 
   document.getElementById("postBtn").onclick = () => {
-    let link = document.getElementById("imageUrl").textContent;
+    let link = document.getElementById("mainProfilePic").textContent;
     if (link != "" && posted && JSON.stringify(info) != "{}") {
       console.log("Posting");
-      createNewPost();
+      add_ProfilePic()
     } else if (!posted) {
       window.alert("Please wait for image to finish uploading");
     } else if (JSON.stringify(info) === "{}") {
