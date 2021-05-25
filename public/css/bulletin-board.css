@@ -101,10 +101,13 @@
 }
 
 .modal-text {
-  width: 20%;
+  /*width: 20%;*/
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 10px;
+}
+.btnHolder{
+  bottom: 10px;
 }
 .applyBtn{
   border: none;
