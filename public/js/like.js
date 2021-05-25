@@ -48,7 +48,6 @@ function addLikes(userID, postID) {
 
   APIRequest(method2, url, (res) => {
     console.log(res);
-    window.location.reload();
   });
 }
 
