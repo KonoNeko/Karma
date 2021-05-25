@@ -92,7 +92,7 @@ app.get(ENDPOINT + '/profiles/:userID', (req, res) => {
 /**
  * Gets the profile information for a given user.
  */
- app.get(ENDPOINT + '/profiles/:profileToView/:currentUser', (req, res) => {
+ app.get(ENDPOINT + '/profiles/other/:profileToView/:currentUser', (req, res) => {
     const currentUsername = req.params.currentUser;
     const profileToView = req.params.profileToView;
     const sql = `CALL get_profile_as_other_user('${profileToView}', '${currentUsername}');`;
