@@ -507,6 +507,8 @@ function createModal(postObj) {
   commentInput.placeholder = "Add a comment...";
 
   let commentSubmit = document.createElement("button");
+  commentSubmit.id = "commentBtn"
+  commentSubmit.setAttribute("class","commentBtn")
   commentSubmit.setAttribute("style","margin-left: 10px;")
   commentSubmit.type = "submit";
   commentSubmit.innerText = "Post";

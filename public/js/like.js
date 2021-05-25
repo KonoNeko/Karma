@@ -1,6 +1,6 @@
-const URL2 = " https://marlonfajardo.ca/karma/v1/post/like?id=value&post=value"
+const URL2 = "https://marlonfajardo.ca/karma/v1/post/like?id=value&post=value"
 const method2 = "POST"
-function like(x){
+function like(){
     let heart = document.getElementById("likeBtn");
     let text = document.getElementById("likeText")
     heart.setAttribute(  "style",
@@ -13,7 +13,7 @@ function like(x){
 
 //@return list of posts
 async function  getPost(){
-    let response = await fetch(URL2);
+    let response = await fetch("https://marlonfajardo.ca/karma/v1/post/like?id=value&post=value")
     let data = await response.json();
     return data;
 }
@@ -27,8 +27,8 @@ function addLikes(){
         //     console.log(posts[i].post_info.likes)
         //     // }
         // }
-        posts[1].post_info.likes = posts[1].post_info.likes+1
-        console.log(posts[1].post_info.likes)
+
+        console.log(posts)
     });
 }
 addLikes()
