@@ -17,7 +17,7 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-
+const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
 let info;
 get_firebase_info();
