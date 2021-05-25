@@ -126,6 +126,8 @@ async function get_firebase_info() {
         info.email = user.email;
         info.username = user.username;
         view_social_feed(info.username); 
+        loadRecommendedConnections(info.username);
+        loadWhatsNew();
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
@@ -197,6 +199,7 @@ function loopThroughSocialPosts(results) {
   }
 }
 
+
 function createNewPost() {
   const method = "POST";
   const endpoint = "/posts";
@@ -255,6 +258,12 @@ function loadStories() {
   createStory(story);
   createStory(story);
   createStory(story);
+}
+
+
+function loadRightSide() {
+  loadWhatsNew();
+
 }
 
 // CREATE INDIVIDUAL UI ELEMENTS
@@ -708,6 +717,5 @@ document.getElementById("postBtn").onclick = () => {
     window.alert("No image is uploaded");
   }
 }
-
 
 // loadHome();
