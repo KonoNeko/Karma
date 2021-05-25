@@ -106,7 +106,15 @@
   padding-right: 20px;
   padding-bottom: 10px;
 }
-
+.applyBtn{
+  border: none;
+  color: #eff0f3;
+  background-color: #0367a6;
+  padding: 20px 40px;
+  font-family: "Montserrat";
+  font-size: 18px;
+  border-radius: 12px;
+}
 /* The Close Button */
 .close {
   color: #51b09f;
