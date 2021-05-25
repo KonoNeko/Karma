@@ -23,3 +23,19 @@ VALUES
 
 (2, 'Helping out at Senior Home', 'Burnaby B.C', 'Health and Wellness', 'Hang out with the Seniors', 'No requirements', '2021-05-21', 'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder-1024x512.png');
 
+
+
+CALL new_education_entry("karma", "09-2019", "05-2021", NULL, "Computer Systems Technology", "https://imgur.com/D8Nhb9F", "British Columbia Institute of Technology");
+CALL new_education_entry("karma", "04-2021", "05-2021", NULL, "Projects 2", "https://imgur.com/D8Nhb9F", "British Columbia Institute of Technology");
+CALL new_education_entry("karma", "01-2021", "04-2021", NULL, "UI/UX Design", "https://imgur.com/D8Nhb9F", "British Columbia Institute of Technology");
+
+CALL new_experience_entry("karma", "01-2020", "05-2020", "Public Park Attendant", "https://ctb.ku.edu/sites/default/files/chapter_files/group_of_volunteers_picking_garbage.jpg", "Concord Pacific Park");
+CALL new_experience_entry("karma", "01-2020", "05-2020", "Front Desk Clerk", "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/experience.jpeg", "Burnaby Public Library");
+
+CALL new_award_entry("karma", "Best Website", "05-2021", "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/awards.jpg");
+CALL new_award_entry("karma", "Greatest Idea", "05-2021", "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/awards.jpg");
+
+CALL new_skill_entry("karma", "Leadership");
+CALL new_skill_entry("karma", "Creativity");
+CALL new_skill_entry("karma", "Problem Solving");
+

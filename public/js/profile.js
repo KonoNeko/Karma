@@ -41,8 +41,8 @@ function APIRequest(method, url, callback) {
     if (this.readyState == 4 && this.status == 200) {
       let response;
       try {
-        response = JSON.parse(response);
-      } catch(err) {
+        response = JSON.parse(this.responseText);
+      } catch (err) {
         response = this.responseText;
       } finally {
         callback(response);
@@ -209,7 +209,7 @@ function loadNumPosts(profileObj) {
 }
 
 function loadSkills(profileObj) {
-  let skills = document.getElementById("skills");
+  let skills = document.getElementById("skills-buttons");
   for (let key of Object.keys(profileObj.skills)) {
     createSkills(skills, profileObj.skills[key]);
     console.log(profileObj.skills[key]);
