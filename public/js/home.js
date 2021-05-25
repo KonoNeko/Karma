@@ -118,14 +118,17 @@ const result = [
 
 async function get_firebase_info() {
   firebase.auth().onAuthStateChanged(function (user) {
-    return db.collection("users").doc(user.uid).get()
+    return db
+      .collection("users")
+      .doc(user.uid)
+      .get()
       .then(function (doc) {
         let user = doc.data();
         console.log(user);
         info.fullName = user.fullName;
         info.email = user.email;
         info.username = user.username;
-        view_social_feed(info.username); 
+        view_social_feed(info.username);
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
@@ -136,7 +139,7 @@ async function get_firebase_info() {
 function formatParams(params) {
   let string = "?";
   let keys = Object.keys(params);
-  for(let i=0; i<keys.length; i++) {
+  for (let i = 0; i < keys.length; i++) {
     string += `${keys[i]}=${params[keys[i]]}`;
     if (i < keys.length - 1) {
       string += "&";
@@ -183,7 +186,13 @@ function view_social_feed(userID) {
 }
 
 function loopThroughSocialPosts(results) {
-  let posts = JSON.parse(results);
+  let posts;
+  try {
+    posts = JSON.parse(results);
+  } catch (err) {
+    console.log(err.message);
+    posts = results;
+  }
   console.log("This is being called" + posts.length);
   for (let i = 0; i < posts.length; i++) {
     console.log(posts[i]);
@@ -198,7 +207,7 @@ function createNewPost() {
     id: info.username,
     img: document.getElementById("imageUrl").textContent,
     caption: document.getElementById("captionInput").value,
-    location: document.getElementById("location").value
+    location: document.getElementById("location").value,
   });
   const url = BASE_URL + endpoint + params;
   APIRequest(method, url, (res) => {
@@ -317,7 +326,7 @@ function createPost(postObj) {
 
   let userName = document.createElement("p");
   userName.setAttribute("class", "userName bodytitle");
-  userName.id = "userName";
+  userName.id = "userName" + postObj.post_info.post_id;
   userName.innerHTML = postObj.post_info.username;
 
   let dateObj = formatTimestamp(postObj.post_info.post_date);
@@ -350,17 +359,15 @@ function createPost(postObj) {
   captionAndComments.setAttribute("class", "captionAndComments");
 
   let likeIcon = document.createElement("i");
-  likeIcon.setAttribute("class", "far fa-heart");
-  likeIcon.setAttribute("onclick", "like()");
-  likeIcon.id = "likeBtn"
-  likeIcon.onclick = function () {
-    like();
-  };
+  likeIcon.setAttribute("class", "far fa-heart likeBtn");
+  likeIcon.id = "likeBtn" + postObj.post_info.post_id;
   likeIcon.setAttribute(
     "style",
     "font-size: 24px; color: #214049; margin-right: 10px; margin-top: 10px; margin-bottom:"
   );
-
+  likeIcon.onclick = function () {
+    like(this.id);
+  };
   let commentIcon = document.createElement("i");
   commentIcon.setAttribute("class", "far fa-comment");
   commentIcon.setAttribute(
@@ -390,7 +397,7 @@ function createPost(postObj) {
   likes.setAttribute("class", "likes bodytitle");
   caption.setAttribute("class", "caption");
   comments.setAttribute("class", "comments smalltext");
-  comments.id = "comment-text"
+  comments.id = "comment-text" + postObj.post_info.post_id;
   comments.onclick = function () {
     displayModal(postObj.post_info.post_id);
   };
@@ -492,7 +499,7 @@ function createModal(postObj) {
   interactionButtons.id = "interactionButtons" + post.post_id;
 
   let likesLine = document.createElement("p");
-  likesLine.setAttribute("style","margin-left: 10px;")
+  likesLine.setAttribute("style", "margin-left: 10px;");
   likesLine.innerHTML =
     post.likes > 1
       ? `${post.likes} users like this`
@@ -503,13 +510,11 @@ function createModal(postObj) {
 
   let commentInput = document.createElement("input");
   commentInput.type = "text";
-  commentInput.setAttribute("style","margin-left: 10px;")
+  commentInput.setAttribute("style", "margin-left: 10px;");
   commentInput.placeholder = "Add a comment...";
 
   let commentSubmit = document.createElement("button");
-  commentSubmit.id = "commentBtn"
-  commentSubmit.setAttribute("class","commentBtn")
-  commentSubmit.setAttribute("style","margin-left: 10px;")
+  commentSubmit.setAttribute("style", "margin-left: 10px;");
   commentSubmit.type = "submit";
   commentSubmit.innerText = "Post";
 
@@ -675,20 +680,22 @@ https://compile.blog/imgur-api-image-uploader/
 
 const uploadFileButton = document.getElementById("file-upload");
 let posted = false;
-uploadFileButton.addEventListener("change", ev => {
-  const formdata = new FormData()
-  formdata.append("image", ev.target.files[0])
+uploadFileButton.addEventListener("change", (ev) => {
+  const formdata = new FormData();
+  formdata.append("image", ev.target.files[0]);
   fetch("https://api.imgur.com/3/image/", {
-      method: "post",
-      headers: {
-          Authorization: "Client-ID 4409588f10776f7"
-      },
-      body: formdata
-  }).then(data => data.json()).then(data => {
+    method: "post",
+    headers: {
+      Authorization: "Client-ID 4409588f10776f7",
+    },
+    body: formdata,
+  })
+    .then((data) => data.json())
+    .then((data) => {
       posted = true;
       document.getElementById("imageUrl").innerText = data.data.link;
-  });
-})
+    });
+});
 
 document.getElementById("postBtn").onclick = () => {
   let link = document.getElementById("imageUrl").textContent;
@@ -699,11 +706,10 @@ document.getElementById("postBtn").onclick = () => {
     window.alert("Please wait for image to finish uploading");
   } else if (JSON.stringify(info) === "{}") {
     window.alert("It doesn't look like you are signed in redirecting you now.");
-    window.location.href("sign-up.html")
-  } else if (link === '') {
+    window.location.href("sign-up.html");
+  } else if (link === "") {
     window.alert("No image is uploaded");
   }
-}
-
+};
 
 // loadHome();
