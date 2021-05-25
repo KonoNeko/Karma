@@ -172,7 +172,7 @@ function loadModal(oppObj) {
   title.className = "heading1";
   location.className = "heading2";
   description.className = "bodytext";
-  btn.className = "primarybutton";
+  btn.className = "applyBtn";
   
   close.innerHTML = "&times;";
   title.innerText = oppObj.title;
@@ -240,7 +240,7 @@ function loadApplication(content, oppObj) {
   title.className = "heading1";
   location.className = "heading2";
 
-  btn.className = "primarybutton";
+  btn.className = "applyBtn";
   nameLabel.className = "applicationLabel";
   emailLabel.className = "applicationLabel";
   phoneLabel.className = "applicationLabel";
@@ -251,8 +251,8 @@ function loadApplication(content, oppObj) {
   messageText.className = "applicationTextArea";
 
   title.innerText = `Application for ${oppObj.title} with ${oppObj.employer}`;
-  nameLabel.innerHTML = "Name";
-  emailLabel.innerHTML = "Email";
+  nameLabel.innerHTML = "Name: ";
+  emailLabel.innerHTML = "Email: ";
   phoneLabel.type = "text";
   phoneLabel.innerHTML = "Phone Number";
   messageLabel.innerHTML = "Message";
