@@ -1,7 +1,11 @@
 function filterObject(object, keys) {
     let cleanObj = {};
     for (let i=0; i<keys.length; i++) {
-        cleanObj[keys[i]] = object[keys[i]];
+        try {
+            cleanObj[keys[i]] = object[keys[i]];
+        } catch(err) {
+            console.log(`${key[i]} doesn't exist`);
+        }
     }
     return cleanObj;
 }
@@ -109,7 +113,7 @@ function fillSocialPost(object, currentPost) {
     } 
     let post = {};
     const post_keys = ['post_id', 'image_url', 'caption', 
-    'location', 'post_date', 'likes', 'username', 'profile_pic_url'];
+    'location', 'post_date', 'likes', 'username', 'profile_pic_url', 'is_liked'];
 
     post.post_info = filterObject(object[currentPost], post_keys);
     post.comments = fillComments(object, object[currentPost]['post_id']);
