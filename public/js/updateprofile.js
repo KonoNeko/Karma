@@ -1,4 +1,4 @@
-var inputs = document.getElementsByTagName("input");
+var inputs = document.getElementsByClassName("skillsinput");
 for (index = 0; index < inputs.length; ++index) {
   inputs[index].addEventListener("input", resizeInput);
   resizeInput.call(inputs[index]);
@@ -52,46 +52,36 @@ function aboutMeOnclick() {
 }
 
 function skillsOnclick() {
-  let skillsDiv = document.getElementById("skills");
+  document.getElementById("skills-inputs").innerHTML = "";
 
-  let skillsEditDiv = document.createElement("div");
-  let skillsCancelBtn = document.createElement("button");
-  let skillsEditBtn = document.createElement("button");
-
-  skillsEditDiv.setAttribute("class", "skills-edit-div");
-  skillsCancelBtn.setAttribute("class", "quarternarybutton");
-  skillsCancelBtn.setAttribute("id", "cancel-skills-btn");
-  skillsCancelBtn.innerHTML = "Cancel";
-  skillsEditBtn.setAttribute("class", "tertiarybutton");
-  skillsEditBtn.setAttribute("id", "edit-skills-btn");
-  skillsEditBtn.innerHTML = "Edit information";
-
-  skillsEditDiv.appendChild(skillsCancelBtn);
-  skillsEditDiv.appendChild(skillsEditBtn);
-
-  skillsDiv.appendChild(skillsEditDiv);
+  document
+    .getElementById("skills-edit")
+    .setAttribute("style", "display: unset");
 
   let skillsBtns = document.getElementsByClassName("skillsbtn");
-  skillsBtns.forEach(function (skillsBtn) {
+  for (i = 0; i < skillsBtns.length; i++) {
     let skillsInput = document.createElement("input");
     skillsInput.setAttribute("class", "skillsinput");
-    skillsInput.value = skillsBtn.textContent;
-    skillsEditDiv.appendChild(skillsInput);
-  });
+    skillsInput.value = skillsBtns[i].textContent;
+    document.getElementById("skills-inputs").appendChild(skillsInput);
+  }
 
-  skillsDiv.innerHTML = "";
+  document
+    .getElementById("skills-buttons")
+    .setAttribute("style", "display: none");
 
-  skillsCancelBtn.onclick = function () {
+  document.getElementById("cancel-skills-btn").onclick = function () {
     document
       .getElementById("skills-edit")
       .setAttribute("style", "display: none");
+    document
+      .getElementById("skills-buttons")
+      .setAttribute("style", "display: unset");
   };
 
-  skillsEditBtn.onclick = function () {
+  document.getElementById("skills-edit").onclick = function () {
     /* BACKEND GUY DO UR MAGIC HERE */
   };
-
-  skillsAlreadyClicked = true;
 }
 
 function educationOnclick() {}
