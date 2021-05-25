@@ -89,6 +89,29 @@ app.get(ENDPOINT + '/profiles/:userID', (req, res) => {
     });
 });
 
+/**
+ * Gets the profile information for a given user.
+ */
+ app.get(ENDPOINT + '/profiles/:profileToView/:currentUser', (req, res) => {
+    const currentUsername = req.params.currentUser;
+    const profileToView = req.params.profileToView;
+    const sql = `CALL get_profile_as_other_user('${profileToView}', '${currentUsername}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        let response = result[0];
+        let profile = {
+            info: filter.profile(response[0]),
+            education: filter.education(response),
+            skills: filter.skills(response),
+            experience: filter.experience(response),
+            certifications: filter.certifications(response),
+            posts: filter.posts(response),
+            follow_status: response[0].follow_status
+        };
+        res.end(JSON.stringify(profile));
+    });
+});
+
 
 /**
  * Gets the list of profiles

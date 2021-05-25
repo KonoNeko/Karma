@@ -71,33 +71,78 @@ BEGIN
     pc.id_of_comment_receiving_reply, pc.post_date as comment_date
 
     FROM profiles prof
-    INNER JOIN profile_education pe
+    LEFT JOIN profile_education pe
     ON prof.profile_id = pe.profile_id
-    INNER JOIN education edu
+    LEFT JOIN education edu
     ON edu.education_id = pe.education_id
 
-    INNER JOIN profile_experiences pex
+    LEFT JOIN profile_experiences pex
     ON prof.profile_id = pex.profile_id
-    INNER JOIN experiences ex
+    LEFT JOIN experiences ex
     ON ex.experience_id = pex.experience_id
 
-    INNER JOIN profile_skills ps
+    LEFT JOIN profile_skills ps
     ON prof.profile_id = ps.profile_id
-    INNER JOIN skills sk
+    LEFT JOIN skills sk
     ON sk.skill_id = ps.skill_id
 
-    INNER JOIN profile_awards pa
+    LEFT JOIN profile_awards pa
     ON prof.profile_id = pa.profile_id
-    INNER JOIN awards_certifications aw
+    LEFT JOIN awards_certifications aw
     ON aw.award_id = pa.award_id
 
-    INNER JOIN social_posts sp
+    LEFT JOIN social_posts sp
     ON prof.profile_id = sp.user_id
 
     LEFT JOIN post_comments pc
     on sp.post_id = pc.post_id
 
     WHERE prof.username = current_username
+    ORDER BY pc.post_date;
+END//
+DELIMITER ;
+
+/*
+Gets all the user profile information as another user (following stats, skills, education, experiences, awards, posts).
+*/
+DROP PROCEDURE IF EXISTS get_profile_as_other_user;
+DELIMITER //
+CREATE PROCEDURE get_profile_as_other_user(IN profile_to_view VARCHAR(50), IN current_username VARCHAR(50))
+BEGIN
+    SELECT prof.*, edu.*, ex.*, sk.*, aw.*, sp.*,
+    get_user_name(pc.user_id) as comment_poster, pc.comment, pc.is_a_reply,
+    pc.comment_id, get_profile_pic(pc.user_id) as commenter_profile_pic,
+    pc.id_of_comment_receiving_reply, pc.post_date as comment_date,
+    follow_status(current_username, profile_to_view) as follow_status
+
+    FROM profiles prof
+    LEFT JOIN profile_education pe
+    ON prof.profile_id = pe.profile_id
+    LEFT JOIN education edu
+    ON edu.education_id = pe.education_id
+
+    LEFT JOIN profile_experiences pex
+    ON prof.profile_id = pex.profile_id
+    LEFT JOIN experiences ex
+    ON ex.experience_id = pex.experience_id
+
+    LEFT JOIN profile_skills ps
+    ON prof.profile_id = ps.profile_id
+    LEFT JOIN skills sk
+    ON sk.skill_id = ps.skill_id
+
+    LEFT JOIN profile_awards pa
+    ON prof.profile_id = pa.profile_id
+    LEFT JOIN awards_certifications aw
+    ON aw.award_id = pa.award_id
+
+    LEFT JOIN social_posts sp
+    ON prof.profile_id = sp.user_id
+
+    LEFT JOIN post_comments pc
+    on sp.post_id = pc.post_id
+
+    WHERE prof.username = profile_to_view
     ORDER BY pc.post_date;
 END//
 DELIMITER ;
