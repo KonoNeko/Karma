@@ -115,7 +115,11 @@ function educationOnclick() {
 
     educationPostInputSchool.value = educationSchoolNames[i].textContent;
     educationPostInputSchoolPara.value = educationParas[i].textContent;
-    educationPostInputSchool.setAttribute("style", "margin-bottom: 5px");
+    educationPostInputSchool.setAttribute(
+      "style",
+      "margin-bottom: 5px; width: 80%;"
+    );
+    educationPostInputSchoolPara.setAttribute("style", "width: 80%");
 
     educationPostImgDiv.appendChild(educationPostImg);
     educationPostImgDiv.appendChild(educationPostImgUpload);
@@ -207,13 +211,18 @@ function experienceOnclick() {
     experiencePostInputTitle.value = experienceNames[i].textContent;
 
     experiencePostInputPara.value = experienceParas[i].textContent;
-    experiencePostInputTitle.setAttribute("style", "margin-bottom: 5px");
+    experiencePostInputTitle.setAttribute(
+      "style",
+      "width: 80%; margin-bottom: 5px"
+    );
 
     experiencePostImgDiv.appendChild(experiencePostImg);
     experiencePostImgDiv.appendChild(experiencePostImgUpload);
 
     experiencePostInputDiv.appendChild(experiencePostInputTitle);
     experiencePostInputDiv.appendChild(experiencePostInputPara);
+
+    experiencePostInputPara.setAttribute("style", "width: 80%");
 
     experiencePostImgDiv.setAttribute(
       "style",
@@ -286,7 +295,11 @@ function awardsOnclick() {
     awardsPostInputTitle.value = awardsNames[i].textContent;
 
     awardsPostInputPara.value = awardsParas[i].textContent;
-    awardsPostInputTitle.setAttribute("style", "margin-bottom: 5px");
+    awardsPostInputTitle.setAttribute(
+      "style",
+      "margin-bottom: 5px; width: 80%; "
+    );
+    awardsPostInputPara.setAttribute("style", "width: 80%;");
 
     awardsPostImgDiv.appendChild(awardsPostImg);
     awardsPostImgDiv.appendChild(awardsPostImgUpload);
