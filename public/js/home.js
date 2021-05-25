@@ -200,7 +200,6 @@ function loopThroughSocialPosts(results) {
   }
 }
 
-
 function createNewPost() {
   const method = "POST";
   const endpoint = "/posts";
@@ -261,10 +260,8 @@ function loadStories() {
   createStory(story);
 }
 
-
 function loadRightSide() {
   loadWhatsNew();
-
 }
 
 // CREATE INDIVIDUAL UI ELEMENTS
@@ -717,10 +714,6 @@ document.getElementById("postBtn").onclick = () => {
   } else if (link === "") {
     window.alert("No image is uploaded");
   }
-<<<<<<< HEAD
-}
-=======
 };
->>>>>>> 2a06ab70f88af8bf708fb722b575a06296340094
 
 // loadHome();
