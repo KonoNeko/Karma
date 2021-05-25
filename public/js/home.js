@@ -202,7 +202,6 @@ function loopThroughSocialPosts(results) {
   }
 }
 
-
 function createNewPost() {
   const method = "POST";
   const endpoint = "/posts";
@@ -263,10 +262,8 @@ function loadStories() {
   createStory(story);
 }
 
-
 function loadRightSide() {
   loadWhatsNew();
-
 }
 
 // CREATE INDIVIDUAL UI ELEMENTS
