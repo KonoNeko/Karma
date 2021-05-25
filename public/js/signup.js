@@ -158,6 +158,7 @@ $("#btn-signup").click(function(){
 $("#btn-logout").click(function logout() {
       firebase.auth().signOut().then(function() {
         // Sign-out successful.
+        alert("sign out success")
         location.href = 'sign-up.html';
       }).catch(function(error) {
         // An error happened.
@@ -165,11 +166,11 @@ $("#btn-logout").click(function logout() {
     }
 );
 
-
+//
 // const logout = document.querySelector("#logout");
 // logout.addEventListener("click", (e) =>{
 //   e.preventDefault();
-//   auth.signOut().then(()=>{
+//   firebase.auth.signOut().then(()=>{
 //     alert("user sign out")
 //
 //   })
