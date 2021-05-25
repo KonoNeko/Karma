@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 
 <head>
-  <link href="./css/style.css" rel="stylesheet" media="screen">
+  <!-- FAVICON -->
   <link rel="icon" type="image/png" href="res/logo0_colored.png" />
 
-  <title>Create Volunteer Post</title>
+  <title>Create volunteer post</title>
   <link rel="stylesheet" href="css/createvolunteerpost.css" />
   <link rel="stylesheet" href="css/base.css" />
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-  />
+  <link rel="stylesheet" href="css/sidebar.css" />
+
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -21,9 +19,14 @@
     name="viewport"
     content="initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
   />
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
 </head>
 
-<body onload="loadHome()">
+<body onload="load()">
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
       >&times;</a
@@ -156,77 +159,50 @@
 
     <div class="flex-main">
       <div class="column" id="mainmain">
-        <div id="opportunity_post" class="opportunity_post">
-          <!--Post form-->
-          <!--                container-->
-          <div class="box">
-            <h1 class="heading1" style="padding-bottom: 20px">
-              Create volunteer opportunity
-            </h1>
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col">
-                  <input
-                    type="text"
-                    id="title"
-                    name="Title"
-                    class="form-control"
-                    placeholder="Title"
-                    required
-                  />
-                </div>
-                <div class="col">
-                  <input
-                    type="datetime-local"
-                    id="date"
-                    name="date"
-                    class="form-control"
-                    placeholder="date"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col">
-                  <input
-                    type="text"
-                    id="location"
-                    name="Location"
-                    class="form-control"
-                    placeholder="Location"
-                    required
-                  />
-                </div>
-                <div class="col">
-                  <input
-                    type="text"
-                    id="contact"
-                    name="Contact"
-                    class="form-control"
-                    placeholder="Contact"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <textarea
-                placeholder="Volunteer Details"
-                id="messages"
-                class="form-control"
-                name="message"
-                rows="10"
-                required
-              ></textarea>
-            </div>
-            <button onclick="writeDate()" class="bugbutton">Post</button>
+        <h1 class="heading1 heading-title">Create volunteer post</h1>
+        <div id="create_volunteer_post_form">
+          <div class="form-row">
+            <label for="opportunity-title">Title</label>
+            <input type="text" id="opportunity-title" name="opportunity-title">
+          </div>
+
+          <div class="form-row">
+            <label for="opportunity-category">Select a category</label>
+            <select name="opportunity-category" id="opportunity-category">
+              <option value="fine-arts-and-culture">Fine Arts and Culture</option>
+              <option value="sports-and-recreation">Sports and Recreation</option>
+              <option value="literacy-libraries-and-learning">Literacy, Libraries, and Learning</option>
+              <option value="environment">Environment</option>
+              <option value="health-and-wellness">Health and Wellness</option>
+              <option value="computers-and-information-technology">Computers and Information Technology</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="opportunity-start">Start date</label>
+            <input type="date" id="opportunity-start" name="opportunity-start"
+              min="2021-05-23">
+          </div>
+
+          <div class="form-row">
+            <label for="opportunity-description">Opportunity description</label>
+            <textarea rows="4" name="opportunity-description" id="opportunity-description">
+            </textarea>
+          </div>
+
+          <div class="form-row">
+            <label for="opportunity-requirements">Opportunity requirements</label>
+            <textarea rows="4" name="opportunity-requirements" id="opportunity-requirements">
+            </textarea>
+          </div>
+
+          <p id="imageUrl" style="display: none;"></p>
+          <div class="button-row">
+            <label for="file-upload" class="fa fa-image"></label>
+            <input id="file-upload" type="file" style="display:none"/>
+            <button id="post-opportunity-btn">Post volunteer opportunity</button>
           </div>
         </div>
-        <div class="dropzone">
-          <div class="info"></div>
-        </div>
-        <script type="text/javascript" src="js/imgur.js"></script>
-        <script type="text/javascript" src="js/upload.js"></script>
       </div>
 
       <div class="column" id="sidemain">
@@ -237,58 +213,29 @@
           </form>
         </div>
         <div id="whats-new" class="whats-new">
-          <h1>What's new?</h1>
-          <p>Recommended volunteering opportunities for you</p>
+          <p class="heading2">What's new?</h1>
+          <p class="heading3">Recommended volunteering opportunities for you</p>
           <div id="whats-new-volunteering-opportunities"></div>
-          <a href="">View all volunteering opportunities</a>
+          <a href="bulletin-board.html" class="heading3">View all volunteering opportunities</a>
         </div>
         <div id="recommended-connections" class="recommended-connections">
-          <h1>Who to connect with</h1>
-          <a href="">View all recommended connections</a>
+          <p class="heading2">Who to connect with</h1>
+          <div id="recommendedUserDiv"></div>
+          <a href="bulletin-board.html" class="heading3">View all recommended connections</a>
         </div>
       </div>
     </div>
   </div>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
-
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-analytics.js"></script>
-
-  <script>
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-      apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
-      authDomain: "karma-535f3.firebaseapp.com",
-      projectId: "karma-535f3",
-      storageBucket: "karma-535f3.appspot.com",
-      messagingSenderId: "1023587584355",
-      appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
-      measurementId: "G-VTZ4TEWFBW",
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-    function writeDate() {
-      firebase
-        .database()
-        .ref("Post")
-        .set({
-          title: document.getElementById("title").value,
-          date: document.getElementById("date").value,
-          location: document.getElementById("location").value,
-          contact: document.getElementById("contact").value,
-          messages: document.getElementById("messages").value,
-        });
-    }
-  </script>
 </body>
 
-<script src="js/home.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/createVolunteerPost.js"></script>
+<script
+  src="https://kit.fontawesome.com/2ec3384389.js"
+  crossorigin="anonymous"
+></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

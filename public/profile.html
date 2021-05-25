@@ -183,6 +183,13 @@
       <button id="addexp" onclick="addAwards()"
         >Add awards</buton
       >
+
+      <button id="addexp" onclick="addProfilePic()"
+        >Add profile picture</buton
+      >
+
+      <label for="file-upload" class="fa fa-image" ></label>
+      <input id="file-upload" type="file" style="display:none"/>
     </div>
     <div id="button-content"></div>
     <button id="save">Save</button>
@@ -204,7 +211,7 @@
       <div class="column" id="mainmain">
         <div id="profile-main">
           <div class="profilepicture profile-column" id="image-column">
-            <img src="images/placeholder.jpg" />
+            <img id="mainProfilePic" />
           </div>
 
           <div
@@ -240,7 +247,15 @@
         </div>
 
         <div id="aboutme">
-          <p class="heading2">About me</p>
+          <div class="heading-and-edit">
+            <p class="heading2">About me</p>
+            <i class="fas fa-edit" id="edit-about-btn"></i>
+          </div>
+          <div style="display: none" class="aboutme-edit" id="aboutme-edit">
+            <input style="margin-bottom: 5px;" id="aboutme-paragraph">
+            <button id="aboutme-cancel" class="quarternarybutton">Cancel</button>
+            <button id="aboutme-edit" class="tertiarybutton">Edit information</button>
+          </div>
         </div>
 
         <div id="posts-div">
@@ -251,21 +266,35 @@
         </div>
 
         <div id="skills">
-          <p style="margin-top: 20px" class="heading2">Skills</p>
+          <div style="margin-top: 20px" class="heading-and-edit">
+            <p class="heading2">Skills</p>
+            <i class="fas fa-edit" id="edit-skills-btn"></i>
+          </div>
+          <div class="skills-edit" id="skills-edit">
+            <button id="skills-cancel" class="quarternarybutton">Cancel</button>
+            <button id="skills-edit" class="tertiarybutton">Edit information</button>
+          </div>
         </div>
 
         <div id="education">
-          <p style="margin-top: 20px" class="heading2">Education</p>
+          <div style="margin-top: 20px" class="heading-and-edit">
+            <p class="heading2">Education</p>
+            <i class="fas fa-edit" id="edit-education-btn"></i>
+          </div>
         </div>
 
         <div id="experience">
-          <p style="margin-top: 20px" class="heading2">
-            Work and volunteer experience
-          </p>
+          <div style="margin-top: 20px" class="heading-and-edit">
+            <p class="heading2">Work and volunteer experience</p>
+            <i class="fas fa-edit" id="edit-experience-btn"></i>
+          </div>
         </div>
 
         <div id="awards">
-          <p style="margin-top: 20px" class="heading2">Awards</p>
+          <div style="margin-top: 20px" class="heading-and-edit">
+            <p class="heading2">Awards</p>
+            <i class="fas fa-edit" id="edit-awards-btn"></i>
+          </div>
         </div>
       </div>
 
@@ -293,8 +322,8 @@
     </div>
   </body>
 
-
   <script src="js/sidebar.js"></script>
+  <script src="js/updateprofile.js"></script>
 
   <script
     src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -306,6 +335,10 @@
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"
   ></script>
+  <script
+  src="https://kit.fontawesome.com/2ec3384389.js"
+  crossorigin="anonymous"
+></script>
 
   <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
@@ -322,69 +355,6 @@
         window.location.href = "sign-up.html";
       }
     });
-
-    // // followers MODAL
-    // // Get the modal
-    // var followersmodal = document.getElementById("followersModal");
-
-    // // Get the button that opens the modal
-    // var btn = document.getElementById("numOfFollowersDiv");
-
-    // // Get the <span> element that closes the modal
-    // var span = document.getElementById("closefollowers");
-
-    // // When the user clicks on the button, open the modal
-    // btn.onclick = function () {
-    //   followersmodal.style.display = "block";
-    // };
-
-    // // When the user clicks on <span> (x), close the modal
-    // span.onclick = function () {
-    //   followersmodal.style.display = "none";
-    // };
-
-    // // When the user clicks anywhere outside of the modal, close it
-    // window.onclick = function (event) {
-    //   if (event.target == followersmodal) {
-    //     followersmodal.style.display = "none";
-    //   }
-    // };
-
-    // // editBtnModal
-    // var editbtnmodal = document.getElementById("myModal");
-    // var editbtn = document.getElementById("editbtn");
-    // var editbtnspan = document.getElementById("closemymodal");
-    // editbtn.onclick = function() {
-    //   editbtnmodal.style.display = "block";
-    // }
-
-    // editbtnspan.onclick = function() {
-    //   editbtnmodal.style.display = "none";
-    // }
-
-    // window.onclick = function (event) {
-    //   if (event.target == editbtnmodal) {
-    //     editbtnmodal.style.display = "none";
-    //   }
-    // };
-
-    // // view applications modal
-    // var viewapplicationsmodal = document.getElementById("viewapplicationsmodal");
-    // var viewapplicationsbtn = document.getElementById("msgbtn");
-    // var viewapplicationsspan = document.getElementById("closeapplications");
-    // viewapplicationsbtn.onclick = function() {
-    //   viewapplicationsmodal.style.display = "block";
-    // }
-
-    // viewapplicationsspan.onclick = function() {
-    //   viewapplicationsmodal.style.display = "none";
-    // }
-
-    // window.onclick = function(event) {
-    //   if (event.target == viewapplicationsmodal) {
-    //     viewapplicationsmodal.style.display = "none";
-    //   }
-    // }
 
     // Get the modal
 var modal = document.getElementsByClassName('modal');

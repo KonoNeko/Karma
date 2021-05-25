@@ -284,6 +284,30 @@ svg {
   outline: none;
 }
 
+.tertiarybutton {
+  background-color: #49a1b9;
+  padding: 8px 12px;
+  border: none;
+  color: #eff0f3;
+  font-family: "Open Sans";
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 10px;
+  outline: none;
+}
+
+.quarternarybutton {
+  background-color: #eff0f3;
+  border: 1px solid #49a1b9;
+  padding: 8px 12px;
+  color: #49a1b9;
+  font-family: "Open Sans";
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 10px;
+  outline: none;
+}
+
 .primarybutton:hover,
 .secondarybutton:hover {
   box-shadow: 0 5px 15px rgba(3, 103, 166, 0.4);
@@ -292,6 +316,17 @@ svg {
 .profilepicture > img {
   border-radius: 50%;
   width: auto;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px 12px;
+  display: inline-block;
+  border: 1px solid #51b09f;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .bulletinboardpicture > img,

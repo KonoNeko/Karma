@@ -593,7 +593,7 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
  * Gets all opportunites posted sorted by category.
  * 
  * Example URL of the request (replace 'value' with an actual value):
- * https://marlonfajardo.ca/karma/v1/post/like
+ * https://marlonfajardo.ca/karma/v1/opportunities
  */
  app.get(ENDPOINT + '/opportunities', (req, res) => {
     const sql = `SELECT * FROM bulletin_board;`;
@@ -775,6 +775,22 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
 });
 
 
+/**
+ * Gets 3 random profiles to connect with.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/recommended/value
+ */
+ app.get(ENDPOINT + '/profiles/recommended/:id', (req, res) => {
+    const userID = req.params.id;
+    const sql = `CALL recommended_users('${userID}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        res.end(JSON.stringify(result[0]));
+    });
+});
+
+
 /*
 TODO:
 -Profile
@@ -813,7 +829,7 @@ DONEc) Like post (PUT - like_post)                                  TESTED      
 DONEd) Unlike post (DELETE - unlike_post)                           TESTED      DOCUMENTED(26)
 DONEe) Comment on a post (POST - comment_on_post)                   TESTED      DOCUMENTED(27)
 DONEf) View all comments (GET - view_comments)                      TESTED
-    g) View stories -  **TODO**
+    g) View stories - (GET - view_stories)                          
 DONEh) View social feed for a user (GET - user_posts_feed)          TESTED      DOCUMENTED(2)
 DONEi) Delete comment - (DELETE - delete_comment)                   TESTED      DOCUMENTED(28)
     h) Create a new post (POST - )

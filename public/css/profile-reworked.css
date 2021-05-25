@@ -9,6 +9,23 @@
   margin-left: 5rem;
 }
 
+.heading-and-edit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.heading-and-edit > p {
+  width: 95%;
+}
+
+.heading-and-edit > i {
+  width: 5%;
+  justify-content: flex-end;
+  color: #0367a6;
+  font-size: 20px;
+}
+
 .flex-main {
   margin-left: 5rem;
   display: flex;
@@ -18,8 +35,8 @@
 
 .flex-main > .column {
   width: 50%;
-  margin-left: 24px;
-  margin-right: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
   display: flex;
   flex-direction: column;
 }
@@ -315,6 +332,17 @@ hr {
 }
 
 @media screen and (max-width: 550px) {
+  .heading-and-edit > p {
+    width: 86%;
+  }
+
+  .heading-and-edit > i {
+    width: 18%;
+    justify-content: flex-end;
+    color: #0367a6;
+    font-size: 20px;
+  }
+
   .above {
     margin-left: 0;
   }

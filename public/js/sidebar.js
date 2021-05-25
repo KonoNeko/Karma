@@ -1,29 +1,91 @@
 // RECOMMENDED.JS STUFF // SIDEBAR STUFF ONLY // SIDEBAR STUFF ONLY // RECCOMMENDED.JS STUFF //
+let firebase_info = {};
+
+// function get_firebase_username() {
+//   firebase.auth().onAuthStateChanged(function (user) {
+//     return db.collection("users").doc(user.uid).get();
+//   });
+// }
+
 function loadWhatsNew() {
-  let whatsNewDiv = document.getElementById(
-    "whats-new-volunteering-opportunities"
-  );
+  const method = "GET";
+  const endpoint = "/opportunities";
+  const params = "";
+  const url = BASE_URL + endpoint + params;
 
-  createWhatsNew(whatsNewDiv);
-  createWhatsNew(whatsNewDiv);
-  createWhatsNew(whatsNewDiv);
+  APIRequest(method, url, getOpportunites);
 }
 
-function loadRecommendedConnections() {
-  let recommendedConnectionsDiv = document.getElementById("recommendedUserDiv");
+function loadRecommendedConnections(username) {
+  firebase_info.username = username;
+  const method = "GET";
+  const endpoint = "/profiles/recommended";
+  const params = `/${username}`;
+  const url = BASE_URL + endpoint + params;
 
-  let hr = document.createElement("hr");
-  document.getElementById("recommendedUserDiv").appendChild(hr);
-  hr.setAttribute("style", "margin-bottom: 20px");
-
-  createRecommendedConnections(recommendedConnectionsDiv);
-  createRecommendedConnections(recommendedConnectionsDiv);
-  createRecommendedConnections(recommendedConnectionsDiv);
+  APIRequest(method, url, getRecommendedUsers);
 }
 
-function createWhatsNew(whatsNewDiv) {
+function formatParams(params) {
+  let string = "?";
+  let keys = Object.keys(params);
+  for(let i=0; i<keys.length; i++) {
+    string += `${keys[i]}=${params[keys[i]]}`;
+    if (i < keys.length - 1) {
+      string += "&";
+    }
+  }
+  return string;
+}
+
+function request_follow(userID, follower) {
+  const method = "POST";
+  const endpoint = "/profiles/followers";
+  const params = formatParams({
+    "id": userID,
+    "follower": follower,
+  });
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, console.log);
+}
+
+function APIRequest(method, url, callback) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let response;
+      try {
+        response = JSON.parse(response);
+      } catch(err) {
+        response = this.responseText;
+      } finally {
+        callback(response);
+      }
+    }
+  };
+}
+
+function getOpportunites(results) {
+  results = results["Recommended For You"];
+  for(let key of Object.keys(results)) {
+    createWhatsNew(results[key]);
+  }
+}
+
+function getRecommendedUsers(users) {
+  for(let user of users) {
+    createRecommendedConnections(user);
+  }
+}
+
+function createWhatsNew(oppObj) {
+  let whatsNewDiv = document.getElementById("whats-new-volunteering-opportunities");
   let opportunityRole = document.createElement("p");
-  opportunityRole.innerHTML = "opportunityRole Role Role";
+  opportunityRole.innerHTML = oppObj.title;
   opportunityRole.setAttribute("class", "heading3");
   opportunityRole.setAttribute("style", "font-weight: 700 !important;");
 
@@ -32,11 +94,11 @@ function createWhatsNew(whatsNewDiv) {
   opportunityImgDiv.setAttribute("style", "padding-bottom: 10px");
 
   let opportunityImg = document.createElement("img");
-  opportunityImg.src = "./images/placeholder.jpg";
+  opportunityImg.src = oppObj.image_url;
   opportunityImgDiv.appendChild(opportunityImg);
 
   let opportunityLocation = document.createElement("p");
-  opportunityLocation.innerHTML = "opportunityLocation";
+  opportunityLocation.innerHTML = oppObj.employer;
   opportunityLocation.setAttribute("class", "bodytext");
 
   let opportunityDiv = document.createElement("div");
@@ -49,7 +111,12 @@ function createWhatsNew(whatsNewDiv) {
   whatsNewDiv.appendChild(opportunityDiv);
 }
 
-function createRecommendedConnections(recommendedConnectionsDiv) {
+function createRecommendedConnections(user) {
+  let recommendedConnectionsDiv = document.getElementById("recommendedUserDiv");
+  let hr = document.createElement("hr");
+  recommendedConnectionsDiv.appendChild(hr);
+  hr.setAttribute("style", "margin-bottom: 20px");
+
   let recommendedUserDiv = document.createElement("div");
   recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
 
@@ -58,7 +125,7 @@ function createRecommendedConnections(recommendedConnectionsDiv) {
   storyImgDiv.setAttribute("style", "padding-bottom: 10px; width: 20%");
   storyImgDiv.setAttribute(
     "style",
-    "background-image: url('./images/placeholder.jpg')"
+    `background-image: url("${user.profile_pic_url}")`
   );
 
   let nameAndUserName = document.createElement("div");
@@ -67,11 +134,12 @@ function createRecommendedConnections(recommendedConnectionsDiv) {
 
   let userName = document.createElement("p");
   userName.setAttribute("class", "userNames");
-  userName.innerHTML = "User name";
+  userName.innerHTML = user.full_name;
 
   let userNameAt = document.createElement("p");
   userNameAt.setAttribute("class", "userAt");
-  userNameAt.innerHTML = "@Username";
+  userNameAt.innerHTML = 
+  `@<span id="recommendedUser${user.profile_id}">${user.username}</span>`;
 
   recommendedUserDiv.appendChild(storyImgDiv);
   nameAndUserName.appendChild(userName);
@@ -81,6 +149,16 @@ function createRecommendedConnections(recommendedConnectionsDiv) {
 
   let followUser = document.createElement("div");
   let followUserButton = document.createElement("button");
+
+  followUserButton.onclick = () => {
+    request_follow(user.username, firebase_info.username);
+    followUserButton.style.color = "white";
+    followUserButton.style.backgroundColor = "#a7b7be";
+    followUserButton.style.border = "0";
+    followUserButton.innerHTML = "REQUESTED";
+    followUserButton.onclick = "";
+  }
+  
 
   followUserButton.innerHTML = "FOLLOW";
   followUserButton.setAttribute("class", "followUserButton");
