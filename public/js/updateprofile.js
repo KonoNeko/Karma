@@ -22,7 +22,7 @@ function aboutMeOnclick() {
     .getElementById("aboutMe-Profile")
     .setAttribute("style", "display: none");
 
-  document.getElementById("aboutme-cancel").onclick = function () {
+  document.getElementById("cancel-about-btn").onclick = function () {
     document
       .getElementById("aboutme-edit")
       .setAttribute("style", "display: none");
@@ -36,7 +36,32 @@ function aboutMeOnclick() {
   };
 }
 
-function skillsOnclick() {}
+function skillsOnclick() {
+  let skillsDiv = document.getElementById("skills");
+
+  let skillsEditDiv = document.createElement("div");
+  let skillsCancelBtn = document.createElement("button");
+  let skillsEditBtn = document.createElement("button");
+
+  skillsEditDiv.setAttribute("class", "skills-edit-div");
+  skillsCancelBtn.setAttribute("class", "quarternarybutton");
+  skillsCancelBtn.setAttribute("id", "cancel-skills-btn");
+  skillsEditBtn.setAttribute("class", "tertiarybutton");
+  skillsEditBtn.setAttribute("id", "edit-skills-btn");
+
+  skillsEditDiv.appendChild(skillsCancelBtn);
+  skillsEditDiv.appendChild(skillsEditBtn);
+
+  skillsDiv.appendChild(skillsEditDiv);
+
+  skillsCancelBtn.onclick = function () {
+    document.getElementById("skills-edit").setAttribute("style", "display: none");
+  }
+
+  skillsEditBtn.onclick = function() {
+    /* BACKEND GUY DO UR MAGIC HERE */ 
+  }
+}
 
 function educationOnclick() {}
 

@@ -41,7 +41,7 @@ function APIRequest(method, url, callback) {
     if (this.readyState == 4 && this.status == 200) {
       let response;
       try {
-        response = JSON.parse(response);
+        response = JSON.parse(this.responseText);
       } catch(err) {
         response = this.responseText;
       } finally {
