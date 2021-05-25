@@ -75,6 +75,7 @@ function createModal(postID, placeholderImg) {
     
     let commentInput = document.createElement("input");
     commentInput.type = "text";
+    commentInput.id = "commentText"
     commentInput.placeholder = "Add a comment...";
 
     let commentSubmit = document.createElement("button");

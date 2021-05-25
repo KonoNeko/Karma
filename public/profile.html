@@ -28,6 +28,7 @@
       <a href="partnerwithus.html">Partner with us</a>
       <a href="donate.html">Donate</a>
       <a href="reportbug.html">Report a bug</a>
+      <a id="btn-logout" href="index.html">Logout</a>
     </div>
 
     <navbar class="nav">
@@ -119,7 +120,7 @@
               <a href="partnerwithus.html">Partner with us</a>
               <a href="donate.html">Donate</a>
               <a href="reportbug.html">Report a bug</a>
-              <a id="btn-logout" href="#">Logout</a>
+              <a id="btn-logout" href="index.html">Logout</a>
             </div>
           </a>
         </li>
@@ -371,8 +372,18 @@
   <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
-  
   <script src="js/signup.js"></script>
+  <script>
+    $("#btn-logout").click(function logout() {
+              firebase.auth().signOut().then(function() {
+                // Sign-out successful.
+                location.href = 'sign-up.html';
+              }).catch(function(error) {
+                // An error happened.
+              });
+            }
+    );
+  </script>
   <script src="js/profile.js"></script>
   <script src="js/viewapplications.js"></script>
   <script>
