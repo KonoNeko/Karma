@@ -52,48 +52,46 @@ function aboutMeOnclick() {
 }
 
 function skillsOnclick() {
-  if ((skillsAlreadyClicked = false)) {
-    let skillsDiv = document.getElementById("skills");
+  let skillsDiv = document.getElementById("skills");
 
-    let skillsEditDiv = document.createElement("div");
-    let skillsCancelBtn = document.createElement("button");
-    let skillsEditBtn = document.createElement("button");
+  let skillsEditDiv = document.createElement("div");
+  let skillsCancelBtn = document.createElement("button");
+  let skillsEditBtn = document.createElement("button");
 
-    skillsEditDiv.setAttribute("class", "skills-edit-div");
-    skillsCancelBtn.setAttribute("class", "quarternarybutton");
-    skillsCancelBtn.setAttribute("id", "cancel-skills-btn");
-    skillsCancelBtn.innerHTML = "Cancel";
-    skillsEditBtn.setAttribute("class", "tertiarybutton");
-    skillsEditBtn.setAttribute("id", "edit-skills-btn");
-    skillsEditBtn.innerHTML = "Edit information";
+  skillsEditDiv.setAttribute("class", "skills-edit-div");
+  skillsCancelBtn.setAttribute("class", "quarternarybutton");
+  skillsCancelBtn.setAttribute("id", "cancel-skills-btn");
+  skillsCancelBtn.innerHTML = "Cancel";
+  skillsEditBtn.setAttribute("class", "tertiarybutton");
+  skillsEditBtn.setAttribute("id", "edit-skills-btn");
+  skillsEditBtn.innerHTML = "Edit information";
 
-    skillsEditDiv.appendChild(skillsCancelBtn);
-    skillsEditDiv.appendChild(skillsEditBtn);
+  skillsEditDiv.appendChild(skillsCancelBtn);
+  skillsEditDiv.appendChild(skillsEditBtn);
 
-    skillsDiv.appendChild(skillsEditDiv);
+  skillsDiv.appendChild(skillsEditDiv);
 
-    let skillsBtns = document.getElementsByClassName("skillsbtn");
-    skillsBtns.forEach(function (skillsBtn) {
-      let skillsInput = document.createElement("input");
-      skillsInput.setAttribute("class", "skillsinput");
-      skillsInput.value = skillsBtn.textContent;
-      skillsEditDiv.appendChild(skillsInput);
-    });
+  let skillsBtns = document.getElementsByClassName("skillsbtn");
+  skillsBtns.forEach(function (skillsBtn) {
+    let skillsInput = document.createElement("input");
+    skillsInput.setAttribute("class", "skillsinput");
+    skillsInput.value = skillsBtn.textContent;
+    skillsEditDiv.appendChild(skillsInput);
+  });
 
-    skillsDiv.innerHTML = "";
+  skillsDiv.innerHTML = "";
 
-    skillsCancelBtn.onclick = function () {
-      document
-        .getElementById("skills-edit")
-        .setAttribute("style", "display: none");
-    };
+  skillsCancelBtn.onclick = function () {
+    document
+      .getElementById("skills-edit")
+      .setAttribute("style", "display: none");
+  };
 
-    skillsEditBtn.onclick = function () {
-      /* BACKEND GUY DO UR MAGIC HERE */
-    };
+  skillsEditBtn.onclick = function () {
+    /* BACKEND GUY DO UR MAGIC HERE */
+  };
 
-    skillsAlreadyClicked = true;
-  }
+  skillsAlreadyClicked = true;
 }
 
 function educationOnclick() {}
