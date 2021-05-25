@@ -218,21 +218,21 @@ function loadSkills(profileObj) {
 }
 
 function loadEducation(profileObj) {
-  let education = document.getElementById("education");
+  let education = document.getElementById("education-div");
   for (let key of Object.keys(profileObj.education)) {
     createEducation(education, profileObj.education[key]);
   }
 }
 
 function loadExperience(profileObj) {
-  let experience = document.getElementById("experience");
+  let experience = document.getElementById("experience-div");
   for (let key of Object.keys(profileObj.experience)) {
     createExperience(experience, profileObj.experience[key]);
   }
 }
 
 function loadAwards(profileObj) {
-  let awards = document.getElementById("awards");
+  let awards = document.getElementById("awards-div");
   for (let key of Object.keys(profileObj.certifications)) {
     createAwards(awards, profileObj.certifications[key]);
   }
@@ -586,7 +586,7 @@ function createPost(posts, postsObj) {
 }
 function createEducation(education, educationObj) {
   let heading1 = document.createElement("p");
-  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("class", "heading3 schoolName");
   heading1.setAttribute("style", "font-weight: bold");
   heading1.innerHTML = `${educationObj.school_name}`;
 
@@ -624,7 +624,7 @@ function createEducation(education, educationObj) {
 
 function createExperience(experience, experienceObj) {
   let heading1 = document.createElement("p");
-  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("class", "heading3 experienceName");
   heading1.setAttribute("style", "font-weight: bold");
   heading1.innerHTML = `${experienceObj.job_title}`;
 
@@ -641,7 +641,7 @@ function createExperience(experience, experienceObj) {
   picture.src = "./images/experience.jpeg";
 
   let para = document.createElement("p");
-  para.setAttribute("class", "schoolpara");
+  para.setAttribute("class", "employerpara");
   para.innerHTML = `${experienceObj.employer}`;
 
   picturediv.appendChild(picture);
@@ -662,12 +662,12 @@ function createExperience(experience, experienceObj) {
 
 function createAwards(awards, awardsObj) {
   let heading1 = document.createElement("p");
-  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("class", "heading3 awardsName");
   heading1.setAttribute("style", "font-weight: bold");
   heading1.innerHTML = `${awardsObj.title}`;
 
   let experiencendiv = document.createElement("div");
-  experiencendiv.setAttribute("class", "experience-post-div");
+  experiencendiv.setAttribute("class", "awards-post-div");
 
   let picturediv = document.createElement("div");
   picturediv.setAttribute("class", "postpreviewpicture");
@@ -675,11 +675,11 @@ function createAwards(awards, awardsObj) {
   let experienceInfoDiv = document.createElement("div");
 
   let picture = document.createElement("img");
-  picture.setAttribute("class", "experiencepic");
+  picture.setAttribute("class", "awardspic");
   picture.src = "./images/awards.jpg";
 
   let para = document.createElement("p");
-  para.setAttribute("class", "schoolpara");
+  para.setAttribute("class", "awardspara");
   para.innerHTML = "Received in November 2019";
 
   picturediv.appendChild(picture);
