@@ -1,5 +1,3 @@
-loadCurrentProfile();
-
 let info;
 get_firebase_info();
 
@@ -46,18 +44,18 @@ function APIRequest(method, url, callback) {
     };
 }
 
-function view_profile(userID) {
+function view_profile(userID, currentUser) {
     const method = "GET";
-    const endpoint = "/profiles";
-    const params = `/${userID}`;
+    const endpoint = "/profiles/other";
+    const params = `/${userID}/${currentUser}`;
     const url = BASE_URL + endpoint + params;
     APIRequest(method, url, loadProfile);
 }
 
-function loadCurrentProfile() {
+function loadCurrentProfile(currentUsername) {
     let currentProfile = localStorage.getItem("profileUsername");
     console.log("Loading profile for " + currentProfile);
-    view_profile(currentProfile);
+    view_profile(currentProfile, currentUsername);
 }
 
 function get_firebase_info() {
@@ -72,6 +70,7 @@ function get_firebase_info() {
           info["email"] = user.email;
           info["username"] = user.username;
           loadRecommendedConnections(info.username);
+          loadCurrentProfile(info.username);
         })
         .catch((error) => {
           console.log(`Error getting data: ${error}`);
@@ -83,6 +82,7 @@ function loadProfile(profileObj) {
     console.log(profileObj);
     console.log(height);
     loadAboutMe(profileObj);
+    loadFollowButton(profileObj);
     loadPosts(profileObj);
     loadNumPosts(profileObj);
     loadSkills(profileObj);
@@ -93,6 +93,21 @@ function loadProfile(profileObj) {
     loadFollowers(profileObj);
     loadFollowing(profileObj);
     loadWhatsNew();
+}
+
+function loadFollowButton(profileObj) {
+    let followBtn = document.getElementById('followbtn');
+    if (profileObj.follow_status === "following") {
+        followBtn.style.backgroundColor = "#51b09f";
+        followBtn.innerHTML = "Following";
+    } else if (profileObj.follow_status === "requested") {
+        followBtn.style.backgroundColor = "#6b7e86";
+        followBtn.innerHTML = "Requested";
+    } else {
+        followBtn.onclick = () => {
+            //code for following
+        }
+    }
 }
 
 // READING INFORMATION FROM THE DATABASE
