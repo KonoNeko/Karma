@@ -175,6 +175,19 @@
   outline: none;
 }
 
+#followbtn {
+  background-color: #0367a6;
+  padding: 12px 20px;
+  border: none;
+  color: #eff0f3;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  width: 49%;
+  border-radius: 10px;
+  outline: none;
+}
+
 #msgbtn {
   background-color: #0367a6;
   padding: 12px 20px;
