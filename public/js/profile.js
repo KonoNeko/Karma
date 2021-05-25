@@ -163,11 +163,11 @@ function add_Description(userID, bio) {
   APIRequest(method, url, console.log);
 }
 
-function add_ProfilePic(userID) {
+function add_ProfilePic() {
   const method = "PUT";
   const endpoint = "/profiles/picture";
   const params = formatParams({
-    id: userID,
+    id: info.username,
     picUrl: document.getElementById("mainProfilePic").textContent,
   });
   const url = BASE_URL + endpoint + params;
