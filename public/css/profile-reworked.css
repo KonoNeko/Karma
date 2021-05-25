@@ -203,6 +203,10 @@
   width: auto !important;
 }
 
+input:focus {
+  outline: none;
+}
+
 #msgbtn {
   background-color: #0367a6;
   padding: 12px 20px;
@@ -237,12 +241,14 @@
 }
 
 .education-post-div > div,
-.experience-post-div > div {
+.experience-post-div > div,
+.awards-post-div > div {
   width: 50%;
 }
 
 .education-post-div,
-.experience-post-div {
+.experience-post-div,
+.awards-post-div {
   display: flex;
   flex-direction: row;
 }
@@ -434,6 +440,18 @@ hr {
     padding-bottom: 8px;
     width: 80%;
     height: 100%;
+  }
+
+  .educationPostImgDiv,
+  .educationPostInputDiv {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .educationPostInputDiv > input {
+    display: flex;
+    width: auto;
   }
 
   .search input[type="search"] {

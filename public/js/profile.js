@@ -1,3 +1,24 @@
+
+// Your web app's Firebase configuration
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+  apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
+  authDomain: "karma-535f3.firebaseapp.com",
+  databaseURL: "https://karma-535f3-default-rtdb.firebaseio.com",
+  projectId: "karma-535f3",
+  storageBucket: "karma-535f3.appspot.com",
+  messagingSenderId: "1023587584355",
+  appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
+  measurementId: "G-VTZ4TEWFBW",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+
+
 let info;
 get_firebase_info();
 
@@ -142,16 +163,18 @@ function add_Description(userID, bio) {
   APIRequest(method, url, console.log);
 }
 
-function add_ProfilePic(userID, picUrl) {
+function add_ProfilePic(userID) {
   const method = "PUT";
   const endpoint = "/profiles/picture";
   const params = formatParams({
     id: userID,
-    picUrl: picUrl,
+    picUrl: document.getElementById("mainProfilePic").textContent,
   });
   const url = BASE_URL + endpoint + params;
-
-  APIRequest(method, url, console.log);
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    window.location.reload();
+  });
 }
 
 function showProfile() {
@@ -218,21 +241,21 @@ function loadSkills(profileObj) {
 }
 
 function loadEducation(profileObj) {
-  let education = document.getElementById("education");
+  let education = document.getElementById("education-div");
   for (let key of Object.keys(profileObj.education)) {
     createEducation(education, profileObj.education[key]);
   }
 }
 
 function loadExperience(profileObj) {
-  let experience = document.getElementById("experience");
+  let experience = document.getElementById("experience-div");
   for (let key of Object.keys(profileObj.experience)) {
     createExperience(experience, profileObj.experience[key]);
   }
 }
 
 function loadAwards(profileObj) {
-  let awards = document.getElementById("awards");
+  let awards = document.getElementById("awards-div");
   for (let key of Object.keys(profileObj.certifications)) {
     createAwards(awards, profileObj.certifications[key]);
   }
@@ -292,15 +315,15 @@ function addProfilePic() {
       .then((data) => data.json())
       .then((data) => {
         posted = true;
-        document.getElementById("imageUrl").innerText = data.data.link;
+        document.getElementById("mainProfilePic").innerText = data.data.link;
       });
   });
 
   document.getElementById("postBtn").onclick = () => {
-    let link = document.getElementById("imageUrl").textContent;
+    let link = document.getElementById("mainProfilePic").textContent;
     if (link != "" && posted && JSON.stringify(info) != "{}") {
       console.log("Posting");
-      createNewPost();
+      add_ProfilePic()
     } else if (!posted) {
       window.alert("Please wait for image to finish uploading");
     } else if (JSON.stringify(info) === "{}") {
@@ -586,7 +609,7 @@ function createPost(posts, postsObj) {
 }
 function createEducation(education, educationObj) {
   let heading1 = document.createElement("p");
-  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("class", "heading3 schoolName");
   heading1.setAttribute("style", "font-weight: bold");
   heading1.innerHTML = `${educationObj.school_name}`;
 
@@ -624,7 +647,7 @@ function createEducation(education, educationObj) {
 
 function createExperience(experience, experienceObj) {
   let heading1 = document.createElement("p");
-  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("class", "heading3 experienceName");
   heading1.setAttribute("style", "font-weight: bold");
   heading1.innerHTML = `${experienceObj.job_title}`;
 
@@ -641,7 +664,7 @@ function createExperience(experience, experienceObj) {
   picture.src = "./images/experience.jpeg";
 
   let para = document.createElement("p");
-  para.setAttribute("class", "schoolpara");
+  para.setAttribute("class", "employerpara");
   para.innerHTML = `${experienceObj.employer}`;
 
   picturediv.appendChild(picture);
@@ -662,12 +685,12 @@ function createExperience(experience, experienceObj) {
 
 function createAwards(awards, awardsObj) {
   let heading1 = document.createElement("p");
-  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("class", "heading3 awardsName");
   heading1.setAttribute("style", "font-weight: bold");
   heading1.innerHTML = `${awardsObj.title}`;
 
   let experiencendiv = document.createElement("div");
-  experiencendiv.setAttribute("class", "experience-post-div");
+  experiencendiv.setAttribute("class", "awards-post-div");
 
   let picturediv = document.createElement("div");
   picturediv.setAttribute("class", "postpreviewpicture");
@@ -675,11 +698,11 @@ function createAwards(awards, awardsObj) {
   let experienceInfoDiv = document.createElement("div");
 
   let picture = document.createElement("img");
-  picture.setAttribute("class", "experiencepic");
+  picture.setAttribute("class", "awardspic");
   picture.src = "./images/awards.jpg";
 
   let para = document.createElement("p");
-  para.setAttribute("class", "schoolpara");
+  para.setAttribute("class", "awardspara");
   para.innerHTML = "Received in November 2019";
 
   picturediv.appendChild(picture);

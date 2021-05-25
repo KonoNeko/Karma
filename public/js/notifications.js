@@ -33,6 +33,7 @@ function get_firebase_info() {
         info['username'] = user.username; 
         view_notifications(info.username);
         loadRecommendedConnections(info.username);
+        loadWhatsNew();
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
