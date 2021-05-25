@@ -2,45 +2,6 @@ const URL2 = " https://marlonfajardo.ca/karma/v1/posts";
 const method2 = "POST";
 const endpoint = "/likes";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-var firebaseConfig = {
-  apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
-  authDomain: "karma-535f3.firebaseapp.com",
-  databaseURL: "https://karma-535f3-default-rtdb.firebaseio.com",
-  projectId: "karma-535f3",
-  storageBucket: "karma-535f3.appspot.com",
-  messagingSenderId: "1023587584355",
-  appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
-  measurementId: "G-VTZ4TEWFBW",
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-let info = {};
-get_firebase_info();
-
-const BASE_URL = "https://marlonfajardo.ca/karma/v1";
-
-async function get_firebase_info() {
-  firebase.auth().onAuthStateChanged(function (user) {
-    db.collection("users")
-      .doc(user.uid)
-      .get()
-      .then(function (doc) {
-        let user = doc.data();
-        console.log(user);
-        info.fullName = user.fullName;
-        info.email = user.email;
-        info.username = user.username;
-      })
-      .catch((error) => {
-        console.log(`Error getting data: ${error}`);
-      });
-  });
-}
-
 function APIRequest(method, url, callback) {
   console.log(method + ": " + url);
   const xhttp = new XMLHttpRequest();
@@ -102,16 +63,14 @@ async function getPost() {
 }
 
 function addLikes(userID, postID) {
-  let method = "POST";
-  let endpoint = "/likes";
   let params = formatParams({
     id: userID,
     post: postID,
   });
 
-  let url = BASE_URL2 + endpoint + params;
+  let url = URL2 + endpoint + params;
 
-  APIRequest(method, url, (res) => {
+  APIRequest(method2, url, (res) => {
     console.log(res);
     window.location.reload();
   });
