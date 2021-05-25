@@ -2,30 +2,6 @@ const URL2 = " https://marlonfajardo.ca/karma/v1/post";
 const method2 = "POST";
 const endpoint = "/like";
 
-function APIRequest(method, url, callback) {
-  console.log(method + ": " + url);
-  const xhttp = new XMLHttpRequest();
-  xhttp.open(method, url, true);
-  xhttp.send();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      callback(this.responseText);
-    }
-  };
-}
-
-function formatParams(params) {
-  let string = "?";
-  let keys = Object.keys(params);
-  for (let i = 0; i < keys.length; i++) {
-    string += `${keys[i]}=${params[keys[i]]}`;
-    if (i < keys.length - 1) {
-      string += "&";
-    }
-  }
-  return string;
-}
-
 function like(id) {
   let heart = document.getElementById(id);
   let postId = id.slice(-1);
