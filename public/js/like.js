@@ -1,6 +1,6 @@
-const URL2 = " https://marlonfajardo.ca/karma/v1/posts";
+const URL2 = " https://marlonfajardo.ca/karma/v1/post";
 const method2 = "POST";
-const endpoint = "/likes";
+const endpoint = "/like";
 
 function APIRequest(method, url, callback) {
   console.log(method + ": " + url);
