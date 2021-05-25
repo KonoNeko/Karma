@@ -5,6 +5,9 @@
   "targets": {
     "karma-535f3": {
       "hosting": {
+        "kar": [
+          "karma"
+        ],
         "karma": [
           "karmavolunteering"
         ]

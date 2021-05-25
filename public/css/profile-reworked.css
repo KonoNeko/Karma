@@ -9,6 +9,23 @@
   margin-left: 5rem;
 }
 
+.heading-and-edit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.heading-and-edit > p {
+  width: 95%;
+}
+
+.heading-and-edit > i {
+  width: 5%;
+  justify-content: flex-end;
+  color: #0367a6;
+  font-size: 20px;
+}
+
 .flex-main {
   margin-left: 5rem;
   display: flex;
@@ -158,6 +175,38 @@
   outline: none;
 }
 
+#followbtn {
+  background-color: #0367a6;
+  padding: 12px 20px;
+  border: none;
+  color: #eff0f3;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  width: 49%;
+  border-radius: 10px;
+  outline: none;
+}
+.skillsinput {
+  background-color: #eff0f3;
+  text-decoration: underline;
+  padding: 12px 24px;
+  border: 1px solid #51b09f;
+  color: #51b09f;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 40px;
+  outline: none;
+  margin-right: 10px;
+  margin-top: 5px;
+  width: auto !important;
+}
+
+input:focus {
+  outline: none;
+}
+
 #msgbtn {
   background-color: #0367a6;
   padding: 12px 20px;
@@ -192,12 +241,14 @@
 }
 
 .education-post-div > div,
-.experience-post-div > div {
+.experience-post-div > div,
+.awards-post-div > div {
   width: 50%;
 }
 
 .education-post-div,
-.experience-post-div {
+.experience-post-div,
+.awards-post-div {
   display: flex;
   flex-direction: row;
 }
@@ -315,6 +366,17 @@ hr {
 }
 
 @media screen and (max-width: 550px) {
+  .heading-and-edit > p {
+    width: 86%;
+  }
+
+  .heading-and-edit > i {
+    width: 18%;
+    justify-content: flex-end;
+    color: #0367a6;
+    font-size: 20px;
+  }
+
   .above {
     margin-left: 0;
   }
@@ -378,6 +440,18 @@ hr {
     padding-bottom: 8px;
     width: 80%;
     height: 100%;
+  }
+
+  .educationPostImgDiv,
+  .educationPostInputDiv {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .educationPostInputDiv > input {
+    display: flex;
+    width: auto;
   }
 
   .search input[type="search"] {

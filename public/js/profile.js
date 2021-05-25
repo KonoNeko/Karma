@@ -39,9 +39,11 @@ function APIRequest(method, url, callback) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      let response = this.responseText;
+      let response;
       try {
-        response = JSON.parse(response);
+        response = JSON.parse(this.responseText);
+      } catch (err) {
+        response = this.responseText;
       } finally {
         callback(response);
       }
@@ -57,9 +59,9 @@ function get_firebase_info() {
       .get()
       .then(function (doc) {
         let user = doc.data();
-        info['fullName'] = user.fullName;
-        info['email'] = user.email;
-        info['username'] = user.username; 
+        info["fullName"] = user.fullName;
+        info["email"] = user.email;
+        info["username"] = user.username;
         view_profile(info.username);
         loadRecommendedConnections(info.username);
       })
@@ -68,7 +70,6 @@ function get_firebase_info() {
       });
   });
 }
-
 
 function add_Skills(userID, skill) {
   const method = "PUT";
@@ -174,7 +175,8 @@ function showProfile() {
 function loadProfile(profileObj) {
   console.log(profileObj);
   console.log(height);
-  document.getElementById("mainProfilePic").src = profileObj.info.profile_pic_url;
+  document.getElementById("mainProfilePic").src =
+    profileObj.info.profile_pic_url;
   loadAboutMe(profileObj);
   loadPosts(profileObj);
   loadNumPosts(profileObj);
@@ -207,7 +209,7 @@ function loadNumPosts(profileObj) {
 }
 
 function loadSkills(profileObj) {
-  let skills = document.getElementById("skills");
+  let skills = document.getElementById("skills-buttons");
   for (let key of Object.keys(profileObj.skills)) {
     createSkills(skills, profileObj.skills[key]);
     console.log(profileObj.skills[key]);
@@ -216,21 +218,21 @@ function loadSkills(profileObj) {
 }
 
 function loadEducation(profileObj) {
-  let education = document.getElementById("education");
+  let education = document.getElementById("education-div");
   for (let key of Object.keys(profileObj.education)) {
     createEducation(education, profileObj.education[key]);
   }
 }
 
 function loadExperience(profileObj) {
-  let experience = document.getElementById("experience");
+  let experience = document.getElementById("experience-div");
   for (let key of Object.keys(profileObj.experience)) {
     createExperience(experience, profileObj.experience[key]);
   }
 }
 
 function loadAwards(profileObj) {
-  let awards = document.getElementById("awards");
+  let awards = document.getElementById("awards-div");
   for (let key of Object.keys(profileObj.certifications)) {
     createAwards(awards, profileObj.certifications[key]);
   }
@@ -272,42 +274,44 @@ function addAboutMe() {
   });
 }
 
-
-
 function addProfilePic() {
   console.log("Add pic button clicked");
 
   const uploadFileButton = document.getElementById("file-upload");
-let posted = false;
-uploadFileButton.addEventListener("change", ev => {
-  const formdata = new FormData()
-  formdata.append("image", ev.target.files[0])
-  fetch("https://api.imgur.com/3/image/", {
+  let posted = false;
+  uploadFileButton.addEventListener("change", (ev) => {
+    const formdata = new FormData();
+    formdata.append("image", ev.target.files[0]);
+    fetch("https://api.imgur.com/3/image/", {
       method: "post",
       headers: {
-          Authorization: "Client-ID 4409588f10776f7"
+        Authorization: "Client-ID 4409588f10776f7",
       },
-      body: formdata
-  }).then(data => data.json()).then(data => {
-      posted = true;
-      document.getElementById("imageUrl").innerText = data.data.link;
+      body: formdata,
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        posted = true;
+        document.getElementById("imageUrl").innerText = data.data.link;
+      });
   });
-})
 
-document.getElementById("postBtn").onclick = () => {
-  let link = document.getElementById("imageUrl").textContent;
-  if (link != "" && posted && JSON.stringify(info) != "{}") {
-    console.log("Posting");
-    createNewPost();
-  } else if (!posted) {
-    window.alert("Please wait for image to finish uploading");
-  } else if (JSON.stringify(info) === "{}") {
-    window.alert("It doesn't look like you are signed in redirecting you now.");
-    window.location.href("sign-up.html")
-  } else if (link === '') {
-    window.alert("No image is uploaded");
-  }
-}
+  document.getElementById("postBtn").onclick = () => {
+    let link = document.getElementById("imageUrl").textContent;
+    if (link != "" && posted && JSON.stringify(info) != "{}") {
+      console.log("Posting");
+      createNewPost();
+    } else if (!posted) {
+      window.alert("Please wait for image to finish uploading");
+    } else if (JSON.stringify(info) === "{}") {
+      window.alert(
+        "It doesn't look like you are signed in redirecting you now."
+      );
+      window.location.href("sign-up.html");
+    } else if (link === "") {
+      window.alert("No image is uploaded");
+    }
+  };
 
   // $("#save").click(function () {
   //   let picUrl= addEducationInput1.value;
@@ -538,9 +542,9 @@ function createAboutMe(aboutMe, aboutMeObj) {
 
   let about = document.createElement("p");
   about.setAttribute("class", "about");
+  about.setAttribute("id", "aboutMe-Profile");
   about.setAttribute("style", "margin-right: 20px;");
   about.innerHTML = `${aboutMeObj.info.bio}`;
-  
 
   aboutdiv.appendChild(about);
   aboutMe.appendChild(aboutdiv);
@@ -582,7 +586,7 @@ function createPost(posts, postsObj) {
 }
 function createEducation(education, educationObj) {
   let heading1 = document.createElement("p");
-  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("class", "heading3 schoolName");
   heading1.setAttribute("style", "font-weight: bold");
   heading1.innerHTML = `${educationObj.school_name}`;
 
@@ -620,7 +624,7 @@ function createEducation(education, educationObj) {
 
 function createExperience(experience, experienceObj) {
   let heading1 = document.createElement("p");
-  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("class", "heading3 experienceName");
   heading1.setAttribute("style", "font-weight: bold");
   heading1.innerHTML = `${experienceObj.job_title}`;
 
@@ -637,7 +641,7 @@ function createExperience(experience, experienceObj) {
   picture.src = "./images/experience.jpeg";
 
   let para = document.createElement("p");
-  para.setAttribute("class", "schoolpara");
+  para.setAttribute("class", "employerpara");
   para.innerHTML = `${experienceObj.employer}`;
 
   picturediv.appendChild(picture);
@@ -658,12 +662,12 @@ function createExperience(experience, experienceObj) {
 
 function createAwards(awards, awardsObj) {
   let heading1 = document.createElement("p");
-  heading1.setAttribute("class", "heading3");
+  heading1.setAttribute("class", "heading3 awardsName");
   heading1.setAttribute("style", "font-weight: bold");
   heading1.innerHTML = `${awardsObj.title}`;
 
   let experiencendiv = document.createElement("div");
-  experiencendiv.setAttribute("class", "experience-post-div");
+  experiencendiv.setAttribute("class", "awards-post-div");
 
   let picturediv = document.createElement("div");
   picturediv.setAttribute("class", "postpreviewpicture");
@@ -671,11 +675,11 @@ function createAwards(awards, awardsObj) {
   let experienceInfoDiv = document.createElement("div");
 
   let picture = document.createElement("img");
-  picture.setAttribute("class", "experiencepic");
+  picture.setAttribute("class", "awardspic");
   picture.src = "./images/awards.jpg";
 
   let para = document.createElement("p");
-  para.setAttribute("class", "schoolpara");
+  para.setAttribute("class", "awardspara");
   para.innerHTML = "Received in November 2019";
 
   picturediv.appendChild(picture);
@@ -701,6 +705,5 @@ function createFollowers(follower, followerObj) {
 function createFollowing(following, followingObj) {
   following.innerHTML = `${followingObj.info.followers}`;
 }
-
 
 showProfile();

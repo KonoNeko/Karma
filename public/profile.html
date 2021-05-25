@@ -28,6 +28,7 @@
       <a href="partnerwithus.html">Partner with us</a>
       <a href="donate.html">Donate</a>
       <a href="reportbug.html">Report a bug</a>
+      <a id="btn-logout" href="index.html">Logout</a>
     </div>
 
     <navbar class="nav">
@@ -119,7 +120,7 @@
               <a href="partnerwithus.html">Partner with us</a>
               <a href="donate.html">Donate</a>
               <a href="reportbug.html">Report a bug</a>
-              <a id="btn-logout" href="#">Logout</a>
+              <a id="btn-logout" href="index.html">Logout</a>
             </div>
           </a>
         </li>
@@ -247,7 +248,15 @@
         </div>
 
         <div id="aboutme">
-          <p class="heading2">About me</p>
+          <div class="heading-and-edit">
+            <p class="heading2">About me</p>
+            <i class="fas fa-edit" id="edit-about-btn"></i>
+          </div>
+          <div style="display: none" class="aboutme-edit" id="aboutme-edit">
+            <input style="margin-bottom: 5px;" id="aboutme-paragraph">
+            <button id="cancel-about-btn" class="quarternarybutton">Cancel</button>
+            <button id="edit-about-btn" class="tertiarybutton">Edit information</button>
+          </div>
         </div>
 
         <div id="posts-div">
@@ -258,21 +267,58 @@
         </div>
 
         <div id="skills">
-          <p style="margin-top: 20px" class="heading2">Skills</p>
+          <div style="margin-top: 20px" class="heading-and-edit">
+            <p class="heading2">Skills</p>
+            <i class="fas fa-edit" id="edit-skills-btn"></i>
+          </div>
+          <div id="skills-buttons"></div>
+          <div style="display: none" class="skills-edit" id="skills-edit">
+            <div style="margin-bottom: 5px;" id="skills-inputs"></div>
+            <button id="cancel-skills-btn" class="quarternarybutton">Cancel</button>
+            <button id="edit-skills-btn" class="tertiarybutton">Edit information</button>
+          </div>
         </div>
 
         <div id="education">
-          <p style="margin-top: 20px" class="heading2">Education</p>
+          <div style="margin-top: 20px; margin-bottom: 20px;" class="heading-and-edit">
+            <p class="heading2">Education</p>
+            <i class="fas fa-edit" id="edit-education-btn"></i>
+          </div>
+          <div id="education-div">
+          </div>
+          <div style="display: none" class="education-edit" id="education-edit">
+            <div style="margin-bottom: 5px;" id="education-edit-div"></div>
+            <button id="cancel-education-btn" class="quarternarybutton">Cancel</button>
+            <button id="edit-education-btn" class="tertiarybutton">Edit information</button>
+          </div>
         </div>
 
         <div id="experience">
-          <p style="margin-top: 20px" class="heading2">
-            Work and volunteer experience
-          </p>
+          <div style="margin-top: 20px; margin-bottom: 20px;" class="heading-and-edit">
+            <p class="heading2">Work and volunteer experience</p>
+            <i class="fas fa-edit" id="edit-experience-btn"></i>
+          </div>
+          <div id="experience-div">
+          </div>
+          <div style="display: none" class="experience-edit" id="experience-edit">
+            <div style="margin-bottom: 5px;" id="experience-edit-div"></div>
+            <button id="cancel-experience-btn" class="quarternarybutton">Cancel</button>
+            <button id="edit-experience-btn" class="tertiarybutton">Edit information</button>
+          </div>
         </div>
 
         <div id="awards">
-          <p style="margin-top: 20px" class="heading2">Awards</p>
+          <div style="margin-top: 20px; margin-bottom: 20px;" class="heading-and-edit">
+            <p class="heading2">Awards</p>
+            <i class="fas fa-edit" id="edit-awards-btn"></i>
+          </div>
+          <div id="awards-div">
+          </div>
+          <div style="display: none" class="awards-edit" id="awards-edit">
+            <div style="margin-bottom: 5px;" id="awards-edit-div"></div>
+            <button id="cancel-awards-btn" class="quarternarybutton">Cancel</button>
+            <button id="edit-awards-btn" class="tertiarybutton">Edit information</button>
+          </div>
         </div>
       </div>
 
@@ -300,8 +346,8 @@
     </div>
   </body>
 
-
   <script src="js/sidebar.js"></script>
+  <script src="js/updateprofile.js"></script>
 
   <script
     src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -313,14 +359,28 @@
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"
   ></script>
+  <script
+  src="https://kit.fontawesome.com/2ec3384389.js"
+  crossorigin="anonymous"
+></script>
 
   <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
-  
   <script src="js/signup.js"></script>
+  <script>
+    $("#btn-logout").click(function logout() {
+              firebase.auth().signOut().then(function() {
+                // Sign-out successful.
+                location.href = 'sign-up.html';
+              }).catch(function(error) {
+                // An error happened.
+              });
+            }
+    );
+  </script>
   <script src="js/profile.js"></script>
   <script src="js/viewapplications.js"></script>
   <script>
@@ -329,69 +389,6 @@
         window.location.href = "sign-up.html";
       }
     });
-
-    // // followers MODAL
-    // // Get the modal
-    // var followersmodal = document.getElementById("followersModal");
-
-    // // Get the button that opens the modal
-    // var btn = document.getElementById("numOfFollowersDiv");
-
-    // // Get the <span> element that closes the modal
-    // var span = document.getElementById("closefollowers");
-
-    // // When the user clicks on the button, open the modal
-    // btn.onclick = function () {
-    //   followersmodal.style.display = "block";
-    // };
-
-    // // When the user clicks on <span> (x), close the modal
-    // span.onclick = function () {
-    //   followersmodal.style.display = "none";
-    // };
-
-    // // When the user clicks anywhere outside of the modal, close it
-    // window.onclick = function (event) {
-    //   if (event.target == followersmodal) {
-    //     followersmodal.style.display = "none";
-    //   }
-    // };
-
-    // // editBtnModal
-    // var editbtnmodal = document.getElementById("myModal");
-    // var editbtn = document.getElementById("editbtn");
-    // var editbtnspan = document.getElementById("closemymodal");
-    // editbtn.onclick = function() {
-    //   editbtnmodal.style.display = "block";
-    // }
-
-    // editbtnspan.onclick = function() {
-    //   editbtnmodal.style.display = "none";
-    // }
-
-    // window.onclick = function (event) {
-    //   if (event.target == editbtnmodal) {
-    //     editbtnmodal.style.display = "none";
-    //   }
-    // };
-
-    // // view applications modal
-    // var viewapplicationsmodal = document.getElementById("viewapplicationsmodal");
-    // var viewapplicationsbtn = document.getElementById("msgbtn");
-    // var viewapplicationsspan = document.getElementById("closeapplications");
-    // viewapplicationsbtn.onclick = function() {
-    //   viewapplicationsmodal.style.display = "block";
-    // }
-
-    // viewapplicationsspan.onclick = function() {
-    //   viewapplicationsmodal.style.display = "none";
-    // }
-
-    // window.onclick = function(event) {
-    //   if (event.target == viewapplicationsmodal) {
-    //     viewapplicationsmodal.style.display = "none";
-    //   }
-    // }
 
     // Get the modal
 var modal = document.getElementsByClassName('modal');

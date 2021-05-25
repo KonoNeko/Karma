@@ -10,11 +10,6 @@
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/sidebar.css" />
   <link rel="stylesheet" href="css/createpost.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
-
   <meta charset="utf-8" />
   <meta
     name="viewport"
@@ -40,6 +35,7 @@
     <a href="partnerwithus.html">Partner with us</a>
     <a href="donate.html">Donate</a>
     <a href="reportbug.html">Report a bug</a>
+    <a id="btn-logout" href="index.html">Logout</a>
   </div>
   <navbar class="nav">
     <ul class="nav__list">
@@ -129,6 +125,7 @@
             <a href="partnerwithus.html">Partner with us</a>
             <a href="donate.html">Donate</a>
             <a href="reportbug.html">Report a bug</a>
+            <a id="btn-logout" href="index.html">Logout</a>
           </div>
         </a>
       </li>
@@ -171,8 +168,9 @@
           </div>
           <div class="newCaption">
             <div>
-              <textarea id="captionInput" rows="4" cols="50" placeholder="Write a caption here..."></textarea>
-              <p id="imageUrl" style="display: none;"></p>
+              <textarea rows="4" cols="50" placeholder="Write a caption here..."></textarea>
+              <img id="image">
+              <p id="url"></p>
             </div>
             <div style="font-size: 2.5rem" class="icons">
               <label for="file-upload" class="fa fa-image"></label>
@@ -185,7 +183,7 @@
           </div>
       </div>
     </div>
-  
+
       <!-- The Modal -->
       <div id="locationModal" class="modal">
         <!-- Modal content -->
@@ -226,7 +224,7 @@
   </div>
 
 </body>
-<script src="js/home.js"></script>
+<script src="js/signup.js"></script>
 <script src="js/like.js"></script>
 <script>
     // Get the modal
@@ -311,10 +309,34 @@
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     crossorigin="anonymous"
   ></script>
-
+<script src="js/signup.js"></script>
   <script src="js/sidebar.js"></script>
+  <script src="js/home.js"></script>
 
 <script src="js/search.js"></script>
+<script>
+  /*
+  Credit to Deepak K for following code snippet.
+  https://compile.blog/imgur-api-image-uploader/
+  */
+  const img = document.getElementById("image")
+  const file = document.getElementById("file-upload")
+  const url = document.getElementById("url");
+  file.addEventListener("change", ev => {
+      const formdata = new FormData()
+      formdata.append("image", ev.target.files[0])
+      fetch("https://api.imgur.com/3/image/", {
+          method: "post",
+          headers: {
+              Authorization: "Client-ID 4409588f10776f7"
+          },
+          body: formdata
+      }).then(data => data.json()).then(data => {
+          img.src = data.data.link
+          url.innerText = data.data.link
+      })
+  })
+</script>
 
 
 

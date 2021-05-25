@@ -389,6 +389,48 @@ DELIMITER ;
 
 
 /*
+Posts a new story.
+*/
+DROP PROCEDURE IF EXISTS post_story;
+DELIMITER //
+CREATE PROCEDURE post_story(IN current_username CHAR(50), IN new_image TEXT)
+BEGIN
+    INSERT INTO stories (`profile_id`, `image_url`)
+    VALUES (get_user_id(current_username), new_image);
+END//
+DELIMITER ;
+
+
+/*
+Deletes an existing story.
+*/
+DROP PROCEDURE IF EXISTS delete_story;
+DELIMITER //
+CREATE PROCEDURE delete_story(IN current_username CHAR(50), IN current_story INTEGER)
+BEGIN
+    DELETE FROM stories 
+    WHERE profile_id = get_user_id(current_username)
+    AND story_id = current_story
+END//
+DELIMITER ;
+
+
+/*
+Gets all stories from users that the current user is following.
+*/
+DROP PROCEDURE IF EXISTS view_stories;
+DELIMITER //
+CREATE PROCEDURE view_stories(IN current_username CHAR(50))
+BEGIN
+    SELECT * FROM stories s
+    WHERE is_following(current_username, s.profile_id)
+    GROUP BY s.profile_id
+    ORDER BY s.timestamp
+END//
+DELIMITER ;
+
+
+/*
 Returns the full name of the opposite user of a user's conversation.
 */
 DROP FUNCTION IF EXISTS get_other_user;
@@ -559,7 +601,7 @@ BEGIN
             ELSE 0
             END
             FROM profile_follows
-            WHERE profile_id = other_username AND follower_id = get_user_id(current_username)
+            WHERE profile_id = other_username AND follower_id = get_user_id(current_username) and request_accepted = 1
     );
 END //
 DELIMITER ;
