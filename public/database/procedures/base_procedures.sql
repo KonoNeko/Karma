@@ -601,7 +601,7 @@ BEGIN
             ELSE 0
             END
             FROM profile_follows
-            WHERE profile_id = other_username AND follower_id = get_user_id(current_username)
+            WHERE profile_id = other_username AND follower_id = get_user_id(current_username) and request_accepted = 1
     );
 END //
 DELIMITER ;
