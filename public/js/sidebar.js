@@ -29,7 +29,7 @@ function loadRecommendedConnections(username) {
 function formatParams(params) {
   let string = "?";
   let keys = Object.keys(params);
-  for(let i=0; i<keys.length; i++) {
+  for (let i = 0; i < keys.length; i++) {
     string += `${keys[i]}=${params[keys[i]]}`;
     if (i < keys.length - 1) {
       string += "&";
@@ -42,8 +42,8 @@ function request_follow(userID, follower) {
   const method = "POST";
   const endpoint = "/profiles/followers";
   const params = formatParams({
-    "id": userID,
-    "follower": follower,
+    id: userID,
+    follower: follower,
   });
   const url = BASE_URL + endpoint + params;
 
@@ -59,8 +59,8 @@ function APIRequest(method, url, callback) {
     if (this.readyState == 4 && this.status == 200) {
       let response;
       try {
-        response = JSON.parse(response);
-      } catch(err) {
+        response = JSON.parse(this.responseText);
+      } catch (err) {
         response = this.responseText;
       } finally {
         callback(response);
@@ -71,19 +71,21 @@ function APIRequest(method, url, callback) {
 
 function getOpportunites(results) {
   results = results["Recommended For You"];
-  for(let key of Object.keys(results)) {
+  for (let key of Object.keys(results)) {
     createWhatsNew(results[key]);
   }
 }
 
 function getRecommendedUsers(users) {
-  for(let user of users) {
+  for (let user of users) {
     createRecommendedConnections(user);
   }
 }
 
 function createWhatsNew(oppObj) {
-  let whatsNewDiv = document.getElementById("whats-new-volunteering-opportunities");
+  let whatsNewDiv = document.getElementById(
+    "whats-new-volunteering-opportunities"
+  );
   let opportunityRole = document.createElement("p");
   opportunityRole.innerHTML = oppObj.title;
   opportunityRole.setAttribute("class", "heading3");
@@ -138,8 +140,7 @@ function createRecommendedConnections(user) {
 
   let userNameAt = document.createElement("p");
   userNameAt.setAttribute("class", "userAt");
-  userNameAt.innerHTML = 
-  `@<span id="recommendedUser${user.profile_id}">${user.username}</span>`;
+  userNameAt.innerHTML = `@<span id="recommendedUser${user.profile_id}">${user.username}</span>`;
 
   recommendedUserDiv.appendChild(storyImgDiv);
   nameAndUserName.appendChild(userName);
@@ -157,8 +158,7 @@ function createRecommendedConnections(user) {
     followUserButton.style.border = "0";
     followUserButton.innerHTML = "REQUESTED";
     followUserButton.onclick = "";
-  }
-  
+  };
 
   followUserButton.innerHTML = "FOLLOW";
   followUserButton.setAttribute("class", "followUserButton");

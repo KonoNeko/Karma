@@ -1,3 +1,24 @@
+
+// Your web app's Firebase configuration
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+  apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
+  authDomain: "karma-535f3.firebaseapp.com",
+  databaseURL: "https://karma-535f3-default-rtdb.firebaseio.com",
+  projectId: "karma-535f3",
+  storageBucket: "karma-535f3.appspot.com",
+  messagingSenderId: "1023587584355",
+  appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
+  measurementId: "G-VTZ4TEWFBW",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+
+
 let info;
 get_firebase_info();
 
@@ -142,16 +163,18 @@ function add_Description(userID, bio) {
   APIRequest(method, url, console.log);
 }
 
-function add_ProfilePic(userID, picUrl) {
+function add_ProfilePic(userID) {
   const method = "PUT";
   const endpoint = "/profiles/picture";
   const params = formatParams({
     id: userID,
-    picUrl: picUrl,
+    picUrl: document.getElementById("mainProfilePic").textContent,
   });
   const url = BASE_URL + endpoint + params;
-
-  APIRequest(method, url, console.log);
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    window.location.reload();
+  });
 }
 
 function showProfile() {
@@ -292,15 +315,15 @@ function addProfilePic() {
       .then((data) => data.json())
       .then((data) => {
         posted = true;
-        document.getElementById("imageUrl").innerText = data.data.link;
+        document.getElementById("mainProfilePic").innerText = data.data.link;
       });
   });
 
   document.getElementById("postBtn").onclick = () => {
-    let link = document.getElementById("imageUrl").textContent;
+    let link = document.getElementById("mainProfilePic").textContent;
     if (link != "" && posted && JSON.stringify(info) != "{}") {
       console.log("Posting");
-      createNewPost();
+      add_ProfilePic()
     } else if (!posted) {
       window.alert("Please wait for image to finish uploading");
     } else if (JSON.stringify(info) === "{}") {

@@ -129,6 +129,8 @@ async function get_firebase_info() {
         info.email = user.email;
         info.username = user.username;
         view_social_feed(info.username);
+        loadWhatsNew();
+        loadRecommendedConnections(info.username);
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
