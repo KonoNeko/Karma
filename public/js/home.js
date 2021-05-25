@@ -128,7 +128,9 @@ async function get_firebase_info() {
         info.fullName = user.fullName;
         info.email = user.email;
         info.username = user.username;
-        view_social_feed(info.username);
+        view_social_feed(info.username); 
+        loadRecommendedConnections(info.username);
+        loadWhatsNew();
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
@@ -714,6 +716,6 @@ document.getElementById("postBtn").onclick = () => {
   } else if (link === "") {
     window.alert("No image is uploaded");
   }
-};
+}
 
 // loadHome();
