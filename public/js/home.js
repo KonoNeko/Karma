@@ -407,6 +407,7 @@ function createPost(postObj) {
   let caption = document.createElement("p");
   let comments = document.createElement("p");
   likes.setAttribute("class", "likes bodytitle");
+  likes.setAttribute("id", "likes" + postObj.post_info.post_id);
   caption.setAttribute("class", "caption");
   comments.setAttribute("class", "comments smalltext");
   comments.id = "comment-text" + postObj.post_info.post_id;

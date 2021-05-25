@@ -16,7 +16,11 @@ function like(id) {
     );
     heart.setAttribute("class", "fas fa-heart likeBtn");
 
+    console.log("username: " + info.username);
+    console.log("post id: " + postId);
     addLikes(info.username, postId);
+
+    changeLikesText(postId);
   }
 
   // UNLIKE
@@ -26,29 +30,62 @@ function like(id) {
       "font-size: 24px; color: #214049; margin-top: 10px; margin-bottom: 10px; margin-right:10px; "
     );
     heart.setAttribute("class", "far fa-heart likeBtn");
-    deleteLikes();
+
+    console.log("username: " + info.username);
+    console.log("post id: " + postId);
+    deleteLikes(info.username, postId);
+
+    changeLikesText(postId);
   }
 }
 
 //@return list of users
 async function getPost() {
-  let response = await fetch(URL2);
+  const URL_POSTS = " https://marlonfajardo.ca/karma/v1/posts";
+  let response = await fetch(URL_POSTS);
   let data = await response.json();
   console.log(data);
   return data;
 }
 
-function addLikes(userID, postID) {
+function changeLikesText(id) {
+  getPost().then((posts) => {
+    let likesText = document.getElementById("likes" + id);
+
+    let likedPostIndex = 0;
+    for (i = 0; i < posts.length; i++) {
+      if (posts[i].post_info.post_id == id) {
+        likedPostIndex = i;
+      }
+    }
+
+    likesText.innerHTML =
+      posts[likedPostIndex].post_info.likes != 1
+        ? `${posts[likedPostIndex].post_info.likes} likes`
+        : `${posts[likedPostIndex].post_info.likes} like`;
+  });
+}
+
+function addLikes(id, post) {
   let params = formatParams({
-    id: userID,
-    post: postID,
+    id: id,
+    post: post,
   });
 
   let url = URL2 + endpoint + params;
 
-  APIRequest(method2, url, (res) => {
-    console.log(res);
-  });
+  APIRequest(method2, url, console.log);
 }
 
-function deleteLikes() {}
+function deleteLikes(id, post) {
+  let params = formatParams({
+    id: id,
+    post: post,
+  });
+
+  let methoddelete = "DELETE";
+
+  let url = URL2 + endpoint + params;
+
+  APIRequest(methoddelete, url, console.log);
+}
