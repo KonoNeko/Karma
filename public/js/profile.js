@@ -619,7 +619,7 @@ function createEducation(education, educationObj) {
 
   let para = document.createElement("p");
   para.setAttribute("class", "schoolpara");
-  para.innerHTML = `${educationObj.start_date}`;
+  para.innerHTML = `${educationObj.edu_start_date}`;
 
   picturediv.appendChild(picture);
 
@@ -691,11 +691,11 @@ function createAwards(awards, awardsObj) {
 
   let picture = document.createElement("img");
   picture.setAttribute("class", "awardspic");
-  picture.src = "./images/awards.jpg";
+  picture.src = awardsObj.awards_image_url;
 
   let para = document.createElement("p");
   para.setAttribute("class", "awardspara");
-  para.innerHTML = "Received in November 2019";
+  para.innerHTML = "Received " + awardsObj.date_received;
 
   picturediv.appendChild(picture);
 
