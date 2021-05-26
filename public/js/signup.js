@@ -89,7 +89,7 @@ async function usernameExists() {
 $("#btn-signup").click(function () {
   let email = $("#email").val();
   let password = $("#password").val();
-  let cpassword = $("#confirmPassword").val();
+  let cpassword = $("#confirmPassowrd").val();
   let full_name = $("#name").val();
   let username = $("#username").val();
   let isVolunteer = $('input[name="isVolunteer"]:checked').val();
