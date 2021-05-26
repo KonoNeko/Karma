@@ -116,8 +116,6 @@ function createWhatsNew(oppObj) {
 function createRecommendedConnections(user) {
   let recommendedConnectionsDiv = document.getElementById("recommendedUserDiv");
   let hr = document.createElement("hr");
-  recommendedConnectionsDiv.appendChild(hr);
-  hr.setAttribute("style", "margin-bottom: 20px");
 
   let recommendedUserDiv = document.createElement("div");
   recommendedUserDiv.setAttribute("class", "recommendedUserDiv");
