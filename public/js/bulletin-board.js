@@ -91,6 +91,7 @@ function send_application(oppObj) {
     const endpoint = "/opportunities/applications";
     const url = BASE_URL + endpoint + params
     APIRequest(method, url, console.log);
+    alert("Your application is sent")
   } else {
     alert("Could not send application, some fields were left unfilled.")
   }
