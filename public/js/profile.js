@@ -81,7 +81,7 @@ function get_firebase_info() {
 }
 
 function add_Skills(userID, skill) {
-  const method = "PUT";
+  const method = "POST";
   const endpoint = "/profiles/skills";
   const params = formatParams({
     id: userID,
@@ -578,6 +578,7 @@ function createSkills(skills, skillsObj) {
   let skillbtn = document.createElement("button");
   skillbtn.setAttribute("class", "skillsbtn");
   skillbtn.innerHTML = `${skillsObj.skill_title}`;
+  skillbtn.id = `${skillsObj.skill_id}`;
   console.log(skillsObj);
   // console.log(skillsObj.skill_title);
 
