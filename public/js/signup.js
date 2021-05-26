@@ -163,27 +163,3 @@ $("#btn-signup").click(function () {
     window.alert("Please fill out all fields.");
   }
 });
-
-$("#btn-logout").click(function logout() {
-  firebase
-    .auth()
-    .signOut()
-    .then(function () {
-      // Sign-out successful.
-      alert("sign out success");
-      location.href = "sign-up.html";
-    })
-    .catch(function (error) {
-      // An error happened.
-    });
-});
-
-//
-// const logout = document.querySelector("#logout");
-// logout.addEventListener("click", (e) =>{
-//   e.preventDefault();
-//   firebase.auth.signOut().then(()=>{
-//     alert("user sign out")
-//
-//   })
-// })
