@@ -1,7 +1,3 @@
-const BASE_URL = "https://marlonfajardo.ca/karma/v1";
-
-
-
 function APIRequest(method, url, callback) {
     console.log(method + ": " + url);
     const xhttp = new XMLHttpRequest();
