@@ -44,6 +44,19 @@ function request_follow(userID, follower) {
 
   APIRequest(method, url, console.log);
 }
+
+function unfollow_user(userID, follower) {
+  const method = "DELETE";
+  const endpoint = "/profiles/followers";
+  const params = formatParams({
+    "id": userID,
+    "follower": follower,
+  });
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, console.log);
+}
+  
   
 
 
