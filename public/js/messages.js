@@ -8,18 +8,16 @@ var firebaseConfig = {
   storageBucket: "karma-535f3.appspot.com",
   messagingSenderId: "1023587584355",
   appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
-  measurementId: "G-VTZ4TEWFBW"
+  measurementId: "G-VTZ4TEWFBW",
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);  
+firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 let info = {};
 get_firebase_info();
 
-
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
-
 
 function formatTimestamp(timestamp) {
   let dateObj = new Date(Date.parse(timestamp));
@@ -57,7 +55,7 @@ async function get_firebase_info() {
         console.log(user);
         info.fullName = user.fullName;
         info.email = user.email;
-        info.username = user.username; 
+        info.username = user.username;
         view_messages(info.username);
       })
       .catch((error) => {
@@ -105,7 +103,7 @@ function APIRequest(method, url, callback) {
 function formatParams(params) {
   let string = "?";
   let keys = Object.keys(params);
-  for(let i=0; i<keys.length; i++) {
+  for (let i = 0; i < keys.length; i++) {
     string += `${keys[i]}=${params[keys[i]]}`;
     if (i < keys.length - 1) {
       string += "&";
@@ -117,14 +115,14 @@ function formatParams(params) {
 function send_message() {
   let message = document.getElementById("user-input").value;
   let receiver = document.getElementById("otherUser").textContent;
-  console.log(`Sending "${message}" to ${receiver} from ${info.username}`)
+  console.log(`Sending "${message}" to ${receiver} from ${info.username}`);
   if (message != "" && receiver != "" && JSON.stringify(info) != "{}") {
     const method = "POST";
     const endpoint = "/messages";
     const params = formatParams({
-      "id": info.username,
-      "receiver": document.getElementById("otherUser").textContent,
-      "msg": message
+      id: info.username,
+      receiver: document.getElementById("otherUser").textContent,
+      msg: message,
     });
     const url = BASE_URL + endpoint + params;
     APIRequest(method, url, console.log);
@@ -246,7 +244,6 @@ function revealMessages(convo) {
       createMessageSentByYou(currentMsg, convo.profile_pic);
     }
   }
-
 }
 
 function generateMessages(msgObj) {
@@ -263,7 +260,8 @@ function generateMessages(msgObj) {
   messagerImg.src = msgObj.other_user_profile_pic;
   messagerName.innerHTML = msgObj.other_user_fullname;
   messagerName.setAttribute("class", "bodytitle");
-  messagerUsername.innerHTML = "@" + `<span id=otherUser>${msgObj.other_user}</span>`;
+  messagerUsername.innerHTML =
+    "@" + `<span id=otherUser>${msgObj.other_user}</span>`;
   messagerUsername.setAttribute("class", "bodytext");
 
   messagerImgDiv.appendChild(messagerImg);
@@ -374,9 +372,51 @@ function generateNoMessages() {
   document.getElementById("sidemain").setAttribute("style", "display: none");
 }
 
-
-
 function createSendMessage() {
   let userValue = document.getElementById("user-input").value;
   createMessageSentByYou(userValue);
+}
+
+function findUsers() {
+  document
+    .getElementById("no-messages-div")
+    .setAttribute("style", "display: none");
+  document.getElementById("findmain").setAttribute("style", "display: unset");
+  // document.getElementById("sidemain").setAttribute("style", "display: unset");
+
+  createNewConnections();
+}
+
+function loadRecommendedConnections(username) {
+  firebase_info.username = username;
+  const method = "GET";
+  const endpoint = "/profiles/recommended";
+  const params = `/${username}`;
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, getRecommendedUsers);
+}
+
+function getRecommendedUsers(users) {
+  for (let user of users) {
+    createNewConnections(user);
+  }
+}
+
+function createNewConnections() {
+  let findnewconnectionsDiv = document.getElementById("findnewconnections");
+
+  let newConnectionsDiv = document.createElement("div");
+  newConnectionsDiv.setAttribute("class", "newConnectionsDiv");
+
+  let profilePicImgDiv = document.createElement("div");
+  let profilePicImg = document.createElement("img");
+
+  profilePicImgDiv.setAttribute("class", "profilepic profilePicImgDiv");
+  profilePicImgDiv.setAttribute("style", "padding-bottom: 10px; width: 20%");
+  profilePicImg.setAttribute.src = "./images/placeholder.png";
+
+  let nameAndUserName = document.createElement("div");
+  nameAndUserName.setAttribute("class", "name-and-userName");
+  nameAndUserName.setAttribute("style", "width: 50%;");
 }

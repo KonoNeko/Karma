@@ -409,7 +409,6 @@ input, select, textarea{
 
 .userNames {
   /* Heading 3 */
-
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
@@ -426,7 +425,6 @@ input, select, textarea{
 }
 
 .userAt {
-  width: 64px;
   height: 19px;
 
   /* Body Subheading */
