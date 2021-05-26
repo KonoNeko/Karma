@@ -72,10 +72,16 @@ function aboutMeOnclick() {
       .setAttribute("style", "display: unset");
   };
 
-  document.getElementById("aboutme-edit").onclick = function () {
+  document.getElementById("edit-about-save").onclick = function () {
     let newBio = document.getElementById("aboutme-paragraph").value;
     console.log(firebase_info.username + ", this is your new bio " + newBio);
     editDescription(firebase_info.username, newBio);
+    document
+      .getElementById("aboutme-edit")
+      .setAttribute("style", "display: none");
+    document
+      .getElementById("aboutMe-Profile")
+      .setAttribute("style", "display: unset");
   };
 }
 
@@ -107,7 +113,7 @@ function skillsOnclick() {
       .setAttribute("style", "display: unset");
   };
 
-  document.getElementById("skills-edit").onclick = function () {
+  document.getElementById("edit-skills-save").onclick = function () {
     /* BACKEND GUY DO UR MAGIC HERE */
   };
 }
@@ -185,7 +191,7 @@ function educationOnclick() {
       .setAttribute("style", "display: unset");
   };
 
-  document.getElementById("education-edit").onclick = function () {
+  document.getElementById("edit-education-save").onclick = function () {
     /* BACKEND GUY DO UR MAGIC HERE */
   };
 }
@@ -210,7 +216,7 @@ function experienceOnclick() {
       .setAttribute("style", "display: unset");
   };
 
-  document.getElementById("experience-edit").onclick = function () {
+  document.getElementById("edit-experience-save").onclick = function () {
     /* BACKEND GUY DO UR MAGIC HERE */
   };
 
@@ -293,7 +299,7 @@ function awardsOnclick() {
       .setAttribute("style", "display: unset");
   };
 
-  document.getElementById("awards-edit").onclick = function () {
+  document.getElementById("edit-awards-save").onclick = function () {
     /* BACKEND GUY DO UR MAGIC HERE */
   };
 
