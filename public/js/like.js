@@ -33,19 +33,10 @@ function like(id) {
 
     console.log("username: " + info.username);
     console.log("post id: " + postId);
-    deleteLikes(info.username, postId);
 
     changeLikesText(postId);
+    deleteLikes(info.username, postId);
   }
-}
-
-//@return list of users
-async function getPost() {
-  const URL_POSTS = " https://marlonfajardo.ca/karma/v1/posts";
-  let response = await fetch(URL_POSTS);
-  let data = await response.json();
-  console.log(data);
-  return data;
 }
 
 function changeLikesText(id) {
@@ -66,6 +57,15 @@ function changeLikesText(id) {
   });
 }
 
+//@return list of users
+async function getPost() {
+  const URL_POSTS = " https://marlonfajardo.ca/karma/v1/posts/";
+  let response = await fetch(URL_POSTS);
+  let data = await response.json();
+  console.log(data);
+  return data;
+}
+
 function addLikes(id, post) {
   let params = formatParams({
     id: id,
@@ -75,6 +75,8 @@ function addLikes(id, post) {
   let url = URL2 + endpoint + params;
 
   APIRequest(method2, url, console.log);
+  console.log("likes" + post);
+  changeLikesText("likes" + post);
 }
 
 function deleteLikes(id, post) {
@@ -88,4 +90,20 @@ function deleteLikes(id, post) {
   let url = URL2 + endpoint + params;
 
   APIRequest(methoddelete, url, console.log);
+  changeLikesText();
+}
+
+function addComment(id, post, msg) {
+  let params = formatParams({
+    id: id,
+    post: post,
+    msg: msg,
+  });
+
+  let method = "POST";
+  let commenturl = "https://marlonfajardo.ca/karma/v1/post/";
+  let commentendpoint = "comment";
+
+  let url = commenturl + commentendpoint + params;
+  APIRequest(method, url, console.log);
 }

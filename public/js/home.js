@@ -19,6 +19,7 @@ const db = firebase.firestore();
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
 let info = {};
+let username;
 get_firebase_info();
 
 const result = [
@@ -126,6 +127,7 @@ async function get_firebase_info() {
         let user = doc.data();
         console.log(user);
         info.fullName = user.fullName;
+        username = user.username;
         info.email = user.email;
         info.username = user.username;
         view_social_feed(info.username);
@@ -185,6 +187,7 @@ function view_social_feed(userID) {
   //   createPost(result[i]);
   // }
   APIRequest(method, url, loopThroughSocialPosts);
+  changeLikeIconForLikedPosts();
 }
 
 function loopThroughSocialPosts(results) {
@@ -552,6 +555,36 @@ function createModal(postObj) {
     post.post_id
   );
   displayComments(comments, post.post_id);
+}
+
+//@return list of users
+async function getPostForOnlyUser() {
+  const URL_POSTS = " https://marlonfajardo.ca/karma/v1/posts/" + "karma";
+  let response = await fetch(URL_POSTS);
+  let data = await response.json();
+  return data;
+}
+
+function changeLikeIconForLikedPosts() {
+  getPostForOnlyUser().then((posts) => {
+    console.log("POSTS: " + posts);
+
+    for (i = 0; i < posts.length; i++) {
+      if (posts[i].post_info.is_liked == 1) {
+        let likedPostsLikeIconId = "likeBtn" + posts[i].post_info.post_id;
+        let likedPostsLikeIcon = document.getElementById(likedPostsLikeIconId);
+
+        console.log(likedPostsLikeIcon);
+        console.log("likeBtn" + posts[i].post_info.post_id);
+
+        likedPostsLikeIcon.setAttribute("class", "fas fa-heart likeBtn");
+        likedPostsLikeIcon.setAttribute(
+          "style",
+          "font-size: 24px; color: #B05A5F; margin-top: 10px; margin-bottom: 10px; margin-right:10px; "
+        );
+      }
+    }
+  });
 }
 
 function hideModal(id) {
