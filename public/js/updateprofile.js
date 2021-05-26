@@ -29,6 +29,19 @@ function editDescription(userID, bio) {
   APIRequest(method, url, console.log);
 }
 
+function editSkill(userID, skill, newSkill) {
+  const method = "PUT";
+  const endpoint = "/profiles/skills";
+  const params = formatParams({
+    id: userID,
+    skill: skill,
+    newSkill: newSkill
+  });
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, console.log);
+}
+
 var inputs = document.getElementsByClassName("skillsinput");
 for (index = 0; index < inputs.length; ++index) {
   inputs[index].addEventListener("input", resizeInput);
@@ -99,6 +112,7 @@ function skillsOnclick() {
     let skillsInput = document.createElement("input");
     skillsInput.setAttribute("class", "skillsinput");
     skillsInput.value = skillsBtns[i].textContent;
+    skillsInput.id = skillsBtns[i].id;
     document.getElementById("skills-inputs").appendChild(skillsInput);
   }
 
@@ -117,6 +131,22 @@ function skillsOnclick() {
 
   document.getElementById("edit-skills-save").onclick = function () {
     /* BACKEND GUY DO UR MAGIC HERE */
+    document
+      .getElementById("skills-edit")
+      .setAttribute("style", "display: none");
+    document
+      .getElementById("skills-buttons")
+      .setAttribute("style", "display: unset");
+    let oldSkills = document.getElementById("skills-buttons").children
+    let newSkills = document.getElementById("skills-inputs").children;
+    for (let i=0; i< newSkills.length; i++) {
+      console.log(`${firebase_info.username} is editing skill${newSkills[i].id} to ${newSkills[i].value}`);
+      oldSkills[i].innerHTML = newSkills[i].value;
+      editSkill(firebase_info.username, newSkills[i].id, newSkills[i].value);
+    }
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 }
 
@@ -195,6 +225,12 @@ function educationOnclick() {
 
   document.getElementById("edit-education-save").onclick = function () {
     /* BACKEND GUY DO UR MAGIC HERE */
+    document
+      .getElementById("education-edit")
+      .setAttribute("style", "display: none");
+    document
+      .getElementById("education-div")
+      .setAttribute("style", "display: unset");
   };
 }
 
@@ -220,6 +256,12 @@ function experienceOnclick() {
 
   document.getElementById("edit-experience-save").onclick = function () {
     /* BACKEND GUY DO UR MAGIC HERE */
+    document
+      .getElementById("experience-edit")
+      .setAttribute("style", "display: none");
+    document
+      .getElementById("experience-div")
+      .setAttribute("style", "display: unset");
   };
 
   let experienceNames = document.getElementsByClassName("experienceName");
@@ -303,6 +345,12 @@ function awardsOnclick() {
 
   document.getElementById("edit-awards-save").onclick = function () {
     /* BACKEND GUY DO UR MAGIC HERE */
+    document
+      .getElementById("awards-edit")
+      .setAttribute("style", "display: none");
+    document
+      .getElementById("awards-div")
+      .setAttribute("style", "display: unset");
   };
 
   let awardsNames = document.getElementsByClassName("awardsName");
