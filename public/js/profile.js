@@ -615,7 +615,7 @@ function createEducation(education, educationObj) {
 
   let picture = document.createElement("img");
   picture.setAttribute("class", "educationpic");
-  picture.src = "./images/education.jpeg";
+  picture.src = educationObj.edu_image_url;
 
   let para = document.createElement("p");
   para.setAttribute("class", "schoolpara");
@@ -653,7 +653,7 @@ function createExperience(experience, experienceObj) {
 
   let picture = document.createElement("img");
   picture.setAttribute("class", "experiencepic");
-  picture.src = "./images/experience.jpeg";
+  picture.src = experienceObj.exp_image_url;
 
   let para = document.createElement("p");
   para.setAttribute("class", "employerpara");
