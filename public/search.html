@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 
 <head>
-  <title>Home</title>
+  <title>Search</title>
 
   <link rel="icon" type="image/png" href="res/logo0_colored.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/home.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <link rel="stylesheet" href="css/search.css" />
   <link rel="stylesheet" href="css/base.css" />
 
-  <link rel="stylesheet" href="css/sidebar.css" />
-  <link rel="stylesheet" href="css/createpost.css" />
   <meta charset="utf-8" />
   <meta
     name="viewport"
@@ -23,7 +24,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
 </head>
 
-<body>
+<body onload="loadSearch()">
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
       >&times;</a
@@ -40,7 +41,7 @@
   <navbar class="nav">
     <ul class="nav__list">
       <li class="nav__item">
-        <a href="home.html" class="current-page">
+        <a href="home.html">
           <svg viewBox="0 0 1024 1024" width="100" title="home">
             <path
               d="M946.5 505L534.6 93.4a31.93 31.93 0 0 0-45.2 0L77.5 505c-12 12-18.8 28.3-18.8 45.3c0 35.3 28.7 64 64 64h43.4V908c0 17.7 14.3 32 32 32H448V716h112v224h265.9c17.7 0 32-14.3 32-32V614.3h43.4c17 0 33.3-6.7 45.3-18.8c24.9-25 24.9-65.5-.1-90.5z"
@@ -86,7 +87,6 @@
         </a>
       </li>
       <li class="nav__item">
-
         <a href="profile.html">
           <svg viewBox="0 0 16 16" width="100" title="profile">
             <path
@@ -132,7 +132,6 @@
     </ul>
   </navbar>
 
-
   <div class="main" id="main">
     <div class="menu-and-search">
       <div class="mobile-menu" onclick="openNav()">
@@ -155,103 +154,16 @@
       </div>
     </div>
 
-    <div id="post-btn" class="post-btn">
-      <img width="60px" height="60px" src="images/mobilepost.png">
-    </div>
-
-
-    <div id="modalOverlay">
-      <div class="postModalBackground" id="postModalBackground"></div>
-      <div class="create-post-container modal-content" id="createPostModal">
-          <div class="image-poster profilepicture">
-            <img src="images/placeholder2.png" />
-          </div>
-          <div class="newCaption">
-            <div>
-              <textarea rows="4" cols="50" placeholder="Write a caption here..."></textarea>
-              <img id="image">
-              <p id="url"></p>
-            </div>
-            <div style="font-size: 2.5rem" class="icons">
-              <label for="file-upload" class="fa fa-image"></label>
-              <input id="file-upload" type="file" style="display:none"/>
-              <i id="marker" class="fas fa-map-marker-alt"></i>
-            </div>
-            <div class="button">
-              <button id="postBtn" class="secondarybutton">Post</button>
-            </div>
-          </div>
-      </div>
-    </div>
-
-      <!-- The Modal -->
-      <div id="locationModal" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <textarea id="location" rows="4" cols="50"></textarea>
-        </div>
-      </div>
-
     <div class="flex-main">
-      <div class="column" id="mainmain">
-        <h1 class="heading1 heading-title">Home</h1>
-        <div id="posts" class="posts"></div>
-      </div>
-
-      <div class="column" id="sidemain">
-        <div class="search">
-          <form autocomplete="off" class="search-form">
-            <input  autocomplete="off" id ="search-input" type="text" placeholder="Search" />
-            <button id = "searchbar" onclick="findUsers()" type="button"><i class="fa fa-search"></i></button>
-          </form>
-        </div>
-        <div id ="searchResult">
-        </div>
-        <div id="whats-new" class="whats-new">
-          <p class="heading2">What's new?</h1>
-          <p class="heading3">Recommended volunteering opportunities for you</p>
-          <div id="whats-new-volunteering-opportunities"></div>
-          <a href="bulletin-board.html" class="heading3">View all volunteering opportunities</a>
-        </div>
-        <div id="recommended-connections" class="recommended-connections">
-          <p class="heading2">Who to connect with</h1>
-          <div id="recommendedUserDiv"></div>
-          <a href="bulletin-board.html" class="heading3">View all recommended connections</a>
-        </div>
-      </div>
+      <p class="heading1">
+        Search results for <span id="search-result-span">something</span>
+      </p>
+      <div id="search-results">
     </div>
   </div>
-
 </body>
-<script>
-    // Get the modal
-    var modal = document.getElementById("locationModal");
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("marker");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal
-    btn.onclick = function () {
-      modal.style.display = "block";
-    };
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-      modal.style.display = "none";
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    };
-  </script>
-
+<script src="js/search.js"></script>
 
 <script>
   function openNav() {
@@ -262,92 +174,3 @@
     document.getElementById("mySidenav").style.width = "0";
   }
 </script>
-
-<!-- <script src="js/signOut.js"></script> -->
-
-<script>
-    // Get the modal
-    var modal = document.getElementById("postModalBackground");
-    var content = document.getElementById("createPostModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("post-btn");
-
-    var createBtn = document.getElementById("create-btn");
-
-    // When the user clicks the button, open the modal
-    btn.onclick = function() {
-      modal.style.display = "block";
-      modal.onclick = () => {
-        modal.style.display = "none";
-        modal.onclick = "";
-        content.style.display = "none"
-      }
-      content.style.display = "flex";
-    }
-
-    createBtn.onclick = function() {
-      modal.style.display = "block";
-      content.style.display = "flex";
-      modal.onclick = () => {
-        modal.style.display = "none";
-        modal.onclick = "";
-        content.style.display = "none"
-      }
-    }
-    </script>
-
-
-<script
-    src="https://kit.fontawesome.com/2ec3384389.js"
-    crossorigin="anonymous"
-  ></script>
-
-<script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    crossorigin="anonymous"
-  ></script>
-
-
-  
-  
-  <script src="js/home.js"></script>
-<!-- <script src="js/signup.js"></script> -->
-  <script src="js/sidebar.js"></script>
-<script src="js/search.js"></script>
-<script src="js/createpost.js"></script>
-<script src="js/signout.js"></script>
-<script src="js/like.js"></script>
-
-<script>
-  /*
-  Credit to Deepak K for following code snippet.
-  https://compile.blog/imgur-api-image-uploader/
-  */
-  const img = document.getElementById("image")
-  const file = document.getElementById("file-upload")
-  const url = document.getElementById("url");
-  file.addEventListener("change", ev => {
-      const formdata = new FormData()
-      formdata.append("image", ev.target.files[0])
-      fetch("https://api.imgur.com/3/image/", {
-          method: "post",
-          headers: {
-              Authorization: "Client-ID 4409588f10776f7"
-          },
-          body: formdata
-      }).then(data => data.json()).then(data => {
-          img.src = data.data.link
-          url.innerText = data.data.link
-      })
-  })
-</script>
-
-
-
-
-
-
-
-
-</html>

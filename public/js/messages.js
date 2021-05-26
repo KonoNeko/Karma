@@ -444,6 +444,10 @@ function createNewConnections(user) {
   followUserDiv.setAttribute("class", "followUser");
   followUserDiv.setAttribute("style", "width: 40%");
   followUserButton.innerHTML = "MESSAGE";
+  followUserButton.setAttribute("id", "messageNewUser" + user.profile_id);
+  followUserButton.onclick = function () {
+    messageNewUser(this.id);
+  };
   followUserButton.setAttribute("style", "width: 70%; min-width: 100px;");
   followUserButton.setAttribute("class", "followUserButton");
 
@@ -462,3 +466,5 @@ function createNewConnections(user) {
   findnewconnectionsDiv.appendChild(newConnectionsDiv);
   findnewconnectionsDiv.appendChild(hr);
 }
+
+function messageNewUser(id) {}

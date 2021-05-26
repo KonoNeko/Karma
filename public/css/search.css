@@ -1,0 +1,157 @@
+#main {
+  margin-left: 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-main {
+  margin-top: 80px;
+  margin-left: 20px;
+}
+
+.menu-and-search {
+  margin-left: 20px;
+  margin-right: 20px;
+  position: fixed;
+  background-color: white;
+  padding-bottom: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  z-index: 1;
+}
+
+.menu-and-search > .mobile-menu > a {
+  width: 20%;
+  height: auto;
+  margin-right: 20px;
+}
+
+.menu-and-search > #above-search {
+  max-width: 40rem;
+  margin-right: 20px;
+}
+
+.search input[type="text"] {
+  font-family: "Montserrat";
+  border: 0px;
+  padding-left: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 90%;
+  height: 100%;
+  outline: none;
+}
+
+.search input[type="search"] {
+  font-family: "Montserrat";
+  border: 0px;
+  padding-left: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 80%;
+  height: 100%;
+  outline: none;
+}
+
+.search {
+  width: 100%;
+}
+
+.search input[type="search"]:focus {
+  outline: none;
+}
+
+.search {
+  background-color: white;
+}
+
+.search button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 20%;
+  height: 100%;
+}
+
+.profilepic {
+  margin: 10px;
+  height: 60px;
+  width: 60px;
+  background-color: #bbb;
+  border-radius: 50%;
+  background-size: 60px;
+}
+
+.searchResultsImgDiv {
+  min-width: 80px;
+  min-height: 80px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  border-radius: 50%;
+}
+
+.searchResultsTextDiv {
+  margin-left: 20px;
+  width: 60%;
+}
+
+.viewProfileButtonDiv {
+  width: 40%;
+}
+
+.searchResultUserDiv {
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.viewProfileButton {
+  margin-right: 20px;
+  float: right;
+  /* Accent */
+  border: 1.5px solid #51b09f;
+  box-sizing: border-box;
+  width: 50%;
+  border-radius: 40px;
+  /* Body Title */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px;
+  color: #51b09f;
+  text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+  .viewProfileButton {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .menu-and-search > #above-search {
+    max-width: 35rem;
+    margin-right: 20px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #main {
+    margin-left: 0px;
+  }
+
+  .menu-and-search > #above-search {
+    max-width: 40rem;
+    margin-right: 20px;
+  }
+
+  .menu-and-search {
+    margin-left: 0px;
+  }
+}

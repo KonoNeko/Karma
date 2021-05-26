@@ -153,7 +153,7 @@ app.post(ENDPOINT + '/profiles', (req, res) => {
  * Example URL of the request (replace 'value' with an actual value):
  * https://marlonfajardo.ca/karma/v1/profiles/skills?id=value&skill=value
  */
-app.put(ENDPOINT + '/profiles/skills', (req, res) => {
+app.post(ENDPOINT + '/profiles/skills', (req, res) => {
     const userID = req.query.id;
     const skill = req.query.skill;
     const sql = `CALL new_skill_entry("${userID}", "${skill}");`;
@@ -166,6 +166,28 @@ app.put(ENDPOINT + '/profiles/skills', (req, res) => {
         }
     });
 });
+
+/**
+ * Associates a new skill to a user.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/profiles/skills?id=value&skill=value&newSkill=value
+ */
+ app.put(ENDPOINT + '/profiles/skills', (req, res) => {
+    const userID = req.query.id;
+    const skillID = req.query.skill;
+    const newSkill = req.query.newSkill;
+    const sql = `CALL edit_skill_entry("${userID}", "${skillID}", "${newSkill}");`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        if (result.affectedRows) {
+            res.send("Success editing skill");
+        } else {
+            res.send("Error editing skill");
+        }
+    });
+});
+
 
 
 /**
@@ -817,24 +839,25 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
 /*
 TODO:
 -Profile
-DONEa) Add skills (PUT - new_skill_entry)                           TESTED      DOCUMENTED(5)    
-DONEb) Remove skills (DELETE - remove_skill_entry)                  TESTED      DOCUMENTED(6)
-DONEc) Add education (POST - new_education_entry)                   TESTED      DOCUMENTED(7)
-DONEd) Edit education (PUT - edit_education_entry)                  TESTED      DOCUMENTED(8)
-DONEe) Add experience (POST - new_experience_entry)                 TESTED      DOCUMENTED(9)
-DONEf) Edit experience (PUT - edit_experience_entry)                TESTED      DOCUMENTED(10)
-DONEg) Add award/certification (POST - new_award_entry)             TESTED      DOCUMENTED(11)
-DONEh) Edit award/certification (PUT - edit_award_entry)            TESTED      DOCUMENTED(12)
-DONEi) Edit profile pic (PUT - change_profile_pic)                  TESTED      DOCUMENTED(13)          
-DONEj) Edit bio (PUT - change_bio)                                  TESTED      DOCUMENTED(14)
-DONEk) Request to follow a user (POST - request_to_follow_user)     TESTED      DOCUMENTED(15)
-DONEl) Accept a follow request (PUT - accept_a_follow_request)      TESTED      DOCUMENTED(16)
-DONEm) Unfollow a user (DELETE - unfollow_user)                     TESTED      DOCUMENTED(17)
-DONEn) Get followers (GET - get_followers)                          TESTED      DOCUMENTED(18)
-DONEo) Get following (GET - get_following)                          TESTED      DOCUMENTED(19)
-DONEp) Get all profiles (GET - SELECT...)                           TESTED      DOCUMENTED(20)
-DONEq) Get profiles info (GET - get_profile_info)                   TESTED      DOCUMENTED(4)
-DONEq) Create new profile (GET - create_new_profile)                TESTED      DOCUMENTED(3)
+DONEa) Add skills (POST - new_skill_entry)                          TESTED      DOCUMENTED(5)
+DONEb) Edit skill (PUT - edit_skill_entry) 
+DONEc) Remove skills (DELETE - remove_skill_entry)                  TESTED      DOCUMENTED(6)
+DONEd) Add education (POST - new_education_entry)                   TESTED      DOCUMENTED(7)
+DONEe) Edit education (PUT - edit_education_entry)                  TESTED      DOCUMENTED(8)
+DONEf) Add experience (POST - new_experience_entry)                 TESTED      DOCUMENTED(9)
+DONEg) Edit experience (PUT - edit_experience_entry)                TESTED      DOCUMENTED(10)
+DONEh) Add award/certification (POST - new_award_entry)             TESTED      DOCUMENTED(11)
+DONEi) Edit award/certification (PUT - edit_award_entry)            TESTED      DOCUMENTED(12)
+DONEj) Edit profile pic (PUT - change_profile_pic)                  TESTED      DOCUMENTED(13)          
+DONEk) Edit bio (PUT - change_bio)                                  TESTED      DOCUMENTED(14)
+DONEl) Request to follow a user (POST - request_to_follow_user)     TESTED      DOCUMENTED(15)
+DONEm) Accept a follow request (PUT - accept_a_follow_request)      TESTED      DOCUMENTED(16)
+DONEn) Unfollow a user (DELETE - unfollow_user)                     TESTED      DOCUMENTED(17)
+DONEo) Get followers (GET - get_followers)                          TESTED      DOCUMENTED(18)
+DONEp) Get following (GET - get_following)                          TESTED      DOCUMENTED(19)
+DONEq) Get all profiles (GET - SELECT...)                           TESTED      DOCUMENTED(20)
+DONEr) Get profiles info (GET - get_profile_info)                   TESTED      DOCUMENTED(4)
+DONEs) Create new profile (GET - create_new_profile)                TESTED      DOCUMENTED(3)
 
 -Bulletin Board
 DONEa) View all opportunities (GET - bulletin_board)                TESTED      DOCUMENTED(21)

@@ -81,7 +81,7 @@ function get_firebase_info() {
 }
 
 function add_Skills(userID, skill) {
-  const method = "PUT";
+  const method = "POST";
   const endpoint = "/profiles/skills";
   const params = formatParams({
     id: userID,
@@ -139,17 +139,17 @@ function add_Awards(userID, awardTitle, date, img) {
   APIRequest(method, url, console.log);
 }
 
-function add_Description(userID, bio) {
-  const method = "POST";
-  const endpoint = "/profiles/bio";
-  const params = formatParams({
-    id: userID,
-    bio: bio,
-  });
-  const url = BASE_URL + endpoint + params;
+// function add_Description(userID, bio) {
+//   const method = "POST";
+//   const endpoint = "/profiles/bio";
+//   const params = formatParams({
+//     id: userID,
+//     bio: bio,
+//   });
+//   const url = BASE_URL + endpoint + params;
 
-  APIRequest(method, url, console.log);
-}
+//   APIRequest(method, url, console.log);
+// }
 
 function add_ProfilePic(username) {
   const method = "PUT";
@@ -264,26 +264,28 @@ function loadFollowers(profileObj) {
   createFollowers(follower, profileObj);
 }
 
-function addAboutMe() {
-  console.log("Add about me button clicked");
+// function addAboutMe() {
+//   console.log("Add about me button clicked");
 
-  document.getElementById("button-content").innerHTML = "";
+//   document.getElementById("button-content").innerHTML = "";
 
-  let addAboutMeHeading = document.createElement("p");
-  addAboutMeHeading.setAttribute("class", "heading3");
-  addAboutMeHeading.innerHTML = "Add a description for your bio";
-  addAboutMeHeading.setAttribute("style", "text-align: left");
+//   let addAboutMeHeading = document.createElement("p");
+//   addAboutMeHeading.setAttribute("class", "heading3");
+//   addAboutMeHeading.innerHTML = "Add a description for your bio";
+//   addAboutMeHeading.setAttribute("style", "text-align: left");
 
-  let addAboutMeInput = document.createElement("textarea");
+//   let addAboutMeInput = document.createElement("textarea");
 
-  document.getElementById("button-content").appendChild(addAboutMeHeading);
-  document.getElementById("button-content").appendChild(addAboutMeInput);
+//   document.getElementById("button-content").appendChild(addAboutMeHeading);
+//   document.getElementById("button-content").appendChild(addAboutMeInput);
 
-  $("#save").click(function () {
-    let bio = addEducationInput1.value;
-    add_Description(bio);
-  });
-}
+//   $("#save").click(function () {
+//     let bio = addEducationInput1.value;
+//     add_Description(bio);
+//   });
+// }
+
+
 let posted = false;
 function addProfilePic() {
   console.log("Add pic button clicked");
@@ -576,6 +578,7 @@ function createSkills(skills, skillsObj) {
   let skillbtn = document.createElement("button");
   skillbtn.setAttribute("class", "skillsbtn");
   skillbtn.innerHTML = `${skillsObj.skill_title}`;
+  skillbtn.id = `${skillsObj.skill_id}`;
   console.log(skillsObj);
   // console.log(skillsObj.skill_title);
 
