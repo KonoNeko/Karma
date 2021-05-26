@@ -28,6 +28,10 @@
   margin-bottom: 20px;
 }
 
+#findmain > .heading-title {
+  margin-left: 0px;
+}
+
 #no-messages-div {
   display: flex;
   flex-direction: column;
@@ -56,15 +60,25 @@
   flex-direction: column;
 }
 
-#mainmain > #messages {
+#mainmain > #messages,
+#findmain > .messages {
   margin-top: 20px;
   height: 400px; /* temp */
   width: 100%;
 }
 
-#mainmain {
+#mainmain,
+#findmain {
   width: 100%;
   margin-bottom: 20px;
+}
+
+#findmain {
+  background-color: red; /* temp */
+}
+
+#findmain > .bodytext {
+  color: #214049;
 }
 
 #sidemain {
