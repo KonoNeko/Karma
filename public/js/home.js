@@ -533,6 +533,7 @@ function createModal(postObj) {
   let commentInput = document.createElement("input");
   commentInput.type = "text";
   commentInput.setAttribute("style", "margin-left: 10px;");
+  commentInput.setAttribute("class", "commetnInput");
   commentInput.placeholder = "Add a comment...";
   commentInput.setAttribute("id", "commentInput" + post.post_id);
 
