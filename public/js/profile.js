@@ -85,6 +85,7 @@ function get_firebase_info() {
         info["username"] = user.username;
         view_profile(info.username);
         loadRecommendedConnections(info.username);
+        enableProfilePicBtn(info.username);
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
@@ -163,11 +164,11 @@ function add_Description(userID, bio) {
   APIRequest(method, url, console.log);
 }
 
-function add_ProfilePic() {
+function add_ProfilePic(username) {
   const method = "PUT";
   const endpoint = "/profiles/picture";
   const params = formatParams({
-    id: info.username,
+    id: username,
     picUrl: document.getElementById("mainProfilePic").textContent,
   });
   const url = BASE_URL + endpoint + params;
@@ -296,12 +297,11 @@ function addAboutMe() {
     add_Description(bio);
   });
 }
-
+let posted = false;
 function addProfilePic() {
   console.log("Add pic button clicked");
 
   const uploadFileButton = document.getElementById("file-upload");
-  let posted = false;
   uploadFileButton.addEventListener("change", (ev) => {
     const formdata = new FormData();
     formdata.append("image", ev.target.files[0]);
@@ -318,12 +318,13 @@ function addProfilePic() {
         document.getElementById("mainProfilePic").innerText = data.data.link;
       });
   });
-
+}
+  function enableProfilePicBtn(username){
   document.getElementById("postBtn").onclick = () => {
     let link = document.getElementById("mainProfilePic").textContent;
     if (link != "" && posted && JSON.stringify(info) != "{}") {
       console.log("Posting");
-      add_ProfilePic()
+      add_ProfilePic(username)
     } else if (!posted) {
       window.alert("Please wait for image to finish uploading");
     } else if (JSON.stringify(info) === "{}") {
@@ -339,6 +340,7 @@ function addProfilePic() {
   // $("#save").click(function () {
   //   let picUrl= addEducationInput1.value;
   //   add_ProfilePic(picUrl);
+
 }
 
 function addSkills() {
