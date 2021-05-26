@@ -19,10 +19,17 @@
 .above {
   margin-left: 5rem;
 }
-input, select, textarea{
+
+.commetnInput{
   width: 90%;
   margin-top: 10px;
+  padding: 8px 12px;
+  display: inline-block;
+  border: 1px solid #51b09f;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
+
 .postBtn{
   margin-top: 10px;
   margin-left: 10px;
