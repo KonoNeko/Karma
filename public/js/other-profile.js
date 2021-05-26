@@ -1,3 +1,22 @@
+// Your web app's Firebase configuration
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+    apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
+    authDomain: "karma-535f3.firebaseapp.com",
+    databaseURL: "https://karma-535f3-default-rtdb.firebaseio.com",
+    projectId: "karma-535f3",
+    storageBucket: "karma-535f3.appspot.com",
+    messagingSenderId: "1023587584355",
+    appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
+    measurementId: "G-VTZ4TEWFBW",
+  };
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+  
+
 let info;
 get_firebase_info();
 
@@ -71,6 +90,15 @@ function get_firebase_info() {
           info["username"] = user.username;
           loadRecommendedConnections(info.username);
           loadCurrentProfile(info.username);
+          let ready = false;
+          let enable = setInterval( () => {
+                if(ready) {
+                    enableFollowButton(info.username);
+                    clearInterval(enable);
+                } else if (document.getElementById("followbtn").innerHTML != "") {
+                    ready = true;
+                }
+            }, 500);
         })
         .catch((error) => {
           console.log(`Error getting data: ${error}`);
@@ -81,8 +109,9 @@ function get_firebase_info() {
 function loadProfile(profileObj) {
     console.log(profileObj);
     console.log(height);
+    loadProfileInfo(profileObj);
     loadAboutMe(profileObj);
-    loadFollowButton(profileObj);
+    loadFollowButton(profileObj.follow_status);
     loadPosts(profileObj);
     loadNumPosts(profileObj);
     loadSkills(profileObj);
@@ -95,19 +124,54 @@ function loadProfile(profileObj) {
     loadWhatsNew();
 }
 
-function loadFollowButton(profileObj) {
+function setButtonToUnfollow(followBtn, currentProfile, currentUser) {
+    unfollow_user(currentProfile, currentUser);
+    loadFollowButton("none");
+    followBtn.onclick = () => {
+        setButtonToFollow(followBtn, currentProfile, currentUser)
+    };
+}
+
+function setButtonToFollow(followBtn, currentProfile, currentUser) {
+    request_follow(currentProfile, currentUser);
+    loadFollowButton("requested");
+    followBtn.onclick = () => {
+        setButtonToUnfollow(followBtn, currentProfile, currentUser)
+    };
+}
+
+function enableFollowButton(currentUser) {
     let followBtn = document.getElementById('followbtn');
-    if (profileObj.follow_status === "following") {
+    let profileUsername = document.getElementById("username").textContent;
+    if (followBtn.innerHTML === "Following" || followBtn.innerHTML === "Requested") {
+        followBtn.onclick = () => {
+            setButtonToUnfollow(followBtn, profileUsername, currentUser);
+        }
+    } else if (followBtn.innerHTML === "Follow") {
+        followBtn.onclick = () => {
+            setButtonToFollow(followBtn, profileUsername, currentUser);
+        }
+    }
+}
+
+function loadFollowButton(status) {
+    let followBtn = document.getElementById('followbtn');
+    if (status === "following") {
         followBtn.style.backgroundColor = "#51b09f";
         followBtn.innerHTML = "Following";
-    } else if (profileObj.follow_status === "requested") {
+    } else if (status === "requested") {
         followBtn.style.backgroundColor = "#6b7e86";
         followBtn.innerHTML = "Requested";
     } else {
-        followBtn.onclick = () => {
-            //code for following
-        }
+        followBtn.innerHTML = "Follow";
+        followBtn.style.backgroundColor = "#0367a6";
     }
+}
+
+function loadProfileInfo(profileObj) {
+    document.getElementById("name").innerHTML = profileObj.info.full_name;
+        document.getElementById("usernamePara").innerHTML = 
+        "@" + `<span id=username>${profileObj.info.username}</span>`;
 }
 
 // READING INFORMATION FROM THE DATABASE

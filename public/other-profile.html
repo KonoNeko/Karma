@@ -170,7 +170,7 @@
   
             <div class="profile-details profile-column" id="profile-details-column">
               <p class="heading1" id="name"></p>
-              <p class="heading3" id="username" style="font-weight: bold"></p>
+              <p class="heading3" id="usernamePara" style="font-weight: bold"></p>
   
               <div id="numbersDiv">
                 <div class="numbers-column" id="numOfPostsDiv">
@@ -190,7 +190,7 @@
               </div>
   
               <div class="profile-buttons-div">
-                <button class="modalBtn" id="followbtn">Follow</button>
+                <button class="modalBtn" id="followbtn"></button>
                 <button class='modalBtn' id="msgbtn">Message</button>
               </div>
             </div>
@@ -262,6 +262,7 @@
       </div>
       <script src="js/sidebar.js"></script>
       <script src="js/signup.js"></script>
+      <script src="js/request_to_follow.js"></script>
       <script src="js/other-profile.js"></script>
       <script>
         firebase.auth().onAuthStateChanged(function (user) {
