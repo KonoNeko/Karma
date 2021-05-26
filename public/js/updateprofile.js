@@ -82,6 +82,8 @@ function aboutMeOnclick() {
     document
       .getElementById("aboutMe-Profile")
       .setAttribute("style", "display: unset");
+    document.getElementById("aboutMe-Profile").textContent = 
+      document.getElementById("aboutme-paragraph").value;
   };
 }
 
