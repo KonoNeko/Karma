@@ -73,7 +73,6 @@ function view_messages(userID) {
 }
 
 function generateMessagesAfterRequest(results) {
-  results = JSON.parse(results);
   console.log("Generating");
   console.log(results);
   if (JSON.stringify(results) === "{}") {
@@ -95,7 +94,14 @@ function APIRequest(method, url, callback) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      callback(this.responseText);
+      let response;
+      try {
+        response = JSON.parse(this.responseText);
+      } catch (err) {
+        response = this.responseText;
+      } finally {
+        callback(response);
+      }
     }
   };
 }
@@ -384,11 +390,11 @@ function findUsers() {
   document.getElementById("findmain").setAttribute("style", "display: unset");
   // document.getElementById("sidemain").setAttribute("style", "display: unset");
 
-  createNewConnections();
+  loadRecommendedConnections(info.username);
 }
 
 function loadRecommendedConnections(username) {
-  firebase_info.username = username;
+  info.username = username;
   const method = "GET";
   const endpoint = "/profiles/recommended";
   const params = `/${username}`;
@@ -398,12 +404,14 @@ function loadRecommendedConnections(username) {
 }
 
 function getRecommendedUsers(users) {
+  console.log("Users " + users);
   for (let user of users) {
+    console.log(user);
     createNewConnections(user);
   }
 }
 
-function createNewConnections() {
+function createNewConnections(user) {
   let findnewconnectionsDiv = document.getElementById("findnewconnections");
 
   let newConnectionsDiv = document.createElement("div");
@@ -413,10 +421,44 @@ function createNewConnections() {
   let profilePicImg = document.createElement("img");
 
   profilePicImgDiv.setAttribute("class", "profilepic profilePicImgDiv");
-  profilePicImgDiv.setAttribute("style", "padding-bottom: 10px; width: 20%");
-  profilePicImg.setAttribute.src = "./images/placeholder.png";
+  profilePicImgDiv.setAttribute(
+    "style",
+    `background-image: url("${user.profile_pic_url}")`
+  );
 
   let nameAndUserName = document.createElement("div");
   nameAndUserName.setAttribute("class", "name-and-userName");
   nameAndUserName.setAttribute("style", "width: 50%;");
+
+  let userName = document.createElement("p");
+  userName.setAttribute("class", "userNames");
+  userName.innerHTML = user.full_name;
+
+  let userNameAt = document.createElement("p");
+  userNameAt.setAttribute("class", "userAt");
+  userNameAt.innerHTML = `@<span id="recommendedUser${user.profile_id}">${user.username}</span>`;
+
+  let followUserDiv = document.createElement("div");
+  let followUserButton = document.createElement("button");
+
+  followUserDiv.setAttribute("class", "followUser");
+  followUserDiv.setAttribute("style", "width: 40%");
+  followUserButton.innerHTML = "MESSAGE";
+  followUserButton.setAttribute("style", "width: 70%; min-width: 100px;");
+  followUserButton.setAttribute("class", "followUserButton");
+
+  nameAndUserName.appendChild(userName);
+  nameAndUserName.appendChild(userNameAt);
+  profilePicImgDiv.appendChild(profilePicImg);
+  followUserDiv.appendChild(followUserButton);
+
+  newConnectionsDiv.appendChild(profilePicImgDiv);
+  newConnectionsDiv.appendChild(nameAndUserName);
+  newConnectionsDiv.appendChild(followUserDiv);
+
+  let hr = document.createElement("hr");
+  hr.setAttribute("style", "margin-top: 20px; margin-bottom: 20px");
+
+  findnewconnectionsDiv.appendChild(newConnectionsDiv);
+  findnewconnectionsDiv.appendChild(hr);
 }
