@@ -1,3 +1,34 @@
+function APIRequest(method, url, callback) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let response;
+      try {
+        response = JSON.parse(this.responseText);
+      } catch (err) {
+        response = this.responseText;
+      } finally {
+        callback(response);
+      }
+    }
+  };
+}
+
+function editDescription(userID, bio) {
+  const method = "PUT";
+  const endpoint = "/profiles/bio";
+  const params = formatParams({
+    id: userID,
+    bio: bio,
+  });
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, console.log);
+}
+
 var inputs = document.getElementsByClassName("skillsinput");
 for (index = 0; index < inputs.length; ++index) {
   inputs[index].addEventListener("input", resizeInput);
@@ -42,7 +73,9 @@ function aboutMeOnclick() {
   };
 
   document.getElementById("aboutme-edit").onclick = function () {
-    /* BACKEND GUY DO UR MAGIC HERE */
+    let newBio = document.getElementById("aboutme-paragraph").value;
+    console.log(firebase_info.username + ", this is your new bio " + newBio);
+    editDescription(firebase_info.username, newBio);
   };
 }
 
