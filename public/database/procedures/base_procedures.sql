@@ -259,8 +259,54 @@ IN new_title CHAR(50))
 BEGIN
     INSERT IGNORE INTO skills (skill_title)
     VALUES (new_title);
-    INSERT INTO profile_skills(profile_id, skill_id)
-    VALUES ((SELECT get_user_id(current_username)), (SELECT skill_id FROM skills WHERE skill_title = new_title));
+    IF (SELECT ((SELECT COUNT(profile_skill_id) FROM profile_skills WHERE skill_id = 1 AND profile_id = 1) = 0)) THEN
+        INSERT INTO profile_skills(profile_id, skill_id)
+        VALUES ((SELECT get_user_id(current_username)), (SELECT skill_id FROM skills WHERE skill_title = new_title));
+    END IF;
+END//
+DELIMITER ;
+
+
+/*
+Connects a skill entry with the associated username.
+
+Example of the procedure being called:
+CALL new_skill_entry("username", "skill");
+*/
+DROP PROCEDURE IF EXISTS new_skill_entry;
+DELIMITER //
+CREATE PROCEDURE new_skill_entry(IN current_username CHAR(50),
+IN new_title CHAR(50))
+BEGIN
+    INSERT IGNORE INTO skills (skill_title)
+    VALUES (new_title);
+    IF (SELECT ((SELECT COUNT(profile_skill_id) FROM profile_skills WHERE skill_id = 1 AND profile_id = 1) = 0)) THEN
+        INSERT INTO profile_skills(profile_id, skill_id)
+        VALUES ((SELECT get_user_id(current_username)), (SELECT skill_id FROM skills WHERE skill_title = new_title));
+    END IF;
+END//
+DELIMITER ;
+
+
+/*
+Connects a skill entry with the associated username.
+
+Example of the procedure being called:
+CALL edit_skill_entry("username", skill_id, "new_title");
+*/
+DROP PROCEDURE IF EXISTS edit_skill_entry;
+DELIMITER //
+CREATE PROCEDURE edit_skill_entry(IN current_username CHAR(50), IN current_skill INTEGER,
+IN new_title CHAR(50))
+BEGIN
+    INSERT IGNORE INTO skills (skill_title)
+    VALUES (new_title);
+    IF (SELECT ((SELECT COUNT(profile_skill_id) FROM profile_skills WHERE skill_id = current_skill AND profile_id = get_user_id(current_username)) > 0)) THEN
+        UPDATE profile_skills
+        SET skill_id = (SELECT skill_id FROM skills WHERE skill_title = new_title)
+        WHERE profile_id = get_user_id(current_username)
+        AND skill_id = current_skill;
+    END IF;
 END//
 DELIMITER ;
 
