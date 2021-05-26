@@ -280,7 +280,7 @@ IN new_title CHAR(50))
 BEGIN
     INSERT IGNORE INTO skills (skill_title)
     VALUES (new_title);
-    IF (SELECT ((SELECT COUNT(profile_skill_id) FROM profile_skills WHERE skill_id = 1 AND profile_id = 1) = 0)) THEN
+    IF (SELECT ((SELECT COUNT(profile_skill_id) FROM profile_skills WHERE skill_id = (SELECT skill_id FROM skills WHERE skill_title = new_title) AND profile_id = get_user_id(current_username)) = 0)) THEN
         INSERT INTO profile_skills(profile_id, skill_id)
         VALUES ((SELECT get_user_id(current_username)), (SELECT skill_id FROM skills WHERE skill_title = new_title));
     END IF;
