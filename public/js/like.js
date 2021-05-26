@@ -2,11 +2,13 @@ const URL2 = " https://marlonfajardo.ca/karma/v1/post";
 const method2 = "POST";
 const endpoint = "/like";
 
+console.log(done_viewing);
+
 function like(id) {
   let heart = document.getElementById(id);
   let postId = id.slice(-1);
 
-  console.log(postId);
+  console.log("YOU ARE NOW ALLOWED TO CLICK LIKE " + postId);
 
   // LIKE
   if (heart.className == "far fa-heart likeBtn") {
@@ -19,8 +21,7 @@ function like(id) {
     console.log("username: " + info.username);
     console.log("post id: " + postId);
     addLikes(info.username, postId);
-
-    changeLikesText(postId);
+    changeLikesText(postId, "add");
   }
 
   // UNLIKE
@@ -34,27 +35,24 @@ function like(id) {
     console.log("username: " + info.username);
     console.log("post id: " + postId);
 
-    changeLikesText(postId);
     deleteLikes(info.username, postId);
+    changeLikesText(postId, "subtract");
   }
 }
 
-function changeLikesText(id) {
-  getPost().then((posts) => {
-    let likesText = document.getElementById("likes" + id);
+function changeLikesText(id, mode) {
+  let likesText = document.getElementById("likes" + id.slice(-1));
+  let likesTextContent = likesText.textContent.slice(
+    0,
+    likesText.textContent.indexOf(" ")
+  );
 
-    let likedPostIndex = 0;
-    for (i = 0; i < posts.length; i++) {
-      if (posts[i].post_info.post_id == id) {
-        likedPostIndex = i;
-      }
-    }
-
-    likesText.innerHTML =
-      posts[likedPostIndex].post_info.likes != 1
-        ? `${posts[likedPostIndex].post_info.likes} likes`
-        : `${posts[likedPostIndex].post_info.likes} like`;
-  });
+  let likesTextNumber =
+    parseInt(likesTextContent, 10) + (mode == "add" ? 1 : -1);
+  likesText.innerHTML =
+    likesTextNumber != 1
+      ? `${likesTextNumber} likes`
+      : `${likesTextNumber} like`;
 }
 
 //@return list of users
@@ -76,7 +74,6 @@ function addLikes(id, post) {
 
   APIRequest(method2, url, console.log);
   console.log("likes" + post);
-  changeLikesText("likes" + post);
 }
 
 function deleteLikes(id, post) {
@@ -90,7 +87,6 @@ function deleteLikes(id, post) {
   let url = URL2 + endpoint + params;
 
   APIRequest(methoddelete, url, console.log);
-  changeLikesText();
 }
 
 function addComment(id, post, msg) {
@@ -105,5 +101,8 @@ function addComment(id, post, msg) {
   let commentendpoint = "comment";
 
   let url = commenturl + commentendpoint + params;
-  APIRequest(method, url, console.log);
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    window.location.reload();
+  });
 }

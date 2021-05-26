@@ -22,6 +22,8 @@ let info = {};
 let username;
 get_firebase_info();
 
+let done_viewing = false;
+
 const result = [
   {
     post_info: {
@@ -188,6 +190,8 @@ function view_social_feed(userID) {
   // }
   APIRequest(method, url, loopThroughSocialPosts);
   changeLikeIconForLikedPosts();
+
+  done_viewing = true;
 }
 
 function loopThroughSocialPosts(results) {
@@ -383,6 +387,8 @@ function createPost(postObj) {
   likeIcon.onclick = function () {
     like(this.id);
   };
+  console.log("LIKE BUTTON " + postObj.post_info.post_id + " CREATED");
+
   let commentIcon = document.createElement("i");
   commentIcon.setAttribute("class", "far fa-comment");
   commentIcon.setAttribute(
@@ -521,18 +527,37 @@ function createModal(postObj) {
       ? `${post.likes} users like this`
       : `${post.likes} user likes this`;
 
-  let commentForm = document.createElement("form");
+  let commentForm = document.createElement("div");
   commentForm.className = "commentForm";
 
   let commentInput = document.createElement("input");
   commentInput.type = "text";
   commentInput.setAttribute("style", "margin-left: 10px;");
   commentInput.placeholder = "Add a comment...";
+  commentInput.setAttribute("id", "commentInput" + post.post_id);
 
   let commentSubmit = document.createElement("button");
   commentSubmit.setAttribute("style", "margin-left: 10px;");
-  commentSubmit.type = "submit";
+  commentSubmit.type = "button";
   commentSubmit.innerText = "Post";
+  commentSubmit.setAttribute("id", "addCommentButton" + post.post_id);
+  commentSubmit.onclick = function () {
+    let id = info.username;
+    let postpost = post.post_id;
+    let message = document.getElementById("commentInput" + post.post_id).value;
+
+    alert(
+      "username: " +
+        id +
+        "\npost: " +
+        postpost +
+        "\nmessage: " +
+        message +
+        "\nAdding comment..."
+    );
+
+    addComment(id, postpost, message);
+  };
 
   commentForm.appendChild(commentInput);
   commentForm.appendChild(commentSubmit);
