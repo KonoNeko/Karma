@@ -22,6 +22,8 @@ let info = {};
 let username;
 get_firebase_info();
 
+let done_viewing = false;
+
 const result = [
   {
     post_info: {
@@ -188,6 +190,8 @@ function view_social_feed(userID) {
   // }
   APIRequest(method, url, loopThroughSocialPosts);
   changeLikeIconForLikedPosts();
+
+  done_viewing = true;
 }
 
 function loopThroughSocialPosts(results) {
@@ -383,6 +387,8 @@ function createPost(postObj) {
   likeIcon.onclick = function () {
     like(this.id);
   };
+  console.log("LIKE BUTTON " + postObj.post_info.post_id + " CREATED");
+
   let commentIcon = document.createElement("i");
   commentIcon.setAttribute("class", "far fa-comment");
   commentIcon.setAttribute(
