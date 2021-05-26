@@ -169,8 +169,8 @@ function loadModal(oppObj) {
   btn.id = "modalButton";
   div.id = "applyDiv2";
   close.className = "close";
-  title.className = "heading1";
-  location.className = "heading2";
+  title.className = "h1";
+  location.className = "h2";
   description.className = "bodytext";
   btn.className = "applyBtn";
   div.className = "btnHolder"
@@ -239,8 +239,8 @@ function loadApplication(content, oppObj) {
   messageText.id = "message" + oppObj.opportunity_id;
   div.id = "btnDiv"
 
-  title.className = "heading1";
-  location.className = "heading2";
+  title.className = "h1";
+  location.className = "h2";
 
   btn.className = "applyBtn";
   nameLabel.className = "applicationLabel";
