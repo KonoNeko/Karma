@@ -329,10 +329,11 @@ function generateOpportunity(oppObj, category) {
 
   let opportunityImgDiv = document.createElement("div");
   opportunityImgDiv.setAttribute("class", "bulletinboardpicture");
-  opportunityImgDiv.setAttribute("style", "padding-bottom: 10px");
+  opportunityImgDiv.setAttribute("style", "padding-bottom: 10px" );
 
   let opportunityImg = document.createElement("img");
   opportunityImg.src = oppObj.image_url;
+  opportunityImg.setAttribute("style", "width: 160px; height: 110px")
   opportunityImgDiv.appendChild(opportunityImg);
 
   let opportunityLocation = document.createElement("p");

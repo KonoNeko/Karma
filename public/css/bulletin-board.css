@@ -209,6 +209,11 @@
     flex: none;
   }
 
+  /* .imgsize{
+    height: 110px;
+    width: 160px;
+  }
+   */
   .modal-img {
     height: 200px;
     margin-bottom: 10px;
