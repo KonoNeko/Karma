@@ -225,8 +225,14 @@ function APIRequest(method, url, callback) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
-      callback(this.responseText);
+      let response;
+      try {
+        response = JSON.parse(this.responseText);
+      } catch (err) {
+        response = this.responseText;
+      } finally {
+        callback(response);
+      }
     }
   };
 }
@@ -401,6 +407,7 @@ function createPost(postObj) {
   let caption = document.createElement("p");
   let comments = document.createElement("p");
   likes.setAttribute("class", "likes bodytitle");
+  likes.setAttribute("id", "likes" + postObj.post_info.post_id);
   caption.setAttribute("class", "caption");
   comments.setAttribute("class", "comments smalltext");
   comments.id = "comment-text" + postObj.post_info.post_id;
