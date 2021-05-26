@@ -19,7 +19,10 @@ const db = firebase.firestore();
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
 let info = {};
+let username;
 get_firebase_info();
+
+let done_viewing = false;
 
 const result = [
   {
@@ -126,6 +129,7 @@ async function get_firebase_info() {
         let user = doc.data();
         console.log(user);
         info.fullName = user.fullName;
+        username = user.username;
         info.email = user.email;
         info.username = user.username;
         view_social_feed(info.username);
@@ -185,6 +189,9 @@ function view_social_feed(userID) {
   //   createPost(result[i]);
   // }
   APIRequest(method, url, loopThroughSocialPosts);
+  changeLikeIconForLikedPosts();
+
+  done_viewing = true;
 }
 
 function loopThroughSocialPosts(results) {
@@ -380,6 +387,8 @@ function createPost(postObj) {
   likeIcon.onclick = function () {
     like(this.id);
   };
+  console.log("LIKE BUTTON " + postObj.post_info.post_id + " CREATED");
+
   let commentIcon = document.createElement("i");
   commentIcon.setAttribute("class", "far fa-comment");
   commentIcon.setAttribute(
@@ -407,6 +416,7 @@ function createPost(postObj) {
   let caption = document.createElement("p");
   let comments = document.createElement("p");
   likes.setAttribute("class", "likes bodytitle");
+  likes.setAttribute("id", "likes" + postObj.post_info.post_id);
   caption.setAttribute("class", "caption");
   comments.setAttribute("class", "comments smalltext");
   comments.id = "comment-text" + postObj.post_info.post_id;
@@ -517,18 +527,37 @@ function createModal(postObj) {
       ? `${post.likes} users like this`
       : `${post.likes} user likes this`;
 
-  let commentForm = document.createElement("form");
+  let commentForm = document.createElement("div");
   commentForm.className = "commentForm";
 
   let commentInput = document.createElement("input");
   commentInput.type = "text";
   commentInput.setAttribute("style", "margin-left: 10px;");
   commentInput.placeholder = "Add a comment...";
+  commentInput.setAttribute("id", "commentInput" + post.post_id);
 
   let commentSubmit = document.createElement("button");
   commentSubmit.setAttribute("style", "margin-left: 10px;");
-  commentSubmit.type = "submit";
+  commentSubmit.type = "button";
   commentSubmit.innerText = "Post";
+  commentSubmit.setAttribute("id", "addCommentButton" + post.post_id);
+  commentSubmit.onclick = function () {
+    let id = info.username;
+    let postpost = post.post_id;
+    let message = document.getElementById("commentInput" + post.post_id).value;
+
+    alert(
+      "username: " +
+        id +
+        "\npost: " +
+        postpost +
+        "\nmessage: " +
+        message +
+        "\nAdding comment..."
+    );
+
+    addComment(id, postpost, message);
+  };
 
   commentForm.appendChild(commentInput);
   commentForm.appendChild(commentSubmit);
@@ -551,6 +580,36 @@ function createModal(postObj) {
     post.post_id
   );
   displayComments(comments, post.post_id);
+}
+
+//@return list of users
+async function getPostForOnlyUser() {
+  const URL_POSTS = " https://marlonfajardo.ca/karma/v1/posts/" + "karma";
+  let response = await fetch(URL_POSTS);
+  let data = await response.json();
+  return data;
+}
+
+function changeLikeIconForLikedPosts() {
+  getPostForOnlyUser().then((posts) => {
+    console.log("POSTS: " + posts);
+
+    for (i = 0; i < posts.length; i++) {
+      if (posts[i].post_info.is_liked == 1) {
+        let likedPostsLikeIconId = "likeBtn" + posts[i].post_info.post_id;
+        let likedPostsLikeIcon = document.getElementById(likedPostsLikeIconId);
+
+        console.log(likedPostsLikeIcon);
+        console.log("likeBtn" + posts[i].post_info.post_id);
+
+        likedPostsLikeIcon.setAttribute("class", "fas fa-heart likeBtn");
+        likedPostsLikeIcon.setAttribute(
+          "style",
+          "font-size: 24px; color: #B05A5F; margin-top: 10px; margin-bottom: 10px; margin-right:10px; "
+        );
+      }
+    }
+  });
 }
 
 function hideModal(id) {

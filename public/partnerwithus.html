@@ -3,7 +3,10 @@
 <head>
   <!-- FAVICON -->
   <link rel="icon" type="image/png" href="res/logo0_colored.png" />
-
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
   <title>Partner with us</title>
   <link rel="stylesheet" href="css/partnerwithus.css" />
   <link rel="stylesheet" href="css/base.css" />
@@ -27,7 +30,7 @@
     <a href="partnerwithus.html">Partner with us</a>
     <a href="donate.html">Donate</a>
     <a href="reportbug.html">Report a bug</a>
-    <a id="btn-logout" href="index.html">Logout</a>
+    <a id="btn-logout" onclick="logout()">Logout</a>
   </div>
 
   <navbar class="nav">
@@ -118,7 +121,7 @@
             <a href="contact-us.html">Contact us</a>
             <a href="partnerwithus.html">Partner with us</a>
             <a href="donate.html">Donate</a>
-            <a id="btn-logout" href="index.html">Logout</a>
+            <a id="btn-logout" onclick="logout()">Logout</a>
           </div>
         </a>
       </li>
@@ -230,6 +233,8 @@
 </body>
 
 <script src="js/partnerwithus.js"></script>
+<script src="js/signup.js"></script>
+<script src="js/signout.js"></script>
 <script>
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

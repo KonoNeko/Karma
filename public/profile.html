@@ -3,7 +3,10 @@
   <head>
     <!-- FAVICON -->
     <link rel="icon" type="image/png" href="res/logo0_colored.png" />
-
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
     <title>Profile</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/profile-reworked.css" />
@@ -28,7 +31,7 @@
       <a href="partnerwithus.html">Partner with us</a>
       <a href="donate.html">Donate</a>
       <a href="reportbug.html">Report a bug</a>
-      <a id="btn-logout" href="index.html">Logout</a>
+      <a id="btn-logout" onclick="loadout()">Logout</a>
     </div>
 
     <navbar class="nav">
@@ -120,7 +123,7 @@
               <a href="partnerwithus.html">Partner with us</a>
               <a href="donate.html">Donate</a>
               <a href="reportbug.html">Report a bug</a>
-              <a id="btn-logout" href="index.html">Logout</a>
+              <a id="btn-logout" onclick="loagout()">Logout</a>
             </div>
           </a>
         </li>
@@ -372,8 +375,8 @@
   <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
-  <script src="js/signup.js"></script>
-  <script>
+  <!-- <script src="js/signup.js"></script> -->
+  <!-- <script>
     $("#btn-logout").click(function logout() {
               firebase.auth().signOut().then(function() {
                 // Sign-out successful.
@@ -383,9 +386,12 @@
               });
             }
     );
-  </script>
+  </script> -->
+  
   <script src="js/profile.js"></script>
   <script src="js/viewapplications.js"></script>
+  <script src="js/signup.js"></script>
+<script src="js/signout.js"></script>
   <script>
     firebase.auth().onAuthStateChanged(function (user) {
       if (!user) {

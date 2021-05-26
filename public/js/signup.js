@@ -1,3 +1,36 @@
+const BASE_URL = "https://marlonfajardo.ca/karma/v1";
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+  apiKey: "AIzaSyA5oEJUCOc3V4zgGI9-wwMWmd-P6opmnWI",
+  authDomain: "karma-535f3.firebaseapp.com",
+  databaseURL: "https://karma-535f3-default-rtdb.firebaseio.com",
+  projectId: "karma-535f3",
+  storageBucket: "karma-535f3.appspot.com",
+  messagingSenderId: "1023587584355",
+  appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
+  measurementId: "G-VTZ4TEWFBW",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+async function APIRequest(method, url) {
+  console.log(method + ": " + url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(method, url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let result = JSON.parse(this.responseText);
+      console.log(result);
+      return result;
+    }
+  };
+}
+
 function formatParams(params) {
   let string = "?";
   let keys = Object.keys(params);
@@ -130,27 +163,3 @@ $("#btn-signup").click(function () {
     window.alert("Please fill out all fields.");
   }
 });
-
-$("#btn-logout").click(function logout() {
-  firebase
-    .auth()
-    .signOut()
-    .then(function () {
-      // Sign-out successful.
-      alert("sign out success");
-      location.href = "sign-up.html";
-    })
-    .catch(function (error) {
-      // An error happened.
-    });
-});
-
-//
-// const logout = document.querySelector("#logout");
-// logout.addEventListener("click", (e) =>{
-//   e.preventDefault();
-//   firebase.auth.signOut().then(()=>{
-//     alert("user sign out")
-//
-//   })
-// })

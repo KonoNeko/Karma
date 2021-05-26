@@ -161,24 +161,24 @@ function loadModal(oppObj) {
   let location = document.createElement("p");
   let description = document.createElement("p");
   let btn = document.createElement("btn");
-
+  let div = document.createElement("div")
   close.id = "close" + oppObj.opportunity_id;
   title.id = "modalRole";
   location.id = "modalLocation";
   description.id = "modalDescription";
   btn.id = "modalButton";
-
+  div.id = "applyDiv2";
   close.className = "close";
   title.className = "heading1";
   location.className = "heading2";
   description.className = "bodytext";
   btn.className = "applyBtn";
-  
+  div.className = "btnHolder"
   close.innerHTML = "&times;";
   title.innerText = oppObj.title;
   location.innerText = "Posted By " + oppObj.employer;
   description.innerHTML = oppObj.description + "<br>" + oppObj.requirements;
-  btn.innerText = "Apply to this opportunity";
+  btn.innerText = "Apply";
 
 
   btn.onclick = () => {
@@ -193,8 +193,8 @@ function loadModal(oppObj) {
   textDiv.appendChild(title);
   textDiv.appendChild(location);
   textDiv.appendChild(description);
-  textDiv.appendChild(btn);
-
+  textDiv.appendChild(div);
+  div.appendChild(btn);
   content.appendChild(img);
   content.appendChild(textDiv);
   modal.appendChild(content);
@@ -227,6 +227,7 @@ function loadApplication(content, oppObj) {
   let phoneText = document.createElement("input");
   let messageLabel = document.createElement("p");
   let messageText = document.createElement("textarea");
+  let div = document.createElement("div")
   let btn = document.createElement("btn");
 
   title.id = "modalRole";
@@ -236,6 +237,7 @@ function loadApplication(content, oppObj) {
   emailText.id = "email" + oppObj.opportunity_id;
   phoneText.id = "phone" + oppObj.opportunity_id;
   messageText.id = "message" + oppObj.opportunity_id;
+  div.id = "btnDiv"
 
   title.className = "heading1";
   location.className = "heading2";
@@ -249,7 +251,7 @@ function loadApplication(content, oppObj) {
   emailText.className = "applicationText";
   phoneText.className = "applicationInput";
   messageText.className = "applicationTextArea";
-
+  div.className= "btnHolder";
   title.innerText = `Application for ${oppObj.title} with ${oppObj.employer}`;
   nameLabel.innerHTML = "Name: ";
   emailLabel.innerHTML = "Email: ";
@@ -274,7 +276,8 @@ function loadApplication(content, oppObj) {
   textModal.appendChild(phoneText);
   textModal.appendChild(messageLabel);
   textModal.appendChild(messageText);
-  textModal.appendChild(btn);
+  textModal.appendChild(div);
+  div.appendChild(btn);
   textModal.style.textAlign = "left";
 
 

@@ -81,8 +81,6 @@
   flex-direction: row;
   flex-wrap: nowrap;
   margin-top: 24px;
-  align-items: center;
-  justify-items: center;
   margin-bottom: 20px;
 }
 
@@ -105,7 +103,8 @@
   flex-direction: column;
   padding-left: 10px;
   padding-right: 10px;
-  justify-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
 #image-column {
@@ -221,8 +220,39 @@ input:focus {
 }
 
 .profilepicture {
-  width: 50%;
+  position: relative;
+  width: 20%;
+  /* desired width */
+  margin: 5px;
+}
+
+.profilepicture:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+  /* initial ratio of 1:1*/
+}
+
+img {
+  min-width: 100%;
   height: auto;
+  object-fit: cover;
+}
+
+.profilepicture > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #333;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .skillsbtn {

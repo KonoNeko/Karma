@@ -32,7 +32,7 @@
     <a href="partnerwithus.html">Partner with us</a>
     <a href="donate.html">Donate</a>
     <a href="reportbug.html">Report a bug</a>
-    <a id="btn-logout" href="index.html">Logout</a>
+    <a id="btn-logout" onclick="logout()">Logout</a>
   </div>
 
   <navbar class="nav">
@@ -124,7 +124,7 @@
             <a href="partnerwithus.html">Partner with us</a>
             <a href="donate.html">Donate</a>
             <a href="reportbug.html">Report a bug</a>
-            <a id="btn-logout" href="index.html">Logout</a>
+            <a id="btn-logout" onclick="logout()">Logout</a>
           </div>
         </a>
       </li>
@@ -183,7 +183,7 @@
           >
         </div>
 
-        <button id="btn-logout"> Logout</button>
+        <button id="btn-logout" onclick="logout()"> Logout</button>
 
       </div>
     </div>
@@ -201,13 +201,4 @@
     document.getElementById("mySidenav").style.width = "0";
   }
 </script>
-<script>
-$("#btn-logout").click(function logout() {
-  firebase.auth().signOut().then(function() {
-      // Sign-out successful.
-      location.href = 'sign-up.html';
-    }).catch(function(error) {
-      // An error happened.
-    });
-}); 
-</script>
+<script src="js/signout.js"></script>
