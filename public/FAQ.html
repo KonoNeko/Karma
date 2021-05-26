@@ -246,6 +246,16 @@
                   </div>
                   </div> 
 
+                  <div class="dropdownn">
+                    <button class="dropbtn" onclick="dropsix()"> <b>Question:</b> How do I create a post?
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-contentt" id="drop6">
+                      <p id="para"><b>Answer:</b> When you are on the home page, click on the create a post icon and then choose a image and caption and click post.</p>
+                     
+                    </div>
+                    </div> 
+
 
     <script>
         /* When the user clicks on the button, 
@@ -329,6 +339,22 @@
         window.onclick = function(e) {
           if (!e.target.matches('.dropbtn')) {
           var myDropdown = document.getElementById("drop5");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
+
+
+
+        function dropsix() {
+          document.getElementById("drop6").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropbtn')) {
+          var myDropdown = document.getElementById("drop6");
             if (myDropdown.classList.contains('show')) {
               myDropdown.classList.remove('show');
             }
