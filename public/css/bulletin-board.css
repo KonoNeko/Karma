@@ -97,7 +97,7 @@
 .modal-img {
   width: 60%;
   background-position: 50% 50%;
-  background-size: auto 100%;
+  background-size: cover;
 }
 
 .modal-text {
@@ -109,15 +109,16 @@
 .btnHolder{
   text-align: center;
   position: absolute;
-  bottom: 40px;
+  bottom: 30px;
   flex: inherit;
-
+  left: 60%;
+  right: 10%;
 }
 .applyBtn{
   border: none;
   color: #eff0f3;
   background-color: #0367a6;
-  padding: 20px 40px;
+  padding: 15px 20px;
   font-family: "Montserrat";
   font-size: 18px;
   border-radius: 12px;
@@ -158,22 +159,40 @@
 }
 
 @media screen and (max-width: 550px) {
+  .modal-content{
+    flex-direction: column;
+    height: 80%;
+  }
   .content {
     margin-left: 0px;
     margin-bottom: 100px;
   }
 
+  .btnHolder{
+  text-align: center;
+  position: fixed;
+  width: max-content;
+  height: max-content;
+  bottom: 20px;
+  }
   .heading1 {
-    width: 75%;
+    /* width: 75%; */
   }
+  .applyBtn{
 
+  }
   .bodytext {
-    width: 100%;
-    padding-right: 10px;
+    /* width: 100%;
+    padding-right: 10px; */
+    margin:none;
   }
-
+  .modal-text{
+    padding: 0;
+  }
   .modal-column {
+    flex: none;
     width: 100%;
+    flex: none;
   }
 
   .modal-img {

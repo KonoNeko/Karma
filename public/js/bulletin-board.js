@@ -178,7 +178,7 @@ function loadModal(oppObj) {
   title.innerText = oppObj.title;
   location.innerText = "Posted By " + oppObj.employer;
   description.innerHTML = oppObj.description + "<br>" + oppObj.requirements;
-  btn.innerText = "Apply to this opportunity";
+  btn.innerText = "Apply";
 
 
   btn.onclick = () => {
