@@ -32,19 +32,6 @@ let height =
   document.documentElement.clientHeight ||
   document.body.clientHeight;
 
-window.onresize = function () {
-  location.reload();
-  width =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-
-  height =
-    window.innerHeight ||
-    document.documentElement.clientHeight ||
-    document.body.clientHeight;
-};
-
 function view_profile(userID) {
   const method = "GET";
   const endpoint = "/profiles";
