@@ -8,6 +8,9 @@
 .above {
   margin-left: 5rem;
 }
+#photo{
+  height: 500px;
+}
 
 
 .flex-main {
