@@ -12,6 +12,11 @@
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/FAQ.css">
     <link rel="stylesheet" href="css/base.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
    
   </head>
   <body>
@@ -182,7 +187,8 @@
 </div> -->
 
 <div class="dropdownn">
-    <button class="dropbtn" onclick="myFunction()"> <b>Question:</b> How do I apply for a volunteering oppurtunity? ▼
+    <button class="dropbtn" onclick="myFunction()"> <b>Question:</b> How do I apply for a volunteering oppurtunity? 
+      <i class="fas fa-caret-square-down"></i>
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-contentt" id="myDropdown">
@@ -191,7 +197,7 @@
     </div>
     </div> 
     <div class="dropdownn">
-        <button class="dropbtn" onclick="dropone()"> <b>Question:</b> How long will it take to get a response from the organziation? ▼
+        <button class="dropbtn" onclick="dropone()"> <b>Question:</b> How long will it take to get a response from the organziation? 
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-contentt" id="drop1">
@@ -201,14 +207,54 @@
         </div> 
 
         <div class="dropdownn">
-            <button class="dropbtn" onclick="droptwo()"> <b>Question:</b> Can organziation view my profile? ▼
+            <button class="dropbtn" onclick="droptwo()"> <b>Question:</b> Can organziations view my profile? 
               <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-contentt" id="drop2">
-              <p id="para"><b>Answer:</b> Yes, organziations can view your profile and see your resume </p>
+              <p id="para"><b>Answer:</b> Yes, organziations can view your profile and see your resume. </p>
              
             </div>
             </div> 
+
+            <div class="dropdownn">
+              <button class="dropbtn" onclick="dropthree()"> <b>Question:</b> How can I change my profile picture? 
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-contentt" id="drop3">
+                <p id="para"><b>Answer:</b> Click on the image icon, choose a picture you would like as your profile picture and click the post button.</p>
+               
+              </div>
+              </div> 
+
+              <div class="dropdownn">
+                <button class="dropbtn" onclick="dropfour()"> <b>Question:</b> How do I start a conversation with someone? 
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-contentt" id="drop4">
+                  <p id="para"><b>Answer:</b> You can simply click on the messages icon in the nav bar and start a conversation, or you can search for a user and click on the message button.</p>
+                 
+                </div>
+                </div> 
+
+                <div class="dropdownn">
+                  <button class="dropbtn" onclick="dropfive()"> <b>Question:</b> How do I logout from my account?
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-contentt" id="drop5">
+                    <p id="para"><b>Answer:</b> In order to logout from your account, you must go to the settings page and click on the logout button which is located on the bottom of the screen.</p>
+                   
+                  </div>
+                  </div> 
+
+                  <div class="dropdownn">
+                    <button class="dropbtn" onclick="dropsix()"> <b>Question:</b> How do I create a post?
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-contentt" id="drop6">
+                      <p id="para"><b>Answer:</b> When you are on the home page, click on the create a post icon and then choose a image and caption and click post.</p>
+                     
+                    </div>
+                    </div> 
 
 
     <script>
@@ -258,13 +304,57 @@
         }
 
         function dropthree() {
-          document.getElementById("drop1").classList.toggle("show");
+          document.getElementById("drop3").classList.toggle("show");
         }
         
         // Close the dropdown if the user clicks outside of it
         window.onclick = function(e) {
           if (!e.target.matches('.dropbtn')) {
-          var myDropdown = document.getElementById("drop1");
+          var myDropdown = document.getElementById("drop3");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
+
+        function dropfour() {
+          document.getElementById("drop4").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropbtn')) {
+          var myDropdown = document.getElementById("drop4");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
+
+        function dropfive() {
+          document.getElementById("drop5").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropbtn')) {
+          var myDropdown = document.getElementById("drop5");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
+
+
+
+        function dropsix() {
+          document.getElementById("drop6").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropbtn')) {
+          var myDropdown = document.getElementById("drop6");
             if (myDropdown.classList.contains('show')) {
               myDropdown.classList.remove('show');
             }

@@ -533,12 +533,14 @@ function createModal(postObj) {
   let commentInput = document.createElement("input");
   commentInput.type = "text";
   commentInput.setAttribute("style", "margin-left: 10px;");
+  commentInput.setAttribute("class", "commetnInput");
   commentInput.placeholder = "Add a comment...";
   commentInput.setAttribute("id", "commentInput" + post.post_id);
 
   let commentSubmit = document.createElement("button");
   commentSubmit.setAttribute("style", "margin-left: 10px;");
   commentSubmit.type = "button";
+  commentSubmit.setAttribute("class", "postBtn");
   commentSubmit.innerText = "Post";
   commentSubmit.setAttribute("id", "addCommentButton" + post.post_id);
   commentSubmit.onclick = function () {

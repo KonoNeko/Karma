@@ -20,6 +20,29 @@
   margin-left: 5rem;
 }
 
+.commetnInput {
+  width: 90%;
+  margin-top: 10px;
+  padding: 8px 12px;
+  display: inline-block;
+  border: 1px solid #51b09f;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.postBtn {
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: #0367a6;
+  padding: 8px 14px;
+  border: none;
+  color: #eff0f3;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 12px;
+  border-radius: 10px;
+  outline: none;
+}
 .flex-main {
   margin-left: 5rem;
   display: flex;
@@ -124,7 +147,7 @@
   line-height: 19px;
   /* identical to box height */
 
-  color: #000000;
+  color: #214049;
 }
 
 .timeAndReply {
@@ -138,7 +161,7 @@
   line-height: 14px;
   /* identical to box height */
 
-  color: #000000;
+  color: #214049;
 }
 
 .comment {
@@ -161,7 +184,7 @@
   font-size: 14px;
   line-height: 19px;
 
-  color: #000000;
+  color: #214049;
   word-wrap: break-word;
 }
 
@@ -349,7 +372,7 @@
   font-size: 14px;
   /* identical to box height */
 
-  color: #000000;
+  color: #214049;
 }
 
 .stories {
@@ -393,7 +416,6 @@
 
 .userNames {
   /* Heading 3 */
-
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
@@ -401,7 +423,7 @@
   line-height: 22px;
   /* identical to box height */
 
-  color: #000000;
+  color: #214049;
 }
 
 .firstDivPicture {
@@ -410,7 +432,6 @@
 }
 
 .userAt {
-  width: 64px;
   height: 19px;
 
   /* Body Subheading */
@@ -422,7 +443,7 @@
   line-height: 19px;
   /* identical to box height */
 
-  color: #000000;
+  color: #214049;
 }
 
 #whoto {
@@ -514,7 +535,7 @@ hr {
   font-weight: 600;
   font-size: 18px;
   /* identical to box height */
-  color: #000000;
+  color: #214049;
 }
 
 .divLocation {
@@ -529,7 +550,7 @@ hr {
   font-size: 18px;
   line-height: 22px;
 
-  color: #000000;
+  color: #214049;
 }
 
 .divPosition {

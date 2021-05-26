@@ -8,18 +8,16 @@ var firebaseConfig = {
   storageBucket: "karma-535f3.appspot.com",
   messagingSenderId: "1023587584355",
   appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
-  measurementId: "G-VTZ4TEWFBW"
+  measurementId: "G-VTZ4TEWFBW",
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);  
+firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 let info = {};
 get_firebase_info();
 
-
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
-
 
 function formatTimestamp(timestamp) {
   let dateObj = new Date(Date.parse(timestamp));
@@ -57,7 +55,7 @@ async function get_firebase_info() {
         console.log(user);
         info.fullName = user.fullName;
         info.email = user.email;
-        info.username = user.username; 
+        info.username = user.username;
         view_messages(info.username);
       })
       .catch((error) => {
@@ -75,7 +73,6 @@ function view_messages(userID) {
 }
 
 function generateMessagesAfterRequest(results) {
-  results = JSON.parse(results);
   console.log("Generating");
   console.log(results);
   if (JSON.stringify(results) === "{}") {
@@ -97,7 +94,14 @@ function APIRequest(method, url, callback) {
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      callback(this.responseText);
+      let response;
+      try {
+        response = JSON.parse(this.responseText);
+      } catch (err) {
+        response = this.responseText;
+      } finally {
+        callback(response);
+      }
     }
   };
 }
@@ -105,7 +109,7 @@ function APIRequest(method, url, callback) {
 function formatParams(params) {
   let string = "?";
   let keys = Object.keys(params);
-  for(let i=0; i<keys.length; i++) {
+  for (let i = 0; i < keys.length; i++) {
     string += `${keys[i]}=${params[keys[i]]}`;
     if (i < keys.length - 1) {
       string += "&";
@@ -117,14 +121,14 @@ function formatParams(params) {
 function send_message() {
   let message = document.getElementById("user-input").value;
   let receiver = document.getElementById("otherUser").textContent;
-  console.log(`Sending "${message}" to ${receiver} from ${info.username}`)
+  console.log(`Sending "${message}" to ${receiver} from ${info.username}`);
   if (message != "" && receiver != "" && JSON.stringify(info) != "{}") {
     const method = "POST";
     const endpoint = "/messages";
     const params = formatParams({
-      "id": info.username,
-      "receiver": document.getElementById("otherUser").textContent,
-      "msg": message
+      id: info.username,
+      receiver: document.getElementById("otherUser").textContent,
+      msg: message,
     });
     const url = BASE_URL + endpoint + params;
     APIRequest(method, url, console.log);
@@ -246,7 +250,6 @@ function revealMessages(convo) {
       createMessageSentByYou(currentMsg, convo.profile_pic);
     }
   }
-
 }
 
 function generateMessages(msgObj) {
@@ -263,7 +266,8 @@ function generateMessages(msgObj) {
   messagerImg.src = msgObj.other_user_profile_pic;
   messagerName.innerHTML = msgObj.other_user_fullname;
   messagerName.setAttribute("class", "bodytitle");
-  messagerUsername.innerHTML = "@" + `<span id=otherUser>${msgObj.other_user}</span>`;
+  messagerUsername.innerHTML =
+    "@" + `<span id=otherUser>${msgObj.other_user}</span>`;
   messagerUsername.setAttribute("class", "bodytext");
 
   messagerImgDiv.appendChild(messagerImg);
@@ -374,9 +378,87 @@ function generateNoMessages() {
   document.getElementById("sidemain").setAttribute("style", "display: none");
 }
 
-
-
 function createSendMessage() {
   let userValue = document.getElementById("user-input").value;
   createMessageSentByYou(userValue);
+}
+
+function findUsers() {
+  document
+    .getElementById("no-messages-div")
+    .setAttribute("style", "display: none");
+  document.getElementById("findmain").setAttribute("style", "display: unset");
+  // document.getElementById("sidemain").setAttribute("style", "display: unset");
+
+  loadRecommendedConnections(info.username);
+}
+
+function loadRecommendedConnections(username) {
+  info.username = username;
+  const method = "GET";
+  const endpoint = "/profiles/recommended";
+  const params = `/${username}`;
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, getRecommendedUsers);
+}
+
+function getRecommendedUsers(users) {
+  console.log("Users " + users);
+  for (let user of users) {
+    console.log(user);
+    createNewConnections(user);
+  }
+}
+
+function createNewConnections(user) {
+  let findnewconnectionsDiv = document.getElementById("findnewconnections");
+
+  let newConnectionsDiv = document.createElement("div");
+  newConnectionsDiv.setAttribute("class", "newConnectionsDiv");
+
+  let profilePicImgDiv = document.createElement("div");
+  let profilePicImg = document.createElement("img");
+
+  profilePicImgDiv.setAttribute("class", "profilepic profilePicImgDiv");
+  profilePicImgDiv.setAttribute(
+    "style",
+    `background-image: url("${user.profile_pic_url}")`
+  );
+
+  let nameAndUserName = document.createElement("div");
+  nameAndUserName.setAttribute("class", "name-and-userName");
+  nameAndUserName.setAttribute("style", "width: 50%;");
+
+  let userName = document.createElement("p");
+  userName.setAttribute("class", "userNames");
+  userName.innerHTML = user.full_name;
+
+  let userNameAt = document.createElement("p");
+  userNameAt.setAttribute("class", "userAt");
+  userNameAt.innerHTML = `@<span id="recommendedUser${user.profile_id}">${user.username}</span>`;
+
+  let followUserDiv = document.createElement("div");
+  let followUserButton = document.createElement("button");
+
+  followUserDiv.setAttribute("class", "followUser");
+  followUserDiv.setAttribute("style", "width: 40%");
+  followUserButton.innerHTML = "MESSAGE";
+  followUserButton.setAttribute("style", "width: 70%; min-width: 100px;");
+  followUserButton.setAttribute("class", "followUserButton");
+
+  nameAndUserName.appendChild(userName);
+  nameAndUserName.appendChild(userNameAt);
+  profilePicImgDiv.appendChild(profilePicImg);
+  followUserDiv.appendChild(followUserButton);
+
+  newConnectionsDiv.appendChild(profilePicImgDiv);
+  newConnectionsDiv.appendChild(nameAndUserName);
+  newConnectionsDiv.appendChild(followUserDiv);
+
+  let hr = document.createElement("hr");
+  hr.setAttribute("style", "margin-top: 20px; margin-bottom: 20px");
+
+  findnewconnectionsDiv.appendChild(newConnectionsDiv);
+  findnewconnectionsDiv.appendChild(hr);
 }

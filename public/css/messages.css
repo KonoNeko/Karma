@@ -28,6 +28,19 @@
   margin-bottom: 20px;
 }
 
+#findmain > .heading-title {
+  margin-left: 0px;
+}
+
+.profilepic {
+  margin: 10px;
+  height: 60px;
+  width: 60px;
+  background-color: #bbb;
+  border-radius: 50%;
+  background-size: 60px;
+}
+
 #no-messages-div {
   display: flex;
   flex-direction: column;
@@ -56,15 +69,24 @@
   flex-direction: column;
 }
 
-#mainmain > #messages {
+#mainmain > #messages,
+#findmain > .messages {
   margin-top: 20px;
   height: 400px; /* temp */
   width: 100%;
 }
 
-#mainmain {
+#mainmain,
+#findmain {
   width: 100%;
   margin-bottom: 20px;
+}
+
+#findmain {
+}
+
+#findmain > .bodytext {
+  color: #214049;
 }
 
 #sidemain {
@@ -96,6 +118,11 @@
 .messagerImgDiv {
   height: 80px;
   width: 80px;
+}
+
+.newConnectionsDiv {
+  display: flex;
+  align-content: stretch;
 }
 
 .messagerImgDiv > img {
@@ -170,6 +197,72 @@ hr {
   cursor: pointer;
 }
 
+.profilePicImgDiv {
+  min-width: 80px;
+  min-height: 80px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.name-and-userName {
+  justify-content: center;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.userName {
+  /* Body text */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  /* identical to box height */
+
+  color: #214049;
+}
+
+.followUserButton {
+  /* Accent */
+  border: 1.5px solid #51b09f;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 40px;
+  /* Body Title */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px;
+  color: #51b09f;
+  text-align: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.followUser {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.userAt {
+  height: 19px;
+
+  /* Body Subheading */
+
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  /* identical to box height */
+
+  color: #214049;
+}
+
 @media screen and (max-width: 900px) {
   .messagesSentTextDiv {
     padding-left: 20px;
@@ -179,6 +272,28 @@ hr {
   .messagesSentByYouTextDiv {
     padding-left: 0px;
     padding-right: 20px;
+  }
+
+  .name-and-userName {
+    margin-left: 10px;
+  }
+  .followUserButton {
+    font-size: 12px;
+  }
+
+  .name-and-userName > .userNames {
+    font-size: 14px;
+  }
+
+  .name-and-userName > .userAt {
+    font-size: 10px;
+  }
+
+  .profilePicImgDiv {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
   }
 }
 

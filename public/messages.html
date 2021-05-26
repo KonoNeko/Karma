@@ -163,7 +163,11 @@
           <p style="margin-bottom: 10px" class="heading3">
             Start messaging other users on Karma today!
           </p>
-          <button style="margin-bottom: 20px" class="secondarybutton">
+          <button
+            onclick="findUsers()"
+            style="margin-bottom: 20px"
+            class="secondarybutton"
+          >
             Find users to begin a conversation with
           </button>
         </div>
@@ -172,6 +176,16 @@
       <div class="column" id="mainmain">
         <h1 class="heading1 heading-title">Messages</h1>
         <div id="messages" class="messages"></div>
+      </div>
+
+      <div class="column" style="display: none" id="findmain">
+        <h1 class="heading1 heading-title">Find new connections</h1>
+        <p style="margin-bottom: 20px" class="bodytext">
+          Karma is full of like-minded individuals who like to volunteer and
+          help out in the community as much as you do! Create a new connection
+          today.
+        </p>
+        <div id="findnewconnections"></div>
       </div>
 
       <div class="column" id="sidemain">
@@ -190,8 +204,14 @@
         <div class="sticky-send-message-div">
           <div id="above-search" class="sticky-send-message search">
             <form class="search-form">
-              <input id="user-input" type="text" placeholder="Compose a message" />
-              <button type="button" id="sendMessage"><i class="fa fa-paper-plane"></i></button>
+              <input
+                id="user-input"
+                type="text"
+                placeholder="Compose a message"
+              />
+              <button type="button" id="sendMessage">
+                <i class="fa fa-paper-plane"></i>
+              </button>
             </form>
           </div>
         </div>
