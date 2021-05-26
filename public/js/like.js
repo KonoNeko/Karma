@@ -101,5 +101,8 @@ function addComment(id, post, msg) {
   let commentendpoint = "comment";
 
   let url = commenturl + commentendpoint + params;
-  APIRequest(method, url, console.log);
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    window.location.reload();
+  });
 }

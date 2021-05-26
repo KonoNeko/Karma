@@ -80,7 +80,7 @@
 }
 
 .commentList {
-  height: 60%;
+  height: 45%;
   overflow: auto;
 }
 
@@ -106,7 +106,7 @@
   height: 100%; /* temp */
   width: 70%; /* temp */
   background-size: cover;
-  border-radius:10px;
+  border-radius: 10px;
 }
 
 .rightDiv {
