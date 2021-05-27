@@ -159,9 +159,16 @@
     </div>
 
     <div id="followersModal" class="modal">
-      <div class="modal-content">
+      <div id="followersModalContent" class="modal-content">
         <span class="close" id="closefollowers">&times;</span>
-        <p>Some text in the modal...</p>
+        <p class="heading2" style="margin-bottom: 20px">Followers</p>
+      </div>
+    </div>
+
+    <div id="followingModal" class="modal">
+      <div id="followingModalContent"  class="modal-content">
+        <span class="close" id="closefollowing">&times;</span>
+        <p class="heading2" style="margin-bottom: 20px">Following</p>
       </div>
     </div>
 
@@ -254,7 +261,7 @@
               </div>
 
               <div class="numbers-column" id="numOfFollowingDiv">
-                <p class="bodytitle" id="numOfFollowing">-</p>
+                <p class="bodytitle modalBtn" id="numOfFollowing">-</p>
                 <p>Following</p>
               </div>
             </div>
@@ -440,6 +447,10 @@ btn[2].onclick = function() {
   modal[2].style.display="block";
 }
 
+btn[3].onclick = function() {
+  modal[3].style.display="block";
+}
+
 // When the user clicks on <span> (x), close the modal
 span[0].onclick = function() {
     modal[0].style.display = "none";
@@ -453,6 +464,10 @@ span[2].onclick = function() {
     modal[2].style.display = "none";
 }
 
+span[3].onclick = function() {
+    modal[3].style.display = "none";
+}
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal[0]) {
@@ -463,6 +478,9 @@ window.onclick = function(event) {
      }  
      if (event.target == modal[2]) {
          modal[2].style.display = "none";
+     }  
+     if (event.target == modal[3]) {
+         modal[3].style.display = "none";
      }  
 }
 

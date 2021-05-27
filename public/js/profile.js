@@ -21,6 +21,12 @@ const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 let info;
 get_firebase_info();
 
+createFollowerUser();
+createFollowerUser();
+createFollowerUser();
+createFollowingUser();
+createFollowingUser();
+
 let width =
   window.innerWidth ||
   document.documentElement.clientWidth ||
@@ -459,6 +465,82 @@ function addAwards() {
 
     add_Awards(save.value, awardTitle, date);
   };
+}
+
+function createFollowerUser() {
+  // CREATE
+  let followerModal = document.getElementById("followersModalContent");
+
+  let followerDiv = document.createElement("div");
+
+  let followerImgDiv = document.createElement("div");
+  let followerImg = document.createElement("img");
+
+  let followerTextDiv = document.createElement("div");
+  let followerName = document.createElement("p");
+  let followerUsername = document.createElement("p");
+
+  // CLASS
+  followerDiv.setAttribute("class", "followerDiv");
+  followerImgDiv.setAttribute("class", "followerDivColumn followerImgDiv");
+  followerTextDiv.setAttribute("class", "followerDivColumn followerTextDiv");
+  followerTextDiv.setAttribute("style", "margin-left: 20px;");
+
+  followerName.setAttribute("class", "heading3");
+  followerUsername.setAttribute("class", "smallbutton");
+
+  // TEMP
+  followerImg.src = "./images/placeholder.jpg";
+  followerName.innerHTML = "Chris Raganit";
+  followerUsername.innerHTML = "@" + "chris.raganit";
+
+  // APPEND
+  followerModal.appendChild(followerDiv);
+  followerDiv.appendChild(followerImgDiv);
+  followerDiv.appendChild(followerTextDiv);
+
+  followerImgDiv.appendChild(followerImg);
+
+  followerTextDiv.appendChild(followerName);
+  followerTextDiv.appendChild(followerUsername);
+}
+
+function createFollowingUser() {
+  // CREATE
+  let followingModal = document.getElementById("followingModalContent");
+
+  let followerDiv = document.createElement("div");
+
+  let followerImgDiv = document.createElement("div");
+  let followerImg = document.createElement("img");
+
+  let followerTextDiv = document.createElement("div");
+  let followerName = document.createElement("p");
+  let followerUsername = document.createElement("p");
+
+  // CLASS
+  followerDiv.setAttribute("class", "followerDiv");
+  followerImgDiv.setAttribute("class", "followerDivColumn followerImgDiv");
+  followerTextDiv.setAttribute("class", "followerDivColumn followerTextDiv");
+  followerTextDiv.setAttribute("style", "margin-left: 20px;");
+
+  followerName.setAttribute("class", "heading3");
+  followerUsername.setAttribute("class", "smallbutton");
+
+  // TEMP
+  followerImg.src = "./images/placeholder.jpg";
+  followerName.innerHTML = "Chris Raganit";
+  followerUsername.innerHTML = "@" + "chris.raganit";
+
+  // APPEND
+  followingModal.appendChild(followerDiv);
+  followerDiv.appendChild(followerImgDiv);
+  followerDiv.appendChild(followerTextDiv);
+
+  followerImgDiv.appendChild(followerImg);
+
+  followerTextDiv.appendChild(followerName);
+  followerTextDiv.appendChild(followerUsername);
 }
 
 function createNumPosts(numPosts, number) {

@@ -205,6 +205,37 @@
   width: auto !important;
 }
 
+.followerDiv {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
+.modalBtn {
+  cursor: pointer;
+}
+
+.followerImgDiv {
+  width: 20%;
+}
+
+.followerImgDiv > img {
+  border-radius: 50%;
+}
+
+.followerTextDiv {
+  width: 80%;
+}
+
+.followerDivColumn {
+  display: flex;
+  flex-direction: column;
+}
+
 input:focus {
   outline: none;
 }
