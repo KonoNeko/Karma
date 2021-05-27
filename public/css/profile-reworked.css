@@ -220,12 +220,12 @@
   cursor: pointer;
 }
 
-.followerImgDiv {
-  width: 10%;
-}
-
 .followerImgDiv > img {
   border-radius: 50%;
+}
+
+.followerImgDiv {
+  width: 10%;
 }
 
 .followerTextDiv {
@@ -452,6 +452,14 @@ hr {
 }
 
 @media screen and (max-width: 550px) {
+  .followerImgDiv {
+    width: 40%;
+  }
+
+  .followerTextDiv {
+    width: 60%;
+  }
+
   #msgbtn {
     font-size: 12px;
     padding: 8px 10px;
