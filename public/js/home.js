@@ -24,6 +24,16 @@ get_firebase_info();
 
 let done_viewing = false;
 
+function load_profile_pic(userID) {
+  const method = "GET";
+  const endpoint = "/profiles";
+  const params = `/${userID}`;
+  const url = BASE_URL + endpoint + params;
+  APIRequest(method, url, (res) => {
+    document.getElementById("createPostID").src = res.info.profile_pic_url;
+  });
+}
+
 async function get_firebase_info() {
   firebase.auth().onAuthStateChanged(function (user) {
     return db
@@ -40,6 +50,7 @@ async function get_firebase_info() {
         view_social_feed(info.username);
         loadWhatsNew();
         loadRecommendedConnections(info.username);
+        load_profile_pic(info.username);
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
