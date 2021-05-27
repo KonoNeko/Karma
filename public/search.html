@@ -147,10 +147,10 @@
       </div>
 
       <div id="above-search" class="search">
-        <form class="search-form">
-          <input id="search-texts" type="search" placeholder="Search" />
-          <button id="search-button"><i class="fa fa-search"></i></button>
-        </form>
+        <div autocomplete="off" class="search-form">
+          <input autocomplete="off" id="search-texts" type="search" placeholder="Search" />
+          <button onclick="saveInStorage(document.getElementById('search-texts').value)" class="search-button"><i class="fa fa-search"></i></button>
+        </div>
       </div>
     </div>
 
@@ -166,6 +166,14 @@
 <script src="js/search.js"></script>
 
 <script>
+function saveInStorage(keyword) {
+      console.log(keyword + " was stored in storage");
+      localStorage.clear();
+      localStorage.setItem('search-keyword', keyword.toLowerCase());
+
+      window.location.href = "search.html";
+    }
+
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
   }
