@@ -3,11 +3,14 @@
 <head>
   <!-- FAVICON -->
   <link rel="icon" type="image/png" href="res/logo0_colored.png" />
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script
+    type="text/javascript"
+    src="https://code.jquery.com/jquery-1.7.1.min.js"
+  ></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
   <title>Report a Bug</title>
   <link rel="stylesheet" href="css/donate.css" />
   <link rel="stylesheet" href="css/base.css" />
@@ -154,10 +157,20 @@
       </div>
 
       <div id="above-search" class="search">
-        <form class="search-form">
-          <input type="text" placeholder="Search" />
-          <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
+        <div autocomplete="off" class="search-form">
+          <input
+            autocomplete="off"
+            id="search-texts"
+            type="search"
+            placeholder="Search"
+          />
+          <button
+            onclick="saveInStorage(document.getElementById('search-texts').value)"
+            class="search-button"
+          >
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -212,11 +225,23 @@
 
       <div class="column" id="sidemain">
         <div class="search">
-          <form class="search-form">
-            <input type="text" placeholder="Search" />
-            <button type="submit"><i class="fa fa-search"></i></button>
-          </form>
+          <div autocomplete="off" class="search-form">
+            <input
+              autocomplete="off"
+              id="search-input"
+              type="text"
+              placeholder="Search"
+            />
+            <button
+              id="searchbar"
+              onclick="saveInStorage(document.getElementById('search-input').value)"
+              type="button"
+            >
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
         </div>
+
         <div id="whats-new" class="whats-new">
           <h1>What's new?</h1>
           <p>Recommended volunteering opportunities for you</p>
@@ -234,6 +259,14 @@
 <script src="js/signup.js"></script>
 <script src="js/signout.js"></script>
 <script>
+  function saveInStorage(keyword) {
+    console.log(keyword + " was stored in storage");
+    localStorage.clear();
+    localStorage.setItem("search-keyword", keyword.toLowerCase());
+
+    window.location.href = "search.html";
+  }
+
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
   }
