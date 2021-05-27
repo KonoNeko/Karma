@@ -1,4 +1,3 @@
-
 // Your web app's Firebase configuration
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -210,8 +209,12 @@ function loadAboutMe(profileObj) {
 
 function loadPosts(profileObj) {
   let posts = document.getElementById("posts");
-  for (let key of profileObj.posts) {
-    createPost(posts, key);
+  if (profileObj.posts.length == 0) {
+    createEmptyPosts();
+  } else {
+    for (let key of profileObj.posts) {
+      createPost(posts, key);
+    }
   }
 }
 
@@ -265,7 +268,6 @@ function loadFollowers(profileObj) {
   createFollowers(follower, profileObj);
 }
 
-
 let posted = false;
 function addProfilePic() {
   console.log("Add pic button clicked");
@@ -288,12 +290,12 @@ function addProfilePic() {
       });
   });
 }
-  function enableProfilePicBtn(username){
+function enableProfilePicBtn(username) {
   document.getElementById("postBtn").onclick = () => {
     let link = document.getElementById("mainProfilePic").textContent;
     if (link != "" && posted && JSON.stringify(info) != "{}") {
       console.log("Posting");
-      add_ProfilePic(username)
+      add_ProfilePic(username);
     } else if (!posted) {
       window.alert("Please wait for image to finish uploading");
     } else if (JSON.stringify(info) === "{}") {
@@ -309,7 +311,6 @@ function addProfilePic() {
   // $("#save").click(function () {
   //   let picUrl= addEducationInput1.value;
   //   add_ProfilePic(picUrl);
-
 }
 
 function addSkills() {
@@ -331,7 +332,7 @@ function addSkills() {
   let save = document.getElementById("save");
   save.onclick = () => {
     add_Skills(save.value, addSkillsInput.value);
-  }
+  };
 }
 
 function addEducation() {
@@ -345,7 +346,8 @@ function addEducation() {
   addEducationHeading1.setAttribute("style", "text-align: left");
 
   let addEducationInput1 = document.createElement("input");
-  addEducationInput1.placeholder = "Ex. British Columbia Institute of Technology"
+  addEducationInput1.placeholder =
+    "Ex. British Columbia Institute of Technology";
   addEducationInput1.setAttribute("style", "height: 30px");
 
   let addEducationHeading3 = document.createElement("p");
@@ -380,7 +382,7 @@ function addEducation() {
     let end = addEducationInput4.value;
 
     add_Education(save.value, schoolName, start, end);
-  }
+  };
 }
 
 function addExperience() {
@@ -394,7 +396,7 @@ function addExperience() {
   addExperienceHeading1.setAttribute("style", "text-align: left");
 
   let addExperienceInput1 = document.createElement("input");
-  addExperienceInput1.placeholder = "Ex. Store Manager, Sales Associate, etc."
+  addExperienceInput1.placeholder = "Ex. Store Manager, Sales Associate, etc.";
   addExperienceInput1.setAttribute("style", "height: 30px");
 
   let addExperienceHeading = document.createElement("p");
@@ -403,7 +405,8 @@ function addExperience() {
   addExperienceHeading.setAttribute("style", "text-align: left");
 
   let addExperienceInput = document.createElement("input");
-  addExperienceInput.placeholder = "Ex. Store name, company name, employer, etc.";
+  addExperienceInput.placeholder =
+    "Ex. Store name, company name, employer, etc.";
   addExperienceInput.setAttribute("style", "height: 30px");
 
   document.getElementById("button-content").appendChild(addExperienceHeading1);
@@ -417,7 +420,7 @@ function addExperience() {
     let workplaceName = addExperienceInput.value;
 
     add_Experience(save.value, jobName, workplaceName);
-  }
+  };
 }
 
 function addAwards() {
@@ -431,7 +434,8 @@ function addAwards() {
   addAwardHeading1.setAttribute("style", "text-align: left");
 
   let addAwardInput1 = document.createElement("input");
-  addAwardInput1.placeholder = "Ex. Red Cross First Aid, Citizenship Award, etc.";
+  addAwardInput1.placeholder =
+    "Ex. Red Cross First Aid, Citizenship Award, etc.";
   addAwardInput1.setAttribute("style", "height: 30px");
 
   let addAwardHeading2 = document.createElement("p");
@@ -454,7 +458,7 @@ function addAwards() {
     let date = addAwardInput2.value;
 
     add_Awards(save.value, awardTitle, date);
-  }
+  };
 }
 
 function createNumPosts(numPosts, number) {
@@ -495,6 +499,16 @@ function createSkills(skills, skillsObj) {
 
   skills.appendChild(skillbtn);
 }
+
+function createEmptyPosts() {
+  let postsDiv = document.getElementById("posts");
+  let noPosts = document.createElement("p");
+  noPosts.setAttribute("class", "bodytitle");
+  noPosts.innerHTML =
+    "You have no posts. Go to the home page and create a new post now!";
+  postsDiv.appendChild(noPosts);
+}
+
 function createPost(posts, postsObj) {
   let postdiv = document.createElement("div");
   postdiv.setAttribute("class", "postdiv");
@@ -531,8 +545,7 @@ function createEducation(education, educationObj) {
 
   let para = document.createElement("p");
   para.setAttribute("class", "schoolpara");
-  para.innerHTML = 
-  `<span class="schoolstart">${educationObj.edu_start_date}</span> to <span class="schoolend">${educationObj.edu_end_date}</span>`;
+  para.innerHTML = `<span class="schoolstart">${educationObj.edu_start_date}</span> to <span class="schoolend">${educationObj.edu_end_date}</span>`;
 
   picturediv.appendChild(picture);
 
