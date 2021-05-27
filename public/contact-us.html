@@ -155,10 +155,10 @@
     </div>
 
     <div id="above-search" class="search">
-      <form class="search-form">
-        <input type="text" placeholder="Search" />
-        <button type="submit"><i class="fa fa-search"></i></button>
-      </form>
+      <div autocomplete="off" class="search-form">
+        <input autocomplete="off" id="search-texts" type="search" placeholder="Search" />
+        <button onclick="saveInStorage(document.getElementById('search-texts').value)" class="search-button"><i class="fa fa-search"></i></button>
+      </div>
     </div>
   </div>
 
@@ -219,24 +219,33 @@
           </form>
         </div>
         <div>
+          <div id="move">
+            <div id="phones">
         <div  class="imgbox" style="padding-top: 20px">
           <img src="images/phone.png">
         </div>
           <p class="headingone">Call us by</p>
           <p class="headingtwo">+1 778-251-2054</p>
+        </div>
+          <div>
+            <div id="emails">
           <img src="images/email.jpg">
-          <p class="headingone">Email Us</p>
-          <p class="headingtwo">Karmavolunteering@gmail.com</p>
+          <p class="headingthree">Email Us</p>
+          <p class="headingfour">Karmavolunteering@gmail.com</p>
+        </div>
+          </div>
         </div>
       </div>
     </div>
+    </div>
+  
 
     <div class="column" id="sidemain">
       <div class="search">
-        <form class="search-form">
-          <input type="text" placeholder="Search" />
-          <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
+        <div autocomplete="off" class="search-form">
+          <input  autocomplete="off" id ="search-input" type="text" placeholder="Search" />
+          <button id = "searchbar" onclick="saveInStorage(document.getElementById('search-input').value)" type="button"><i class="fa fa-search"></i></button>
+        </div>
       </div>
       <div id="whats-new" class="whats-new">
         <h1>What's new?</h1>
@@ -263,6 +272,14 @@
   ></script>
   
 <script>
+function saveInStorage(keyword) {
+      console.log(keyword + " was stored in storage");
+      localStorage.clear();
+      localStorage.setItem('search-keyword', keyword.toLowerCase());
+
+      window.location.href = "search.html";
+    }
+
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
   }

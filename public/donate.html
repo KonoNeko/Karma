@@ -6,6 +6,8 @@
 
   <title>Donate</title>
   <link rel="stylesheet" href="css/donate.css" />
+  <link rel="stylesheet" href="css/searchbar.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link
     rel="stylesheet"
@@ -99,7 +101,7 @@
       </li>
 
       <li class="nav__item hide-in-mobile">
-        <a href="createpost.html">
+        <a href="home.html">
           <svg viewBox="0 0 32 32" width="100" title="create">
             <path
               d="M16 2A14.172 14.172 0 0 0 2 16a14.172 14.172 0 0 0 14 14a14.172 14.172 0 0 0 14-14A14.172 14.172 0 0 0 16 2zm8 15h-7v7h-2v-7H8v-2h7V8h2v7h7z"
@@ -149,17 +151,27 @@
       </div>
 
       <div id="above-search" class="search">
-        <form class="search-form">
-          <input type="text" placeholder="Search" />
-          <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
+        <div autocomplete="off" class="search-form">
+          <input
+            autocomplete="off"
+            id="search-texts"
+            type="search"
+            placeholder="Search"
+          />
+          <button
+            onclick="saveInStorage(document.getElementById('search-texts').value)"
+            class="search-button"
+          >
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
       </div>
     </div>
 
     <div class="flex-main">
       <div class="column" id="mainmain">
         <h1 class="heading1 heading-title">Donate</h1>
-        <img src="images/volunteer.jpg">
+        <img src="images/donation.jpg" style="border-radius: 12px" />
         <div style="padding-bottom: 20px" id="stories" class="stories">
           <p style="padding-bottom: 10px" class="heading2">
             A contribution to Karma is a contribution to the community and the
@@ -167,28 +179,49 @@
           </p>
 
           <p class="bodytext">
-            Karma is a social media platform that provides aspiring volunteers with opportunities
-            to contribute to their communities and make a change for the better.
-            Your donations mean a lot to us, we will use the donation to improve our service to help more people in our
-            society, the development team of Karma. If
-            you are as passionate about volunteering as we are and if you would
-            like to help this platform grow, donate below!
+            Karma is a social media platform that provides aspiring volunteers
+            with opportunities to contribute to their communities and make a
+            change for the better. Your donations mean a lot to us, we will use
+            the donation to improve our service to help more people in our
+            society, the development team of Karma. If you are as passionate
+            about volunteering as we are and if you would like to help this
+            platform grow, donate below!
           </p>
         </div>
-        <form action="https://www.paypal.com/donate" method="post" target="_top">
+        <form
+          action="https://www.paypal.com/donate"
+          method="post"
+          target="_top"
+        >
           <input type="hidden" name="business" value="BSLNUT8AQE6BC" />
           <input type="hidden" name="currency_code" value="CAD" />
           <button class="secondarybutton">Donate</button>
-          <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
-          </form>
+          <img
+            alt=""
+            src="https://www.paypal.com/en_CA/i/scr/pixel.gif"
+            width="1"
+            height="1"
+          />
+        </form>
       </div>
 
       <div class="column" id="sidemain">
         <div class="search">
-          <form class="search-form">
-            <input type="text" placeholder="Search" />
-            <button type="submit"><i class="fa fa-search"></i></button>
-          </form>
+          <div autocomplete="off" class="search-form">
+            <input
+              autocomplete="off"
+              id="search-input"
+              type="text"
+              placeholder="Search"
+            />
+            <button
+              id="searchbar"
+              onclick="saveInStorage(document.getElementById('search-input').value)"
+              type="button"
+            >
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
         </div>
         <div id="whats-new" class="whats-new">
           <h1>What's new?</h1>
@@ -204,12 +237,21 @@
     </div>
   </div>
 </body>
+<script src="js/sidebar.js"></script>
 <script src="js/signup.js"></script>
 <script src="js/signout.js"></script>
 <script src="js/donate.js"></script>
 
 <!--<script src="js/home.js"></script>-->
 <script>
+  function saveInStorage(keyword) {
+    console.log(keyword + " was stored in storage");
+    localStorage.clear();
+    localStorage.setItem("search-keyword", keyword.toLowerCase());
+
+    window.location.href = "search.html";
+  }
+
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
   }

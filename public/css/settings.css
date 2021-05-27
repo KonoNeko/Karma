@@ -11,8 +11,9 @@
   margin-left: 24px;
   margin-right: 24px;
 }
+
 .box{
-  margin-left: 80px;
+  margin: 0;
 }
 .setting {
   font-family: Montserrat;
@@ -73,3 +74,8 @@ button {
 button:hover {
   box-shadow: 0 5px 15px rgba(3, 103, 166, 0.4);
 }
+@media screen and (min-width: 550px){
+  .box{
+    margin-left: 80px;
+  }
+} 

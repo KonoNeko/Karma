@@ -163,7 +163,7 @@
     <div id="modalOverlay">
       <div class="postModalBackground" id="postModalBackground"></div>
       <div class="create-post-container modal-content" id="createPostModal">
-          <div class="image-poster profilepicture">
+          <div class="image-poster profilepicture" style="margin-top: 5px; margin-right: 20px;">
             <img src="images/placeholder2.png" />
           </div>
           <div class="newCaption">
@@ -201,10 +201,10 @@
 
       <div class="column" id="sidemain">
         <div class="search">
-          <form autocomplete="off" class="search-form">
+          <div autocomplete="off" class="search-form">
             <input  autocomplete="off" id ="search-input" type="text" placeholder="Search" />
             <button id = "searchbar" onclick="saveInStorage(document.getElementById('search-input').value)" type="button"><i class="fa fa-search"></i></button>
-          </form>
+          </div>
         </div>
         <div id ="searchResult">
         </div>
@@ -217,7 +217,7 @@
         <div id="recommended-connections" class="recommended-connections">
           <p class="heading2">Who to connect with</h1>
           <div id="recommendedUserDiv"></div>
-          <a href="bulletin-board.html" class="heading3">View all recommended connections</a>
+          <a href="notifications.html" class="heading3">View all recommended connections</a>
         </div>
       </div>
     </div>

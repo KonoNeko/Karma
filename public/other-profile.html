@@ -96,7 +96,7 @@
           </li>
   
           <li class="nav__item hide-in-mobile">
-            <a href="createpost.html">
+            <a href="home.html">
               <svg viewBox="0 0 32 32" width="100" title="create">
                 <path
                   d="M16 2A14.172 14.172 0 0 0 2 16a14.172 14.172 0 0 0 14 14a14.172 14.172 0 0 0 14-14A14.172 14.172 0 0 0 16 2zm8 15h-7v7h-2v-7H8v-2h7V8h2v7h7z"
@@ -146,10 +146,10 @@
           </div>
   
           <div id="above-search" class="search">
-            <form class="search-form">
-              <input id="search-texts" type="search" placeholder="Search" />
-              <button id="search-button"><i class="fa fa-search"></i></button>
-            </form>
+            <div autocomplete="off" class="search-form">
+              <input autocomplete="off" id="search-texts" type="search" placeholder="Search" />
+              <button onclick="saveInStorage(document.getElementById('search-texts').value)" class="search-button"><i class="fa fa-search"></i></button>
+            </div>
           </div>
         </div>
       </div>
@@ -239,12 +239,10 @@
   
         <div class="column" id="sidemain">
           <div class="search">
-            <form class="search-form">
-              <input id="search-input" type="text" placeholder="Search" />
-              <button id="searchbar" onclick="findUsers()" type="submit">
-                <i class="fa fa-search"></i>
-              </button>
-            </form>
+            <div autocomplete="off" class="search-form">
+              <input  autocomplete="off" id ="search-input" type="text" placeholder="Search" />
+              <button id = "searchbar" onclick="saveInStorage(document.getElementById('search-input').value)" type="button"><i class="fa fa-search"></i></button>
+            </div>
           </div>
           <div id="whats-new" class="whats-new">
             <p class="heading2">What's new?</h1>
@@ -266,6 +264,14 @@
       <script src="js/signout.js"></script>
       <script src="js/other-profile.js"></script>
       <script>
+function saveInStorage(keyword) {
+      console.log(keyword + " was stored in storage");
+      localStorage.clear();
+      localStorage.setItem('search-keyword', keyword.toLowerCase());
+
+      window.location.href = "search.html";
+    }
+
         firebase.auth().onAuthStateChanged(function (user) {
             if (!user) {
                 window.location.href = "sign-up.html";
