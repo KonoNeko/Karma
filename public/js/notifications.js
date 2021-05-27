@@ -100,7 +100,7 @@ function loadNotifications(notis) {
   }
 }
 
-function accept_request(userID, follower) {
+function accept_request(userID, follower, btn) {
   const method = "PUT";
   const endpoint = "/profiles/followers";
   const params = formatParams({
@@ -109,7 +109,10 @@ function accept_request(userID, follower) {
   });
   const url = BASE_URL + endpoint + params;
 
-  APIRequest(method, url, console.log);
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    btn.onclick = "";
+  });
 }
 
 function loadAll() {
@@ -294,7 +297,10 @@ function generateNotificationFollow(postObj) {
   notificationFollowButton.onclick = () => {
     let userID = postObj.username_of_notification;
     let follower = postObj.current_user;
+    notificationFollowButton.style.backgroundColor = "#6b7e86";
+    notificationFollowButton.innerHTML = "<i class='fas fa-user-clock'></i>";
     request_follow(userID, follower);
+    notificationFollowButton.onclick = "";
   };
 
   if (postObj.follow_status === "following") {
@@ -417,7 +423,7 @@ function generateNotificationFollowRequest(postObj) {
   notificationConfirmButton.onclick = () => {
     let userID = postObj.current_user;
     let follower = postObj.username_of_notification;
-    accept_request(userID, follower);
+    accept_request(userID, follower, notificationConfirmButton);
   };
 
   let notificationDeleteButton = document.createElement("button");
