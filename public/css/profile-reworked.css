@@ -19,7 +19,6 @@
   width: 95%;
 }
 
-
 .heading-and-edit > i {
   width: 5%;
   justify-content: flex-end;
@@ -104,12 +103,14 @@
   flex-direction: column;
   padding-left: 10px;
   padding-right: 10px;
-  align-content: center;
-  justify-content: center;
 }
 
 #image-column {
   width: 30%;
+}
+
+#image-column > #mainProfilePic {
+  justify-content: center;
 }
 
 #profile-details-column {
@@ -187,6 +188,7 @@
   border-radius: 10px;
   outline: none;
 }
+
 .skillsinput {
   background-color: #eff0f3;
   text-decoration: underline;
@@ -207,6 +209,10 @@ input:focus {
   outline: none;
 }
 
+#image-column {
+  justify-content: center;
+}
+
 #msgbtn {
   background-color: #0367a6;
   padding: 12px 20px;
@@ -219,11 +225,10 @@ input:focus {
   border-radius: 10px;
   outline: none;
 }
-
+/* 
 .profilepicture {
   position: relative;
   width: 20%;
-  /* desired width */
   margin: 5px;
 }
 
@@ -231,7 +236,6 @@ input:focus {
   content: "";
   display: block;
   padding-top: 100%;
-  /* initial ratio of 1:1*/
 }
 
 img {
@@ -254,7 +258,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .skillsbtn {
   background-color: #0367a6;
@@ -352,7 +356,7 @@ img {
   margin-right: 5px;
   cursor: pointer;
 }
-#postBtn{
+#postBtn {
   background-color: #0367a6;
   padding: 6px 14px;
   border: none;
@@ -365,18 +369,12 @@ img {
   margin-top: 5px;
   cursor: pointer;
   margin-left: 5px;
-
-
-
 }
 
 .icons {
   display: flex;
   color: #49a1b9;
 }
-
-
-
 
 #addexp {
   background-color: #0367a6;
@@ -422,6 +420,16 @@ hr {
 }
 
 @media screen and (max-width: 550px) {
+  #msgbtn {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  #editbtn {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
   .heading-and-edit > p {
     width: 86%;
   }
@@ -458,6 +466,7 @@ hr {
   #mainmain {
     margin-top: 60px;
     margin-bottom: 96px;
+    margin-right: 20px !important;
   }
 
   .sidenav {
