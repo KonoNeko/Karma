@@ -750,7 +750,7 @@ function createFollowers(follower, followerObj) {
 }
 
 function createFollowing(following, followingObj) {
-  following.innerHTML = `${followingObj.info.followers}`;
+  following.innerHTML = `${followingObj.info.following}`;
 }
 
 showProfile();
