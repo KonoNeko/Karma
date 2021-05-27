@@ -1,8 +1,3 @@
-createFollowerUser();
-createFollowerUser();
-createFollowerUser();
-createFollowingUser();
-createFollowingUser();
 
 let info;
 get_firebase_info();
@@ -26,6 +21,34 @@ function APIRequest(method, url, callback) {
       }
     }
   };
+}
+
+function get_followers() {
+    let currentUser = localStorage.getItem("profileUsername");
+    const method = "GET";
+    const endpoint = "/profiles/followers";
+    const params = `/${currentUser}`;
+    const url = BASE_URL + endpoint + params;
+    APIRequest(method, url, (res) => {
+      console.log(res);
+      for (let i=0; i<res.length; i++) {
+        createFollowerUser(res[i])
+      }
+    });
+  }
+  
+function get_following() {
+    let currentUser = localStorage.getItem("profileUsername");
+    const method = "GET";
+    const endpoint = "/profiles/following";
+    const params = `/${currentUser}`;
+    const url = BASE_URL + endpoint + params;
+    APIRequest(method, url, (res) => {
+        console.log(res);
+      for (let i=0; i<res.length; i++) {
+        createFollowingUser(res[i])
+      }
+    });
 }
 
 function view_profile(userID, currentUser) {
@@ -64,6 +87,8 @@ function get_firebase_info() {
             ready = true;
           }
         }, 500);
+        get_followers();
+        get_following();
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
@@ -216,7 +241,7 @@ function loadFollowers(profileObj) {
   createFollowers(follower, profileObj);
 }
 
-function createFollowerUser() {
+function createFollowerUser(user) {
   // CREATE
   let followerModal = document.getElementById("followersModalContent");
 
@@ -239,9 +264,10 @@ function createFollowerUser() {
   followerUsername.setAttribute("class", "smallbutton");
 
   // TEMP
-  followerImg.src = "./images/placeholder.jpg";
-  followerName.innerHTML = "Chris Raganit";
-  followerUsername.innerHTML = "@" + "chris.raganit";
+  followerImg.src = user.profile_pic;
+  followerName.innerHTML = user.full_name;
+  followerUsername.innerHTML = "@" + `<span class='follower'>${user.follower}</span>`;
+
 
   // APPEND
   followerModal.appendChild(followerDiv);
@@ -254,7 +280,7 @@ function createFollowerUser() {
   followerTextDiv.appendChild(followerUsername);
 }
 
-function createFollowingUser() {
+function createFollowingUser(user) {
   // CREATE
   let followingModal = document.getElementById("followingModalContent");
 
@@ -277,9 +303,9 @@ function createFollowingUser() {
   followerUsername.setAttribute("class", "smallbutton");
 
   // TEMP
-  followerImg.src = "./images/placeholder.jpg";
-  followerName.innerHTML = "Chris Raganit";
-  followerUsername.innerHTML = "@" + "chris.raganit";
+  followerImg.src = user.profile_pic;
+  followerName.innerHTML = user.full_name;
+  followerUsername.innerHTML = "@" + `<span class='follower'>${user.follower}</span>`;
 
   // APPEND
   followingModal.appendChild(followerDiv);
@@ -459,5 +485,5 @@ function createFollowers(follower, followerObj) {
 }
 
 function createFollowing(following, followingObj) {
-  following.innerHTML = `${followingObj.info.followers}`;
+  following.innerHTML = `${followingObj.info.following}`;
 }

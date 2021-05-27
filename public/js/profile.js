@@ -515,7 +515,7 @@ function createFollowerUser(user) {
   // TEMP
   followerImg.src = user.profile_pic;
   followerName.innerHTML = user.full_name;
-  followerUsername.innerHTML = "@" + `<span class=follower>${user.follower}</span>`;
+  followerUsername.innerHTML = "@" + `<span 'class='follower'>${user.follower}</span>`;
 
   // APPEND
   followerModal.appendChild(followerDiv);
@@ -553,7 +553,7 @@ function createFollowingUser(user) {
   // TEMP
   followerImg.src = user.profile_pic;
   followerName.innerHTML = user.full_name;
-  followerUsername.innerHTML = "@" + `<span class=follower>${user.follower}</span>`;
+  followerUsername.innerHTML = "@" + `<span class='follower'>${user.follower}</span>`;
 
   // APPEND
   followingModal.appendChild(followerDiv);
