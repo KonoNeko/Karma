@@ -118,9 +118,10 @@ function loadAll() {
 
 function generateNoNotifications() {
   let noNotificationsDiv = document.getElementById("notifications");
+  noNotificationsDiv.setAttribute("style", "text-align: center");
 
   let notificationsImg = document.createElement("img");
-  notificationsImg.setAttribute("style", "width: 100%;");
+  notificationsImg.setAttribute("style", "width: 60%");
   notificationsImg.src = "./res/notifications.svg";
 
   let notification = document.createElement("p");
