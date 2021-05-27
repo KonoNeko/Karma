@@ -103,8 +103,6 @@
   flex-direction: column;
   padding-left: 10px;
   padding-right: 10px;
-  align-content: center;
-  justify-content: center;
 }
 
 #image-column {
@@ -117,10 +115,7 @@
 #image-column > #mainProfilePic {
   width: 200px;
   height: 200px;
-  align-content: center;
   justify-content: center;
-  justify-items: center;
-  align-items: center;
 }
 
 #profile-details-column {
