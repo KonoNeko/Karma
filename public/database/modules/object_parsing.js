@@ -133,7 +133,7 @@ function fillSocialPosts(object) {
     let posts = [];
     for (let i=0; i<object.length; i++) {
         let currentID = object[i]['post_id'];
-        if (!postExists(posts, currentID)) {
+        if (!postExists(posts, currentID) && currentID != null) {
             // If current post isn't parsed
                 posts.push(fillSocialPost(object, i));
         }
