@@ -647,6 +647,7 @@ function createExperience(experience, experienceObj) {
 
   let experiencendiv = document.createElement("div");
   experiencendiv.setAttribute("class", "experience-post-div");
+  experiencendiv.id = experienceObj.experience_id;
 
   let picturediv = document.createElement("div");
   picturediv.setAttribute("class", "postpreviewpicture");
@@ -685,6 +686,7 @@ function createAwards(awards, awardsObj) {
 
   let experiencendiv = document.createElement("div");
   experiencendiv.setAttribute("class", "awards-post-div");
+  experiencendiv.id = awardsObj.award_id;
 
   let picturediv = document.createElement("div");
   picturediv.setAttribute("class", "postpreviewpicture");
@@ -696,8 +698,7 @@ function createAwards(awards, awardsObj) {
   picture.src = awardsObj.awards_image_url;
 
   let para = document.createElement("p");
-  para.setAttribute("class", "awardspara");
-  para.innerHTML = "Received " + awardsObj.date_received;
+  para.innerHTML = `Received <span class="awardspara">${awardsObj.date_received}</span>`;
 
   picturediv.appendChild(picture);
 

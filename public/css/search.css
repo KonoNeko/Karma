@@ -150,6 +150,14 @@
     margin-left: 0px;
   }
 
+  .searchResultsTextDiv {
+    width: 40%;
+  }
+
+  .viewProfileButtonDiv {
+    width: 60%;
+  }
+
   .menu-and-search > #above-search {
     max-width: 40rem;
     margin-right: 20px;
