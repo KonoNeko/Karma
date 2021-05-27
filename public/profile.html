@@ -399,6 +399,13 @@
   <script src="js/signup.js"></script>
 <script src="js/signout.js"></script>
   <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
     firebase.auth().onAuthStateChanged(function (user) {
       if (!user) {
         window.location.href = "sign-up.html";
