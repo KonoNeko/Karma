@@ -148,10 +148,10 @@
       </div>
 
       <div id="above-search" class="search">
-        <form class="search-form">
-          <input id="search-texts" type="search" placeholder="Search" />
-          <button id="search-button"><i class="fa fa-search"></i></button>
-        </form>
+        <div autocomplete="off" class="search-form">
+          <input autocomplete="off" id="search-texts" type="search" placeholder="Search" />
+          <button onclick="saveInStorage(document.getElementById('search-texts').value)" class="search-button"><i class="fa fa-search"></i></button>
+        </div>
       </div>
     </div>
 
@@ -203,7 +203,7 @@
         <div class="search">
           <form autocomplete="off" class="search-form">
             <input  autocomplete="off" id ="search-input" type="text" placeholder="Search" />
-            <button id = "searchbar" onclick="findUsers()" type="button"><i class="fa fa-search"></i></button>
+            <button id = "searchbar" onclick="saveInStorage(document.getElementById('search-input').value)" type="button"><i class="fa fa-search"></i></button>
           </form>
         </div>
         <div id ="searchResult">
@@ -225,6 +225,14 @@
 
 </body>
 <script>
+    function saveInStorage(keyword) {
+      console.log(keyword + " was stored in storage");
+      localStorage.clear();
+      localStorage.setItem('search-keyword', keyword.toLowerCase());
+
+      window.location.href = "search.html";
+    }
+
     // Get the modal
     var modal = document.getElementById("locationModal");
 
@@ -312,9 +320,9 @@
   
   
   <script src="js/home.js"></script>
+<!-- <script src="js/search.js"></script> -->
 <!-- <script src="js/signup.js"></script> -->
   <script src="js/sidebar.js"></script>
-<script src="js/search.js"></script>
 <script src="js/createpost.js"></script>
 <script src="js/signout.js"></script>
 <script src="js/like.js"></script>
