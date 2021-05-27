@@ -106,9 +106,14 @@ color: #000000;
         margin-left: -400px;
     }
     #emails {
-        margin-left: 700px;
+        margin-left: 300px;
         margin-top: -260px;
         width: 500px;
+    }
+
+    #phones {
+        margin-left: 00px;
+        
     }
 
 
@@ -146,6 +151,29 @@ color: #000000;
             margin-right: 110px;
             }
 
+#emails {
+    margin-left: -30px;
+    margin-top: 80px;
+    width: 500px;
+}
+
+.headingone{
+    padding-top: 10px;
+    font-family: Montserrat;
+    font-size: 40px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+.headingtwo{
+    font-family: Montserrat;
+    font-size: 26px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+.imgbox{
+    margin-left: 20px;
+}
+
     }
 #mainmain > #box{
     background-color: none; /* temp */
@@ -173,13 +201,5 @@ img {
     border-radius: 10px;
 }
 
-#emails {
-    margin-left: -30px;
-    margin-top: 80px;
-    width: 500px;
-}
 
-#phones {
-    margin-left: 400px;
-    
-}
+
