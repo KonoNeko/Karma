@@ -767,6 +767,23 @@ app.post(ENDPOINT + '/post/comment', (req, res) => {
 });
 
 /**
+ * Gets the conversation between two users, creates a new one if it doesn't exist.
+ * 
+ * Example URL of the request (replace 'value' with an actual value):
+ * https://marlonfajardo.ca/karma/v1/messages/value/value
+ */
+ app.put(ENDPOINT + '/messages/:id/:otherUser', (req, res) => {
+    const userID = req.params.id;
+    const receiver = req.params.otherUser;
+    const sql = `CALL get_conversation('${userID}', '${receiver}');`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        result[0][0].messages = [];
+        res.end(JSON.stringify(result[0][0]));
+    });
+});
+
+/**
  * Gets all conversations for a user
  * 
  * Example URL of the request (replace 'value' with an actual value):
@@ -884,6 +901,7 @@ DONEi) Delete comment - (DELETE - delete_comment)                   TESTED      
 DONEa) View messages in conversation (GET - view_a_conversations)   TESTED      DOCUMENTED(22)
 DONEb) Send message to another user (POST - send_message)           TESTED      DOCUMENTED(24)
 DONEc) View all conversations for a user (GET - view_conversations) TESTED      DOCUMENTED(23)
+DONEd) Get single convo + create (PUT - get_conversation)           
 
 -Notifications
 DONEa) View all notifications (GET - view_notifications)            TESTED
