@@ -208,6 +208,7 @@
 .followerDiv {
   display: flex;
   flex-direction: row;
+  margin-right: 0px !important;
   margin-bottom: 20px;
   justify-content: center;
   align-content: center;
@@ -220,9 +221,7 @@
 }
 
 .followerImgDiv {
-  max-width: 110px;
-  max-height: 110px;
-  width: 20%;
+  width: 10%;
 }
 
 .followerImgDiv > img {
@@ -230,7 +229,7 @@
 }
 
 .followerTextDiv {
-  width: 80%;
+  width: 90%;
 }
 
 .followerDivColumn {
@@ -459,6 +458,11 @@ hr {
   }
 
   #editbtn {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  #followbtn {
     font-size: 12px;
     padding: 8px 10px;
   }

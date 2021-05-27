@@ -155,9 +155,16 @@
       </div>
 
       <div id="followersModal" class="modal">
-        <div class="modal-content">
+        <div id="followersModalContent" class="modal-content">
           <span class="close" id="closefollowers">&times;</span>
-          <p>Some text in the modal...</p>
+          <p class="heading2" style="margin-bottom: 20px">Followers</p>
+        </div>
+      </div>
+  
+      <div id="followingModal" class="modal">
+        <div id="followingModalContent"  class="modal-content">
+          <span class="close" id="closefollowing">&times;</span>
+          <p class="heading2" style="margin-bottom: 20px">Following</p>
         </div>
       </div>
 
@@ -190,8 +197,8 @@
               </div>
   
               <div class="profile-buttons-div">
-                <button class="modalBtn" id="followbtn"></button>
-                <button class='modalBtn' id="msgbtn">Message</button>
+                <button id="followbtn"></button>
+                <button id="msgbtn">Message</button>
               </div>
             </div>
           </div>
@@ -264,6 +271,47 @@
       <script src="js/signOut.js"></script>
       <script src="js/other-profile.js"></script>
       <script>
+        
+    // Get the modal
+    var followersModal = document.getElementById("followersModal");
+    var followingModal = document.getElementById("followingModal");
+
+// Get the button that opens the modal
+var followersBtn = document.getElementById("numOfFollowersDiv");
+var followingBtn = document.getElementById("numOfFollowingDiv");
+
+// Get the <span> element that closes the modal
+var followersClose = document.getElementById("closefollowers");
+var followingClose = document.getElementById("closefollowing");
+
+// When the user clicks the button, open the modal 
+followersBtn.onclick = function() {
+  followersModal.style.display = "block";
+}
+
+followingBtn.onclick = function() {
+  followingModal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+  followersClose.onclick = function() {
+    followersModal.style.display = "none";
+}
+
+followingClose.onclick = function() {
+  followingModal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == followersModal) {
+      followersModal.style.display = "none";
+     }
+    if (event.target == followingModal) {
+      followingModal.style.display = "none";
+     } 
+}
+
 function saveInStorage(keyword) {
       console.log(keyword + " was stored in storage");
       localStorage.clear();
