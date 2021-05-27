@@ -32,6 +32,13 @@ function createUserSearch(user) {
   viewProfileButtonDiv.setAttribute("class", "viewProfileButtonDiv");
   viewProfileButton.setAttribute("class", "viewProfileButton");
 
+  viewProfileButton.onclick = function () {
+    localStorage.clear();
+    localStorage.setItem("profileUsername", user.username);
+    console.log(localStorage.getItem("profileUsername"));
+    window.location.href = "other-profile.html";
+  };
+
   searchResultsName.setAttribute("class", "bodytitle");
   searchResultsUserAt.setAttribute("class", "bodytext");
   searchResultsIsVolunteer.setAttribute("class", "smallbutton");
