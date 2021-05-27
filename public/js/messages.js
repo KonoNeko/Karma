@@ -17,6 +17,8 @@ const db = firebase.firestore();
 let info = {};
 get_firebase_info();
 
+let is_finding = false;
+
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
 function formatTimestamp(timestamp) {
@@ -119,6 +121,9 @@ function formatParams(params) {
 }
 
 function send_message() {
+  is_finding = false;
+  console.log("is finding: " + is_finding);
+
   let message = document.getElementById("user-input").value;
   let receiver = document.getElementById("otherUser").textContent;
   console.log(`Sending "${message}" to ${receiver} from ${info.username}`);
@@ -217,9 +222,18 @@ function returnToMessages() {
   document.getElementById("user-input").value = "";
   document.getElementById("sendMessage").onclick = "";
   document.getElementById("sidemain").setAttribute("style", "display: none");
-  document
-    .getElementById("mainmain")
-    .setAttribute("style", "display: unset; width: 100%;");
+
+  if (is_finding) {
+    console.log("is finding: " + is_finding);
+    document
+      .getElementById("findmain")
+      .setAttribute("style", "display: unset; width: 100% !important;");
+  } else {
+    console.log("is finding: " + is_finding);
+    document
+      .getElementById("mainmain")
+      .setAttribute("style", "display: unset; width: 100%;");
+  }
 }
 
 function revealMessages(convo) {
@@ -384,6 +398,9 @@ function createSendMessage() {
 }
 
 function findUsers() {
+  is_finding = true;
+  console.log("is finding: " + is_finding);
+
   document
     .getElementById("no-messages-div")
     .setAttribute("style", "display: none");
