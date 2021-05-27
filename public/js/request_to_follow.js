@@ -38,8 +38,11 @@ function request_follow(userID, follower) {
   });
   const url = BASE_URL + endpoint + params;
 
-  APIRequest(method, url, console.log);
-}
+  APIRequest(method, url, (res) => {
+      console.log(res);
+      window.location.reload();
+    });
+  }
 
 function unfollow_user(userID, follower) {
   const method = "DELETE";
