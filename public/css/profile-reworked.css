@@ -106,15 +106,10 @@
 }
 
 #image-column {
-  align-content: center;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
+  width: 30%;
 }
 
 #image-column > #mainProfilePic {
-  width: 200px;
-  height: 200px;
   justify-content: center;
 }
 
@@ -212,6 +207,10 @@
 
 input:focus {
   outline: none;
+}
+
+#image-column {
+  justify-content: center;
 }
 
 #msgbtn {
@@ -423,15 +422,12 @@ hr {
 @media screen and (max-width: 550px) {
   #msgbtn {
     font-size: 12px;
+    padding: 8px 10px;
   }
 
   #editbtn {
     font-size: 12px;
-  }
-
-  #image-column {
-    width: 100px;
-    height: 100px;
+    padding: 8px 10px;
   }
 
   .heading-and-edit > p {
@@ -470,6 +466,7 @@ hr {
   #mainmain {
     margin-top: 60px;
     margin-bottom: 96px;
+    margin-right: 20px !important;
   }
 
   .sidenav {
