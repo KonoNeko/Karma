@@ -58,6 +58,23 @@ color: #000000;
     color: #000000;
     
     }
+
+    .headingthree {
+        padding-top: 10px;
+    font-family: Montserrat;
+    font-size: 40px;
+    font-weight: bold;
+        
+    }
+
+
+    .headingfour {
+        font-family: Montserrat;
+        font-size: 26px;
+        font-weight: bold;
+
+        
+    }
     
     #email-two {
     margin-top: 15px;
@@ -77,14 +94,26 @@ color: #000000;
     
     }
 
-    #phoneicon {
-    margin-top: -50px;
-    margin-left: 70px;
+
+    .imgbox {
+        margin-left: -400px;
     }
 
-    #earthicon {
-    margin-top: -50px;
-    margin-left: 70px;
+    .headingone {
+        margin-left: -400px;
+    }
+    .headingtwo {
+        margin-left: -400px;
+    }
+    #emails {
+        margin-left: 300px;
+        margin-top: -260px;
+        width: 500px;
+    }
+
+    #phones {
+        margin-left: 00px;
+        
     }
 
 
@@ -122,6 +151,29 @@ color: #000000;
             margin-right: 110px;
             }
 
+#emails {
+    margin-left: -30px;
+    margin-top: 80px;
+    width: 500px;
+}
+
+.headingone{
+    padding-top: 10px;
+    font-family: Montserrat;
+    font-size: 40px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+.headingtwo{
+    font-family: Montserrat;
+    font-size: 26px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+.imgbox{
+    margin-left: 20px;
+}
+
     }
 #mainmain > #box{
     background-color: none; /* temp */
@@ -148,3 +200,6 @@ img {
     margin-top: 10px;
     border-radius: 10px;
 }
+
+
+

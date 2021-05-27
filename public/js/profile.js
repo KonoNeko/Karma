@@ -73,6 +73,7 @@ function get_firebase_info() {
         view_profile(info.username);
         loadRecommendedConnections(info.username);
         enableProfilePicBtn(info.username);
+        document.getElementById("save").value = info.username;
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
@@ -89,67 +90,67 @@ function add_Skills(userID, skill) {
   });
   const url = BASE_URL + endpoint + params;
 
-  APIRequest(method, url, console.log);
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    window.location.reload();
+  });
 }
 
-function add_Education(userID, schoolName, description, gpa, start, end, img) {
+function add_Education(userID, schoolName, start, end) {
   const method = "POST";
   const endpoint = "/profiles/education";
   const params = formatParams({
     id: userID,
     name: schoolName,
-    type: description,
-    gpa: gpa,
+    type: "description",
+    gpa: "4.0",
     start: start,
     end: end,
-    img: img,
+    img: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/education.jpeg",
   });
   const url = BASE_URL + endpoint + params;
 
-  APIRequest(method, url, console.log);
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    window.location.reload();
+  });
 }
 
-function add_Experience(userID, jobName, workplaceName, start, end, img) {
+function add_Experience(userID, jobName, workplaceName) {
   const method = "POST";
   const endpoint = "/profiles/experience";
   const params = formatParams({
     id: userID,
-    name: jobName,
+    job: jobName,
     employer: workplaceName,
-    start: start,
-    end: end,
-    img: img,
+    start: "start",
+    end: "end",
+    img: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/experience.jpeg",
   });
   const url = BASE_URL + endpoint + params;
 
-  APIRequest(method, url, console.log);
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    window.location.reload();
+  });
 }
 
-function add_Awards(userID, awardTitle, date, img) {
+function add_Awards(userID, awardTitle, date) {
   const method = "POST";
-  const endpoint = "/profiles/awardsAndCertifications";
+  const endpoint = "/profiles/awardsAndCertification";
   const params = formatParams({
     id: userID,
     title: awardTitle,
     date: date,
-    img: img,
+    img: "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/awards.jpg",
   });
   const url = BASE_URL + endpoint + params;
 
-  APIRequest(method, url, console.log);
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    window.location.reload();
+  });
 }
-
-// function add_Description(userID, bio) {
-//   const method = "POST";
-//   const endpoint = "/profiles/bio";
-//   const params = formatParams({
-//     id: userID,
-//     bio: bio,
-//   });
-//   const url = BASE_URL + endpoint + params;
-
-//   APIRequest(method, url, console.log);
-// }
 
 function add_ProfilePic(username) {
   const method = "PUT";
@@ -264,27 +265,6 @@ function loadFollowers(profileObj) {
   createFollowers(follower, profileObj);
 }
 
-// function addAboutMe() {
-//   console.log("Add about me button clicked");
-
-//   document.getElementById("button-content").innerHTML = "";
-
-//   let addAboutMeHeading = document.createElement("p");
-//   addAboutMeHeading.setAttribute("class", "heading3");
-//   addAboutMeHeading.innerHTML = "Add a description for your bio";
-//   addAboutMeHeading.setAttribute("style", "text-align: left");
-
-//   let addAboutMeInput = document.createElement("textarea");
-
-//   document.getElementById("button-content").appendChild(addAboutMeHeading);
-//   document.getElementById("button-content").appendChild(addAboutMeInput);
-
-//   $("#save").click(function () {
-//     let bio = addEducationInput1.value;
-//     add_Description(bio);
-//   });
-// }
-
 
 let posted = false;
 function addProfilePic() {
@@ -342,16 +322,16 @@ function addSkills() {
   addSkillsHeading.innerHTML = "Add skills";
   addSkillsHeading.setAttribute("style", "text-align: left");
 
-  let addSkillsInput = document.createElement("textarea");
+  let addSkillsInput = document.createElement("input");
+  addSkillsInput.placeholder = "Ex. Leadership, Creativity, etc.";
 
   document.getElementById("button-content").appendChild(addSkillsHeading);
   document.getElementById("button-content").appendChild(addSkillsInput);
 
-  $("#save").click(function () {
-    let skill = addSkillsInput.value;
-
-    add_Skills(skill);
-  });
+  let save = document.getElementById("save");
+  save.onclick = () => {
+    add_Skills(save.value, addSkillsInput.value);
+  }
 }
 
 function addEducation() {
@@ -361,76 +341,46 @@ function addEducation() {
 
   let addEducationHeading1 = document.createElement("p");
   addEducationHeading1.setAttribute("class", "heading3");
-  addEducationHeading1.innerHTML = "Please enter the name of your school";
+  addEducationHeading1.innerHTML = "Enter the name of the school";
   addEducationHeading1.setAttribute("style", "text-align: left");
 
-  let addEducationInput1 = document.createElement("textarea");
+  let addEducationInput1 = document.createElement("input");
+  addEducationInput1.placeholder = "Ex. British Columbia Institute of Technology"
   addEducationInput1.setAttribute("style", "height: 30px");
-
-  let addEducationHeading2 = document.createElement("p");
-  addEducationHeading2.setAttribute("class", "heading3");
-  addEducationHeading2.innerHTML = "Please enter your gpa:";
-  addEducationHeading2.setAttribute("style", "text-align: left");
-
-  let addEducationInput2 = document.createElement("textarea");
-  addEducationInput2.setAttribute("style", "height: 30px");
 
   let addEducationHeading3 = document.createElement("p");
   addEducationHeading3.setAttribute("class", "heading3");
-  addEducationHeading3.innerHTML = "Please enter the date your started";
+  addEducationHeading3.innerHTML = "Enter the date the school started";
   addEducationHeading3.setAttribute("style", "text-align: left");
 
-  let addEducationInput3 = document.createElement("textarea");
+  let addEducationInput3 = document.createElement("input");
+  addEducationInput3.placeholder = "MM-YYYY";
   addEducationInput3.setAttribute("style", "height: 30px");
 
   let addEducationHeading4 = document.createElement("p");
   addEducationHeading4.setAttribute("class", "heading3");
-  addEducationHeading4.innerHTML = "Please enter the date you ended";
+  addEducationHeading4.innerHTML = "Enter the date the school ended";
   addEducationHeading4.setAttribute("style", "text-align: left");
 
-  let addEducationInput4 = document.createElement("textarea");
+  let addEducationInput4 = document.createElement("input");
+  addEducationInput4.placeholder = "MM-YYYY";
   addEducationInput4.setAttribute("style", "height: 30px");
-
-  let addEducationHeading5 = document.createElement("p");
-  addEducationHeading5.setAttribute("class", "heading3");
-  addEducationHeading5.innerHTML = "Please add a image of your school";
-  addEducationHeading5.setAttribute("style", "text-align: left");
-
-  let addEducationInput5 = document.createElement("button");
-  addEducationInput5.setAttribute("style", "height: 20px");
-
-  let addEducationHeading = document.createElement("p");
-  addEducationHeading.setAttribute("class", "heading3");
-  addEducationHeading.innerHTML = "Please add the type of certification earned";
-  addEducationHeading.setAttribute("style", "text-align: left");
-
-  let addEducationInput = document.createElement("textarea");
-  addEducationInput.setAttribute("style", "height: 30px");
 
   document.getElementById("button-content").appendChild(addEducationHeading1);
   document.getElementById("button-content").appendChild(addEducationInput1);
-  document.getElementById("button-content").appendChild(addEducationHeading);
-  document.getElementById("button-content").appendChild(addEducationInput);
-  document.getElementById("button-content").appendChild(addEducationHeading2);
-  document.getElementById("button-content").appendChild(addEducationInput2);
   document.getElementById("button-content").appendChild(addEducationHeading3);
   document.getElementById("button-content").appendChild(addEducationInput3);
   document.getElementById("button-content").appendChild(addEducationHeading4);
   document.getElementById("button-content").appendChild(addEducationInput4);
-  document.getElementById("button-content").appendChild(addEducationHeading5);
-  document.getElementById("button-content").appendChild(addEducationInput5);
 
-  // userID, schoolName, description, gpa, start, end, img
-  $("#save").click(function () {
+  let save = document.getElementById("save");
+  save.onclick = () => {
     let schoolName = addEducationInput1.value;
-    let description = addEducationInput.value;
-    let gpa = addEducationInput2.value;
     let start = addEducationInput3.value;
     let end = addEducationInput4.value;
-    let img = addEducationInput5.value;
 
-    add_Education(info.username, schoolName, description, gpa, start, end, img);
-  });
+    add_Education(save.value, schoolName, start, end);
+  }
 }
 
 function addExperience() {
@@ -440,65 +390,34 @@ function addExperience() {
 
   let addExperienceHeading1 = document.createElement("p");
   addExperienceHeading1.setAttribute("class", "heading3");
-  addExperienceHeading1.innerHTML = "Please enter the job title";
+  addExperienceHeading1.innerHTML = "Enter the title of the position";
   addExperienceHeading1.setAttribute("style", "text-align: left");
 
-  let addExperienceInput1 = document.createElement("textarea");
+  let addExperienceInput1 = document.createElement("input");
+  addExperienceInput1.placeholder = "Ex. Store Manager, Sales Associate, etc."
   addExperienceInput1.setAttribute("style", "height: 30px");
 
   let addExperienceHeading = document.createElement("p");
   addExperienceHeading.setAttribute("class", "heading3");
-  addExperienceHeading.innerHTML = "Please eneter the name of the workplace";
+  addExperienceHeading.innerHTML = "Enter the name of the workplace";
   addExperienceHeading.setAttribute("style", "text-align: left");
 
-  let addExperienceInput = document.createElement("textarea");
+  let addExperienceInput = document.createElement("input");
+  addExperienceInput.placeholder = "Ex. Store name, company name, employer, etc.";
   addExperienceInput.setAttribute("style", "height: 30px");
-
-  let addExperienceHeading2 = document.createElement("p");
-  addExperienceHeading2.setAttribute("class", "heading3");
-  addExperienceHeading2.innerHTML = "Please eneter the start date";
-  addExperienceHeading2.setAttribute("style", "text-align: left");
-
-  let addExperienceInput2 = document.createElement("textarea");
-  addExperienceInput2.setAttribute("style", "height: 30px");
-
-  let addExperienceHeading3 = document.createElement("p");
-  addExperienceHeading3.setAttribute("class", "heading3");
-  addExperienceHeading3.innerHTML = "Please enter the end date";
-  addExperienceHeading3.setAttribute("style", "text-align: left");
-
-  let addExperienceInput3 = document.createElement("textarea");
-  addExperienceInput3.setAttribute("style", "height: 30px");
-
-  let addExperienceHeading4 = document.createElement("p");
-  addExperienceHeading4.setAttribute("class", "heading3");
-  addExperienceHeading4.innerHTML = "Please add a image of your workplace";
-  addExperienceHeading4.setAttribute("style", "text-align: left");
-
-  let addExperienceInput4 = document.createElement("button");
-  addExperienceInput4.setAttribute("style", "height: 30px");
 
   document.getElementById("button-content").appendChild(addExperienceHeading1);
   document.getElementById("button-content").appendChild(addExperienceInput1);
   document.getElementById("button-content").appendChild(addExperienceHeading);
   document.getElementById("button-content").appendChild(addExperienceInput);
-  document.getElementById("button-content").appendChild(addExperienceHeading2);
-  document.getElementById("button-content").appendChild(addExperienceInput2);
-  document.getElementById("button-content").appendChild(addExperienceHeading3);
-  document.getElementById("button-content").appendChild(addExperienceInput3);
-  document.getElementById("button-content").appendChild(addExperienceHeading4);
-  document.getElementById("button-content").appendChild(addExperienceInput4);
 
-  // userID, jobName, workplaceName, start, end, img
-  $("#save").click(function () {
+  let save = document.getElementById("save");
+  save.onclick = () => {
     let jobName = addExperienceInput1.value;
     let workplaceName = addExperienceInput.value;
-    let start = addExperienceInput2.value;
-    let end = addExperienceInput3.value;
-    let img = addExperienceInput4.value;
 
-    add_Experience(jobName, workplaceName, start, end, img);
-  });
+    add_Experience(save.value, jobName, workplaceName);
+  }
 }
 
 function addAwards() {
@@ -508,42 +427,34 @@ function addAwards() {
 
   let addAwardHeading1 = document.createElement("p");
   addAwardHeading1.setAttribute("class", "heading3");
-  addAwardHeading1.innerHTML = "Please enter the name of the certificate/award";
+  addAwardHeading1.innerHTML = "Enter the name of the certificate/award";
   addAwardHeading1.setAttribute("style", "text-align: left");
 
-  let addAwardInput1 = document.createElement("textarea");
+  let addAwardInput1 = document.createElement("input");
+  addAwardInput1.placeholder = "Ex. Red Cross First Aid, Citizenship Award, etc.";
   addAwardInput1.setAttribute("style", "height: 30px");
 
   let addAwardHeading2 = document.createElement("p");
   addAwardHeading2.setAttribute("class", "heading3");
-  addAwardHeading2.innerHTML = "Please enter the date the award was recieved:";
+  addAwardHeading2.innerHTML = "Enter the date it was recieved";
   addAwardHeading2.setAttribute("style", "text-align: left");
 
-  let addAwardInput2 = document.createElement("textarea");
+  let addAwardInput2 = document.createElement("input");
+  addAwardInput2.placeholder = "MM-YYYY";
   addAwardInput2.setAttribute("style", "height: 30px");
-
-  let addAwardHeading3 = document.createElement("p");
-  addAwardHeading3.setAttribute("class", "heading3");
-  addAwardHeading3.innerHTML = "Please add a image of the certificate/award";
-  addAwardHeading3.setAttribute("style", "text-align: left");
-
-  let addAwardInput3 = document.createElement("button");
-  addAwardInput3.setAttribute("style", "height: 20px");
 
   document.getElementById("button-content").appendChild(addAwardHeading1);
   document.getElementById("button-content").appendChild(addAwardInput1);
   document.getElementById("button-content").appendChild(addAwardHeading2);
   document.getElementById("button-content").appendChild(addAwardInput2);
-  document.getElementById("button-content").appendChild(addAwardHeading3);
-  document.getElementById("button-content").appendChild(addAwardInput3);
 
-  $("#save").click(function () {
+  let save = document.getElementById("save");
+  save.onclick = () => {
     let awardTitle = addAwardInput1.value;
     let date = addAwardInput2.value;
-    let img = addAwardInput3.value;
 
-    add_Awards(awardTitle, date, img);
-  });
+    add_Awards(save.value, awardTitle, date);
+  }
 }
 
 function createNumPosts(numPosts, number) {
