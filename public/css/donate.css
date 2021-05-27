@@ -33,8 +33,6 @@
   width: 50%;
 }
 
-
-
 #mainmain {
   display: flex;
   align-content: center;
@@ -79,6 +77,10 @@
     display: none;
   }
 
+  #mainmain {
+    margin-top: 64px;
+  }
+
   .flex-main > .column {
     width: 100%;
   }
@@ -104,7 +106,7 @@
   }
 
   .menu-and-search {
-    display: flex;
+    display: block;
     flex-direction: row;
     flex-wrap: nowrap;
   }
