@@ -75,6 +75,20 @@ function editExperience(exp_id, jobName, workplaceName, img) {
   APIRequest(method, url, console.log);
 }
 
+function editAwards(userID, awardTitle, date, img) {
+  const method = "PUT";
+  const endpoint = "/profiles/awardsAndCertification";
+  const params = formatParams({
+    id: userID,
+    title: awardTitle,
+    date: date,
+    img: img,
+  });
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, console.log);
+}
+
 var inputs = document.getElementsByClassName("skillsinput");
 for (index = 0; index < inputs.length; ++index) {
   inputs[index].addEventListener("input", resizeInput);
@@ -467,6 +481,86 @@ function awardsOnclick() {
 
   document.getElementById("awards-div").setAttribute("style", "display: none");
 
+  let awardsNames = document.getElementsByClassName("awardsName");
+  let awardsParas = document.getElementsByClassName("awardspara");
+  let awardsPics = document.getElementsByClassName("awardspic");
+  let awardsPosts = document.getElementsByClassName("awards-post-div");
+
+  for (i = 0; i < awardsPosts.length; i++) {
+    let awardsPostDiv = document.createElement("div");
+    awardsPostDiv.setAttribute("style", "display: flex;");
+    awardsPostDiv.id = awardsPosts[i].id;
+
+    let awardsPostImgDiv = document.createElement("div");
+
+    let awardsPostImg = document.createElement("img");
+    let awardsPostImgLabel = document.createElement("label");
+    let awardsPostImgUpload = document.createElement("input");
+
+    awardsPostImg.src = awardsPics[i].src;
+    awardsPostImg.className = "newImageAward";
+    awardsPostImg.setAttribute("style", "border-radius: 10px; width: 90%;");
+
+    awardsPostImgUpload.id = "upload-image-award" + i;
+    awardsPostImgUpload.type = "file";
+    awardsPostImgUpload.style.display = "none";
+
+    awardsPostImgLabel.innerHTML = "Upload new image";
+    awardsPostImgLabel.setAttribute("for", "upload-image-award" + i);
+    awardsPostImgLabel.setAttribute("class", "smalltext");
+    awardsPostImgLabel.setAttribute(
+      "style",
+      "color: #51B09F; font-weight: bold; margin-bottom: 10px;"
+    );
+
+    let awardsPostInputDiv = document.createElement("div");
+    let awardsPostInputTitle = document.createElement("input");
+    let awardsPostInputPara = document.createElement("input");
+
+    awardsPostInputTitle.className = "newawardsName";
+    awardsPostInputPara.className = "newawardspara";
+
+    awardsPostInputTitle.value = awardsNames[i].textContent;
+
+    awardsPostInputPara.value = awardsParas[i].textContent;
+    awardsPostInputTitle.setAttribute(
+      "style",
+      "margin-bottom: 5px; width: 80%; "
+    );
+    awardsPostInputPara.setAttribute("style", "width: 80%;");
+
+    awardsPostImgUpload.addEventListener("change", (ev) => {
+      console.log(ev);
+      const formdata = new FormData();
+      formdata.append("image", ev.target.files[0]);
+      fetch("https://api.imgur.com/3/image/", {
+        method: "post",
+        headers: {
+          Authorization: "Client-ID 4409588f10776f7",
+        },
+        body: formdata,
+      })
+        .then((data) => data.json()).then((data) => {
+          awardsPostImg.src = data.data.link;
+        });
+    });
+
+    awardsPostImgLabel.appendChild(awardsPostImg);
+    awardsPostImgDiv.appendChild(awardsPostImgLabel);
+    awardsPostImgDiv.appendChild(awardsPostImgUpload);
+
+    awardsPostInputDiv.appendChild(awardsPostInputTitle);
+    awardsPostInputDiv.appendChild(awardsPostInputPara);
+
+    awardsPostImgDiv.setAttribute("style", "width: 50%; margin-right: 10px");
+    awardsPostInputDiv.setAttribute("style", "width: 50%; margin-left: 10px;");
+
+    awardsPostDiv.appendChild(awardsPostImgDiv);
+    awardsPostDiv.appendChild(awardsPostInputDiv);
+
+    document.getElementById("awards-edit-div").appendChild(awardsPostDiv);
+  }
+
   document.getElementById("cancel-awards-btn").onclick = function () {
     document
       .getElementById("awards-edit")
@@ -484,57 +578,24 @@ function awardsOnclick() {
     document
       .getElementById("awards-div")
       .setAttribute("style", "display: unset");
+
+    let newAwardTitle = document.getElementsByClassName("newawardsName");
+    let newAwardDate = document.getElementsByClassName("newawardspara");
+    let newImages = document.getElementsByClassName("newImageAward");
+    let posts = document.getElementsByClassName("awards-post-div");
+
+    for(let i=0; i<posts.length; i++) {
+      console.log(`${newAwardTitle[i].value}: ${newAwardDate[i].value}`);
+      console.log("IMG: " + newImages[i].src);
+      awardsNames[i].innerHTML = newAwardTitle[i].value;
+      awardsParas[i].innerHTML = newAwardDate[i].value;
+      awardsPics[i].src = newImages[i].src;
+      editAwards(
+        posts[i].id,
+        newAwardTitle[i].value,
+        newAwardDate[i].value,
+        newImages[i].src
+      )
+    }
   };
-
-  let awardsNames = document.getElementsByClassName("awardsName");
-  let awardsParas = document.getElementsByClassName("awardspara");
-  let awardsPics = document.getElementsByClassName("awardspic");
-  let awardsPosts = document.getElementsByClassName("awards-post-div");
-
-  for (i = 0; i < awardsPosts.length; i++) {
-    let awardsPostDiv = document.createElement("div");
-    awardsPostDiv.setAttribute("style", "display: flex;");
-
-    let awardsPostImgDiv = document.createElement("div");
-
-    let awardsPostImg = document.createElement("img");
-    let awardsPostImgUpload = document.createElement("p");
-
-    awardsPostImg.src = awardsPics[i].src;
-    awardsPostImg.setAttribute("style", "border-radius: 10px; width: 90%;");
-
-    awardsPostImgUpload.innerHTML = "Upload new image";
-    awardsPostImgUpload.setAttribute("class", "smalltext");
-    awardsPostImgUpload.setAttribute(
-      "style",
-      "color: #51B09F; font-weight: bold; margin-bottom: 10px;"
-    );
-
-    let awardsPostInputDiv = document.createElement("div");
-    let awardsPostInputTitle = document.createElement("input");
-    let awardsPostInputPara = document.createElement("input");
-
-    awardsPostInputTitle.value = awardsNames[i].textContent;
-
-    awardsPostInputPara.value = awardsParas[i].textContent;
-    awardsPostInputTitle.setAttribute(
-      "style",
-      "margin-bottom: 5px; width: 80%; "
-    );
-    awardsPostInputPara.setAttribute("style", "width: 80%;");
-
-    awardsPostImgDiv.appendChild(awardsPostImg);
-    awardsPostImgDiv.appendChild(awardsPostImgUpload);
-
-    awardsPostInputDiv.appendChild(awardsPostInputTitle);
-    awardsPostInputDiv.appendChild(awardsPostInputPara);
-
-    awardsPostImgDiv.setAttribute("style", "width: 50%; margin-right: 10px");
-    awardsPostInputDiv.setAttribute("style", "width: 50%; margin-left: 10px;");
-
-    awardsPostDiv.appendChild(awardsPostImgDiv);
-    awardsPostDiv.appendChild(awardsPostInputDiv);
-
-    document.getElementById("awards-edit-div").appendChild(awardsPostDiv);
-  }
 }
