@@ -6,7 +6,7 @@ console.log(done_viewing);
 
 function like(id) {
   let heart = document.getElementById(id);
-  let postId = id.slice(-1);
+  let postId = id.match(/\d+/)[0];
 
   console.log("YOU ARE NOW ALLOWED TO CLICK LIKE " + postId);
 
@@ -41,7 +41,8 @@ function like(id) {
 }
 
 function changeLikesText(id, mode) {
-  let likesText = document.getElementById("likes" + id.slice(-1));
+  let num = id.match(/\d+/)[0];
+  let likesText = document.getElementById("likes" + num);
   let likesTextContent = likesText.textContent.slice(
     0,
     likesText.textContent.indexOf(" ")
