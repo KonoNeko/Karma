@@ -173,7 +173,7 @@
   padding-bottom: 10px;
   text-align: center;
 }
-@media screen and (max-width: 1220px) and (min-width: 550px) {
+@media screen and (max-width: 1420px) and (min-width: 550px) {
   .h1{
     font-size: 22px;
   }

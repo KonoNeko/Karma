@@ -116,11 +116,6 @@ const result = [
   },
 ];
 
-
-
-
-
-
 async function get_firebase_info() {
   firebase.auth().onAuthStateChanged(function (user) {
     return db
@@ -134,7 +129,6 @@ async function get_firebase_info() {
         username = user.username;
         info.email = user.email;
         info.username = user.username;
-        view_social_feed(info.username);
         loadWhatsNew();
         loadRecommendedConnections(info.username);
       })

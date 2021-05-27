@@ -118,7 +118,7 @@
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: -1;
     margin-left: 40px;
     height: 40px;
 
@@ -174,7 +174,7 @@
   width: 400px;
   border-radius: 20px;
   margin-left: 100px;
-
+  
 
 
 }
@@ -185,11 +185,25 @@
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  
+  z-index: -1;
+  margin-left: 20px;
   height: 60px;
 
  
+}
+
+.dropdownn .dropbtn {
+  cursor: pointer;
+  font-size: 18px;  
+  border: none;
+  outline: none;
+  color:black;
+  padding: 18px 20px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  display: block;
+  margin-top: 20px;
 }
 
 /* #para {

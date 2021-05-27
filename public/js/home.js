@@ -105,9 +105,13 @@ function loopThroughSocialPosts(results) {
     posts = results;
   }
   console.log("This is being called" + posts.length);
-  for (let i = 0; i < posts.length; i++) {
-    console.log(posts[i]);
-    createPost(posts[i]);
+  if (posts.length == 0) {
+    createBlankHomePage();
+  } else {
+    for (let i = 0; i < posts.length; i++) {
+      console.log(posts[i]);
+      createPost(posts[i]);
+    }
   }
 }
 

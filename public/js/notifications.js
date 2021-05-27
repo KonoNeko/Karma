@@ -8,13 +8,13 @@ var firebaseConfig = {
   storageBucket: "karma-535f3.appspot.com",
   messagingSenderId: "1023587584355",
   appId: "1:1023587584355:web:89bb521723bf4afd58eb56",
-  measurementId: "G-VTZ4TEWFBW"
+  measurementId: "G-VTZ4TEWFBW",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
-  
+
 const db = firebase.firestore();
 
 let info = {};
@@ -28,9 +28,9 @@ function get_firebase_info() {
       .get()
       .then(function (doc) {
         let user = doc.data();
-        info['fullName'] = user.fullName;
-        info['email'] = user.email;
-        info['username'] = user.username; 
+        info["fullName"] = user.fullName;
+        info["email"] = user.email;
+        info["username"] = user.username;
         view_notifications(info.username);
         loadRecommendedConnections(info.username);
         loadWhatsNew();
@@ -85,12 +85,17 @@ function view_notifications(userID) {
 
 function loadNotifications(notis) {
   console.log(notis);
-  for (let i = 0; i < notis.length; i++) {
-    // for each notification
-    let currentEvent = notis[i].type_of_event;
-    notification_types[currentEvent](notis[i]);
-    if (i != notis.length - 1) {
-      generateHR();
+
+  if (notis.length == 0) {
+    generateNoNotifications();
+  } else {
+    for (let i = 0; i < notis.length; i++) {
+      // for each notification
+      let currentEvent = notis[i].type_of_event;
+      notification_types[currentEvent](notis[i]);
+      if (i != notis.length - 1) {
+        generateHR();
+      }
     }
   }
 }
@@ -113,6 +118,11 @@ function loadAll() {
 
 function generateNoNotifications() {
   let noNotificationsDiv = document.getElementById("notifications");
+  noNotificationsDiv.setAttribute("style", "text-align: center");
+
+  let notificationsImg = document.createElement("img");
+  notificationsImg.setAttribute("style", "width: 60%");
+  notificationsImg.src = "./res/notifications.svg";
 
   let notification = document.createElement("p");
   notification.setAttribute("class", "heading3");
@@ -120,6 +130,7 @@ function generateNoNotifications() {
   notification.innerHTML =
     "You have no new notifications. Check back to see if there are any new notifications!";
 
+  noNotificationsDiv.appendChild(notificationsImg);
   noNotificationsDiv.appendChild(notification);
 }
 
@@ -284,7 +295,7 @@ function generateNotificationFollow(postObj) {
     let userID = postObj.username_of_notification;
     let follower = postObj.current_user;
     request_follow(userID, follower);
-  }
+  };
 
   if (postObj.follow_status === "following") {
     notificationFollowButton.style.backgroundColor = "#51b09f";
@@ -407,7 +418,7 @@ function generateNotificationFollowRequest(postObj) {
     let userID = postObj.current_user;
     let follower = postObj.username_of_notification;
     accept_request(userID, follower);
-  }
+  };
 
   let notificationDeleteButton = document.createElement("button");
   notificationDeleteButton.id = postObj.notification_id;

@@ -11,9 +11,9 @@
   <title>Contact us</title>
   <link rel="stylesheet" href="css/createvolunteerpost.css" />
   <link rel="stylesheet" href="css/contact-us.css" />
-  <link rel=stylesheet href = "css/partnerwithus.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
   <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -166,7 +166,9 @@
     <div class="column" id="mainmain">
       <div id="box" class="box" style="text-align: center">
         <h class="heading1" style="padding-top: 20px">Contact us</h>
-        <p class="bodytext" style="text-align: left; padding-bottom: 10px" >We will reply your message in 7 business day.</p>
+        <p class="bodytitle">Phone number: +1 778-251-2054</p>
+        <p class="bodytitle">Email: karmavolunteering@gmail.com</p>
+        <p class="bodytext" style="text-align: left; padding-bottom: 10px" >We will reply your message in 7 business days.</p>
         <div class="container">
           <form
                   class="form-format"
@@ -219,20 +221,6 @@
           </form>
         </div>
         <div>
-          <div id="move">
-        <div  class="imgbox" style="padding-top: 20px">
-          <img src="images/phone.png">
-        </div>
-          <p class="headingone">Call us by</p>
-          <p class="headingtwo">+1 778-251-2054</p>
-          <div>
-            <div id="emails">
-          <img src="images/email.jpg">
-          <p class="headingthree">Email Us</p>
-          <p class="headingfour">Karmavolunteering@gmail.com</p>
-        </div>
-          </div>
-        </div>
       </div>
     </div>
     </div>
@@ -245,23 +233,25 @@
           <button id = "searchbar" onclick="saveInStorage(document.getElementById('search-input').value)" type="button"><i class="fa fa-search"></i></button>
         </div>
       </div>
+      <div id ="searchResult">
+      </div>
       <div id="whats-new" class="whats-new">
-        <h1>What's new?</h1>
-        <p>Recommended volunteering opportunities for you</p>
+        <p class="heading2">What's new?</h1>
+        <p class="heading3">Recommended volunteering opportunities for you</p>
         <div id="whats-new-volunteering-opportunities"></div>
-        <a href="">View all volunteering opportunities</a>
+        <a href="bulletin-board.html" class="heading3">View all volunteering opportunities</a>
       </div>
       <div id="recommended-connections" class="recommended-connections">
-        <h1>Who to connect with</h1>
-        <a href="">View all recommended connections</a>
+        <p class="heading2">Who to connect with</h1>
+        <div id="recommendedUserDiv"></div>
+        <a href="notifications.html" class="heading3">View all recommended connections</a>
       </div>
     </div>
   </div>
 
 </body>
-<script src="js/signup.js"></script>
-<script src="js/signout.js"></script>
 <script src="js/contact-us.js"></script>
+<script src="js/sidebar.js"></script>
 
 
 <script
@@ -270,6 +260,7 @@
   ></script>
   
 <script>
+
 function saveInStorage(keyword) {
       console.log(keyword + " was stored in storage");
       localStorage.clear();

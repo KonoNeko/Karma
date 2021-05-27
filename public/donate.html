@@ -5,10 +5,10 @@
   <link rel="icon" type="image/png" href="res/logo0_colored.png" />
 
   <title>Donate</title>
-  <link rel="stylesheet" href="css/donate.css" />
-  <link rel="stylesheet" href="css/searchbar.css" />
-  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/contact-us.css" />
+  <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -171,8 +171,10 @@
     <div class="flex-main">
       <div class="column" id="mainmain">
         <h1 class="heading1 heading-title">Donate</h1>
-        <img src="images/donation.jpg" style="border-radius: 12px" />
-        <div style="padding-bottom: 20px" id="stories" class="stories">
+        <div style="text-align: center">
+          <img src="res/donate.svg" style="width: 50%" />
+        </div>
+        <div style="padding-bottom: 20px">
           <p style="padding-bottom: 10px" class="heading2">
             A contribution to Karma is a contribution to the community and the
             world.
@@ -208,38 +210,28 @@
       <div class="column" id="sidemain">
         <div class="search">
           <div autocomplete="off" class="search-form">
-            <input
-              autocomplete="off"
-              id="search-input"
-              type="text"
-              placeholder="Search"
-            />
-            <button
-              id="searchbar"
-              onclick="saveInStorage(document.getElementById('search-input').value)"
-              type="button"
-            >
-              <i class="fa fa-search"></i>
-            </button>
+            <input  autocomplete="off" id ="search-input" type="text" placeholder="Search" />
+            <button id = "searchbar" onclick="saveInStorage(document.getElementById('search-input').value)" type="button"><i class="fa fa-search"></i></button>
           </div>
         </div>
+        <div id ="searchResult">
+        </div>
         <div id="whats-new" class="whats-new">
-          <h1>What's new?</h1>
-          <p>Recommended volunteering opportunities for you</p>
+          <p class="heading2">What's new?</h1>
+          <p class="heading3">Recommended volunteering opportunities for you</p>
           <div id="whats-new-volunteering-opportunities"></div>
-          <a href="">View all volunteering opportunities</a>
+          <a href="bulletin-board.html" class="heading3">View all volunteering opportunities</a>
         </div>
         <div id="recommended-connections" class="recommended-connections">
-          <h1>Who to connect with</h1>
-          <a href="">View all recommended connections</a>
+          <p class="heading2">Who to connect with</h1>
+          <div id="recommendedUserDiv"></div>
+          <a href="notifications.html" class="heading3">View all recommended connections</a>
         </div>
       </div>
     </div>
   </div>
 </body>
 <script src="js/sidebar.js"></script>
-<script src="js/signup.js"></script>
-<script src="js/signout.js"></script>
 <script src="js/donate.js"></script>
 
 <!--<script src="js/home.js"></script>-->
