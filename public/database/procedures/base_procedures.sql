@@ -480,6 +480,58 @@ DELIMITER ;
 
 
 /*
+Gets a single conversation, creates a new one if it doesn't exist.
+*/
+DROP PROCEDURE IF EXISTS get_conversation;
+DELIMITER //
+CREATE PROCEDURE get_conversation(IN current_username CHAR(50), IN receiver_username CHAR(50))
+BEGIN
+    IF ( SELECT 
+            (   SELECT COUNT(a.conversation_id)
+                FROM conversations a
+                WHERE (a.user_id_1 = get_user_id(current_username) AND a.user_id_2 = get_user_id(receiver_username))
+                OR (a.user_id_2 = get_user_id(current_username) AND a.user_id_1 = get_user_id(receiver_username))
+            ) = 0) THEN
+        INSERT INTO conversations (user_id_1, user_id_2)
+        VALUES (get_user_id(current_username), get_user_id(receiver_username));
+
+        SELECT
+        get_user_name(get_user_id(receiver_username)) as other_user,
+        get_full_name_with_id(get_user_id(receiver_username)) as other_user_fullname,
+        get_profile_pic(get_user_id(receiver_username)) as other_user_profile_pic;
+
+    ELSEIF ( SELECT COUNT(message_id) = 0
+                FROM messages 
+        WHERE conversation_id = (
+            SELECT b.conversation_id FROM conversations b
+            WHERE (b.user_id_1 = get_user_id(current_username) AND b.user_id_2 = get_user_id(receiver_username))
+            OR (b.user_id_2 = get_user_id(current_username) AND b.user_id_1 = get_user_id(receiver_username))
+        )) THEN
+
+        SELECT
+        get_user_name(get_user_id(receiver_username)) as other_user,
+        get_full_name_with_id(get_user_id(receiver_username)) as other_user_fullname,
+        get_profile_pic(get_user_id(receiver_username)) as other_user_profile_pic;
+    
+    ELSE
+        SELECT m.*,
+        get_user_name(get_user_id(receiver_username)) as other_user,
+        get_full_name_with_id(get_user_id(receiver_username)) as other_user_fullname,
+        get_profile_pic(get_user_id(receiver_username)) as other_user_profile_pic
+        FROM messages m
+        WHERE m.conversation_id = (
+            SELECT b.conversation_id FROM conversations b
+            WHERE (b.user_id_1 = get_user_id(current_username) AND b.user_id_2 = get_user_id(receiver_username))
+            OR (b.user_id_2 = get_user_id(current_username) AND b.user_id_1 = get_user_id(receiver_username))
+        )
+        ORDER BY m.message_id;
+
+    END IF;
+END//
+DELIMITER ;
+
+
+/*
 Posts a new story.
 */
 DROP PROCEDURE IF EXISTS post_story;
