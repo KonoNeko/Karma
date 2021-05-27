@@ -19,7 +19,6 @@
   width: 95%;
 }
 
-
 .heading-and-edit > i {
   width: 5%;
   justify-content: flex-end;
@@ -109,7 +108,8 @@
 }
 
 #image-column {
-  width: 30%;
+  width: 200px;
+  height: 200px;
 }
 
 #profile-details-column {
@@ -219,11 +219,10 @@ input:focus {
   border-radius: 10px;
   outline: none;
 }
-
+/* 
 .profilepicture {
   position: relative;
   width: 20%;
-  /* desired width */
   margin: 5px;
 }
 
@@ -231,7 +230,6 @@ input:focus {
   content: "";
   display: block;
   padding-top: 100%;
-  /* initial ratio of 1:1*/
 }
 
 img {
@@ -254,7 +252,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .skillsbtn {
   background-color: #0367a6;
@@ -352,7 +350,7 @@ img {
   margin-right: 5px;
   cursor: pointer;
 }
-#postBtn{
+#postBtn {
   background-color: #0367a6;
   padding: 6px 14px;
   border: none;
@@ -365,18 +363,12 @@ img {
   margin-top: 5px;
   cursor: pointer;
   margin-left: 5px;
-
-
-
 }
 
 .icons {
   display: flex;
   color: #49a1b9;
 }
-
-
-
 
 #addexp {
   background-color: #0367a6;
@@ -422,6 +414,11 @@ hr {
 }
 
 @media screen and (max-width: 550px) {
+  #image-column {
+    width: 100px;
+    height: 100px;
+  }
+
   .heading-and-edit > p {
     width: 86%;
   }
