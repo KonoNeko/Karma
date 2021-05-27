@@ -21,11 +21,31 @@ const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 let info;
 get_firebase_info();
 
-createFollowerUser();
-createFollowerUser();
-createFollowerUser();
-createFollowingUser();
-createFollowingUser();
+function get_followers(currentUser) {
+  const method = "GET";
+  const endpoint = "/profiles/followers";
+  const params = `/${currentUser}`;
+  const url = BASE_URL + endpoint + params;
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    for (let i=0; i<res.length; i++) {
+      createFollowerUser(res[i])
+    }
+  });
+}
+
+function get_following(currentUser) {
+  const method = "GET";
+  const endpoint = "/profiles/following";
+  const params = `/${currentUser}`;
+  const url = BASE_URL + endpoint + params;
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    for (let i=0; i<res.length; i++) {
+      createFollowingUser(res[i])
+    }
+  });
+}
 
 let width =
   window.innerWidth ||
@@ -78,6 +98,8 @@ function get_firebase_info() {
         view_profile(info.username);
         loadRecommendedConnections(info.username);
         enableProfilePicBtn(info.username);
+        get_followers(info.username);
+        get_following(info.username);
         document.getElementById("save").value = info.username;
       })
       .catch((error) => {
@@ -468,7 +490,7 @@ function addAwards() {
   };
 }
 
-function createFollowerUser() {
+function createFollowerUser(user) {
   // CREATE
   let followerModal = document.getElementById("followersModalContent");
 
@@ -491,9 +513,9 @@ function createFollowerUser() {
   followerUsername.setAttribute("class", "smallbutton");
 
   // TEMP
-  followerImg.src = "./images/placeholder.jpg";
-  followerName.innerHTML = "Chris Raganit";
-  followerUsername.innerHTML = "@" + "chris.raganit";
+  followerImg.src = user.profile_pic;
+  followerName.innerHTML = user.full_name;
+  followerUsername.innerHTML = "@" + `<span class=follower>${user.follower}</span>`;
 
   // APPEND
   followerModal.appendChild(followerDiv);
@@ -506,7 +528,7 @@ function createFollowerUser() {
   followerTextDiv.appendChild(followerUsername);
 }
 
-function createFollowingUser() {
+function createFollowingUser(user) {
   // CREATE
   let followingModal = document.getElementById("followingModalContent");
 
@@ -529,9 +551,9 @@ function createFollowingUser() {
   followerUsername.setAttribute("class", "smallbutton");
 
   // TEMP
-  followerImg.src = "./images/placeholder.jpg";
-  followerName.innerHTML = "Chris Raganit";
-  followerUsername.innerHTML = "@" + "chris.raganit";
+  followerImg.src = user.profile_pic;
+  followerName.innerHTML = user.full_name;
+  followerUsername.innerHTML = "@" + `<span class=follower>${user.follower}</span>`;
 
   // APPEND
   followingModal.appendChild(followerDiv);

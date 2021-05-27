@@ -1032,7 +1032,8 @@ DROP PROCEDURE IF EXISTS get_followers;
 DELIMITER //
 CREATE PROCEDURE get_followers(IN current_username CHAR(50))
 BEGIN
-    SELECT get_user_name(follower_id) as follower, get_full_name_with_id(follower_id) as full_name
+    SELECT get_user_name(follower_id) as follower, get_full_name_with_id(follower_id) as full_name,
+    get_profile_pic(follower_id) as profile_pic
     FROM profile_follows
     WHERE profile_id = get_user_id(current_username)
     AND request_accepted = 1;
@@ -1047,7 +1048,8 @@ DROP PROCEDURE IF EXISTS get_following;
 DELIMITER //
 CREATE PROCEDURE get_following(IN current_username CHAR(50))
 BEGIN
-    SELECT get_user_name(profile_id) as follower, get_full_name_with_id(profile_id) as full_name
+    SELECT get_user_name(profile_id) as follower, get_full_name_with_id(profile_id) as full_name,
+    get_profile_pic(profile_id) as profile_pic
     FROM profile_follows
     WHERE follower_id = get_user_id(current_username)
     AND request_accepted = 1;
