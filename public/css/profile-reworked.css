@@ -108,8 +108,19 @@
 }
 
 #image-column {
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
+#image-column > #mainProfilePic {
   width: 200px;
   height: 200px;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
 }
 
 #profile-details-column {
@@ -187,6 +198,7 @@
   border-radius: 10px;
   outline: none;
 }
+
 .skillsinput {
   background-color: #eff0f3;
   text-decoration: underline;
@@ -414,6 +426,14 @@ hr {
 }
 
 @media screen and (max-width: 550px) {
+  #msgbtn {
+    font-size: 12px;
+  }
+
+  #editbtn {
+    font-size: 12px;
+  }
+
   #image-column {
     width: 100px;
     height: 100px;
