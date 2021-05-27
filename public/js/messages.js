@@ -17,6 +17,8 @@ const db = firebase.firestore();
 let info = {};
 get_firebase_info();
 
+let is_finding = false;
+
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
 function formatTimestamp(timestamp) {
@@ -119,6 +121,9 @@ function formatParams(params) {
 }
 
 function send_message() {
+  is_finding = false;
+  console.log("is finding: " + is_finding);
+
   let message = document.getElementById("user-input").value;
   let receiver = document.getElementById("otherUser").textContent;
   console.log(`Sending "${message}" to ${receiver} from ${info.username}`);
@@ -217,9 +222,18 @@ function returnToMessages() {
   document.getElementById("user-input").value = "";
   document.getElementById("sendMessage").onclick = "";
   document.getElementById("sidemain").setAttribute("style", "display: none");
-  document
-    .getElementById("mainmain")
-    .setAttribute("style", "display: unset; width: 100%;");
+
+  if (is_finding) {
+    console.log("is finding: " + is_finding);
+    document
+      .getElementById("findmain")
+      .setAttribute("style", "display: unset; width: 100% !important;");
+  } else {
+    console.log("is finding: " + is_finding);
+    document
+      .getElementById("mainmain")
+      .setAttribute("style", "display: unset; width: 100%;");
+  }
 }
 
 function revealMessages(convo) {
@@ -384,6 +398,9 @@ function createSendMessage() {
 }
 
 function findUsers() {
+  is_finding = true;
+  console.log("is finding: " + is_finding);
+
   document
     .getElementById("no-messages-div")
     .setAttribute("style", "display: none");
@@ -446,7 +463,7 @@ function createNewConnections(user) {
   followUserButton.innerHTML = "MESSAGE";
   followUserButton.setAttribute("id", "messageNewUser" + user.profile_id);
   followUserButton.onclick = function () {
-    messageNewUser(this.id);
+    messageNewUser(user);
   };
   followUserButton.setAttribute("style", "width: 70%; min-width: 100px;");
   followUserButton.setAttribute("class", "followUserButton");
@@ -467,4 +484,54 @@ function createNewConnections(user) {
   findnewconnectionsDiv.appendChild(hr);
 }
 
-function messageNewUser(id) {}
+function messageNewUser(user) {
+  document.getElementById("sendMessage").onclick = send_message;
+
+  document.getElementById("mainmain").setAttribute("style", "display: none");
+
+  console.log(width);
+  if (width > 600) {
+    document.getElementById("messages-user-information").innerHTML = "";
+    document.getElementById("messagesList").innerHTML = "";
+
+    document.getElementById("findmain").setAttribute("style", "width: 50%");
+    document.getElementById("sidemain").setAttribute("style", "display: unset");
+  } else {
+    document.getElementById("messages-user-information").innerHTML = "";
+    document.getElementById("messagesList").innerHTML = "";
+
+    document.getElementById("findmain").setAttribute("style", "display: none");
+    document
+      .getElementById("sidemain")
+      .setAttribute("style", "display: unset; width: 100%;");
+  }
+
+  let messagerInformationDiv = document.getElementById(
+    "messages-user-information"
+  );
+
+  let messagerImgDiv = document.createElement("div");
+  let messagerImg = document.createElement("img");
+  let messagerName = document.createElement("p");
+  let messagerUsername = document.createElement("p");
+
+  messagerImgDiv.setAttribute("class", "smallMessagerImgDiv profilepicture");
+  messagerImg.src = user.profile_pic_url;
+  messagerName.innerHTML = user.full_name;
+  messagerName.setAttribute("class", "bodytitle");
+  messagerUsername.innerHTML =
+    "@" + `<span id=otherUser>${user.username}</span>`;
+  messagerUsername.setAttribute("class", "bodytext");
+
+  messagerImgDiv.appendChild(messagerImg);
+  let messagerAuthorText = document.createElement("div");
+  messagerAuthorText.appendChild(messagerName);
+  messagerAuthorText.appendChild(messagerUsername);
+  messagerAuthorText.setAttribute("class", "messagerText");
+  messagerAuthorText.setAttribute("style", "padding-left: 10px");
+
+  messagerInformationDiv.setAttribute("style", "padding-bottom: 20px");
+
+  messagerInformationDiv.appendChild(messagerImgDiv);
+  messagerInformationDiv.appendChild(messagerAuthorText);
+}

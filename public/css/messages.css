@@ -10,6 +10,7 @@
 
 .messages-expanded {
   overflow: auto;
+  height: 70%;
 }
 
 .sticky-send-message-div {
