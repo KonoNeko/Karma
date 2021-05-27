@@ -158,10 +158,10 @@ CREATE PROCEDURE create_new_profile(IN new_username VARCHAR(50),
                                     IN new_is_volunteer TINYINT(1))
 BEGIN
     IF (SELECT 1 FROM profiles WHERE username = new_username) IS NULL THEN
-        INSERT INTO profiles(username, full_name, is_volunteer, profile_pic_url)
-        VALUES (new_username, new_fullname, new_is_volunteer, "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png");
+        INSERT INTO profiles(username, full_name, is_volunteer, profile_pic_url, bio)
+        VALUES (new_username, new_fullname, new_is_volunteer, "https://www.lightsong.net/wp-content/uploads/2020/12/blank-profile-circle.png", "I am a Karma user.");
         CALL new_education_entry(new_username, "Start", "End", 0.0, "Certification type", "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/education.jpeg", "School Name");
-        CALL new_experience_entry(new_username, "Start", "End", "Job title", "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png", "Employer");
+        CALL new_experience_entry(new_username, "Start", "End", "Job title", "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/experience.jpeg", "Employer");
         CALL new_award_entry(new_username, "Certificate Title", "Date Received", "https://raw.githubusercontent.com/KonoNeko/Karma/main/public/images/awards.jpg");
         CALL new_skill_entry(new_username, "Community Member");
     END IF;
