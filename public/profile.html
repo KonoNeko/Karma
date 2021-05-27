@@ -145,10 +145,10 @@
         </div>
 
         <div id="above-search" class="search">
-          <form class="search-form">
-            <input id="search-texts" type="search" placeholder="Search" />
-            <button id="search-button"><i class="fa fa-search"></i></button>
-          </form>
+          <div autocomplete="off" class="search-form">
+            <input autocomplete="off" id="search-texts" type="search" placeholder="Search" />
+            <button onclick="saveInStorage(document.getElementById('search-texts').value)" class="search-button"><i class="fa fa-search"></i></button>
+          </div>
         </div>
       </div>
     </div>
@@ -338,12 +338,10 @@
 
       <div class="column" id="sidemain">
         <div class="search">
-          <form class="search-form">
-            <input id="search-input" type="text" placeholder="Search" />
-            <button id="searchbar" onclick="findUsers()" type="submit">
-              <i class="fa fa-search"></i>
-            </button>
-          </form>
+          <div autocomplete="off" class="search-form">
+            <input  autocomplete="off" id ="search-input" type="text" placeholder="Search" />
+            <button id = "searchbar" onclick="saveInStorage(document.getElementById('search-input').value)" type="button"><i class="fa fa-search"></i></button>
+          </div>
         </div>
         <div id="whats-new" class="whats-new">
           <p class="heading2">What's new?</h1>
@@ -455,5 +453,13 @@ window.onclick = function(event) {
          modal[2].style.display = "none";
      }  
 }
+
+function saveInStorage(keyword) {
+      console.log(keyword + " was stored in storage");
+      localStorage.clear();
+      localStorage.setItem('search-keyword', keyword.toLowerCase());
+
+      window.location.href = "search.html";
+    }
   </script>
 </html>
