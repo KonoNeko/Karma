@@ -58,6 +58,23 @@ color: #000000;
     color: #000000;
     
     }
+
+    .headingthree {
+        padding-top: 10px;
+    font-family: Montserrat;
+    font-size: 40px;
+    font-weight: bold;
+        
+    }
+
+
+    .headingfour {
+        font-family: Montserrat;
+        font-size: 26px;
+        font-weight: bold;
+
+        
+    }
     
     #email-two {
     margin-top: 15px;
@@ -77,14 +94,21 @@ color: #000000;
     
     }
 
-    #phoneicon {
-    margin-top: -50px;
-    margin-left: 70px;
+
+    .imgbox {
+        margin-left: -400px;
     }
 
-    #earthicon {
-    margin-top: -50px;
-    margin-left: 70px;
+    .headingone {
+        margin-left: -400px;
+    }
+    .headingtwo {
+        margin-left: -400px;
+    }
+    #emails {
+        margin-left: 700px;
+        margin-top: -260px;
+        width: 500px;
     }
 
 
@@ -147,4 +171,15 @@ img {
     width: 150px;
     margin-top: 10px;
     border-radius: 10px;
+}
+
+#emails {
+    margin-left: -30px;
+    margin-top: 80px;
+    width: 500px;
+}
+
+#phones {
+    margin-left: 400px;
+    
 }
