@@ -42,6 +42,23 @@ function editSkill(userID, skill, newSkill) {
   APIRequest(method, url, console.log);
 }
 
+function editEducation(userID, schoolName, start, end, img) {
+  const method = "PUT";
+  const endpoint = "/profiles/education";
+  const params = formatParams({
+    id: userID,
+    name: schoolName,
+    type: "description",
+    gpa: "4.0",
+    start: start,
+    end: end,
+    img: img,
+  });
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, console.log);
+}
+
 var inputs = document.getElementsByClassName("skillsinput");
 for (index = 0; index < inputs.length; ++index) {
   inputs[index].addEventListener("input", resizeInput);
@@ -130,7 +147,6 @@ function skillsOnclick() {
   };
 
   document.getElementById("edit-skills-save").onclick = function () {
-    /* BACKEND GUY DO UR MAGIC HERE */
     document
       .getElementById("skills-edit")
       .setAttribute("style", "display: none");
@@ -158,45 +174,79 @@ function educationOnclick() {
     .setAttribute("style", "display: unset");
 
   let educationSchoolNames = document.getElementsByClassName("schoolName");
-  let educationParas = document.getElementsByClassName("schoolpara");
+  let educationStarts = document.getElementsByClassName("schoolstart");
+  let educationEnds = document.getElementsByClassName("schoolend");
   let educationPics = document.getElementsByClassName("educationpic");
   let educationPosts = document.getElementsByClassName("education-post-div");
 
   for (i = 0; i < educationPosts.length; i++) {
     let educationPostDiv = document.createElement("div");
+    educationPostDiv.id = educationPosts[i].id;
     educationPostDiv.setAttribute("style", "display: flex;");
 
     let educationPostImgDiv = document.createElement("div");
     let educationPostImg = document.createElement("img");
-    let educationPostImgUpload = document.createElement("p");
+    let educationPostImgLabel = document.createElement("label");
+    let educationPostImgUpload = document.createElement("input");
 
     educationPostImg.src = educationPics[i].src;
+    educationPostImg.className = "newImage";
     educationPostImg.setAttribute("style", "border-radius: 10px; width: 90%;");
 
-    educationPostImgUpload.innerHTML = "Upload new image";
-    educationPostImgUpload.setAttribute("class", "smalltext");
-    educationPostImgUpload.setAttribute(
+    educationPostImgUpload.id = "upload-image" + i;
+    educationPostImgUpload.type = "file";
+    educationPostImgUpload.style.display = "none";
+
+    educationPostImgLabel.innerHTML = "Upload new image";
+    educationPostImgLabel.setAttribute("for", "upload-image" + i);
+    educationPostImgLabel.setAttribute("class", "smalltext");
+    educationPostImgLabel.setAttribute(
       "style",
       "color: #51B09F; font-weight: bold; margin-bottom: 10px;"
     );
 
     let educationPostInputDiv = document.createElement("div");
     let educationPostInputSchool = document.createElement("input");
-    let educationPostInputSchoolPara = document.createElement("input");
+    let educationPostInputSchoolStart = document.createElement("input");
+    let educationPostInputSchoolEnd = document.createElement("input");
 
+    educationPostInputSchool.className = "newSchoolName";
+    educationPostInputSchoolStart.className = "newSchoolstart";
+    educationPostInputSchoolEnd.className = "newSchoolend";
+    
     educationPostInputSchool.value = educationSchoolNames[i].textContent;
-    educationPostInputSchoolPara.value = educationParas[i].textContent;
+    educationPostInputSchoolStart.value = educationStarts[i].textContent;
+    educationPostInputSchoolEnd.value = educationEnds[i].textContent;
     educationPostInputSchool.setAttribute(
       "style",
       "margin-bottom: 5px; width: 80%;"
     );
-    educationPostInputSchoolPara.setAttribute("style", "width: 80%");
+    educationPostInputSchoolStart.setAttribute("style", "width: 80%");
+    educationPostInputSchoolEnd.setAttribute("style", "width: 80%");
 
-    educationPostImgDiv.appendChild(educationPostImg);
+    educationPostImgUpload.addEventListener("change", (ev) => {
+      console.log(ev);
+      const formdata = new FormData();
+      formdata.append("image", ev.target.files[0]);
+      fetch("https://api.imgur.com/3/image/", {
+        method: "post",
+        headers: {
+          Authorization: "Client-ID 4409588f10776f7",
+        },
+        body: formdata,
+      })
+        .then((data) => data.json()).then((data) => {
+          educationPostImg.src = data.data.link;
+        });
+    });
+      
+    educationPostImgLabel.appendChild(educationPostImg);
+    educationPostImgDiv.appendChild(educationPostImgLabel);
     educationPostImgDiv.appendChild(educationPostImgUpload);
 
     educationPostInputDiv.appendChild(educationPostInputSchool);
-    educationPostInputDiv.appendChild(educationPostInputSchoolPara);
+    educationPostInputDiv.appendChild(educationPostInputSchoolStart);
+    educationPostInputDiv.appendChild(educationPostInputSchoolEnd);
 
     educationPostImgDiv.setAttribute("style", "width: 50%; margin-right: 10px");
     educationPostInputDiv.setAttribute(
@@ -231,6 +281,25 @@ function educationOnclick() {
     document
       .getElementById("education-div")
       .setAttribute("style", "display: unset");
+    let newEducationSchoolNames = document.getElementsByClassName("newSchoolName");
+    let newEducationStarts = document.getElementsByClassName("newSchoolstart");
+    let newEducationEnds = document.getElementsByClassName("newSchoolend");
+    let newImage = document.getElementsByClassName("newImage");
+    let posts = document.getElementsByClassName("education-post-div");
+
+    for (i = 0; i < posts.length; i++) {
+      educationSchoolNames[i].innerHTML = newEducationSchoolNames[i].value;
+      educationStarts[i].innerHTML = newEducationStarts[i].value;
+      educationEnds[i].innerHTML = newEducationEnds[i].value;
+      educationPics[i].src = newImage[i].src;
+      editEducation(
+        posts[i].id,
+        newEducationSchoolNames[i].value,
+        newEducationStarts[i].value,
+        newEducationEnds[i].value,
+        newImage[i].src
+      );
+    }
   };
 }
 

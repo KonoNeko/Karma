@@ -607,6 +607,7 @@ function createEducation(education, educationObj) {
 
   let educationdiv = document.createElement("div");
   educationdiv.setAttribute("class", "education-post-div");
+  educationdiv.id = educationObj.education_id;
 
   let picturediv = document.createElement("div");
   picturediv.setAttribute("class", "postpreviewpicture");
@@ -619,7 +620,8 @@ function createEducation(education, educationObj) {
 
   let para = document.createElement("p");
   para.setAttribute("class", "schoolpara");
-  para.innerHTML = `${educationObj.edu_start_date}`;
+  para.innerHTML = 
+  `<span class="schoolstart">${educationObj.edu_start_date}</span> to <span class="schoolend">${educationObj.edu_end_date}</span>`;
 
   picturediv.appendChild(picture);
 
