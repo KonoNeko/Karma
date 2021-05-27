@@ -154,6 +154,58 @@
   @media screen and (max-width: 550px) {
    
 
+#move {
+  margin-left: -80px;
+  margin-bottom: 150px;
+
+}
+
+.dropdownn {
+
+  overflow: hidden;
+  margin-bottom: 75px;
+  display: block;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  background-color: #cfd8dc;
+  width: 400px;
+  border-radius: 20px;
+  margin-left: 100px;
+
+
+
+}
+
+.dropdown-contentt {
+ 
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  
+  height: 60px;
+
+ 
+}
+
+/* #para {
+  margin-left: px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 12px;
+  height: 150px;
+
+  color: #0367A6;
+} */
+
+
+
 
 
 
