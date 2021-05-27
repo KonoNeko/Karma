@@ -266,11 +266,12 @@ function createEducation(education, educationObj) {
   
     let picture = document.createElement("img");
     picture.setAttribute("class", "educationpic");
-    picture.src = "./images/education.jpeg";
+    picture.src = educationObj.edu_image_url;
   
     let para = document.createElement("p");
     para.setAttribute("class", "schoolpara");
-    para.innerHTML = `${educationObj.start_date}`;
+    para.innerHTML = 
+    `<span class="schoolstart">${educationObj.edu_start_date}</span> to <span class="schoolend">${educationObj.edu_end_date}</span>`;
   
     picturediv.appendChild(picture);
   
@@ -304,7 +305,7 @@ function createExperience(experience, experienceObj) {
   
     let picture = document.createElement("img");
     picture.setAttribute("class", "experiencepic");
-    picture.src = "./images/experience.jpeg";
+    picture.src = experienceObj.exp_image_url;
   
     let para = document.createElement("p");
     para.setAttribute("class", "schoolpara");
@@ -342,7 +343,7 @@ function createAwards(awards, awardsObj) {
   
     let picture = document.createElement("img");
     picture.setAttribute("class", "experiencepic");
-    picture.src = "./images/awards.jpg";
+    picture.src = awardsObj.awards_image_url;
   
     let para = document.createElement("p");
     para.setAttribute("class", "schoolpara");
