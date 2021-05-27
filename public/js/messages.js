@@ -21,6 +21,28 @@ let is_finding = false;
 
 const BASE_URL = "https://marlonfajardo.ca/karma/v1";
 
+function get_conversation(currentUser, receiver) {
+  const method = "PUT";
+  const endpoint = "/messages";
+  const params = `/${currentUser}/${receiver}`;
+  const url = BASE_URL + endpoint + params;
+  APIRequest(method, url, (res) =>
+  {
+    localStorage.clear();
+    console.log(res);
+    generateMessages(res);
+    revealMessages(res);
+  });
+}
+
+function checkIfConductingMessage(currentUser) {
+  let receiver = localStorage.getItem("userToMessage")
+  if (receiver) {
+    get_conversation(currentUser, receiver);
+  } 
+}
+
+
 function formatTimestamp(timestamp) {
   let dateObj = new Date(Date.parse(timestamp));
   return returnHighestTimeDiff(dateObj);
@@ -59,6 +81,7 @@ async function get_firebase_info() {
         info.email = user.email;
         info.username = user.username;
         view_messages(info.username);
+        checkIfConductingMessage(info.username);
       })
       .catch((error) => {
         console.log(`Error getting data: ${error}`);
@@ -136,7 +159,10 @@ function send_message() {
       msg: message,
     });
     const url = BASE_URL + endpoint + params;
-    APIRequest(method, url, console.log);
+    APIRequest(method, url, (res) => {
+      console.log(res);
+      window.location.reload();
+    });
   }
 }
 

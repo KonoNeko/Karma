@@ -115,6 +115,8 @@ function enableFollowButton(currentUser) {
 function enableMessageButton() {
     let msgBtn = document.getElementById('msgbtn');
     msgBtn.onclick = () => {
+        localStorage.clear();
+        localStorage.setItem("userToMessage", document.getElementById("username").textContent);
         window.location.href = "messages.html";
     }
 }
