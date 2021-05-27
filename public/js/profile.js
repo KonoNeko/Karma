@@ -287,6 +287,7 @@ function addProfilePic() {
       .then((data) => {
         posted = true;
         document.getElementById("mainProfilePic").innerText = data.data.link;
+        alert("New picture loaded, press 'Post' to save changes.");
       });
   });
 }
