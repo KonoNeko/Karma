@@ -112,6 +112,7 @@ function accept_request(userID, follower, btn) {
   APIRequest(method, url, (res) => {
     console.log(res);
     btn.onclick = "";
+    window.location.reload("");
   });
 }
 
@@ -306,11 +307,19 @@ function generateNotificationFollow(postObj) {
   if (postObj.follow_status === "following") {
     notificationFollowButton.style.backgroundColor = "#51b09f";
     notificationFollowButton.innerHTML = "<i class='fas fa-user-check'></i>";
-    notificationFollowButton.onclick = ""; // change to unfollow in the future
+    notificationFollowButton.onclick = () => {
+      let userID = postObj.username_of_notification;
+      let follower = postObj.current_user;
+      unfollow_user(userID, follower);
+    };
   } else if (postObj.follow_status === "requested") {
     notificationFollowButton.style.backgroundColor = "#6b7e86";
     notificationFollowButton.innerHTML = "<i class='fas fa-user-clock'></i>";
-    notificationFollowButton.onclick = ""; // change to unfollow in the future
+    notificationFollowButton.onclick = () => {
+      let userID = postObj.username_of_notification;
+      let follower = postObj.current_user;
+      unfollow_user(userID, follower);
+    };
   } else {
     notificationFollowButton.style.backgroundColor = "#0367a6";
     notificationFollowButton.innerHTML = "<i class='fas fa-user-plus'></i>";

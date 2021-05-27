@@ -53,7 +53,10 @@ function unfollow_user(userID, follower) {
   });
   const url = BASE_URL + endpoint + params;
 
-  APIRequest(method, url, console.log);
+  APIRequest(method, url, (res) => {
+    console.log(res);
+    window.location.reload();
+  });
 }
   
   
