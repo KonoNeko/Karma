@@ -647,6 +647,7 @@ function createExperience(experience, experienceObj) {
 
   let experiencendiv = document.createElement("div");
   experiencendiv.setAttribute("class", "experience-post-div");
+  experiencendiv.id = experienceObj.experience_id;
 
   let picturediv = document.createElement("div");
   picturediv.setAttribute("class", "postpreviewpicture");

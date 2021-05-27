@@ -42,16 +42,32 @@ function editSkill(userID, skill, newSkill) {
   APIRequest(method, url, console.log);
 }
 
-function editEducation(userID, schoolName, start, end, img) {
+function editEducation(edu_id, schoolName, start, end, img) {
   const method = "PUT";
   const endpoint = "/profiles/education";
   const params = formatParams({
-    id: userID,
+    id: edu_id,
     name: schoolName,
     type: "description",
     gpa: "4.0",
     start: start,
     end: end,
+    img: img,
+  });
+  const url = BASE_URL + endpoint + params;
+
+  APIRequest(method, url, console.log);
+}
+
+function editExperience(exp_id, jobName, workplaceName, img) {
+  const method = "PUT";
+  const endpoint = "/profiles/experience";
+  const params = formatParams({
+    id: exp_id,
+    job: jobName,
+    employer: workplaceName,
+    start: "start",
+    end: "end",
     img: img,
   });
   const url = BASE_URL + endpoint + params;
@@ -314,25 +330,6 @@ function experienceOnclick() {
     .getElementById("experience-div")
     .setAttribute("style", "display: none");
 
-  document.getElementById("cancel-experience-btn").onclick = function () {
-    document
-      .getElementById("experience-edit")
-      .setAttribute("style", "display: none");
-    document
-      .getElementById("experience-div")
-      .setAttribute("style", "display: unset");
-  };
-
-  document.getElementById("edit-experience-save").onclick = function () {
-    /* BACKEND GUY DO UR MAGIC HERE */
-    document
-      .getElementById("experience-edit")
-      .setAttribute("style", "display: none");
-    document
-      .getElementById("experience-div")
-      .setAttribute("style", "display: unset");
-  };
-
   let experienceNames = document.getElementsByClassName("experienceName");
   let experienceParas = document.getElementsByClassName("employerpara");
   let experiencePics = document.getElementsByClassName("experiencepic");
@@ -341,17 +338,41 @@ function experienceOnclick() {
   for (i = 0; i < experiencePosts.length; i++) {
     let experiencePostDiv = document.createElement("div");
     experiencePostDiv.setAttribute("style", "display: flex;");
+    experiencePostDiv.id = experiencePosts[i].id;
 
     let experiencePostImgDiv = document.createElement("div");
     let experiencePostImg = document.createElement("img");
-    let experiencePostImgUpload = document.createElement("p");
+    let experiencePostImgLabel = document.createElement("label");
+    let experiencePostImgUpload = document.createElement("input");
 
     experiencePostImg.src = experiencePics[i].src;
+    experiencePostImg.className = "newImageExp";
     experiencePostImg.setAttribute("style", "border-radius: 10px; width: 90%;");
 
-    experiencePostImgUpload.innerHTML = "Upload new image";
-    experiencePostImgUpload.setAttribute("class", "smalltext");
-    experiencePostImgUpload.setAttribute(
+    experiencePostImgUpload.id = "upload-exp-image" + i;
+    experiencePostImgUpload.type = "file";
+    experiencePostImgUpload.style.display = "none";
+
+    experiencePostImgUpload.addEventListener("change", (ev) => {
+      console.log(ev);
+      const formdata = new FormData();
+      formdata.append("image", ev.target.files[0]);
+      fetch("https://api.imgur.com/3/image/", {
+        method: "post",
+        headers: {
+          Authorization: "Client-ID 4409588f10776f7",
+        },
+        body: formdata,
+      })
+        .then((data) => data.json()).then((data) => {
+          experiencePostImg.src = data.data.link;
+        });
+    });
+
+    experiencePostImgLabel.innerHTML = "Upload new image";
+    experiencePostImgLabel.setAttribute("for", "upload-exp-image" + i);
+    experiencePostImgLabel.setAttribute("class", "smalltext");
+    experiencePostImgLabel.setAttribute(
       "style",
       "color: #51B09F; font-weight: bold; margin-bottom: 10px;"
     );
@@ -368,8 +389,13 @@ function experienceOnclick() {
       "width: 80%; margin-bottom: 5px"
     );
 
-    experiencePostImgDiv.appendChild(experiencePostImg);
+    experiencePostInputTitle.className = "newExperienceName";
+    experiencePostInputPara.className = "newEmployerpara";
+
+    experiencePostImgLabel.appendChild(experiencePostImg);
     experiencePostImgDiv.appendChild(experiencePostImgUpload);
+    experiencePostImgDiv.appendChild(experiencePostImgLabel);
+
 
     experiencePostInputDiv.appendChild(experiencePostInputTitle);
     experiencePostInputDiv.appendChild(experiencePostInputPara);
@@ -392,6 +418,44 @@ function experienceOnclick() {
       .getElementById("experience-edit-div")
       .appendChild(experiencePostDiv);
   }
+
+  document.getElementById("cancel-experience-btn").onclick = function () {
+    document
+      .getElementById("experience-edit")
+      .setAttribute("style", "display: none");
+    document
+      .getElementById("experience-div")
+      .setAttribute("style", "display: unset");
+  };
+
+  document.getElementById("edit-experience-save").onclick = function () {
+    /* BACKEND GUY DO UR MAGIC HERE */
+    document
+      .getElementById("experience-edit")
+      .setAttribute("style", "display: none");
+    document
+      .getElementById("experience-div")
+      .setAttribute("style", "display: unset");
+
+    let newExpTitle = document.getElementsByClassName("newExperienceName");
+    let newExpEmployer = document.getElementsByClassName("newEmployerpara");
+    let newImages = document.getElementsByClassName("newImageExp");
+    let posts = document.getElementsByClassName("experience-post-div");
+
+    for (let i=0; i<posts.length; i++) {
+      experienceNames[i].innerHTML = newExpTitle[i].value;
+      experienceParas[i].innerHTML = newExpEmployer[i].value;
+      experiencePics[i].src = newImages[i].src;
+      console.log(`${newExpTitle[i].value}: ${newExpEmployer[i].value}`);
+      console.log(`IMG: ${newImages[i].src}`);
+      editExperience(
+        posts[i].id, 
+        newExpTitle[i].value,
+        newExpEmployer[i].value,
+        newImages[i].src
+      );
+    }
+  };
 }
 
 function awardsOnclick() {
